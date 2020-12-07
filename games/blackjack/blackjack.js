@@ -3,4 +3,23 @@
 ///////////////////////////////////////////////
 
 const suits = ['clubs', 'diamonds', 'hearts', 'spades'];
-const cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+const vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
+const deck = [];
+
+function createDeck() {
+    deck = [];
+    for (var i = 0; i < vals.length; i++) {
+        for (var i = 0; i < suits.length; i++) {
+            if(vals[i] === "J" || vals[i] === "Q" || vals[i] === "K") {
+                value = 10;
+            }
+            else if (vals[i] === "A") {
+                value = 11
+            }
+            else {
+                value = parseInt(vals[i])
+            }
+        }
+    }
+}
