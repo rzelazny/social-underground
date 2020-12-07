@@ -1,6 +1,6 @@
 body {
     background-color: black;
-    background-image: url(./uglycarpet1.jpg);
+    /* background-image: url(./uglycarpet1.jpg); */
     background-size: cover;
     text-align: center;
 }
@@ -9,8 +9,4 @@ canvas {
     background-image: url(./blackjacktable.jpg);
     display: inline;
     background-size: cover;
-}
-
-button {
-    
 }
