@@ -10,7 +10,7 @@ const deck = [];
 function createDeck() {
     deck = [];
     for (var i = 0; i < vals.length; i++) {
-        for (var i = 0; i < suits.length; i++) {
+        for (var j = 0; j < suits.length; j++) {
             if(vals[i] === "J" || vals[i] === "Q" || vals[i] === "K") {
                 value = 10;
             }
@@ -20,6 +20,8 @@ function createDeck() {
             else {
                 value = parseInt(vals[i])
             }
+            var card = { Value: values[i], Suit: suits[j], Value: value };
+            deck.push(card);
         }
     }
 }
