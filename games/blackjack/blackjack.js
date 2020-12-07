@@ -16,10 +16,11 @@ let players = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player 
 
 var displayPlayers = $('#players');
 
-var startBtn = $('#start');
-var hitBtn = $('#hit');
-var stayBtn = $('#stay');
+var startBtn = document.querySelector('#start');
+var hitBtn = document.querySelector('#hit');
+var stayBtn = document.querySelector('#stay');
 
+var score = 0;
 var wins = 0;
 var losses = 0;
 var ties = 0;
@@ -72,23 +73,32 @@ shuffleDeck(deck);
 
 // }
 
-function displayPlayers(){
-    displayPlayers.innerHTML('hello' + players[1].Name);
-}
+// function displayPlayers(){
+//     displayPlayers.innerHTML('hello' + players[1].Name);
+// }
 
-displayPlayers();
+// displayPlayers();
 
 console.log('Hello ' + players[1].Name);
 
-// function displayOptBtns() {
-//     if 
-// }
+function onStart() {
+    console.log("i see in here");
+    if (hitBtn.style.display === "none") {
+        hitBtn.style.display = "block"
+    }
+    if (stayBtn.style.display === "none") {
+        stayBtn.style.display = "block"
+    }
+    if (startBtn.style.display === "block") {
+        startBtn.style.display = "none"
+    }
+}
 
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
 ///////////////////////////////////////////////
 
-startBtn.on("click", displayOptBtns);
+startBtn.addEventListener("click", onStart);
 
 });
