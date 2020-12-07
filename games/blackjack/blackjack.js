@@ -1,4 +1,3 @@
-$(document).ready(function() {
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
@@ -12,9 +11,9 @@ let hand = [];
 
 // let players = [];
 // hard coded for now but will use players from db
-let players = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player 1',  ID: 1, Points: 0, Hand: hand }]
+let playerArray = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player 1',  ID: 1, Points: 0, Hand: hand }]
 
-var displayPlayers = $('#players');
+var players =  document.querySelector('#players');
 
 var startBtn = document.querySelector('#start');
 var hitBtn = document.querySelector('#hit');
@@ -73,25 +72,34 @@ shuffleDeck(deck);
 
 // }
 
-// function displayPlayers(){
-//     displayPlayers.innerHTML('hello' + players[1].Name);
-// }
+function displayPlayers() {
+    console.log('Hello ' + playerArray[1].Name);
+}
 
-// displayPlayers();
-
-console.log('Hello ' + players[1].Name);
+displayPlayers();
 
 function onStart() {
-    console.log("i see in here");
-    if (hitBtn.style.display === "none") {
-        hitBtn.style.display = "block"
+    console.log("you pressed start")
+    function displayBtns() {
+        if (hitBtn.style.display === "none") {
+            hitBtn.style.display = "block"
+        }
+        if (stayBtn.style.display === "none") {
+            stayBtn.style.display = "block"
+        }
+        if (startBtn.style.display === "block") {
+            startBtn.style.display = "none"
+        }
     }
-    if (stayBtn.style.display === "none") {
-        stayBtn.style.display = "block"
-    }
-    if (startBtn.style.display === "block") {
-        startBtn.style.display = "none"
-    }
+    displayBtns();
+}
+
+function onHit() {
+    console.log("you pressed hit");
+}
+
+function onStay() {
+    console.log("you pressed stay");
 }
 
 
@@ -100,5 +108,5 @@ function onStart() {
 ///////////////////////////////////////////////
 
 startBtn.addEventListener("click", onStart);
-
-});
+hitBtn.addEventListener("click", onHit);
+stayBtn.addEventListener("click", onStay);
