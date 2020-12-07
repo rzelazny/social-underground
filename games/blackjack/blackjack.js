@@ -7,6 +7,12 @@ const vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
 let deck = [];
 
+let hand = [];
+
+// let players = [];
+// hard coded for now but will use players from db
+let players = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player 1',  ID: 1, Points: 0, Hand: hand }]
+
 function createDeck() {
     deck = [];
     for (let i = 0; i < vals.length; i++) {
@@ -45,3 +51,8 @@ function shuffleDeck(deck) {
 }
 
 shuffleDeck(deck);
+
+//currently a hard coded array under variables but will need a function where there are actual players
+// function addPlayers(amount) {
+
+// }
