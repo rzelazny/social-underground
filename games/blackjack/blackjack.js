@@ -1,3 +1,4 @@
+$(document).ready(function() {
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
@@ -12,6 +13,20 @@ let hand = [];
 // let players = [];
 // hard coded for now but will use players from db
 let players = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player 1',  ID: 1, Points: 0, Hand: hand }]
+
+var displayPlayers = $('#players');
+
+var startBtn = $('#start');
+var hitBtn = $('#hit');
+var stayBtn = $('#stay');
+
+var wins = 0;
+var losses = 0;
+var ties = 0;
+
+///////////////////////////////////////////////
+//                Functions                  //
+///////////////////////////////////////////////
 
 function createDeck() {
     deck = [];
@@ -56,3 +71,24 @@ shuffleDeck(deck);
 // function addPlayers(amount) {
 
 // }
+
+function displayPlayers(){
+    displayPlayers.innerHTML('hello' + players[1].Name);
+}
+
+displayPlayers();
+
+console.log('Hello ' + players[1].Name);
+
+// function displayOptBtns() {
+//     if 
+// }
+
+
+///////////////////////////////////////////////
+//                On Clicks                  //
+///////////////////////////////////////////////
+
+startBtn.on("click", displayOptBtns);
+
+});
