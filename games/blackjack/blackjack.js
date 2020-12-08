@@ -32,10 +32,10 @@ function createDeck() {
     deck = [];
     for (let i = 0; i < vals.length; i++) {
         for (let j = 0; j < suits.length; j++) {
-            if (vals[i] === "J" || vals[i] === "Q" || vals[i] === "K") {
+            if (vals[i] === 'J' || vals[i] === 'Q' || vals[i] === 'K') {
                 weight = 10;
             }
-            else if (vals[i] === "A") {
+            else if (vals[i] === 'A') {
                 weight = 11
             }
             else {
@@ -78,14 +78,14 @@ shuffleDeck(deck);
 // }
 
 function displayBtns() {
-    if (hitBtn.style.display === "none") {
-        hitBtn.style.display = "block"
+    if (hitBtn.style.display === 'none') {
+        hitBtn.style.display = 'block'
     }
-    if (stayBtn.style.display === "none") {
-        stayBtn.style.display = "block"
+    if (stayBtn.style.display === 'none') {
+        stayBtn.style.display = 'block'
     }
-    if (startBtn.style.display === "block") {
-        startBtn.style.display = "none"
+    if (startBtn.style.display === 'block') {
+        startBtn.style.display = 'none'
     }
 }
 
@@ -101,11 +101,11 @@ function displayPlayers() {
         divPlayerName.innerHTML = (playerArray[i].Name);
 
         var divHand = document.createElement('div');
-        divHand.id = ("hand " + playerArray[i].Name);
+        divHand.id = ('hand ' + playerArray[i].Name);
 
         var divScore = document.createElement('div');
         divScore.className = ('score');
-        divScore.id = ("score " + playerArray[i].Name);
+        divScore.id = ('score ' + playerArray[i].Name);
 
 
         divPlayer.appendChild(divPlayerName, divHand, divScore);
@@ -115,17 +115,18 @@ function displayPlayers() {
 
 
 function onStart() {
-    console.log("you pressed start")
+    console.log('you pressed start')
+    startBtn.value = ('Restart');
     displayBtns();
     displayPlayers();
 }
 
 function onHit() {
-    console.log("you pressed hit");
+    console.log('you pressed hit');
 }
 
 function onStay() {
-    console.log("you pressed stay");
+    console.log('you pressed stay');
 }
 
 
@@ -133,6 +134,6 @@ function onStay() {
 //                On Clicks                  //
 ///////////////////////////////////////////////
 
-startBtn.addEventListener("click", onStart);
-hitBtn.addEventListener("click", onHit);
-stayBtn.addEventListener("click", onStay);
+startBtn.addEventListener('click', onStart);
+hitBtn.addEventListener('click', onHit);
+stayBtn.addEventListener('click', onStay);
