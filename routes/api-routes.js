@@ -66,7 +66,7 @@ module.exports = function(app) {
     })
       .then(function() {
         console.log("made table now redirecting: ")
-        res.redirect(307, "/public/home");
+        res.redirect(307, "/public/casino");
       })
       .catch(function(err) {
         res.status(401).json(err);
