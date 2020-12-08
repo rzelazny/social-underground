@@ -8,8 +8,10 @@ USE gaming_underground_db;
 -- table stores login information
 CREATE TABLE user_login(
 	id int NOT NULL AUTO_INCREMENT,
-	login varchar(255) NOT NULL,
+	email varchar(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
+    createdAt DATETIME NOT NULL, 
+    updatedAt DATETIME NOT NULL,
 	PRIMARY KEY (id)
 );
 
