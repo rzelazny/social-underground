@@ -84,9 +84,6 @@ function displayBtns() {
     if (stayBtn.style.display === 'none') {
         stayBtn.style.display = 'block'
     }
-    if (startBtn.style.display === 'block') {
-        startBtn.style.display = 'none'
-    }
 }
 
 function displayPlayers() {
@@ -116,7 +113,7 @@ function displayPlayers() {
 
 function onStart() {
     console.log('you pressed start')
-    startBtn.value = ('Restart');
+    startBtn.value = ('restart');
     displayBtns();
     displayPlayers();
 }
