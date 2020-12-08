@@ -40,7 +40,6 @@ module.exports = function(app) {
     var routeName = req.body.name.replace(/\s+/g, "").toLowerCase();
     // Then add the user to the database using sequelize
     User_stat.create({
-      routeName: routeName,
       name: req.body.name,
       gamePoints: req.body.gamePoints
 
