@@ -19,7 +19,8 @@ var startBtn = document.querySelector('#start');
 var hitBtn = document.querySelector('#hit');
 var stayBtn = document.querySelector('#stay');
 
-var score = 0;
+let score = [];
+
 var wins = 0;
 var losses = 0;
 var ties = 0;
@@ -96,14 +97,14 @@ function displayPlayers() {
         divPlayerName.innerHTML = (playerArray[i].Name);
 
         var divHand = document.createElement('div');
-        divHand.id = (playerArray[i].Name + "Hand");
+        divHand.id = ("hand " + playerArray[i].Name);
 
-        var divPoints = document.createElement('div');
-        divPoints.className = ('points');
-        divPoints.id = (playerArray[i].Name + "Points");
+        var divScore = document.createElement('div');
+        divScore.className = ('score');
+        divScore.id = ("score " + playerArray[i].Name);
 
 
-        divPlayer.appendChild(divPlayerName, divHand,divPoints);
+        divPlayer.appendChild(divPlayerName, divHand, divScore);
         players.appendChild(divPlayer);
     }
 }
