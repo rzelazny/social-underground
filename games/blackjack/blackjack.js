@@ -74,30 +74,28 @@ function displayBtns() {
     }
 }
 
-function displayPlayers() {
+function createElements() {
     players.innerHTML = '';
     for(var i = 0; i < playerArray.length; i++) {
 
         var divPlayer = document.createElement('div');
         divPlayer.className = ('player');
         divPlayer.id = playerArray[i].Name;
-
-        var divPlayerName = document.createElement('div');
-        divPlayerName.innerHTML = (playerArray[i].Name);
+        divPlayer.innerHTML = (playerArray[i].Name);
 
         var divHand = document.createElement('div');
         divHand.id = ('hand' + playerArray[i].Name);
-        // for (var j = 1; j = 2; j++) {
-        //     var cardImg = document.createElement('img');
-        //     cardImg.id = ('card' + [j] + playerArray[i].Name)
-        // }
+        var cardOneImg = document.createElement('img');
+        cardOneImg.id = ('cardOne' + playerArray[i].Name)
+        var cardTwoImg = document.createElement('img');
+        cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
 
         var divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
 
-        // divHand.appendChild(cardImg);
-        divPlayer.appendChild(divPlayerName, divHand, divPoints);
+        divHand.appendChild(cardOneImg, cardTwoImg);
+        divPlayer.appendChild(divHand, divPoints);
         players.appendChild(divPlayer);
     }
 }
@@ -107,10 +105,8 @@ function addPlayers() {
     // console.log(hand);
     
     var house = { Name: 'House', ID: 0, Points: 0, Hand: hand[0] };
-    // console.log(house);
 
     var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand[1] };
-    // console.log(player1);
 
     playerArray.push(house, player1);
     console.log(playerArray);
@@ -123,25 +119,40 @@ function onStart() {
     displayBtns();
 
     addPlayers();
-    displayPlayers();
 
     drawCards();
+
+    createElements();
+
+    //total point value
 }
 
 function onRestart() {
-    //updating cards only
+    //updating hands only
     console.log('you pressed restart');
 }
 
 function onHit() {
+    // to add card
     console.log('you pressed hit me');
+    //house logic function//
+    //total point value
 }
 
 function onStay() {
+    // to end round
+    //total point value
+
     console.log('you pressed stay');
+    //house logic function//
 }
 
+//house logic function//
 //if the house total is less than player1 hit until more than or bust//
+
+//total point value function
+//count values of all cards
+//if bust logic
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
