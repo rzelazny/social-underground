@@ -76,14 +76,10 @@ module.exports = function(app) {
 
     console.log("User ID is: " + req.user.email);
     db.gaming_tables.create({
-      game: "BlackJack",
+      game: "Just Chatting",
       game_started: false,
       user1: req.user.email
     })
-      .then(function() {
-        console.log("made table now redirecting: ")
-        res.redirect(307, "/public/casino");
-      })
       .catch(function(err) {
         res.status(401).json(err);
       });
