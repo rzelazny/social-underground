@@ -36,6 +36,8 @@ CREATE TABLE gaming_tables(
     user3 varchar(255),
     user4 varchar(255),
     user5 varchar(255),
+    createdAt DATETIME NOT NULL, 
+    updatedAt DATETIME NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -45,6 +47,8 @@ CREATE TABLE chat_log(
 	user varchar(255) NOT NULL,
     message varchar(255) NOT NULL,
     table_id int NOT NULL,
+    createdAt DATETIME NOT NULL, 
+    updatedAt DATETIME NOT NULL,
     foreign key (table_id) references gaming_tables(id) on delete cascade,
 	PRIMARY KEY (id)
 );
