@@ -69,7 +69,7 @@ function shuffleDeck(deck) {
 // // function addPlayers(amount) {
 //     playerArray = [{ Name: House, ID: 0, Points: 0, Hand: hand }];
 //     for (var i = 1; i <= amount; i++) {
-//         var hand = [];
+//         var Hand = [];
 //         var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand };
 //         playerArray.push(player)
 //     }
@@ -96,11 +96,11 @@ function displayPlayers() {
         divPlayerName.innerHTML = (playerArray[i].Name);
 
         var divHand = document.createElement('div');
-        divHand.id = ('hand ' + playerArray[i].Name);
+        divHand.id = ('hand' + playerArray[i].Name);
 
         var divPoints = document.createElement('div');
         divPoints.className = ('points');
-        divPoints.id = ('points ' + playerArray[i].Name);
+        divPoints.id = ('points' + playerArray[i].Name);
 
 
         divPlayer.appendChild(divPlayerName, divHand, divPoints);
@@ -118,16 +118,72 @@ function onStart() {
     createDeck();
     shuffleDeck(deck);
 
-    //dealhands fuction call back//
+    // dealHands();
 }
 
-//deal hands function //
+//deal hands function//
+// function dealHands() {
+//     for (var i = 0; i <=2; i++) {
+//         for (var j = 0; j < playerArray.length; j++) {
+//             var card = deck.pop();
+//             players[j].Hand.push(card);
+//             getCard(card, j);
+//             updatePoints();
+//         }
+//     }
+//     updateDeck();
+// }
 
-//display cards function //
+// function getCard(card, player) {
+//     var hand = document.getElementById('hand' + player);
+//     hand.appendChild(displayCards(card));
+// }
 
-//get points from hand
+// function updateDeck() {
+//     document.getElementById('deckcount').innerHTML = deck.length;
+// }
 
-//update points
+//display cards function//
+// function displayCards() {
+//     var div = document.createElement('div');
+//     var icon = '';
+
+//     if (card.Suit === 'clubs') {
+//         icon = '&clubs;';
+//     }
+//     else if (card.Suit === 'diamonds') {
+//         icon = '&diams;';
+//     }
+//     else if (card.Suit === 'hearts') {
+//         icon = '&hearts;';
+//     }
+//     else if (card.Suit === 'spades') {
+//         icon = '&spades;';
+//     }
+
+//     div.className = 'card';
+//     div.innerHTML = card.Value + '<br/>' + icon;
+//     return div;
+// }
+
+
+//get points from hand//
+// function updatePoints() {
+//     var points = 0;
+//     for (var i = 0; i < players[player].Hand.length; i++) {
+//         points += players[player].Hand[i].Weight;
+//     }
+//     players[player].Points = points;
+//     return points;
+// }
+
+//update points//
+// function updatePoints(){
+//     for (var i = 0 ; i < players.length; i++) {
+//         getPoints(i);
+//         document.getElementById('points_' + i).innerHTML = players[i].Points;
+//     }
+// }
 
 function onHit() {
     console.log('you pressed hit');
