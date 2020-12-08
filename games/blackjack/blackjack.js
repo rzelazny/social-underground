@@ -9,7 +9,6 @@ let deck = [];
 
 let hand = [];
 
-// let players = [];
 // hard coded for now but will use players from db
 let playerArray = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player1',  ID: 1, Points: 0, Hand: hand }]
 
@@ -69,8 +68,13 @@ function shuffleDeck(deck) {
 shuffleDeck(deck);
 
 //currently a hard coded array under variables but will need a function where there are actual players
-// function addPlayers(amount) {
-
+// // function addPlayers(amount) {
+//     playerArray = [{ Name: House, ID: 0, Points: 0, Hand: hand }];
+//     for (var i = 1; i <= amount; i++) {
+//         var hand = [];
+//         var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand };
+//         playerArray.push(player)
+//     }
 // }
 
 function displayBtns() {
