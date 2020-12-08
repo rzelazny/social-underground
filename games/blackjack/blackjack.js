@@ -2,14 +2,14 @@
 //                Variables                  //
 ///////////////////////////////////////////////
 
-// hard coded for now but will use players from db
-// let playerArray = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player1',  ID: 1, Points: 0, Hand: hand }]
-
 var players =  document.querySelector('#players');
 
 var startBtn = document.querySelector('#start');
 var hitBtn = document.querySelector('#hit');
 var stayBtn = document.querySelector('#stay');
+
+// hard coded for now but will use players from db
+let playerArray = [];
 
 let score = [];
 
@@ -26,13 +26,16 @@ let hand = [];
 ///////////////////////////////////////////////
 
 function drawCards() {
+    for (var x = 0; x < playerArray.length; x++) {
+        hand = [];
         var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
         $.ajax({
             url: docUrl,
             method: "GET"
         }).then(function(data) {
             // console.log(data);
-            var cardOne = {
+            for (var i = 0; i < playerArray.length; i++) {
+                var cardOne = {
                     ID: 1,
                     code: data.cards[0].code,
                     suit: data.cards[0].suit,
@@ -40,20 +43,18 @@ function drawCards() {
                     imgUrl: data.cards[0].image
 
                 };
-            var cardTwo = 
-                {
+                var cardTwo = {
                     ID: 2,
                     code: data.cards[1].code,
                     suit: data.cards[1].suit,
                     value: data.cards[1].value,
                     imgUrl: data.cards[1].image
                 };
-            hand.push(cardOne, cardTwo);
+                x = hand.push(cardOne, cardTwo);
+            };
         })
+    }
 }
-
-drawCards();
-console.log(hand);
 
 
 function displayBtns() {
@@ -65,43 +66,57 @@ function displayBtns() {
     }
 }
 
-// function displayPlayers() {
-//     players.innerHTML = '';
-//     for(var i = 0; i < playerArray.length; i++) {
+function displayPlayers() {
+    players.innerHTML = '';
+    for(var i = 0; i < playerArray.length; i++) {
 
-//         var divPlayer = document.createElement('div');
-//         divPlayer.className = ('player');
-//         divPlayer.id = playerArray[i].Name;
+        var divPlayer = document.createElement('div');
+        divPlayer.className = ('player');
+        divPlayer.id = playerArray[i].Name;
 
-//         var divPlayerName = document.createElement('div');
-//         divPlayerName.innerHTML = (playerArray[i].Name);
+        var divPlayerName = document.createElement('div');
+        divPlayerName.innerHTML = (playerArray[i].Name);
 
-//         var divHand = document.createElement('div');
-//         divHand.id = ('hand' + playerArray[i].Name);
+        var divHand = document.createElement('div');
+        divHand.id = ('hand' + playerArray[i].Name);
 
-//         var divPoints = document.createElement('div');
-//         divPoints.className = ('points');
-//         divPoints.id = ('points' + playerArray[i].Name);
+        var divPoints = document.createElement('div');
+        divPoints.className = ('points');
+        divPoints.id = ('points' + playerArray[i].Name);
 
 
-//         divPlayer.appendChild(divPlayerName, divHand, divPoints);
-//         players.appendChild(divPlayer);
-//     }
-// }
+        divPlayer.appendChild(divPlayerName, divHand, divPoints);
+        players.appendChild(divPlayer);
+    }
+}
+
+function addPlayers() {
+    // drawCards();
+    // console.log(hand);
+    var house = { Name: 'House', ID: 0, Points: 0, Hand: hand };
+    // console.log(house);
+
+    // drawCards();
+    // console.log(hand);
+    var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand };
+    // console.log(player1);
+
+    playerArray.push(house, player1);
+    console.log(playerArray);
+}
 
 
 function onStart() {
     console.log('you pressed start')
-    startBtn.value = ('restart');
-    displayBtns();
-    displayPlayers();
 
-    createDeck();
-    shuffleDeck(deck);
+    startBtn.value = ('restart');
+
+    displayBtns();
+
+    // addPlayers();
+    // displayPlayers();
 
     drawCards();
-
-    // dealHands();
 }
 
 function onHit() {
