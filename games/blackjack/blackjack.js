@@ -85,8 +85,12 @@ function createElements() {
 
         var divHand = document.createElement('div');
         divHand.id = ('hand' + playerArray[i].Name);
+
         var cardOneImg = document.createElement('img');
         cardOneImg.id = ('cardOne' + playerArray[i].Name)
+        console.log(playerArray[i]);
+        console.log(playerArray[i].Hand[0]);
+        // cardOneImg.src = (hand[i].imgUrl)
         var cardTwoImg = document.createElement('img');
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
 
@@ -101,15 +105,13 @@ function createElements() {
 }
 
 function addPlayers() {
-    // drawCards();
-    // console.log(hand);
     
     var house = { Name: 'House', ID: 0, Points: 0, Hand: hand[0] };
 
     var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand[1] };
 
     playerArray.push(house, player1);
-    console.log(playerArray);
+    // console.log(playerArray);
 }
 
 
