@@ -4,4 +4,9 @@ $(document).ready(function() {
   $.get("/api/user_data").then(function(data) {
     $(".member-name").text(data.email);
   });
+
+  //make a new table then redirect the user to it.
+  $.post("/api/newtable").then(function(data) {
+    //redirect here
+  });
 });
