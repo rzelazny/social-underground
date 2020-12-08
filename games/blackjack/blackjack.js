@@ -33,7 +33,7 @@ function drawCards() {
         }).then(function(data) {
             // console.log(data);
             for (var i = 0; i < playerArray.length; i++) {
-                playerArray[i].hand = [
+                playerHand = [
                     {
                         ID: 1,
                         code: data.cards[0].code,
@@ -49,6 +49,8 @@ function drawCards() {
                         imgUrl: data.cards[1].image
                     }
                 ];
+                hand.push(playerHand);
+                playerArray[i].Hand = hand[i]
             };
         })
 }
@@ -89,11 +91,12 @@ function displayPlayers() {
 
 function addPlayers() {
     drawCards();
-    var house = { Name: 'House', ID: 0, Points: 0, Hand: hand };
+    console.log(hand);
+    
+    var house = { Name: 'House', ID: 0, Points: 0, Hand: hand[0] };
     console.log(house);
 
-    drawCards();
-    var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand };
+    var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand[1] };
     console.log(player1);
 
     playerArray.push(house, player1);
