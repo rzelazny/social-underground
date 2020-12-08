@@ -2,13 +2,14 @@
 var db = require("../models");
 var passport = require("../config/passport");
 const { sequelize } = require("../models");
+const user = require("../models/user");
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
-    console.log("app post api/login")
+    console.log("app post api/login");
     res.json(req.user);
   });
 
@@ -51,5 +52,24 @@ module.exports = function(app) {
         id: req.user.id
       });
     }
+  });
+
+  app.post("/api/newtable", function(req, res) {
+
+    console.log("api new table running");
+
+    console.log("User ID is: " + req.user.email);
+    db.gaming_tables.create({
+      game: "BlackJack",
+      game_started: false,
+      user1: req.user.email
+    })
+      .then(function() {
+        console.log("made table now redirecting: ")
+        res.redirect(307, "/public/casino");
+      })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
   });
 };
