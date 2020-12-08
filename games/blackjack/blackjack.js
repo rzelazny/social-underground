@@ -11,7 +11,7 @@ let hand = [];
 
 // let players = [];
 // hard coded for now but will use players from db
-let playerArray = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player 1',  ID: 1, Points: 0, Hand: hand }]
+let playerArray = [{ Name: 'House', ID: 0, Points: 0, Hand: hand }, { Name: 'Player1',  ID: 1, Points: 0, Hand: hand }]
 
 var players =  document.querySelector('#players');
 
@@ -72,26 +72,47 @@ shuffleDeck(deck);
 
 // }
 
-function displayPlayers() {
-    console.log('Hello ' + playerArray[1].Name);
+function displayBtns() {
+    if (hitBtn.style.display === "none") {
+        hitBtn.style.display = "block"
+    }
+    if (stayBtn.style.display === "none") {
+        stayBtn.style.display = "block"
+    }
+    if (startBtn.style.display === "block") {
+        startBtn.style.display = "none"
+    }
 }
 
-displayPlayers();
+function displayPlayers() {
+    players.innerHTML = '';
+    for(var i = 0; i < playerArray.length; i++) {
+
+        var divPlayer = document.createElement('div');
+        divPlayer.className = ('player');
+        divPlayer.id = playerArray[i].Name;
+
+        var divPlayerName = document.createElement('div');
+        divPlayerName.innerHTML = (playerArray[i].Name);
+
+        var divHand = document.createElement('div');
+        divHand.id = (playerArray[i].Name + "Hand");
+
+        var divPoints = document.createElement('div');
+        divPoints.className = ('points');
+        divPoints.id = (playerArray[i].Name + "Points");
+
+
+        divPlayer.appendChild(divPlayerName, divHand,divPoints);
+        players.appendChild(divPlayer);
+    }
+}
+
 
 function onStart() {
     console.log("you pressed start")
-    function displayBtns() {
-        if (hitBtn.style.display === "none") {
-            hitBtn.style.display = "block"
-        }
-        if (stayBtn.style.display === "none") {
-            stayBtn.style.display = "block"
-        }
-        if (startBtn.style.display === "block") {
-            startBtn.style.display = "none"
-        }
-    }
     displayBtns();
+    displayPlayers();
 }
 
 function onHit() {
