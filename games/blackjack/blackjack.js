@@ -65,6 +65,21 @@ function shuffleDeck(deck) {
     console.log(deck);
 }
 
+
+function drawCards() {
+        var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
+    
+        $.ajax({
+            url: docUrl,
+            method: "GET"
+        }).then(function(data) {
+            console.log(data)
+        })
+}
+
+drawCards();
+
+
 //currently a hard coded array under variables but will need a function where there are actual players
 // // function addPlayers(amount) {
 //     playerArray = [{ Name: House, ID: 0, Points: 0, Hand: hand }];
