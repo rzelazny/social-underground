@@ -2,6 +2,8 @@
 //                Variables                  //
 ///////////////////////////////////////////////
 
+//https://deckofcardsapi.com/// look into tomo
+
 const suits = ['clubs', 'diamonds', 'hearts', 'spades'];
 const vals = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 
@@ -96,12 +98,12 @@ function displayPlayers() {
         var divHand = document.createElement('div');
         divHand.id = ('hand ' + playerArray[i].Name);
 
-        var divScore = document.createElement('div');
-        divScore.className = ('score');
-        divScore.id = ('score ' + playerArray[i].Name);
+        var divPoints = document.createElement('div');
+        divPoints.className = ('points');
+        divPoints.id = ('points ' + playerArray[i].Name);
 
 
-        divPlayer.appendChild(divPlayerName, divHand, divScore);
+        divPlayer.appendChild(divPlayerName, divHand, divPoints);
         players.appendChild(divPlayer);
     }
 }
@@ -115,7 +117,17 @@ function onStart() {
 
     createDeck();
     shuffleDeck(deck);
+
+    //dealhands fuction call back//
 }
+
+//deal hands function //
+
+//display cards function //
+
+//get points from hand
+
+//update points
 
 function onHit() {
     console.log('you pressed hit');
@@ -125,6 +137,7 @@ function onStay() {
     console.log('you pressed stay');
 }
 
+//if the house total is less than player1 hit until more than or bust//
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
