@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+var User = require("../models/userStat")
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -25,17 +26,16 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
-  
+
   app.post("/api/new", function(req, res) {
     // Take the request...
     var user = req.body;
 
     var routeName = user.name.replace(/\s+/g, "").toLowerCase();
     // Then add the user to the database using sequelize
-    user.create({
+    User.create({
       routeName: routeName,
       name: user.name,
-      age: user.age,
       gamePoints: user.gamePoints
     });
     res.status(204).end();
