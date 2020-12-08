@@ -1,18 +1,15 @@
-//Users stats
-var Sequelize = require("sequelize");
-// sequelize (lowercase) references our connection to the DB.
-var sequelize = require("./index.js");
-
 // Creates a "Character" model that matches up with DB
-var User = sequelize.define("User", {
-    routeName: Sequelize.STRING,
-    name: Sequelize.STRING,
-    gamePoints: Sequelize.INTEGER
-}, {
-    freezeTableName: true
-});
-// Syncs with DB
-User.sync();
+module.exports = function (sequelize, DataTypes){
+    return sequelize.define("User", {
+        routeName: DataTypes.STRING,
+        name: DataTypes.STRING,
+        gamePoints: DataTypes.INTEGER
+    }, {
+        freezeTableName: true
+    });
+};
+// // Syncs with DB
+// User.sync();
 
-// Makes the User Model available for other files (will also create a table)
-module.exports = User;
+// // Makes the User Model available for other files (will also create a table)
+// module.exports = User;

@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
+// var User = require("../models/userStat")
 var User = require("../models/userStat")
 const { sequelize } = require("../models");
 const user = require("../models/user");
@@ -36,14 +37,12 @@ module.exports = function(app) {
 
   app.post("/api/new", function(req, res) {
     // Take the request...
-    var user = req.body;
-
-    var routeName = user.name.replace(/\s+/g, "").toLowerCase();
+    var routeName = req.body.name.replace(/\s+/g, "").toLowerCase();
     // Then add the user to the database using sequelize
-    User.create({
+    db.user.create({
       routeName: routeName,
-      name: user.name,
-      gamePoints: user.gamePoints
+      name: req.body.name,
+      gamePoints: req.body.gamePoints
     });
     res.status(204).end();
   });
@@ -76,14 +75,10 @@ module.exports = function(app) {
 
     console.log("User ID is: " + req.user.email);
     db.gaming_tables.create({
-      game: "BlackJack",
+      game: "Just Chatting",
       game_started: false,
       user1: req.user.email
     })
-      .then(function() {
-        console.log("made table now redirecting: ")
-        res.redirect(307, "/public/casino");
-      })
       .catch(function(err) {
         res.status(401).json(err);
       });
