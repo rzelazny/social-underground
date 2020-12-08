@@ -20,7 +20,7 @@ module.exports = function(app) {
     console.log("My email is: " + req.body.email + " my pass is: " + req.body.password);
     console.log()
     db.User_login.create({
-      login: req.body.email,
+      email: req.body.email,
       password: req.body.password
     })
       .then(function() {
