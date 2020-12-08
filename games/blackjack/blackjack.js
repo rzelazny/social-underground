@@ -26,8 +26,6 @@ let hand = [];
 ///////////////////////////////////////////////
 
 function drawCards() {
-    for (var x = 0; x < playerArray.length; x++) {
-        hand = [];
         var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
         $.ajax({
             url: docUrl,
@@ -35,25 +33,24 @@ function drawCards() {
         }).then(function(data) {
             // console.log(data);
             for (var i = 0; i < playerArray.length; i++) {
-                var cardOne = {
-                    ID: 1,
-                    code: data.cards[0].code,
-                    suit: data.cards[0].suit,
-                    value: data.cards[0].value,
-                    imgUrl: data.cards[0].image
-
-                };
-                var cardTwo = {
-                    ID: 2,
-                    code: data.cards[1].code,
-                    suit: data.cards[1].suit,
-                    value: data.cards[1].value,
-                    imgUrl: data.cards[1].image
-                };
-                x = hand.push(cardOne, cardTwo);
+                playerArray[i].hand = [
+                    {
+                        ID: 1,
+                        code: data.cards[0].code,
+                        suit: data.cards[0].suit,
+                        value: data.cards[0].value,
+                        imgUrl: data.cards[0].image
+    
+                    }, {
+                        ID: 2,
+                        code: data.cards[1].code,
+                        suit: data.cards[1].suit,
+                        value: data.cards[1].value,
+                        imgUrl: data.cards[1].image
+                    }
+                ];
             };
         })
-    }
 }
 
 
@@ -91,15 +88,13 @@ function displayPlayers() {
 }
 
 function addPlayers() {
-    // drawCards();
-    // console.log(hand);
+    drawCards();
     var house = { Name: 'House', ID: 0, Points: 0, Hand: hand };
-    // console.log(house);
+    console.log(house);
 
-    // drawCards();
-    // console.log(hand);
+    drawCards();
     var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand };
-    // console.log(player1);
+    console.log(player1);
 
     playerArray.push(house, player1);
     console.log(playerArray);
@@ -113,10 +108,9 @@ function onStart() {
 
     displayBtns();
 
-    // addPlayers();
-    // displayPlayers();
+    addPlayers();
+    displayPlayers();
 
-    drawCards();
 }
 
 function onHit() {
