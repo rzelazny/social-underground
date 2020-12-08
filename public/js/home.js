@@ -1,14 +1,15 @@
 $(document).ready(function() {
-    //variables
-    var newGame = document.getElementById("newGame");
+    // Getting references to our form and inputs
     var joinGame = document.getElementById("joinGame");
 
-    //functions with event listners 
-    newGame.addEventListener("click", function() {
+    // When the form is submitted, we validate there's an email and password entered
+    $("#newTable").on("click", function(event) {
         console.log("You clicked me! That tickled...");
-        //create new gaming table
         $.post("/api/newtable");
-    });
+            console.log("The table was made");
+            window.location.replace("/casino");
+        
+    })
 
     joinGame.addEventListener("click", function() {
         console.log("Stopppppp that tickles!! >:(");
