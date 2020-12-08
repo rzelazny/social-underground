@@ -48,7 +48,13 @@ module.exports = function(app) {
     })
   });
 
-
+  app.get("/api/user_stat", function(req, res) {
+    // Take the request...
+    // Then add the user to the database using sequelize
+    User_stat.findAll().then((user_stat) => {
+      res.json(user_stat);
+    });
+  });
 
   // Route for logging user out
   app.get("/logout", function(req, res) {
