@@ -45,11 +45,9 @@ function createDeck() {
             deck.push(card);
         }
     }
+    return console.log(deck.length),
+    console.log(deck);
 }
-
-createDeck();
-console.log(deck.length);
-console.log(deck);
 
 //credit: fisher-yates shuffle method
 function shuffleDeck(deck) {
@@ -64,8 +62,6 @@ function shuffleDeck(deck) {
     return console.log(deck.length),
     console.log(deck);
 }
-
-shuffleDeck(deck);
 
 //currently a hard coded array under variables but will need a function where there are actual players
 // // function addPlayers(amount) {
@@ -116,6 +112,9 @@ function onStart() {
     startBtn.value = ('restart');
     displayBtns();
     displayPlayers();
+
+    createDeck();
+    shuffleDeck(deck);
 }
 
 function onHit() {
