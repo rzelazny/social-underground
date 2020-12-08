@@ -2,9 +2,9 @@
 var db = require("../models");
 var passport = require("../config/passport");
 // var User = require("../models/userStat")
-var User = require("../models/userStat")
+var User_stat = db.User_stat
 const { sequelize } = require("../models");
-const user = require("../models/user");
+const user = require("../models/user_login");
 
 
 module.exports = function(app) {
@@ -28,24 +28,28 @@ module.exports = function(app) {
       password: req.body.password
     })
       .then(function() {
-        res.redirect(307, "/api/login");
+        res.redirect(307, "/api/new");
       })
       .catch(function(err) {
         res.status(401).json(err);
       });
   });
 
-  app.post("/api/new", function(req, res) {
+  app.post("/api/user_stat", function(req, res) {
     // Take the request...
     var routeName = req.body.name.replace(/\s+/g, "").toLowerCase();
     // Then add the user to the database using sequelize
-    db.user.create({
+    User_stat.create({
       routeName: routeName,
       name: req.body.name,
       gamePoints: req.body.gamePoints
-    });
-    res.status(204).end();
+
+    }).then ((user_stat) => {
+      res.status(201).json(user_stat);
+    })
   });
+
+
 
   // Route for logging user out
   app.get("/logout", function(req, res) {

@@ -1,6 +1,6 @@
 // Creates a "Character" model that matches up with DB
 module.exports = function (sequelize, DataTypes){
-    return sequelize.define("User", {
+    return sequelize.define("User_stat", {
         routeName: DataTypes.STRING,
         name: DataTypes.STRING,
         gamePoints: DataTypes.INTEGER
