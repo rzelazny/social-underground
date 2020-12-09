@@ -5,12 +5,8 @@ body {
     text-align: center;
 }
 
-canvas {
-
+/* canvas {
     background-image: url(./images/blackjacktable2.png);
-
-    background-image: url(../images/blackjacktable.jpg);
-
     display: inline;
     background-size: cover;
-}
+} */
