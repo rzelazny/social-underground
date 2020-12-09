@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
-
+var gameBody =  document.querySelector('#gameBody');
 var players =  document.querySelector('#players');
 
 var startBtn = document.querySelector('#start');
@@ -54,6 +54,7 @@ function drawCards() {
                 hand.push(playerHand);
                 playerArray[i].Hand = hand[i]
             };
+            createElements();
         })
     // };
 }
@@ -88,9 +89,8 @@ function createElements() {
 
         var cardOneImg = document.createElement('img');
         cardOneImg.id = ('cardOne' + playerArray[i].Name)
-        console.log(playerArray[i]);
-        console.log(playerArray[i].Hand[0]);
-        // cardOneImg.src = (hand[i].imgUrl)
+        cardOneImg.src = (playerArray[i].Hand[i].imgUrl)
+        // console.log(playerArray[i].Hand[i].imgUrl)
         var cardTwoImg = document.createElement('img');
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
 
@@ -102,6 +102,7 @@ function createElements() {
         divPlayer.appendChild(divHand, divPoints);
         players.appendChild(divPlayer);
     }
+    // cardOneImg.src = (hand[i].imgUrl)
 }
 
 function addPlayers() {
@@ -124,7 +125,7 @@ function onStart() {
 
     drawCards();
 
-    createElements();
+    // createElements();
 
     //total point value
 }
