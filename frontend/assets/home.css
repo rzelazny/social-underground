@@ -1,6 +1,6 @@
 body {
     background-color: black;
-    background-image: url(./images/carpet.jpg);
+    /* background-image: url(./images/carpet.jpg); */
     background-size: cover;
     text-align: center;
 }
@@ -10,22 +10,15 @@ canvas {
     display: inline;
     background-size: cover;
 }
-/* @import url("//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"); */
-* {
-    padding: 0px;
-    margin: 0px;
-  }
-  /* body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #00071c;
-  } */
+.buttons {
+    position: center;
+}
+
   ul {
-    position: relative;
+    position: absolute;
+    align-items: center;
     display: flex;
-    transform: rotate(-25deg) skew(25deg);
+    /* transform: rotate(-25deg) skew(25deg); */
     transform-style: preserve-3d;
   }
   ul li {
