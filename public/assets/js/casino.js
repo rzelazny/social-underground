@@ -25,7 +25,7 @@ $("#navBtnLogOut").on("click", function(event) {
 
 //Navigation button: Go back to homepage
 $("#navBtnHome").on("click", function(event) {
-    window.location.replace("/");
+    window.location.replace("/home");
 })
 
 
