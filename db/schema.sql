@@ -15,7 +15,7 @@ CREATE TABLE user_login(
 	PRIMARY KEY (id)
 );
 
---table stores user displayName and win/loss record
+-- table stores user displayName and win/loss record
 CREATE TABLE user_stats(
     id int NOT NULL AUTO_INCREMENT,
 	login_id int NOT NULL,
