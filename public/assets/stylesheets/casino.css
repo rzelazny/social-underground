@@ -1,0 +1,12 @@
+body {
+    background-color: black;
+    /* background-image: url(./images/uglycarpet1.jpg); */
+    background-size: cover;
+    text-align: center;
+}
+
+canvas {
+    background-image: url(./images/blackjacktable.jpg);
+    display: inline;
+    background-size: cover;
+}

@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "2aaeec3b-e3de-44b1-850e-1148bab92e33",
+		"name": "project 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jayrhee0514@gmail.com\",\n    \"password\": \"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				},
+				"description": "unathorized login"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
