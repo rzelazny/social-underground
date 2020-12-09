@@ -4,6 +4,7 @@ var passport = require("../config/passport");
 // var User = require("../models/userStat")
 var User = require("../models/userStat")
 const { sequelize } = require("../models");
+const { Op } = require("sequelize");
 const user = require("../models/user");
 
 
@@ -52,6 +53,20 @@ module.exports = function(app) {
     req.logout();
     res.redirect("/");
   });
+
+ // Route for finding existing game tables
+  app.get("/api/tables", function(req, res) {
+    db.gaming_tables.findAll({
+      where: {
+        game_started: {
+          [Op.eq]: false
+        }
+      }
+    }).then(function(results){
+      console.log("sending table data back")
+      res.send(results);
+    })
+});
 
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
