@@ -43,10 +43,12 @@ $(document).ready(function() {
     $("#newTable").on("click", function(event) {
         console.log("Making a new gaming table ");
         //create a new gaming table
-        $.post("/api/newtable");
+        $.post("/api/newtable", function(newTable){
             console.log("The table was made");
-            window.location.replace("/casino");
-        
+            console.log(newTable);
+            window.location.replace("/casino/" + newTable.id);
+        }
+        );
     })
 
     // $("#joinGame").on("click", function(event) {
