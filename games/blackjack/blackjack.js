@@ -89,10 +89,18 @@ function createElements() {
 
         var cardOneImg = document.createElement('img');
         cardOneImg.id = ('cardOne' + playerArray[i].Name)
-        cardOneImg.src = (playerArray[i].Hand[i].imgUrl)
-        // console.log(playerArray[i].Hand[i].imgUrl)
+        cardOneImg.src = (playerArray[i].Hand[0].imgUrl)
+
+        console.log("=========FIRST ONE===============")
+        console.log(playerArray[i].Hand[i].imgUrl)
+        console.log("============SECOND ONE============")
+        console.log(playerArray[i].Hand[0].imgUrl)
+        console.log("===========THIRD ONE============")
+        console.log(playerArray[i].Hand[1].imgUrl)
+
         var cardTwoImg = document.createElement('img');
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
+        cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
 
         var divPoints = document.createElement('div');
         divPoints.className = ('points');
