@@ -12,17 +12,29 @@ $(document).ready(function() {
 
             //append current stats to card
             var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id);
-            var game = $("<h4>").addClass("card-text").text("Game: " + curTables[i].game);
-            var user1 = $("<h4>").addClass("card-text").text("Player 1: " + curTables[i].user1);
-            var user2 = $("<h4>").addClass("card-text").text("Player 2: " + curTables[i].user2);
-            var user3 = $("<h4>").addClass("card-text").text("Player 3: " + curTables[i].user3);
-            var user4 = $("<h4>").addClass("card-text").text("Player 4: " + curTables[i].user4);
-            var user5 = $("<h4>").addClass("card-text").text("Player 5: " + curTables[i].user5);
-            cardBody.append(id, game, user1, user2, user3, user4, user5);
+            var game = $("<p>").addClass("card-text").text("Game: " + curTables[i].game);
+            var user1 = $("<p>").addClass("card-text").text("Player 1: " + curTables[i].user1);
+            var user2 = $("<p>").addClass("card-text").text("Player 2: " + curTables[i].user2);
+            var user3 = $("<p>").addClass("card-text").text("Player 3: " + curTables[i].user3);
+            var user4 = $("<p>").addClass("card-text").text("Player 4: " + curTables[i].user4);
+            var user5 = $("<p>").addClass("card-text").text("Player 5: " + curTables[i].user5);
+            var joinBtn = $('<button/>', {
+                text: "Join Table",
+                id: "btnJoin",
+                table: curTables[i].id,
+                click: joinTable
+            })
+            cardBody.append(id, game, user1, user2, user3, user4, user5, joinBtn);
             card.append(cardBody);
             $("#current-tables").append(card);
         };
     });
+
+    //function lets user join an existing table
+    function joinTable() {
+        let tableId = $(this).attr("table")
+        window.location.replace("/casino/" + tableId);
+    }
 
     // Getting references to our form and inputs
     var joinGame = document.getElementById("joinGame");
@@ -37,11 +49,11 @@ $(document).ready(function() {
         
     })
 
-    $("#joinGame").on("click", function(event) {
-        console.log("Stopppppp that tickles!! >:(");
-        $.post("/api/newtable");
-            console.log("The table was made");
-            window.location.replace("/casino");
+    // $("#joinGame").on("click", function(event) {
+    //     console.log("Stopppppp that tickles!! >:(");
+    //     $.post("/api/newtable");
+    //         console.log("The table was made");
+    //         window.location.replace("/casino");
         
-    })
+    // })
 });
