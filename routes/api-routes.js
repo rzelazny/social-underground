@@ -94,6 +94,10 @@ module.exports = function(app) {
       game_started: false,
       user1: req.user.email
     })
+    .then(function(results){
+      console.log("sending new table data back")
+      res.send(results);
+    })
       .catch(function(err) {
         res.status(401).json(err);
       });

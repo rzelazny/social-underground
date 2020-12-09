@@ -8,11 +8,11 @@ module.exports = function(app) {
 
   app.get("/", function(req, res) {
     // If the user already has an account send them to the members page
-    console.log("I'm sending them home");
     if (req.user) {
+      console.log("I'm sending them home");
       res.redirect("/home");
     }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
+    res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
   app.get("/login", function(req, res) {
