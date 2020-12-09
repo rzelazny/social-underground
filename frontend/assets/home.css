@@ -10,13 +10,21 @@ canvas {
     display: inline;
     background-size: cover;
 }
-.buttons {
-    position: center;
+
+/* .container {
+
+} */
+
+/* .row {
 }
+
+.col {
+
+} */
+
 
   ul {
     position: absolute;
-    align-items: center;
     display: flex;
     /* transform: rotate(-25deg) skew(25deg); */
     transform-style: preserve-3d;
