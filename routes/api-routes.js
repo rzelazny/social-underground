@@ -5,6 +5,8 @@ var passport = require("../config/passport");
 var User_stat = db.User_stat
 const { sequelize } = require("../models");
 const user = require("../models/user_login");
+const { Op } = require("sequelize");
+const user = require("../models/user");
 
 
 module.exports = function(app) {
@@ -62,6 +64,20 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
+ // Route for finding existing game tables
+  app.get("/api/tables", function(req, res) {
+    db.gaming_tables.findAll({
+      where: {
+        game_started: {
+          [Op.eq]: false
+        }
+      }
+    }).then(function(results){
+      console.log("sending table data back")
+      res.send(results);
+    })
+});
+
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
     console.log("app.get api user data")
@@ -84,14 +100,10 @@ module.exports = function(app) {
 
     console.log("User ID is: " + req.user.email);
     db.gaming_tables.create({
-      game: "BlackJack",
+      game: "Just Chatting",
       game_started: false,
       user1: req.user.email
     })
-      .then(function() {
-        console.log("made table now redirecting: ")
-        res.redirect(307, "/public/casino");
-      })
       .catch(function(err) {
         res.status(401).json(err);
       });

@@ -2,7 +2,8 @@
 module.exports = function (sequelize, DataTypes){
     return sequelize.define("User_stat", {
         name: DataTypes.STRING,
-        gamePoints: DataTypes.INTEGER
+        gamePoints: DataTypes.INTEGER,
+        bio: DataTypes.STRING
     }, {
         freezeTableName: true
     });
