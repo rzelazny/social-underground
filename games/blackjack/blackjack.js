@@ -55,6 +55,7 @@ function drawCards() {
                 playerArray[i].Hand = hand[i]
             };
             createElements();
+            // totalPoints();
         })
     // };
 }
@@ -91,16 +92,14 @@ function createElements() {
         cardOneImg.id = ('cardOne' + playerArray[i].Name)
         cardOneImg.src = (playerArray[i].Hand[0].imgUrl)
 
-        console.log("=========FIRST ONE===============")
-        console.log(playerArray[i].Hand[i].imgUrl)
-        console.log("============SECOND ONE============")
-        console.log(playerArray[i].Hand[0].imgUrl)
-        console.log("===========THIRD ONE============")
-        console.log(playerArray[i].Hand[1].imgUrl)
-
         var cardTwoImg = document.createElement('img');
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
         cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
+
+        console.log("============Card 1============")
+        console.log(playerArray[i].Hand[0].imgUrl)
+        console.log("===========Card 2============")
+        console.log(playerArray[i].Hand[1].imgUrl)
 
         var divPoints = document.createElement('div');
         divPoints.className = ('points');
@@ -110,7 +109,6 @@ function createElements() {
         divPlayer.appendChild(divHand, divPoints);
         players.appendChild(divPlayer);
     }
-    // cardOneImg.src = (hand[i].imgUrl)
 }
 
 function addPlayers() {
@@ -132,8 +130,6 @@ function onStart() {
     addPlayers();
 
     drawCards();
-
-    // createElements();
 
     //total point value
 }
@@ -161,9 +157,10 @@ function onStay() {
 //house logic function//
 //if the house total is less than player1 hit until more than or bust//
 
-//total point value function
-//count values of all cards
-//if bust logic
+// function totalPoints() {
+//     //count values of all cards
+//     //if bust logic
+// }
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
