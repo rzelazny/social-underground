@@ -68,7 +68,7 @@ $(document).ready(function() {
     $("#navBtnLogOut").on("click", function(event) {
         console.log("Logging out");
         $.get("/logout");
-        window.location.replace("/login");
+        location.reload();
     })
 
     //Navigation button: Go back to homepage
