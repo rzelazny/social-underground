@@ -202,8 +202,8 @@ function totalPoints() {
         var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
         console.log(cardTwoVal);
 
-        // var handVal = cardOneVal + cardTwoVal;
-        // console.log(handVal);
+        var handVal = cardOneVal + cardTwoVal;
+        console.log(handVal);
 
         // divPoints.innerHTML = `Points: ` + playerArray
         // if playerArray[i].Value 
