@@ -1,9 +1,9 @@
 // Creates a "Character" model that matches up with DB
 module.exports = function (sequelize, DataTypes){
-    return sequelize.define("User", {
-        routeName: DataTypes.STRING,
+    return sequelize.define("User_stat", {
         name: DataTypes.STRING,
-        gamePoints: DataTypes.INTEGER
+        gamePoints: DataTypes.INTEGER,
+        bio: DataTypes.STRING
     }, {
         freezeTableName: true
     });

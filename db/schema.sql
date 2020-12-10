@@ -20,8 +20,7 @@ CREATE TABLE user_stats(
     id int NOT NULL AUTO_INCREMENT,
 	login_id int NOT NULL,
     display_name varchar(255) DEFAULT "New Player",
-    wins int DEFAULT 0,
-    losses int DEFAULT 0,
+    wins BOOLEAN DEFAULT FALSE,
 	foreign key (login_id) references user_login(id) on delete cascade,
 	PRIMARY KEY (id)
 );
