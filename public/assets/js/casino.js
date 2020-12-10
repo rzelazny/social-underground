@@ -3,35 +3,34 @@ $(document).ready(function() {
     var hitButton = document.getElementById("hitButton");
     var stayButton = document.getElementById("stayButton");
     var newRound = document.getElementById("newRound");
-
+    //get the current casino table
+    var curTable = document.defaultView.location.pathname.split("casino").pop();
+    console.log(document.defaultView);
     //populate chat log
-    $.get("api/tables", function(curTables){
+    $.get("/api/chat" + curTable, function(chatLog){
 
-        console.log(curTables);
-        for(i=0; i < curTables.length; i++) {
-            var card = $("<div>").addClass("card");
-            var cardBody = $("<div>").addClass("card-body");
-            cardBody.attr("id", "resultCardBody");
+        console.log("getting chat: ");
+        for(i=0; i < chatLog.length; i++) {
+            var chatLine = $("<li>")
 
-            //append current stats to card
-            var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id);
-            var game = $("<p>").addClass("card-text").text("Game: " + curTables[i].game);
-            var user1 = $("<p>").addClass("card-text").text("Player 1: " + curTables[i].user1);
-            var user2 = $("<p>").addClass("card-text").text("Player 2: " + curTables[i].user2);
-            var user3 = $("<p>").addClass("card-text").text("Player 3: " + curTables[i].user3);
-            var user4 = $("<p>").addClass("card-text").text("Player 4: " + curTables[i].user4);
-            var user5 = $("<p>").addClass("card-text").text("Player 5: " + curTables[i].user5);
-            var joinBtn = $('<button/>', {
-                text: "Join Table",
-                id: "btnJoin",
-                table: curTables[i].id,
-                click: joinTable
-            })
-            cardBody.append(id, game, user1, user2, user3, user4, user5, joinBtn);
-            card.append(cardBody);
-            $("#current-tables").append(card);
+            chatLine.attr("id", "chat-line-" + i);
+            chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
+            $("#chat-log").append(chatLine);
         };
     });
+
+    //submit chat button
+    $("#send-chat").on("click", function(event) {
+        event.preventDefault();
+
+        let newMessage = {
+            message: $("#chat-input").text,
+            table: curTable
+        }
+        console.log("Sending chat");
+
+        $.post("/api/chat/", newMessage);
+    })
 
     //functions with event listners 
     hitButton.addEventListener("click", function hitButton() {

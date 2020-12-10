@@ -29,7 +29,8 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/home.html"));
   });
 
-  app.get("/casino/:id", isAuthenticated, function(req, res) {
+  app.get("/casino:id", isAuthenticated, function(req, res) {
+    console.log("sending them to :" + req.url);
     res.sendFile(path.join(__dirname, "../public/casino.html"));
   });
 

@@ -33,7 +33,7 @@ $(document).ready(function() {
     //function lets user join an existing table
     function joinTable() {
         let tableId = $(this).attr("table")
-        window.location.replace("/casino/" + tableId);
+        window.location.assign("/casino" + tableId);
     }
 
     // Getting references to our form and inputs
