@@ -12,10 +12,10 @@ canvas {
     background-size: cover;
 }
 
+/*Buttons*/
 ul {
   position: relative;
   display: flex;
-  /* transform: rotate(-25deg) skew(25deg); */
   transform-style: preserve-3d;
 }
 ul li {
@@ -99,10 +99,15 @@ ul li:nth-child(3):hover span {
 ul li:nth-child(4):hover span {
   background: #fceb00 !important;
 }
+
+/*Chat Css*/
+.container {
+    align-items: flex;
+}
 #chat-container{
     text-align: left;
     height: 200px;
-    width: 800px;
+    width: 400px;
     background-color: beige;
 }
 
