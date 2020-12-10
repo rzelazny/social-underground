@@ -20,6 +20,10 @@ var ties = 0;
 
 let hand = [];
 
+//making a global variable to be used throughout several functions//
+var divPlayer = null;
+var divHand = null;
+var divPoints = null;
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
@@ -51,6 +55,7 @@ function drawCards () {
         }
         else {
             createElements();
+            totalPoints();
         }
     })
 }
@@ -74,13 +79,13 @@ function createElements() {
     players.innerHTML = '';
     for(var i = 0; i < playerArray.length; i++) {
 
-        var divPlayer = document.createElement('div');
+        divPlayer = document.createElement('div');
         divPlayer.className = ('player');
         divPlayer.id = playerArray[i].Name;
         divPlayer.innerHTML = (playerArray[i].Name);
 
-        var divHand = document.createElement('div');
-        divHand.id = ('hand' + playerArray[i].Name);
+        divHand = document.createElement("div");
+        divHand.id = ("hand" + playerArray[i].Name);
 
         var cardOneImg = document.createElement('img');
         cardOneImg.id = ('cardOne' + playerArray[i].Name)
@@ -90,9 +95,10 @@ function createElements() {
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
         cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
 
-        var divPoints = document.createElement('div');
+        divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
+        divPoints.innerHTML = `Points: ` + playerArray[i].Points
 
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
@@ -107,6 +113,8 @@ function addPlayers() {
     var house = { Name: 'House', ID: 0, Points: 0, Hand: hand[0] };
 
     var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand[1] };
+
+    // var player2 = { Name: 'Player2',  ID: 2, Points: 0, Hand: hand[2] };
 
     playerArray.push(house, player1);
     // console.log(playerArray);
@@ -145,7 +153,6 @@ function playerOneHit() {
         url: docUrl,
         method: "GET"
     }).then(function (data) {
-        // console.log(data);
         hitCard = {
                 code: data.cards[0].code,
                 suit: data.cards[0].suit,
@@ -158,9 +165,8 @@ function playerOneHit() {
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard' + playerArray[1].Name)
         hitCardImg.src = (hitCard.imgUrl)
-        console.log(hitCardImg);
 
-        var divHand = document.getElementById(handPlayer1);
+        console.log(divHand);
         divHand.appendChild(hitCardImg);
     })
 }
@@ -176,10 +182,35 @@ function onStay() {
 //house logic function//
 //if the house total is less than player1 hit until more than or bust//
 
-// function totalPoints() {
-//     //count values of all cards
-//     //if bust logic
-// }
+function totalPoints() {
+    for(var i = 0; i < playerArray.length; i++) {
+
+        if (playerArray[i].Hand[0].value === "JACK" || playerArray[i].Hand[0].value === "QUEEN" || playerArray[i].Hand[0].value === "KING") {
+            playerArray[i].Hand[0].value = "10";
+        } else if (playerArray[i].Hand[0].value === "ACE") {
+            playerArray[i].Hand[0].value = "11";
+        }
+        var cardOneVal = parseInt(playerArray[i].Hand[0].value);
+
+        if (playerArray[i].Hand[1].value === "JACK" || playerArray[i].Hand[1].value === "QUEEN" || playerArray[i].Hand[1].value === "KING") {
+            playerArray[i].Hand[1].value = "10";
+        } else if (playerArray[i].Hand[1].value === "ACE") {
+            playerArray[i].Hand[1].value = "11";
+        }
+        var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
+
+        var handVal = cardOneVal + cardTwoVal;
+        playerArray[i].Points = handVal;
+
+        console.log(playerArray[i].Points);
+
+        divPoints.innerHTML = `Points: ` + playerArray[i].Points
+    }
+    //count values of all cards
+    //if bust logic
+}
+
+//hide house cards after game is built//
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
