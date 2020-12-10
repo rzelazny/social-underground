@@ -189,18 +189,14 @@ function totalPoints() {
         } else if (playerArray[i].Hand[0].value === "ACE") {
             playerArray[i].Hand[0].value = "11";
         }
-
         var cardOneVal = parseInt(playerArray[i].Hand[0].value);
-        console.log(cardOneVal);
 
         if (playerArray[i].Hand[1].value === "JACK" || playerArray[i].Hand[1].value === "QUEEN" || playerArray[i].Hand[1].value === "KING") {
             playerArray[i].Hand[1].value = "10";
         } else if (playerArray[i].Hand[1].value === "ACE") {
             playerArray[i].Hand[1].value = "11";
         }
-
         var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
-        console.log(cardTwoVal);
 
         var handVal = cardOneVal + cardTwoVal;
         console.log(handVal);
