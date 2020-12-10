@@ -19,6 +19,8 @@ var losses = 0;
 var ties = 0;
 
 let hand = [];
+
+//making a global variable to be used throughout several functions//
 var divHand = null
 ///////////////////////////////////////////////
 //                Functions                  //
@@ -108,6 +110,8 @@ function addPlayers() {
 
     var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand[1] };
 
+    // var player2 = { Name: 'Player2',  ID: 2, Points: 0, Hand: hand[2] };
+
     playerArray.push(house, player1);
     // console.log(playerArray);
 }
@@ -145,7 +149,6 @@ function playerOneHit() {
         url: docUrl,
         method: "GET"
     }).then(function (data) {
-        // console.log(data);
         hitCard = {
                 code: data.cards[0].code,
                 suit: data.cards[0].suit,
@@ -158,9 +161,7 @@ function playerOneHit() {
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard' + playerArray[1].Name)
         hitCardImg.src = (hitCard.imgUrl)
-        console.log(hitCardImg);
 
-        // var divHand = document.getElementById(handPlayer1);
         console.log(divHand);
         divHand.appendChild(hitCardImg);
     })
@@ -181,6 +182,8 @@ function onStay() {
 //     //count values of all cards
 //     //if bust logic
 // }
+
+//hide house cards after game is built//
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
