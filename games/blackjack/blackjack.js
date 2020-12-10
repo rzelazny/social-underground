@@ -18,8 +18,6 @@ var wins = 0;
 var losses = 0;
 var ties = 0;
 
-//https://deckofcardsapi.com/// 
-
 let hand = [];
 
 ///////////////////////////////////////////////
@@ -35,31 +33,31 @@ function drawCards() {
         }).then(function(data) {
             // console.log(data);
             for (var i = 0; i < playerArray.length; i++) {
-                playerHand = [
-                    {
-                        ID: 1,
-                        code: data.cards[0].code,
-                        suit: data.cards[0].suit,
-                        value: data.cards[0].value,
-                        imgUrl: data.cards[0].image
-    
-                    }, {
-                        ID: 2,
-                        code: data.cards[1].code,
-                        suit: data.cards[1].suit,
-                        value: data.cards[1].value,
-                        imgUrl: data.cards[1].image
-                    }
-                ];
-                hand.push(playerHand);
-                playerArray[i].Hand = hand[i]
-            };
-            createElements();
-            // totalPoints();
+            playerHand = [
+                {
+                    ID: 1,
+                    code: data.cards[0].code,
+                    suit: data.cards[0].suit,
+                    value: data.cards[0].value,
+                    imgUrl: data.cards[0].image
+                }, {
+                    ID: 2,
+                    code: data.cards[1].code,
+                    suit: data.cards[1].suit,
+                    value: data.cards[1].value,
+                    imgUrl: data.cards[1].image
+                }
+            ];
+            hand.push(playerHand);
+            playerArray[i].Hand = hand[i]
+        }
+        createElements();
+        // totalPoints();
         })
     // };
+    // createElements();
+    // // totalPoints();
 }
-
 
 function displayBtns() {
     if (startBtn.style.display === 'block') {
