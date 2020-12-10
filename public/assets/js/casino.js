@@ -3,14 +3,16 @@ $(document).ready(function() {
     var hitButton = document.getElementById("hitButton");
     var stayButton = document.getElementById("stayButton");
     var newRound = document.getElementById("newRound");
-    var chatBox = $("#chat-input");
+    var chatScroll = $("#chat-log");
+    var chatInput = $("#chat-input");
+    
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
     let chatLength = 0;
+
     //populate chat log
     $.get("/api/chat" + curTable, function(chatLog){
         chatLength = chatLog.length;
-        console.log("getting chat: ");
         for(i=0; i < chatLength; i++) {
             var chatLine = $("<li>")
 
@@ -18,7 +20,7 @@ $(document).ready(function() {
             chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
             $("#chat-log").append(chatLine);
         };
-
+        chatScroll.scrollTop(1000);
     });
 
     //Function checks the chat log db for changes every 3s and refreshes the page if someone has posted a message to the chat log
@@ -26,10 +28,9 @@ $(document).ready(function() {
         
         setInterval(function() {
             $.get("/api/chat" + curTable, function(chatLog){
-                console.log("checking chat logs", chatLog.length);
-
                 if(chatLog.length > chatLength){
                     location.reload();
+                    chatScroll.scrollTop(1000);
                 }
             })
         }, 3000);
@@ -41,7 +42,7 @@ $(document).ready(function() {
     $("#send-chat").on("click", function(event) {
         event.preventDefault();
         let newMessage = {
-            message: chatBox.val(),
+            message: chatInput.val(),
             table: curTable
         }
         console.log("Sending chat");
