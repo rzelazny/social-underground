@@ -33,13 +33,11 @@ function drawCards () {
     }).then(function (data) {
         playerHand = [
             {
-                ID: 1,
                 code: data.cards[ 0 ].code,
                 suit: data.cards[ 0 ].suit,
                 value: data.cards[ 0 ].value,
                 imgUrl: data.cards[ 0 ].image
             }, {
-                ID: 2,
                 code: data.cards[ 1 ].code,
                 suit: data.cards[ 1 ].suit,
                 value: data.cards[ 1 ].value,
@@ -133,10 +131,32 @@ function onRestart() {
 }
 
 function onHit() {
-    // to add card
     console.log('you pressed hit me');
+    playerOneHit();
+    // to add card
     //house logic function//
     //total point value
+}
+
+function playerOneHit() {
+    var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
+    $.ajax({
+        url: docUrl,
+        method: "GET"
+    }).then(function (data) {
+        // console.log(data);
+        hitCard = {
+                code: data.cards[0].code,
+                suit: data.cards[0].suit,
+                value: data.cards[0].value,
+                imgUrl: data.cards[0].image
+            };
+        console.log(hitCard);
+        var originalHand = playerArray[1].Hand;
+        console.log(originalHand);
+        originalHand.push(hitCard);
+        console.log(originalHand);
+    })
 }
 
 // to end round //
