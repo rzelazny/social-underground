@@ -170,6 +170,7 @@ function playerOneHit() {
         console.log(divHand);
         divHand.appendChild(hitCardImg);
     })
+    // totalPoints(); // work on recalculating points on hit
 }
 
 // to end round //
