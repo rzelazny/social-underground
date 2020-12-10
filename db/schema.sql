@@ -6,7 +6,7 @@ CREATE DATABASE gaming_underground_db;
 USE gaming_underground_db;
 
 -- table stores login information
-CREATE TABLE user_login(
+CREATE TABLE User_login(
 	id int NOT NULL AUTO_INCREMENT,
 	email varchar(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE user_login(
 );
 
 -- table stores user displayName and win/loss record
-CREATE TABLE user_stats(
+CREATE TABLE User_stat(
     id int NOT NULL AUTO_INCREMENT,
 	login_id int NOT NULL,
     display_name varchar(255) DEFAULT "New Player",

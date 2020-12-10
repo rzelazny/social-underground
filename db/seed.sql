@@ -1,7 +1,7 @@
-INSERT INTO user_login (email, password, createdAt, updatedAt)
+INSERT INTO User_login (email, password, createdAt, updatedAt)
 VALUES ("Alice@aliceMail.com", "password", "2020-12-21", "2020-12-21"), ("Bob@aol.com", "password", "2020-12-21", "2020-12-21");
 
-INSERT INTO user_stats (login_id, display_name, wins, losses)
+INSERT INTO User_stat (login_id, display_name, wins, losses)
 VALUES (1, "Alice", 10, 3), (2, "Bob", 5, 10);
 
 INSERT INTO gaming_tables (game, game_started, user1, createdAt, updatedAt)

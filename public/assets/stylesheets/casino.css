@@ -7,6 +7,7 @@ body {
 
 canvas {
     background-image: url(../images/blackjacktable2.png);
+
     display: inline;
     background-size: cover;
 }
@@ -97,4 +98,24 @@ ul li:nth-child(3):hover span {
 }
 ul li:nth-child(4):hover span {
   background: #fceb00 !important;
+}
+#chat-container{
+    text-align: left;
+    height: 200px;
+    width: 800px;
+    background-color: beige;
+}
+
+#chat-log{
+    height: 80%;
+    overflow:hidden; 
+    overflow-y:scroll;
+}
+
+#chat-entry{
+    padding: 10px 0px 0px 10px;
+}
+
+#chat-input{
+    width: 90%;
 }
