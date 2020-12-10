@@ -183,10 +183,6 @@ function onStay() {
 
 function totalPoints() {
     for(var i = 0; i < playerArray.length; i++) {
-        // if (parseInt(playerArray[i].Hand[1].value) === "JACK") {
-        //     playerArray[i].Hand[1].value = 10;
-        // }
-        // console.log(playerArray[i].Hand[0].value);
 
         if (playerArray[i].Hand[0].value === "JACK" || playerArray[i].Hand[0].value === "QUEEN" || playerArray[i].Hand[0].value === "KING") {
             playerArray[i].Hand[0].value = "10";
@@ -194,12 +190,17 @@ function totalPoints() {
             playerArray[i].Hand[0].value = "11";
         }
 
-        var cardOneVal = (playerArray[i].Hand[0].value);
+        var cardOneVal = parseInt(playerArray[i].Hand[0].value);
         console.log(cardOneVal);
 
-        // console.log(playerArray[i].Hand[1].value);
-        // var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
-        // console.log(cardTwoVal);
+        if (playerArray[i].Hand[1].value === "JACK" || playerArray[i].Hand[1].value === "QUEEN" || playerArray[i].Hand[1].value === "KING") {
+            playerArray[i].Hand[1].value = "10";
+        } else if (playerArray[i].Hand[1].value === "ACE") {
+            playerArray[i].Hand[1].value = "11";
+        }
+
+        var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
+        console.log(cardTwoVal);
 
         // var handVal = cardOneVal + cardTwoVal;
         // console.log(handVal);
