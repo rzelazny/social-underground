@@ -105,7 +105,8 @@ function createElements() {
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
 
-        divHand.appendChild(cardOneImg, cardTwoImg);
+        divHand.appendChild(cardOneImg);
+        divHand.appendChild(cardTwoImg);
         divPlayer.appendChild(divHand, divPoints);
         players.appendChild(divPlayer);
     }
@@ -130,12 +131,11 @@ function onStart() {
     addPlayers();
 
     drawCards();
-
-    //total point value
 }
 
 function onRestart() {
-    //updating hands only
+    //clear the html // 
+    drawCards(); // works but give the exact same cards //
     console.log('you pressed restart');
 }
 
@@ -146,8 +146,8 @@ function onHit() {
     //total point value
 }
 
+// to end round //
 function onStay() {
-    // to end round
     //total point value
 
     console.log('you pressed stay');
