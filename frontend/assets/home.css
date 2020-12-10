@@ -26,20 +26,20 @@ canvas {
   font-family: neon;
   font-size: 75px;
   color: white;
-  text-shadow:  
-  1px 1px 5px rgb(230, 255, 230),
-  0px 2px 5px rgb(204, 255, 204),
-  0px 3px 10px rgb(179, 255, 179),
-  0px 4px 10px rgb(153, 255, 153),
-  0px 5px 15px rgb(128, 255, 128),
-  0px 6px 15px rgb(0, 204, 0),
-  0px 7px 20px rgb(0, 153, 0),
-  0px 8px 20px rgb(0, 102, 0);
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
 }
-
-
-
-
+@-webkit-keyframes glow {
+  from {text-shadow:  
+  0 0 10px rgb(230, 255, 230), 0 0 20px rgb(204, 255, 204), 0 0 30px rgb(179, 255, 179), 0 0 40px rgb(153, 255, 153),
+  0 0 50px rgb(128, 255, 128), 0 0 60px rgb(0, 204, 0), 0 0 70px rgb(0, 153, 0), 0 0 80px rgb(0, 102, 0);
+}
+to {
+  text-shadow: 
+  0 0 20px rgb(204, 255, 204), 0 0 30px rgb(179, 255, 179), 0 0 40px rgb(153, 255, 153), 0 0 50px rgb(128, 255, 128),
+  0 0 60px rgb(0, 204, 0), 0 0 70px rgb(0, 153, 0), 0 0 80px rgb(0, 102, 0), 0 0 90px rgb(0, 77, 0);
+}}
 
   ul {
     position: absolute;
@@ -117,10 +117,10 @@ canvas {
     opacity: 0.2;
   }
   ul li:nth-child(1):hover span {
-    background: #30d461 !important;
+    background: #e42424 !important;
   }
   ul li:nth-child(2):hover span {
-    background: #062ddf !important;
+    background: #021fa3 !important;
   }
   ul li:nth-child(3):hover span {
     background: #ea6e96 !important;
