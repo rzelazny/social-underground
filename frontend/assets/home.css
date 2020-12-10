@@ -11,16 +11,34 @@ canvas {
     background-size: cover;
 }
 
-/* .container {
-
-} */
-
-/* .row {
+.wrapper {
+  display: inline;
+  align-items: center;
+  justify-content: center;
 }
 
-.col {
+@font-face {
+  font-family: neon;
+  src: url(./Neon\ Planet\ Display.ttf);
+}
 
-} */
+.neon-text {
+  font-family: neon;
+  font-size: 75px;
+  color: white;
+  text-shadow:  
+  1px 1px 5px rgb(230, 255, 230),
+  0px 2px 5px rgb(204, 255, 204),
+  0px 3px 10px rgb(179, 255, 179),
+  0px 4px 10px rgb(153, 255, 153),
+  0px 5px 15px rgb(128, 255, 128),
+  0px 6px 15px rgb(0, 204, 0),
+  0px 7px 20px rgb(0, 153, 0),
+  0px 8px 20px rgb(0, 102, 0);
+}
+
+
+
 
 
   ul {
