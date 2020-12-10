@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     //variables
     var hitButton = document.getElementById("hitButton");
     var stayButton = document.getElementById("stayButton");
@@ -9,6 +10,13 @@ $(document).ready(function() {
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
     let chatLength = 0;
+
+    //webcam stuff, user is user facing camera mode, not userID
+    const webcamElement = document.getElementById('webcam');
+    const webcam = new Webcam(webcamElement, 'user');
+
+    //prompt user to start their camera
+    webcam.start();
 
     //populate chat log
     $.get("/api/chat" + curTable, function(chatLog){
