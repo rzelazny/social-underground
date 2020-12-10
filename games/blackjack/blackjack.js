@@ -18,8 +18,6 @@ var wins = 0;
 var losses = 0;
 var ties = 0;
 
-//https://deckofcardsapi.com/// 
-
 let hand = [];
 
 ///////////////////////////////////////////////
@@ -35,30 +33,31 @@ function drawCards() {
         }).then(function(data) {
             // console.log(data);
             for (var i = 0; i < playerArray.length; i++) {
-                playerHand = [
-                    {
-                        ID: 1,
-                        code: data.cards[0].code,
-                        suit: data.cards[0].suit,
-                        value: data.cards[0].value,
-                        imgUrl: data.cards[0].image
-    
-                    }, {
-                        ID: 2,
-                        code: data.cards[1].code,
-                        suit: data.cards[1].suit,
-                        value: data.cards[1].value,
-                        imgUrl: data.cards[1].image
-                    }
-                ];
-                hand.push(playerHand);
-                playerArray[i].Hand = hand[i]
-            };
-            createElements();
+            playerHand = [
+                {
+                    ID: 1,
+                    code: data.cards[0].code,
+                    suit: data.cards[0].suit,
+                    value: data.cards[0].value,
+                    imgUrl: data.cards[0].image
+                }, {
+                    ID: 2,
+                    code: data.cards[1].code,
+                    suit: data.cards[1].suit,
+                    value: data.cards[1].value,
+                    imgUrl: data.cards[1].image
+                }
+            ];
+            hand.push(playerHand);
+            playerArray[i].Hand = hand[i]
+        }
+        createElements();
+        // totalPoints();
         })
     // };
+    // createElements();
+    // // totalPoints();
 }
-
 
 function displayBtns() {
     if (startBtn.style.display === 'block') {
@@ -91,26 +90,25 @@ function createElements() {
         cardOneImg.id = ('cardOne' + playerArray[i].Name)
         cardOneImg.src = (playerArray[i].Hand[0].imgUrl)
 
-        console.log("=========FIRST ONE===============")
-        console.log(playerArray[i].Hand[i].imgUrl)
-        console.log("============SECOND ONE============")
-        console.log(playerArray[i].Hand[0].imgUrl)
-        console.log("===========THIRD ONE============")
-        console.log(playerArray[i].Hand[1].imgUrl)
-
         var cardTwoImg = document.createElement('img');
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
         cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
+
+        console.log("============Card 1============")
+        console.log(playerArray[i].Hand[0].imgUrl)
+        console.log("===========Card 2============")
+        console.log(playerArray[i].Hand[1].imgUrl)
 
         var divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
 
-        divHand.appendChild(cardOneImg, cardTwoImg);
-        divPlayer.appendChild(divHand, divPoints);
+        divHand.appendChild(cardOneImg);
+        divHand.appendChild(cardTwoImg);
+        divPlayer.appendChild(divHand);
+        divPlayer.appendChild(divPoints);
         players.appendChild(divPlayer);
     }
-    // cardOneImg.src = (hand[i].imgUrl)
 }
 
 function addPlayers() {
@@ -132,14 +130,11 @@ function onStart() {
     addPlayers();
 
     drawCards();
-
-    // createElements();
-
-    //total point value
 }
 
 function onRestart() {
-    //updating hands only
+    //clear the html // 
+    drawCards(); // works but give the exact same cards //
     console.log('you pressed restart');
 }
 
@@ -150,8 +145,8 @@ function onHit() {
     //total point value
 }
 
+// to end round //
 function onStay() {
-    // to end round
     //total point value
 
     console.log('you pressed stay');
@@ -161,9 +156,10 @@ function onStay() {
 //house logic function//
 //if the house total is less than player1 hit until more than or bust//
 
-//total point value function
-//count values of all cards
-//if bust logic
+// function totalPoints() {
+//     //count values of all cards
+//     //if bust logic
+// }
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
