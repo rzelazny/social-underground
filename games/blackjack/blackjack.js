@@ -54,6 +54,7 @@ function drawCards () {
         }
         else {
             createElements();
+            totalPoints();
         }
     })
 }
@@ -96,7 +97,7 @@ function createElements() {
         divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
-        divPoints.innerHTML = `Points: `;
+        // divPoints.innerHTML = `Points: `;
 
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
@@ -180,10 +181,35 @@ function onStay() {
 //house logic function//
 //if the house total is less than player1 hit until more than or bust//
 
-// function totalPoints() {
-//     //count values of all cards
-//     //if bust logic
-// }
+function totalPoints() {
+    for(var i = 0; i < playerArray.length; i++) {
+        // if (parseInt(playerArray[i].Hand[1].value) === "JACK") {
+        //     playerArray[i].Hand[1].value = 10;
+        // }
+        // console.log(playerArray[i].Hand[0].value);
+
+        if (playerArray[i].Hand[0].value === "JACK" || playerArray[i].Hand[0].value === "QUEEN" || playerArray[i].Hand[0].value === "KING") {
+            playerArray[i].Hand[0].value = "10";
+        } else if (playerArray[i].Hand[0].value === "ACE") {
+            playerArray[i].Hand[0].value = "11";
+        }
+
+        var cardOneVal = (playerArray[i].Hand[0].value);
+        console.log(cardOneVal);
+
+        // console.log(playerArray[i].Hand[1].value);
+        // var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
+        // console.log(cardTwoVal);
+
+        // var handVal = cardOneVal + cardTwoVal;
+        // console.log(handVal);
+
+        // divPoints.innerHTML = `Points: ` + playerArray
+        // if playerArray[i].Value 
+    }
+    //count values of all cards
+    //if bust logic
+}
 
 //hide house cards after game is built//
 
