@@ -24,39 +24,37 @@ let hand = [];
 //                Functions                  //
 ///////////////////////////////////////////////
 
-function drawCards() {
-    // for (var i = 0; i < playerArray.length; i++) {
-        var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
-        $.ajax({
-            url: docUrl,
-            method: "GET"
-        }).then(function(data) {
-            // console.log(data);
-            for (var i = 0; i < playerArray.length; i++) {
-            playerHand = [
-                {
-                    ID: 1,
-                    code: data.cards[0].code,
-                    suit: data.cards[0].suit,
-                    value: data.cards[0].value,
-                    imgUrl: data.cards[0].image
-                }, {
-                    ID: 2,
-                    code: data.cards[1].code,
-                    suit: data.cards[1].suit,
-                    value: data.cards[1].value,
-                    imgUrl: data.cards[1].image
-                }
-            ];
-            hand.push(playerHand);
-            playerArray[i].Hand = hand[i]
+let i = 0;
+function drawCards () {
+    var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
+    $.ajax({
+        url: docUrl,
+        method: "GET"
+    }).then(function (data) {
+        playerHand = [
+            {
+                ID: 1,
+                code: data.cards[ 0 ].code,
+                suit: data.cards[ 0 ].suit,
+                value: data.cards[ 0 ].value,
+                imgUrl: data.cards[ 0 ].image
+            }, {
+                ID: 2,
+                code: data.cards[ 1 ].code,
+                suit: data.cards[ 1 ].suit,
+                value: data.cards[ 1 ].value,
+                imgUrl: data.cards[ 1 ].image
+            }
+        ];
+        playerArray[ i ].Hand = playerHand
+        i++
+        if (i < playerArray.length) {
+            drawCards()
         }
-        createElements();
-        // totalPoints();
-        })
-    // };
-    // createElements();
-    // // totalPoints();
+        else {
+            createElements();
+        }
+    })
 }
 
 function displayBtns() {
@@ -93,11 +91,6 @@ function createElements() {
         var cardTwoImg = document.createElement('img');
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
         cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
-
-        console.log("============Card 1============")
-        console.log(playerArray[i].Hand[0].imgUrl)
-        console.log("===========Card 2============")
-        console.log(playerArray[i].Hand[1].imgUrl)
 
         var divPoints = document.createElement('div');
         divPoints.className = ('points');
