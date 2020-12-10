@@ -126,7 +126,8 @@ function onStart() {
 }
 
 function onRestart() {
-    //clear the html // 
+    players.innerHTML = '';
+    i = 0;
     drawCards(); // works but give the exact same cards //
     console.log('you pressed restart');
 }
