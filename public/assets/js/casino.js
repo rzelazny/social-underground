@@ -3,9 +3,10 @@ $(document).ready(function() {
     var hitButton = document.getElementById("hitButton");
     var stayButton = document.getElementById("stayButton");
     var newRound = document.getElementById("newRound");
+    var chatBox = $("#chat-input");
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
-    console.log(document.defaultView);
+    
     //populate chat log
     $.get("/api/chat" + curTable, function(chatLog){
 
@@ -22,14 +23,14 @@ $(document).ready(function() {
     //submit chat button
     $("#send-chat").on("click", function(event) {
         event.preventDefault();
-
         let newMessage = {
-            message: $("#chat-input").text,
+            message: chatBox.val(),
             table: curTable
         }
         console.log("Sending chat");
 
         $.post("/api/chat/", newMessage);
+        location.reload();
     })
 
     //functions with event listners 

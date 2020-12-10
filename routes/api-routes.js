@@ -118,14 +118,14 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/api/chat/", newMessage, function(req, res) {
+  app.post("/api/chat/", function(req, res) {
 
-    console.log("adding new chat table to table " + req.body.table);
+    console.log("adding new chat table to table " + JSON.stringify(req.body));
 
     db.chat_log.create({
       user: req.user.email,
-      message: newMessage.message,
-      table_id: newMessage.table
+      message: req.body.message,
+      table_id: req.body.table
     })
     .then(function(results){
       console.log("sending new table data back")
