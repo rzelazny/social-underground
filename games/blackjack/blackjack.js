@@ -24,39 +24,35 @@ let hand = [];
 //                Functions                  //
 ///////////////////////////////////////////////
 
-function drawCards() {
-    // for (var i = 0; i < playerArray.length; i++) {
-        var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
-        $.ajax({
-            url: docUrl,
-            method: "GET"
-        }).then(function(data) {
-            // console.log(data);
-            for (var i = 0; i < playerArray.length; i++) {
-            playerHand = [
-                {
-                    ID: 1,
-                    code: data.cards[0].code,
-                    suit: data.cards[0].suit,
-                    value: data.cards[0].value,
-                    imgUrl: data.cards[0].image
-                }, {
-                    ID: 2,
-                    code: data.cards[1].code,
-                    suit: data.cards[1].suit,
-                    value: data.cards[1].value,
-                    imgUrl: data.cards[1].image
-                }
-            ];
-            hand.push(playerHand);
-            playerArray[i].Hand = hand[i]
+let i = 0;
+function drawCards () {
+    var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
+    $.ajax({
+        url: docUrl,
+        method: "GET"
+    }).then(function (data) {
+        playerHand = [
+            {
+                code: data.cards[ 0 ].code,
+                suit: data.cards[ 0 ].suit,
+                value: data.cards[ 0 ].value,
+                imgUrl: data.cards[ 0 ].image
+            }, {
+                code: data.cards[ 1 ].code,
+                suit: data.cards[ 1 ].suit,
+                value: data.cards[ 1 ].value,
+                imgUrl: data.cards[ 1 ].image
+            }
+        ];
+        playerArray[ i ].Hand = playerHand
+        i++
+        if (i < playerArray.length) {
+            drawCards()
         }
-        createElements();
-        // totalPoints();
-        })
-    // };
-    // createElements();
-    // // totalPoints();
+        else {
+            createElements();
+        }
+    })
 }
 
 function displayBtns() {
@@ -94,11 +90,6 @@ function createElements() {
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
         cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
 
-        console.log("============Card 1============")
-        console.log(playerArray[i].Hand[0].imgUrl)
-        console.log("===========Card 2============")
-        console.log(playerArray[i].Hand[1].imgUrl)
-
         var divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
@@ -133,16 +124,45 @@ function onStart() {
 }
 
 function onRestart() {
-    //clear the html // 
-    drawCards(); // works but give the exact same cards //
     console.log('you pressed restart');
+    players.innerHTML = '';
+    i = 0;
+    drawCards();
 }
 
 function onHit() {
-    // to add card
     console.log('you pressed hit me');
+    playerOneHit();
+
     //house logic function//
     //total point value
+}
+
+// hard coded for one player // 
+function playerOneHit() {
+    var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
+    $.ajax({
+        url: docUrl,
+        method: "GET"
+    }).then(function (data) {
+        // console.log(data);
+        hitCard = {
+                code: data.cards[0].code,
+                suit: data.cards[0].suit,
+                value: data.cards[0].value,
+                imgUrl: data.cards[0].image
+            };
+        var originalHand = playerArray[1].Hand;
+        originalHand.push(hitCard);
+
+        var hitCardImg = document.createElement('img');
+        hitCardImg.className = ('hitCard' + playerArray[1].Name)
+        hitCardImg.src = (hitCard.imgUrl)
+        console.log(hitCardImg);
+
+        var divHand = document.getElementById(handPlayer1);
+        divHand.appendChild(hitCardImg);
+    })
 }
 
 // to end round //
