@@ -21,7 +21,8 @@ var ties = 0;
 let hand = [];
 
 //making a global variable to be used throughout several functions//
-var divHand = null
+var divHand = null;
+var divPoints = null;
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
@@ -92,9 +93,10 @@ function createElements() {
         cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
         cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
 
-        var divPoints = document.createElement('div');
+        divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
+        divPoints.innerHTML = `Points: `;
 
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
