@@ -6,7 +6,7 @@ var User_stat = db.User_stat
 const { sequelize } = require("../models");
 const user = require("../models/user_login");
 const { Op } = require("sequelize");
-const user = require("../models/user");
+// const user = require("../models/user");
 
 
 module.exports = function(app) {
@@ -43,7 +43,8 @@ module.exports = function(app) {
     // Then add the user to the database using sequelize
     User_stat.create({
       name: req.body.name,
-      gamePoints: req.body.gamePoints
+      gamePoints: req.body.gamePoints,
+      bio: req.body.bio
 
     }).then ((user_stat) => {
       res.status(201).json(user_stat);
