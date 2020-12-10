@@ -138,6 +138,7 @@ function onHit() {
     //total point value
 }
 
+// hard coded for one player // 
 function playerOneHit() {
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
     $.ajax({
@@ -151,11 +152,16 @@ function playerOneHit() {
                 value: data.cards[0].value,
                 imgUrl: data.cards[0].image
             };
-        console.log(hitCard);
         var originalHand = playerArray[1].Hand;
-        console.log(originalHand);
         originalHand.push(hitCard);
-        console.log(originalHand);
+
+        var hitCardImg = document.createElement('img');
+        hitCardImg.className = ('hitCard' + playerArray[1].Name)
+        hitCardImg.src = (hitCard.imgUrl)
+        console.log(hitCardImg);
+
+        var divHand = document.getElementById(handPlayer1);
+        divHand.appendChild(hitCardImg);
     })
 }
 
