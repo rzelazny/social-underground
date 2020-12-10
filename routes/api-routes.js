@@ -79,6 +79,21 @@ module.exports = function(app) {
     })
 });
 
+// Route for getting chat log data
+  app.get("/api/chat:table", function(req, res) {
+    console.log("Getting chat for table: " + req.params.table);
+    db.chat_log.findAll({
+      where: {
+        table_id: {
+          [Op.eq]: req.params.table
+        }
+      }
+    }).then(function(results){
+      console.log("sending chat data back")
+      res.send(results);
+    })
+  });
+
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
     console.log("app.get api user data")
@@ -113,4 +128,24 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
+
+  app.post("/api/chat/", function(req, res) {
+
+    console.log("adding new chat table to table " + JSON.stringify(req.body));
+
+    db.chat_log.create({
+      user: req.user.email,
+      message: req.body.message,
+      table_id: req.body.table
+    })
+    .then(function(results){
+      console.log("sending new table data back")
+      res.send(results);
+    })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
 };
+
+
