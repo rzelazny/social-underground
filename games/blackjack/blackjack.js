@@ -126,10 +126,10 @@ function onStart() {
 }
 
 function onRestart() {
+    console.log('you pressed restart');
     players.innerHTML = '';
     i = 0;
-    drawCards(); // works but give the exact same cards //
-    console.log('you pressed restart');
+    drawCards();
 }
 
 function onHit() {
