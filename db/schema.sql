@@ -50,7 +50,6 @@ CREATE TABLE chat_log(
     createdAt DATETIME NOT NULL, 
     updatedAt DATETIME NOT NULL,
     createdAt DATETIME NOT NULL, 
-    updatedAt DATETIME NOT NULL,
     foreign key (table_id) references gaming_tables(id) on delete cascade,
 	PRIMARY KEY (id)
 );
