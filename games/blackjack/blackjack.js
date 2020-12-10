@@ -98,7 +98,7 @@ function createElements() {
         divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
-        divPoints.innerHTML = `Points: ` + playerArray[i].Points
+        divPoints.innerHTML = `Points: `;
 
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
@@ -203,8 +203,7 @@ function totalPoints() {
         playerArray[i].Points = handVal;
 
         console.log(playerArray[i].Points);
-
-        divPoints.innerHTML = `Points: ` + playerArray[i].Points
+        divPoints.innerHTML = `Points: ${playerArray[i].Points} `
     }
     //count values of all cards
     //if bust logic
