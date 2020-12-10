@@ -30,7 +30,7 @@ module.exports = function(app) {
       password: req.body.password
     })
       .then(function() {
-        res.redirect(307, "/api/new");
+        res.redirect(307, "/api/login");
       })
       .catch(function(err) {
         res.status(401).json(err);
@@ -104,6 +104,10 @@ module.exports = function(app) {
       game: "Just Chatting",
       game_started: false,
       user1: req.user.email
+    })
+    .then(function(results){
+      console.log("sending new table data back")
+      res.send(results);
     })
       .catch(function(err) {
         res.status(401).json(err);

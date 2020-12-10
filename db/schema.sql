@@ -1,6 +1,6 @@
--- Drops the blogger if it exists currently --
+-- Drops if it exists currently --
 DROP DATABASE IF EXISTS gaming_underground_db;
--- Creates the "blogger" database --
+-- Creates the database --
 CREATE DATABASE gaming_underground_db;
 
 USE gaming_underground_db;
