@@ -107,7 +107,8 @@ function createElements() {
 
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
-        divPlayer.appendChild(divHand, divPoints);
+        divPlayer.appendChild(divHand);
+        divPlayer.appendChild(divPoints);
         players.appendChild(divPlayer);
     }
 }
