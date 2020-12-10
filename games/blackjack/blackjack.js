@@ -21,6 +21,7 @@ var ties = 0;
 let hand = [];
 
 //making a global variable to be used throughout several functions//
+var divPlayer = null;
 var divHand = null;
 var divPoints = null;
 ///////////////////////////////////////////////
@@ -78,7 +79,7 @@ function createElements() {
     players.innerHTML = '';
     for(var i = 0; i < playerArray.length; i++) {
 
-        var divPlayer = document.createElement('div');
+        divPlayer = document.createElement('div');
         divPlayer.className = ('player');
         divPlayer.id = playerArray[i].Name;
         divPlayer.innerHTML = (playerArray[i].Name);
