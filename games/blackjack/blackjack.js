@@ -133,7 +133,7 @@ function onRestart() {
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
-    // to add card
+
     //house logic function//
     //total point value
 }
