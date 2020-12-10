@@ -81,7 +81,6 @@ module.exports = function(app) {
 
 // Route for getting chat log data
   app.get("/api/chat:table", function(req, res) {
-    console.log("Getting chat for table: " + req.params.table);
     db.chat_log.findAll({
       where: {
         table_id: {
@@ -89,7 +88,6 @@ module.exports = function(app) {
         }
       }
     }).then(function(results){
-      console.log("sending chat data back")
       res.send(results);
     })
   });
