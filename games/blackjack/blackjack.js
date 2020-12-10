@@ -98,7 +98,7 @@ function createElements() {
         divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
-        // divPoints.innerHTML = `Points: `;
+        divPoints.innerHTML = `Points: `;
 
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
@@ -200,9 +200,11 @@ function totalPoints() {
         var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
 
         var handVal = cardOneVal + cardTwoVal;
-        console.log(handVal);
+        playerArray[i].Points = handVal;
 
-        // divPoints.innerHTML = `Points: ` + playerArray
+        console.log(playerArray[i].Points);
+
+        // divPoints.innerHTML = `Points: ` + player
         // if playerArray[i].Value 
     }
     //count values of all cards
