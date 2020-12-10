@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
     <link rel="stylesheet" href="./assets/stylesheets/casino.css">
     <title>Casino</title>
 </head>
@@ -46,9 +47,16 @@
         </ul>
     </div>
 
-    <!-- <button id="hitButton">Hit Me!</button>
-    <button id="stayButton">I'll Stay</button>
-    <button id="newRound">Next Round</button> -->
+
+    <button id="newRound">Next Round</button>
+    
+    <div class="container" id="chat-container">
+        <div id="chat-log"></div>
+        <form class="form-inline">
+            <input type="text" class="form-control" id="chat-input" placeholder="Chat here">
+            <button type="submit" class="btn btn-default" id="send-chat"><i class="fas fa-share"></i></button>
+        </form>
+    </div>
 </body>
 
 <footer>
@@ -58,5 +66,4 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/js/casino.js"></script>
-
 </html>
