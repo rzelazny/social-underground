@@ -19,7 +19,7 @@ var losses = 0;
 var ties = 0;
 
 let hand = [];
-
+var divHand = null
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
@@ -79,8 +79,8 @@ function createElements() {
         divPlayer.id = playerArray[i].Name;
         divPlayer.innerHTML = (playerArray[i].Name);
 
-        var divHand = document.createElement('div');
-        divHand.id = ('hand' + playerArray[i].Name);
+        divHand = document.createElement("div");
+        divHand.id = ("hand" + playerArray[i].Name);
 
         var cardOneImg = document.createElement('img');
         cardOneImg.id = ('cardOne' + playerArray[i].Name)
@@ -160,7 +160,8 @@ function playerOneHit() {
         hitCardImg.src = (hitCard.imgUrl)
         console.log(hitCardImg);
 
-        var divHand = document.getElementById(handPlayer1);
+        // var divHand = document.getElementById(handPlayer1);
+        console.log(divHand);
         divHand.appendChild(hitCardImg);
     })
 }
