@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
-var gameBody =  document.querySelector('#gameBody');
 var players =  document.querySelector('#players');
 
 var startBtn = document.querySelector('#start');
@@ -12,11 +11,6 @@ var stayBtn = document.querySelector('#stay');
 // hard coded for now but will use players from db
 let playerArray = [];
 
-let score = [];
-
-var wins = 0;
-var losses = 0;
-var ties = 0;
 
 let hand = [];
 
@@ -24,6 +18,7 @@ let hand = [];
 var divPlayer = null;
 var divHand = null;
 var divPoints = null;
+var divScore = null;
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
@@ -100,10 +95,16 @@ function createElements() {
         divPoints.id = ('points' + playerArray[i].Name);
         divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
 
+        divScore = document.createElement('div');
+        divScore.className = ('score');
+        divScore.id = ('score' + playerArray[i].Name);
+        divScore.innerHTML = `Score: ${playerArray[i].Score} `;
+
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
         divPlayer.appendChild(divHand);
         divPlayer.appendChild(divPoints);
+        divPlayer.appendChild(divScore);
         players.appendChild(divPlayer);
     }
 }
@@ -211,14 +212,24 @@ function playerOneHit() {
 // to end round //
 function onStay() {
     console.log('you pressed stay');
-    console.log(playerArray)
     endRound();
     //house logic function//
 }
 
 function endRound() {
-    alert("Game is over") // add stats & update "score"
-    //hid all buttons, clear html, show start another round button//
+    alert(`Game is over`)
+    for(var i = 0; i < playerArray.length; i++) {
+        console.log(playerArray[i].Points);
+        console.log(`${playerArray[i].Name} has ${playerArray[i].Points} points.`)
+        alert(`${playerArray[i].Name} has ${playerArray[i].Points} points.`)
+    }
+    if (playerArray[0].Points === playerArray[1].Points) {
+        alert(`You tied.`)
+
+    } else if (playerArray[0].Points > playerArray[1].Points) {
+        alert(`${playerArray[0].Name} won. ${playerArray[1].Name} lost.`)
+    }
+     // add stats & update "score"
     if (hitBtn.style.display === 'block') {
         hitBtn.style.display = 'none'
     }
