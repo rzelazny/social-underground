@@ -344,7 +344,6 @@ function endRound() {
     alert(`round over`)
     // display points from round to user //
     for(var i = 0; i < playerArray.length; i++) {
-        console.log(playerArray[i].Points);
         console.log(`${playerArray[i].Name} has ${playerArray[i].Points} points`)
         alert(`${playerArray[i].Name} has ${playerArray[i].Points} points`)
     }
