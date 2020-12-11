@@ -142,6 +142,7 @@ function onRestart() {
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
+    // totalPoints();
 
     //house logic function//
     //total point value
@@ -186,31 +187,26 @@ function onStay() {
 
 function totalPoints() {
     for(var i = 0; i < playerArray.length; i++) {
-
-        if (playerArray[i].Hand[0].value === "JACK" || playerArray[i].Hand[0].value === "QUEEN" || playerArray[i].Hand[0].value === "KING") {
-            playerArray[i].Hand[0].value = "10";
-        } else if (playerArray[i].Hand[0].value === "ACE") {
-            playerArray[i].Hand[0].value = "11";
+        for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+            if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
+                playerArray[i].Hand[j].value = "10";
+            } else if (playerArray[i].Hand[j].value === "ACE") {
+                playerArray[i].Hand[j].value = "11";
+            }
         }
+
         var cardOneVal = parseInt(playerArray[i].Hand[0].value);
-
-        if (playerArray[i].Hand[1].value === "JACK" || playerArray[i].Hand[1].value === "QUEEN" || playerArray[i].Hand[1].value === "KING") {
-            playerArray[i].Hand[1].value = "10";
-        } else if (playerArray[i].Hand[1].value === "ACE") {
-            playerArray[i].Hand[1].value = "11";
-        }
         var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
-
         var handVal = cardOneVal + cardTwoVal;
+        
         playerArray[i].Points = handVal;
 
-        console.log(playerArray[i].Points);
     }
     //count values of all cards
     //if bust logic
 }
 
-//hide house cards after game is built//
+//hide house cards after game is built OR Dealer will hit until his/her cards total 17 or higher //
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
