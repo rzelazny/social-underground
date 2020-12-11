@@ -1,3 +1,9 @@
+// current issues //
+
+// 1. When I press hit and I bust the hit card doesn't display until after the alerts //
+// 2. When the game ends the score only updates for player1 on the html //
+
+
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
@@ -322,9 +328,7 @@ function endRound() {
         // increase House points by 2 //
         playerArray[0].Score = playerArray[0].Score + 2;
         // alert the users of current scores //
-        alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`)
-        // update scores on html //
-        divScore.innerHTML = `Score: ${playerArray[0].Score} `;
+        alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`) 
     }
     // if player1 wins //
     else if (playerArray[1].Points > playerArray[0].Points){
@@ -334,8 +338,16 @@ function endRound() {
         playerArray[1].Score = playerArray[1].Score + 2;
         // alert the users of current scores //
         alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`)
-        // update scores on html //
-        divScore.innerHTML = `Score: ${playerArray[1].Score} `;
+    }
+
+    // // update scores on html //
+    for (var i = 0; i < playerArray.length; i++) {
+        divScore.innerHTML = ''
+        divScore = document.createElement('div');
+        divScore.className = ('score');
+        divScore.id = ('score' + playerArray[i].Name);
+        divScore.innerHTML = `Score: ${playerArray[i].Score} `;
+        divPlayer.appendChild(divScore);
     }
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
