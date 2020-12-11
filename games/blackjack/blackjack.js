@@ -121,6 +121,16 @@ function addPlayers() {
     // console.log(playerArray);
 }
 
+//currently a hard coded but will need a function where there are actual players
+// // function addPlayers(amount) {
+//     playerArray = [{ Name: House, ID: 0, Points: 0, Hand: hand }];
+//     for (var i = 1; i <= amount; i++) {
+//         var Hand = [];
+//         var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand };
+//         playerArray.push(player)
+//     }
+// }
+
 
 function onStart() {
     console.log('you pressed start')
@@ -186,6 +196,7 @@ function onStay() {
 //if the house total is less than player1 hit until more than or bust//
 
 function totalPoints() {
+    var handVal = 0;
     for(var i = 0; i < playerArray.length; i++) {
         for (var j = 0; j < (playerArray[i].Hand).length; j++) {
             if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
@@ -193,11 +204,9 @@ function totalPoints() {
             } else if (playerArray[i].Hand[j].value === "ACE") {
                 playerArray[i].Hand[j].value = "11";
             }
-        }
 
-        var cardOneVal = parseInt(playerArray[i].Hand[0].value);
-        var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
-        var handVal = cardOneVal + cardTwoVal;
+            handVal += parseInt(playerArray[i].Hand[j].value);
+        }
         
         playerArray[i].Points = handVal;
 
