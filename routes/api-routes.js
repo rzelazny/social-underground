@@ -1,7 +1,6 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
-// var User = require("../models/userStat")
 var User_stat = db.User_stat
 const { sequelize } = require("../models");
 const user = require("../models/user_login");
@@ -108,6 +107,7 @@ module.exports = function(app) {
     }
   });
 
+  //create a new gaming table
   app.post("/api/newtable", function(req, res) {
 
     console.log("api new table running");
@@ -127,12 +127,11 @@ module.exports = function(app) {
       });
   });
 
+  //post a new chat message
   app.post("/api/chat/", function(req, res) {
 
-    console.log("adding new chat table to table " + JSON.stringify(req.body));
-
     db.chat_log.create({
-      user: req.user.email,
+      user: req.user.id,
       message: req.body.message,
       table_id: req.body.table
     })
@@ -145,13 +144,14 @@ module.exports = function(app) {
       });
   });
 
+  //stores a photo captured from the webcam to the photo table
   app.post("/api/photo", function(req, res) {
 
     console.log("storing photo");
 
     db.photo.create({
       photo: req.body.photo,
-      user_id: req.user.email,
+      user_id: req.user.id,
       table_id: req.body.table
     })
       .catch(function(err) {
