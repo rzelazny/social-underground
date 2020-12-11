@@ -136,6 +136,8 @@ function onRestart() {
     console.log('you pressed restart');
     players.innerHTML = '';
     i = 0;
+    displayBtns();
+    restartBtn.value = "restart";
     drawCards();
 }
 
@@ -201,6 +203,7 @@ function playerOneHit() {
                 endRound();
             }
         }
+
     })
 }
 
@@ -208,15 +211,21 @@ function playerOneHit() {
 // to end round //
 function onStay() {
     console.log('you pressed stay');
+    console.log(playerArray)
     endRound();
     //house logic function//
 }
 
 function endRound() {
     alert("Game is over") // add stats & update "score"
-    console.log(playerArray)
     //hid all buttons, clear html, show start another round button//
-
+    if (hitBtn.style.display === 'block') {
+        hitBtn.style.display = 'none'
+    }
+    if (stayBtn.style.display === 'block') {
+        stayBtn.style.display = 'none'
+    }
+    restartBtn.value = "Play another round";
 }
 
 
@@ -244,9 +253,9 @@ function totalPoints() {
 }
 
 //house logic function//
-//if the house total is less than player1 hit until more than or bust//
+//if the house total is less than player1 hit until more than or bust OR Dealer will hit until his/her cards total 17 or higher//
 
-//hide house cards after game is built OR Dealer will hit until his/her cards total 17 or higher //
+//hide house cards after game is built //
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
