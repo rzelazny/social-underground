@@ -142,12 +142,12 @@ function onRestart() {
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
-    for (var i = 0; i < playerArray.length; i++) {
-        if (playerArray[i].Points > 21) {
-            alert("you have bust");
-            endRound();
-        }
-    }
+    // for (var i = 0; i < playerArray.length; i++) {
+    //     if (playerArray[i].Points > 21) {
+    //         alert("you have bust");
+    //         endRound();
+    //     }
+    // }
     //house logic function//
 }
 
@@ -178,8 +178,15 @@ function playerOneHit() {
             for (var j = 0; j < (playerArray[i].Hand).length; j++) {
                 if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
                     playerArray[i].Hand[j].value = "10";
-                } else if (playerArray[i].Hand[j].value === "ACE") {
+                } 
+                // else if (playerArray[i].Hand[j].value === "ACE") {
+                //     playerArray[i].Hand[j].value = "11";
+                // }
+
+                else if (playerArray[i].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[i].Hand[j].value = "11";
+                } else if (playerArray[i].Hand[j].value === "ACE" && handVal > 10) {
+                    playerArray[i].Hand[j].value = "1";
                 }
                 handVal += parseInt(playerArray[i].Hand[j].value);
             }
