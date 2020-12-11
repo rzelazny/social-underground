@@ -152,69 +152,87 @@ function addPlayers() {
     playerArray.push(house, player1);
 }
 
+// this function will be called when the start btn is pressed //
 function onStart() {
-    console.log('you pressed start')
+    // will call the displayBtns function //
     displayBtns();
+    // will add the players hard coded in the allPlayers function to the session //
     addPlayers();
+    // will draw cards for all players using the drawCards function //
     drawCards();
 }
 
+// this function will be called when the user presses restart button //
 function onRestart() {
-    console.log('you pressed restart');
+    // will clear everything on the gameboard //
     players.innerHTML = '';
+    // reset i back to 0 for drawCards function //
     i = 0;
+    // makes sure the buttons are displayed in case the round ended previously and buttons were hidden //
     displayBtns();
+    // sets the restart btn text back to restart in case the round ended previously and the value said to play another round //
     restartBtn.value = "restart";
+    // redraws cards for all players in session //
     drawCards();
 }
 
+// this function will be called when the user presses the hit button //
 function onHit() {
-    console.log('you pressed hit me');
+    // will call player one hit function //
     playerOneHit();
 }
 
 // hard coded for one player // 
 function playerOneHit() {
+    // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
     $.ajax({
         url: docUrl,
         method: "GET"
     }).then(function (data) {
+        // this object holds all the data needed for the card //
         hitCard = {
                 code: data.cards[0].code,
                 suit: data.cards[0].suit,
                 value: data.cards[0].value,
                 imgUrl: data.cards[0].image
             };
+        // this variable = the players original cards
         var originalHand = playerArray[1].Hand;
-        originalHand.push(hitCard);
+        // this pushes the new card into the array of cards
+        originalHand.push(hitCard); 
+        // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard' + playerArray[1].Name)
         hitCardImg.src = (hitCard.imgUrl)
-        console.log(divHand);
         divHand.appendChild(hitCardImg);
-
+        
+        // resets value of hand to zero //
         var handVal = 0;
         for(var i = 0; i < playerArray.length; i++) {
+            // resets players points //
             playerArray[i].Points = 0;
             for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+                // sets values for face cards //
                 if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
                     playerArray[i].Hand[j].value = "10";
                 } 
-                // else if (playerArray[i].Hand[j].value === "ACE") {
-                //     playerArray[i].Hand[j].value = "11";
-                // }
-
+                // sets value for ace depending on previous hand value //
                 else if (playerArray[i].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[i].Hand[j].value = "11";
                 } else if (playerArray[i].Hand[j].value === "ACE" && handVal > 10) {
                     playerArray[i].Hand[j].value = "1";
                 }
+
+                // adds all cards in hand to create new value //
                 handVal += parseInt(playerArray[i].Hand[j].value);
             }
+            // sets the points equal to the new value //
             playerArray[i].Points = handVal;
+            // resets handVal back to zero //
             handVal = 0;
 
+            // clears points on html & recreates the elements to display the new points //
             divPoints.innerHTML = ''
             divPoints = document.createElement('div');
             divPoints.className = ('points');
@@ -223,6 +241,7 @@ function playerOneHit() {
             divPlayer.appendChild(divPoints);
             
         }
+        // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
         for (var i = 0; i < playerArray.length; i++) {
             console.log(playerArray[i].Points);
             if (playerArray[i].Points > 21) {
