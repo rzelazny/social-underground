@@ -101,9 +101,10 @@ ul li:nth-child(4):hover span {
 }
 
 /*Chat Css*/
-.container {
+/* .container {
     float: right 75%;
-}
+} */
+
 #chat-container{
     text-align: left;
     height: 200px;
@@ -115,8 +116,8 @@ ul li:nth-child(4):hover span {
 
 #chat-log{
     height: 80%;
-    overflow:hidden; 
-    overflow-y:scroll;
+    overflow: hidden; 
+    overflow-y: scroll;
 }
 
 #chat-entry{
@@ -124,6 +125,7 @@ ul li:nth-child(4):hover span {
 }
 
 #chat-input{
-    color: rgb(109, 104, 104);
     width: 90%;
+    background-color: rgb(109, 104, 104);
+    color: white;
 }
