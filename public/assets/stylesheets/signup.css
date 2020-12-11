@@ -15,3 +15,15 @@ body {
     margin-left: 100px;
     margin-bottom: 100px;
 }
+
+.navlinks-right{
+    color: pink;
+    margin-left: 50%;
+} 
+
+.navbar-brand{
+    background-color: green;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold; 
+    color: white;
+}
