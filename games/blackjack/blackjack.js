@@ -288,12 +288,13 @@ function playerOneHit() {
         }
 
     })
+    houseLogic();
 }
 
 // this function will be called when the user presses the stay button //
 function onStay() {
     //house logic function//
-
+    houseLogic();
     // calls to end game //
     endRound();
 }
@@ -354,8 +355,12 @@ function endRound() {
     restartBtn.value = "Play another round";
 }
 
-//house logic function//
+function houseLogic() {
+    if (playerArray[0].Points < playerArray[1].Points) {
+    console.log("I can see that the house has less points than the player")
+}
 //if the house total is less than player1 hit until more than or bust OR Dealer will hit until his/her cards total 17 or higher//
+}
 
 //hide house cards after game is built //
 
