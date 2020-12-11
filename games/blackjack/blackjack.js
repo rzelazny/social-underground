@@ -333,7 +333,7 @@ function endRound() {
         divScore.innerHTML = `Score: ${playerArray[1].Score} `;
     } 
     // if the House wins //
-    else if (playerArray[0].Points > playerArray[1].Points) {
+    else if (playerArray[1].Bust === true || playerArray[0].Bust === false && playerArray[0].Points > playerArray[1].Points) {
         // alert users //
         alert(`${playerArray[0].Name} won. ${playerArray[1].Name} lost.`)
         // increase House points by 2 //
@@ -345,7 +345,7 @@ function endRound() {
 
     }
     // if player1 wins //
-    else if (playerArray[1].Points > playerArray[0].Points){
+    else if (playerArray[0].Bust === true || playerArray[1].Bust === false && playerArray[1].Points > playerArray[1].Points){
         // alert users //
         alert (`${playerArray[1].Name} won. ${playerArray[0].Name} lost.`)
         // increase player1 points by 2 //
