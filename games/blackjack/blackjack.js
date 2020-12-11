@@ -8,27 +8,30 @@ var restartBtn = document.querySelector('#restart');
 var hitBtn = document.querySelector('#hit');
 var standBtn = document.querySelector('#stand');
 
-// hard coded for now but will use players from db
-let playerArray = [];
-
+//making global variables to be used throughout several functions//
 let hand = [];
-
-//making a global variable to be used throughout several functions//
 var divPlayer = null;
 var divHand = null;
 var divPoints = null;
 var divScore = null;
+
+// hard coded for now but will use players from db
+let playerArray = [];
+
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
 
+// setting i to 0 so that we can control the synchronicity //
 let i = 0;
 function drawCards () {
+    // this api link will draw 2 random cards //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
     $.ajax({
         url: docUrl,
         method: "GET"
     }).then(function (data) {
+        // we will save the data in an array. each object will hold the cards code, suit, value, and image //
         playerHand = [
             {
                 code: data.cards[ 0 ].code,
@@ -42,11 +45,14 @@ function drawCards () {
                 imgUrl: data.cards[ 1 ].image
             }
         ];
+        // this will give the drawn set of cards to whichever player is 'i' //
         playerArray[ i ].Hand = playerHand
+        // this will increment i so that it will keep running the draw cards function for each player //
         i++
         if (i < playerArray.length) {
             drawCards()
         }
+        // if there isnt any more players it will stop drawing cards and run the following functions //
         else {
             totalPoints();
             createElements();
