@@ -151,6 +151,7 @@ function onRestart() {
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
+
     //house logic function//
     //total point value
 }
@@ -170,15 +171,35 @@ function playerOneHit() {
             };
         var originalHand = playerArray[1].Hand;
         originalHand.push(hitCard);
-
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard' + playerArray[1].Name)
         hitCardImg.src = (hitCard.imgUrl)
-
         console.log(divHand);
         divHand.appendChild(hitCardImg);
+
+        var handVal = 0;
+        for(var i = 0; i < playerArray.length; i++) {
+            playerArray[i].Points = 0;
+            for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+                if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
+                    playerArray[i].Hand[j].value = "10";
+                } else if (playerArray[i].Hand[j].value === "ACE") {
+                    playerArray[i].Hand[j].value = "11";
+                }
+                handVal += parseInt(playerArray[i].Hand[j].value);
+            }
+            console.log(handVal);
+            playerArray[i].Points = handVal;
+            handVal = 0;
+
+            divPoints.innerHTML = ''
+            divPoints = document.createElement('div');
+            divPoints.className = ('points');
+            divPoints.id = ('points' + playerArray[i].Name);
+            divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
+            divPlayer.appendChild(divPoints);
+        }
     })
-    totalPoints();
 }
 
 // to end round //
@@ -201,7 +222,6 @@ function totalPoints() {
             }
             handVal += parseInt(playerArray[i].Hand[j].value);
         }
-        console.log(handVal);
         playerArray[i].Points = handVal;
         handVal = 0;
     }
