@@ -23,6 +23,55 @@ let playerArray = [];
 //                Functions                  //
 ///////////////////////////////////////////////
 
+// this function will be called when the start btn is pressed //
+function onStart() {
+    // will call the displayBtns function //
+    displayBtns();
+    // will add the players hard coded in the allPlayers function to the session //
+    addPlayers();
+    // will draw cards for all players using the drawCards function //
+    drawCards();
+}
+
+// this function is called at the start of the game //
+function displayBtns() {
+    // the start button is hidden //
+    if (startBtn.style.display === 'block') {
+        startBtn.style.display = 'none'
+    }
+    // the hit button is displayed //
+    if (hitBtn.style.display === 'none') {
+        hitBtn.style.display = 'block'
+    }
+    // the stand button is displayed //
+    if (standBtn.style.display === 'none') {
+        standBtn.style.display = 'block'
+    }
+    // the restart button is displayed and replaces the spot of the start button //
+    if (restartBtn.style.display === 'none') {
+        restartBtn.style.display = 'block'
+    }
+}
+
+// currently a hard coded below but will need a more in-depth function where we use the logged in players //
+// function addPlayers(amount) {
+    // playerArray = [{ Name: House, ID: 0, Score: 0, Points: 0, Hand: hand }];
+    //     for (var i = 1; i <= amount; i++) {
+    //         var Hand = [];
+    //         var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Hand: hand };
+    //         playerArray.push(player)
+    //     }
+// }
+
+// hard coded for one player to play against the House //
+function addPlayers() {
+    // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
+    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Hand: hand[0] };
+    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Hand: hand[1] };
+    // appends the objects created above to the playerArray //
+    playerArray.push(house, player1);
+}
+
 // setting i to 0 so that we can control the synchronicity //
 let i = 0;
 function drawCards () {
@@ -61,23 +110,34 @@ function drawCards () {
     })
 }
 
-// this function is called at the start of the game //
-function displayBtns() {
-    // the start button is hidden //
-    if (startBtn.style.display === 'block') {
-        startBtn.style.display = 'none'
-    }
-    // the hit button is displayed //
-    if (hitBtn.style.display === 'none') {
-        hitBtn.style.display = 'block'
-    }
-    // the stand button is displayed //
-    if (standBtn.style.display === 'none') {
-        standBtn.style.display = 'block'
-    }
-    // the restart button is displayed and replaces the spot of the start button //
-    if (restartBtn.style.display === 'none') {
-        restartBtn.style.display = 'block'
+// this function is called after the cards are originally drawn //
+function totalPoints() {
+    // handVal is set to 0 //
+    var handVal = 0;
+    for(var i = 0; i < playerArray.length; i++) {
+        // resets players points //
+        playerArray[i].Points = 0;
+        for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+            // sets values for face cards //
+            if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
+                playerArray[i].Hand[j].value = "10";
+            } 
+            // sets value for ace depending on current point value
+            if (playerArray[i].Hand[0].value === "ACE") {
+                playerArray[i].Hand[0].value = "11";
+            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value < 11) {
+                playerArray[i].Hand[1].value = "11";
+            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value > 10) {
+                playerArray[i].Hand[1].value = "1";
+            }
+
+            // adds all cards in hand to create new value //
+            handVal += parseInt(playerArray[i].Hand[j].value);
+        }
+        // sets the points equal to the new value //
+        playerArray[i].Points = handVal;
+        // resets back to zero //
+        handVal = 0;
     }
 }
 
@@ -132,35 +192,6 @@ function createElements() {
         // appends all the data held in the player div to the gameboard
         players.appendChild(divPlayer);
     }
-}
-
-// currently a hard coded below but will need a more in-depth function where we use the logged in players //
-// function addPlayers(amount) {
-    // playerArray = [{ Name: House, ID: 0, Score: 0, Points: 0, Hand: hand }];
-    //     for (var i = 1; i <= amount; i++) {
-    //         var Hand = [];
-    //         var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Hand: hand };
-    //         playerArray.push(player)
-    //     }
-// }
-
-// hard coded for one player to play against the House //
-function addPlayers() {
-    // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
-    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Hand: hand[0] };
-    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Hand: hand[1] };
-    // appends the objects created above to the playerArray //
-    playerArray.push(house, player1);
-}
-
-// this function will be called when the start btn is pressed //
-function onStart() {
-    // will call the displayBtns function //
-    displayBtns();
-    // will add the players hard coded in the allPlayers function to the session //
-    addPlayers();
-    // will draw cards for all players using the drawCards function //
-    drawCards();
 }
 
 // this function will be called when the user presses restart button //
@@ -254,7 +285,6 @@ function playerOneHit() {
     })
 }
 
-
 // this function will be called when the user presses the stay button //
 function onStay() {
     //house logic function//
@@ -316,30 +346,6 @@ function endRound() {
         standBtn.style.display = 'none'
     }
     restartBtn.value = "Play another round";
-}
-
-
-function totalPoints() {
-    var handVal = 0;
-    for(var i = 0; i < playerArray.length; i++) {
-        playerArray[i].Points = 0;
-        for (var j = 0; j < (playerArray[i].Hand).length; j++) {
-            if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
-                playerArray[i].Hand[j].value = "10";
-            } 
-            if (playerArray[i].Hand[0].value === "ACE") {
-                playerArray[i].Hand[0].value = "11";
-            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value < 11) {
-                playerArray[i].Hand[1].value = "11";
-            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value > 10) {
-                playerArray[i].Hand[1].value = "1";
-            }
-
-            handVal += parseInt(playerArray[i].Hand[j].value);
-        }
-        playerArray[i].Points = handVal;
-        handVal = 0;
-    }
 }
 
 //house logic function//
