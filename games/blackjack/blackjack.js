@@ -7,6 +7,7 @@ var startBtn = document.querySelector('#start');
 var restartBtn = document.querySelector('#restart');
 var hitBtn = document.querySelector('#hit');
 var standBtn = document.querySelector('#stand');
+var goBackBtn = document.querySelector('#goBack');
 
 //making global variables to be used throughout several functions//
 let hand = [];
@@ -257,12 +258,14 @@ function playerOneHit() {
 // this function will be called when the user presses the stay button //
 function onStay() {
     //house logic function//
-    
+
     // calls to end game //
     endRound();
 }
 
+// when this function is called the game is ended //
 function endRound() {
+    // the users will get an alert that the game is over //
     alert(`Game is over`)
     // display points from round to user //
     for(var i = 0; i < playerArray.length; i++) {
@@ -305,7 +308,7 @@ function endRound() {
         divScore.innerHTML = `Score: ${playerArray[1].Score} `;
     }
 
-
+    // hides all game buttons besides and changes the value to ask user if they want to play another game //
     if (hitBtn.style.display === 'block') {
         hitBtn.style.display = 'none'
     }
