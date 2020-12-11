@@ -2,6 +2,7 @@
 var db = require("../models");
 var passport = require("../config/passport");
 var User_stat = db.User_stat
+var fs = require("fs");
 const { sequelize } = require("../models");
 const user = require("../models/user_login");
 const { Op } = require("sequelize");
@@ -108,14 +109,16 @@ module.exports = function(app) {
   });
 
 // Route for retrieving a photo
-app.get("/api/photo", function(req, res) {
+app.get("/api/photo/:id/:table", function(req, res) {
+  console.log("getting photo for user", req.params.id)
+  console.log("getting photo for table", req.params.table)
   db.photo.findOne({
     where: {
       table_id: {
-        [Op.eq]: req.body.table
+        [Op.eq]: req.params.table
       },
       user_id: {
-        [Op.eq]: req.body.user
+        [Op.eq]: req.params.id
       }
     }
   }).then(function(results){
@@ -164,15 +167,17 @@ app.get("/api/photo", function(req, res) {
   app.post("/api/photo", function(req, res) {
 
     console.log("storing photo");
+    
+    let data = req.body.photo;
+    let base64Data = data.replace(/^data:image\/png;base64,/, "");
 
-    db.photo.create({
-      photo: req.body.photo,
-      user_id: req.user.id,
-      table_id: req.body.table
-    })
-      .catch(function(err) {
-        res.status(401).json(err);
-      });
+    fs.writeFile("tbl_" + req.body.table + "_user_" + req.user.id + ".png", base64Data, 'base64', 
+    function(err, data) {
+    if (err) {
+        console.log('err', err);
+    }
+      console.log('success');
+    });
   });
 };
 
