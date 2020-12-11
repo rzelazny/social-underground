@@ -1,7 +1,7 @@
 // Requiring necessary npm packages
 var express = require("express");
 var session = require("express-session");
-var bodyParser = require("body-parser");
+//var bodyParser = require("body-parser");
 // Requiring passport as we've configured it
 var passport = require("./config/passport");
 
