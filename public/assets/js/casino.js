@@ -13,10 +13,16 @@ $(document).ready(function() {
 
     //webcam stuff, user is user facing camera mode, not userID
     const webcamElement = document.getElementById('webcam');
-    const webcam = new Webcam(webcamElement, 'user');
+    const canvasElement = document.getElementById('snapShot');
+    const webcam = new Webcam(webcamElement, 'user', canvasElement);
+    
+    
+    // //mirror webcam
+    // if(webcam._facingMode == 'user'){
+    //     webcam._webcamElement.style.transform = "scale(-1,1)";
+    // }
 
-    //prompt user to start their camera
-    webcam.start();
+
 
     //populate chat log
     $.get("/api/chat" + curTable, function(chatLog){
@@ -35,6 +41,8 @@ $(document).ready(function() {
     function chatTimer() {
         
         setInterval(function() {
+            // let lookingFor = {audio: false, video: true}
+            // console.log(navigator.mediaDevices.getUserMedia(lookingFor));
             $.get("/api/chat" + curTable, function(chatLog){
                 if(chatLog.length > chatLength){
                     location.reload();
@@ -82,6 +90,30 @@ $(document).ready(function() {
     //Navigation button: Go back to homepage
     $("#navBtnHome").on("click", function(event) {
         window.location.replace("/home");
+    })
+
+    //Turn on the camera
+    $("#camBtnOn").on("click", function(event) {
+        //prompt user to start their camera
+        webcam.start();
+    })
+
+    //Turn off the camera
+    $("#camBtnOff").on("click", function(event) {
+        webcam.stop();
+    })
+
+    //Turn off the camera
+    $("#camBtnSnap").on("click", function(event) {
+        let picture = {
+            photo: webcam.snap(),
+            table: curTable
+        }
+        console.log("Sending photo");
+
+        $.post("/api/photo/", picture);
+
+        document.querySelector('#download-photo').href = picture.photo;
     })
 });
 

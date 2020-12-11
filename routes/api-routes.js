@@ -144,6 +144,20 @@ module.exports = function(app) {
         res.status(401).json(err);
       });
   });
+
+  app.post("/api/photo", function(req, res) {
+
+    console.log("storing photo");
+
+    db.photo.create({
+      photo: req.body.photo,
+      user_id: req.user.email,
+      table_id: req.body.table
+    })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
 };
 
 

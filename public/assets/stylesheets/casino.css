@@ -5,7 +5,7 @@ body {
     text-align: center;
 }
 
-canvas {
+#canvas {
     background-image: url(../images/blackjacktable2.png);
 
     display: inline;

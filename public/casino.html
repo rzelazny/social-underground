@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="./assets/stylesheets/casino.css">
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <title>Casino</title>
+
+    <!-- <script>
+        var host = location.origin.replace(/^http/, 'ws')
+        var ws = new WebSocket(host);
+        ws.onmessage = function (event) {
+          var li = document.createElement('li');
+          li.innerHTML = JSON.parse(event.data);
+          document.querySelector('#pings').appendChild(li);
+        };
+      </script> -->
 </head>
 
 <body>
@@ -48,7 +58,17 @@
         </ul>
     </div>
     <div class="container" id="webcam1">
-        <video id="webcam" autoplay playsinline width="640" height="480"></video>
+        <video id="webcam" autoplay playsinline width="320" height="240"></video>
+        <canvas id="snapShot" class="d-none"></canvas>
+        <button id="camBtnOn">Camera On</button>
+        <button id="camBtnSnap">Camera Snap</button>
+        <button id="camBtnOff">Camera Off</button>
+        <a id="download-photo">
+        
+        <!-- <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+        </label> -->
     </div>
 
     <button id="newRound">Next Round</button>
@@ -69,4 +89,5 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/js/casino.js"></script>
+<!-- <script src="./assets/js/websocket.js"></script> -->
 </html>
