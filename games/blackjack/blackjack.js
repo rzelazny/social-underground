@@ -142,13 +142,6 @@ function onRestart() {
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
-    // for (var i = 0; i < playerArray.length; i++) {
-    //     if (playerArray[i].Points > 21) {
-    //         alert("you have bust");
-    //         endRound();
-    //     }
-    // }
-    //house logic function//
 }
 
 // hard coded for one player // 
@@ -199,9 +192,18 @@ function playerOneHit() {
             divPoints.id = ('points' + playerArray[i].Name);
             divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
             divPlayer.appendChild(divPoints);
+            
+        }
+        for (var i = 0; i < playerArray.length; i++) {
+            console.log(playerArray[i].Points);
+            if (playerArray[i].Points > 21) {
+                alert("you have bust");
+                endRound();
+            }
         }
     })
 }
+
 
 // to end round //
 function onStay() {
