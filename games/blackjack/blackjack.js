@@ -1,6 +1,10 @@
 // current issues //
 
-// 1. When I press hit and I bust the hit card doesn't display until after the alerts //
+// 1. 
+
+// to do //
+
+// 1. hide house cards & points from user during game. At the end of the game display cards and points //
 
 
 ///////////////////////////////////////////////
@@ -71,8 +75,8 @@ function displayBtns() {
 // hard coded for one player to play against the House //
 function addPlayers() {
     // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
-    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0] };
-    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1] };
+    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' };
+    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
     // appends the objects created above to the playerArray //
     playerArray.push(house, player1);
 }
@@ -284,7 +288,7 @@ function playerOneHit() {
             itsABust();
         }, 500);
     })
-    houseLogic();
+    // hitHouseLogic();
 }
 
 function itsABust() {
@@ -302,13 +306,39 @@ function itsABust() {
     }
 }
 
-// this function will be called when the user presses the stay button //
-function onStay() {
-    //house logic function//
-    houseLogic();
-    // calls to end game //
+// function hitHouseLogic() {
+//     if (playerArray[0].Points < playerArray[1].Points) {
+//         console.log("house needs to add a card here");
+//         // playerArray[0].Points = 100;
+//     }
+//     else {
+//         playerArray[0].Stand = true;
+//         onStand();
+//     }
+// }
+
+// this function will be called when the user presses the stand button //
+function onStand() {
+    playerArray[1].Stand = true;
+    console.log(playerArray);
+    // temp //
     endRound();
+    // afterStandHouseLogic();
 }
+
+// function afterStandHouseLogic() {
+//     if (playerArray[0].Stand === true) {
+//         endRound();
+//     }
+//     else if (playerArray[0].Points > playerArray[1].Points) {
+//         playerArray[0].Stand = true;
+//         endRound();
+//     }
+//     else {
+//         hitHouseLogic();
+//     }
+// }
+
 
 // when this function is called the game is ended //
 function endRound() {
@@ -345,7 +375,7 @@ function endRound() {
 
     }
     // if player1 wins //
-    else if (playerArray[0].Bust === true || playerArray[1].Bust === false && playerArray[1].Points > playerArray[1].Points){
+    else if (playerArray[0].Bust === true || playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points){
         // alert users //
         alert (`${playerArray[1].Name} won. ${playerArray[0].Name} lost.`)
         // increase player1 points by 2 //
@@ -364,17 +394,13 @@ function endRound() {
         standBtn.style.display = 'none'
     }
     restartBtn.value = "Play another round";
-}
 
-function houseLogic() {
-    if (playerArray[0].Points < playerArray[1].Points) {
-    console.log("I can see that the house has less points than the player")
+    // reset player values //
+    playerArray[0].Bust = false;
+    playerArray[1].Bust = false;
+    playerArray[0].Stand = false;
+    playerArray[1].Stand = false;
 }
-//if the house total is less than player1 points when hit/stay add another card until houses points are more than/ equal to bust 
-// OR Dealer will hit until his/her cards total 17 or higher//
-}
-
-// hide house cards & points from user during game. At the end of the game display cards and points //
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
@@ -383,4 +409,4 @@ function houseLogic() {
 startBtn.addEventListener('click', onStart);
 restartBtn.addEventListener('click', onRestart);
 hitBtn.addEventListener('click', onHit);
-standBtn.addEventListener('click', onStay);
+standBtn.addEventListener('click', onStand);
