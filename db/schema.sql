@@ -52,3 +52,14 @@ CREATE TABLE chat_log(
     foreign key (table_id) references gaming_tables(id) on delete cascade,
 	PRIMARY KEY (id)
 );
+
+CREATE TABLE Photo(
+	id int NOT NULL AUTO_INCREMENT,
+	image BLOB,
+    user_id int NOT NULL,
+    table_id int NOT NULL,
+    createdAt DATETIME NOT NULL, 
+    updatedAt DATETIME NOT NULL,
+	PRIMARY KEY (id),
+    foreign key (table_id) references gaming_tables(id) on delete cascade
+);
