@@ -115,6 +115,18 @@ app.get("/api/photo/:id/:table", function(req, res) {
   console.log("getting photo for user", req.params.id)
   console.log("getting photo for table", req.params.table)
 
+  db.photo.findOne({
+    where: {
+      table_id: {
+        [Op.eq]: req.params.table
+      },
+      user_id: {
+        [Op.eq]: req.params.id
+      }
+    }
+  }).then(function(results){
+    res.send(results);
+  })
   
 });
 
@@ -161,19 +173,35 @@ app.get("/api/photo/:id/:table", function(req, res) {
     console.log("storing photo");
     let data = req.body.photo;
     let base64Data = data.replace(/^data:image\/png;base64,/, "");
-    let pathName = path.join(__dirname, "..");
 
-    fs.writeFile(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png", base64Data, 'base64', 
-    function(err, data) {
-    if (err) {
-        console.log('err', err);
-    }
-      console.log('success');
+    db.photo.create({
+      photo: base64Data,
+      user_id: req.user.id,
+      table_id: req.body.table
+    })
+    .then(function(results){
+      console.log("sending new table data back")
+      res.send(results);
+    })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+
+    // This successfully stores the photo as a png file in the public/assets/imgages folder, but the page can't use the images as a src
+    // console.log("storing photo");
+    // let data = req.body.photo;
+    // let base64Data = data.replace(/^data:image\/png;base64,/, "");
+    // let pathName = path.join(__dirname, "..");
+
+    // fs.writeFile(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png", base64Data, 'base64', 
+    // function(err, data) {
+    // if (err) {
+    //     console.log('err', err);
+    // }
+    //   console.log('success');
     
-      //var onlyPath = fs.realpathSync("tbl_" + req.body.table + "_user_" + req.user.id + ".png")
-      // console.log(onlyPath);
-      // res.send(onlyPath);
-    });
+    //   res.send(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png");
+    //});
   });
 };
 

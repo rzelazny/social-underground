@@ -123,15 +123,12 @@ $(document).ready(function() {
                     table: curTable
                 }
                 console.log("Sending photo");
-                $.post("/api/photo/", sendPic);
+                $.post("/api/photo/", sendPic)
                 
-                let oppID = 7;
-                $.get("/api/photo/" + oppID + "/" + curTable).then(function(getPic){
-                    console.log(getPic.photo);
-                    document.querySelector('#download-photo').href = "data:image/png;base64," + getPic.photo;
-                });
-        
-                
+                $.get("/api/photo/" + 1 + "/" + curTable).then(function(photo){
+                    console.log("photo: ", photo);
+                    document.querySelector('#download-photo').href = "data:image/png;base64," + photo.photo;
+                })
             }
         }, 1000);
     })
