@@ -109,15 +109,9 @@ function createElements() {
 }
 
 function addPlayers() {
-    
-    var house = { Name: 'House', ID: 0, Points: 0, Hand: hand[0] };
-
-    var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand[1] };
-
-    // var player2 = { Name: 'Player2',  ID: 2, Points: 0, Hand: hand[2] };
-
+    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Hand: hand[0] };
+    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Hand: hand[1] };
     playerArray.push(house, player1);
-    // console.log(playerArray);
 }
 
 //currently a hard coded but will need a function where there are actual players
@@ -133,11 +127,8 @@ function addPlayers() {
 
 function onStart() {
     console.log('you pressed start')
-
     displayBtns();
-
     addPlayers();
-
     drawCards();
 }
 
@@ -151,9 +142,13 @@ function onRestart() {
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
-
+    for (var i = 0; i < playerArray.length; i++) {
+        if (playerArray[i].Points > 21) {
+            alert("you have bust");
+            endRound();
+        }
+    }
     //house logic function//
-    //total point value
 }
 
 // hard coded for one player // 
@@ -188,7 +183,6 @@ function playerOneHit() {
                 }
                 handVal += parseInt(playerArray[i].Hand[j].value);
             }
-            console.log(handVal);
             playerArray[i].Points = handVal;
             handVal = 0;
 
@@ -204,11 +198,18 @@ function playerOneHit() {
 
 // to end round //
 function onStay() {
-    //total point value
-
     console.log('you pressed stay');
+    endRound();
     //house logic function//
 }
+
+function endRound() {
+    alert("Game is over") // add stats & update "score"
+    console.log(playerArray)
+    //hid all buttons, clear html, show start another round button//
+
+}
+
 
 function totalPoints() {
     var handVal = 0;
@@ -217,15 +218,20 @@ function totalPoints() {
         for (var j = 0; j < (playerArray[i].Hand).length; j++) {
             if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
                 playerArray[i].Hand[j].value = "10";
-            } else if (playerArray[i].Hand[j].value === "ACE") {
-                playerArray[i].Hand[j].value = "11";
+            } 
+            if (playerArray[i].Hand[0].value === "ACE") {
+                playerArray[i].Hand[0].value = "11";
+            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value < 11) {
+                playerArray[i].Hand[1].value = "11";
+            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value > 10) {
+                playerArray[i].Hand[1].value = "1";
             }
+
             handVal += parseInt(playerArray[i].Hand[j].value);
         }
         playerArray[i].Points = handVal;
         handVal = 0;
     }
-    //if bust logic
 }
 
 //house logic function//
