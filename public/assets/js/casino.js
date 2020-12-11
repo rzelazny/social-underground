@@ -96,7 +96,7 @@ $(document).ready(function() {
         webcam.stop();
     })
 
-    //Turn off the camera
+    //Take photo
     $("#camBtnSnap").on("click", function(event) {
         let picture = {
             photo: webcam.snap(),
@@ -109,32 +109,31 @@ $(document).ready(function() {
         document.querySelector('#download-photo').href = picture.photo;
     })
 
-    let timer = 3
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
+        let timer = 3
         let rpsTimer = setInterval(function() {
             timer--
             $("#rpsCountdown").text(timer);
             console.log(timer);
-        }, 1000);
+            if(timer === 0){
+                clearInterval(rpsTimer);
+                let sendPic = {
+                    photo: webcam.snap(),
+                    table: curTable
+                }
+                console.log("Sending photo");
+                $.post("/api/photo/", sendPic);
+                
+                let oppID = 7;
+                $.get("/api/photo/" + oppID + "/" + curTable).then(function(getPic){
+                    console.log(getPic.photo);
+                    document.querySelector('#download-photo').href = "data:image/png;base64," + getPic.photo;
+                });
         
-        if(timer === 0){
-            clearInterval(rpsTimer);
-            let sendPic = {
-                photo: webcam.snap(),
-                table: curTable
+                
             }
-            console.log("Sending photo");
-            $.post("/api/photo/", sendPic);
-
-            let getPic = {
-                table: curTable,
-                user: 1
-            }
-            $.get("/api/photo/", getPic);
-
-            document.querySelector('#download-photo').href = getPic.photo;
-        }
+        }, 1000);
     })
 });
 
