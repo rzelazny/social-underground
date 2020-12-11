@@ -281,18 +281,25 @@ function playerOneHit() {
         // creating a timer function to give time for the card to render before busting //
         setTimeout(function () {
             // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-            for (var i = 0; i < playerArray.length; i++) {
-                console.log(playerArray[i].Points);
-                if (playerArray[i].Points > 21) {
-                    alert("you bust");
-                    playerArray[i].Bust = true;
-                    console.log(playerArray);
-                    endRound();
-                }
-            }
+            itsABust();
         }, 500);
     })
     houseLogic();
+}
+
+function itsABust() {
+    for (var i = 0; i < playerArray.length; i++) {
+        console.log(playerArray[i].Points);
+        if (playerArray[i].Points > 21) {
+            //sends user alert //
+            alert("you bust");
+            // sets bst property to true //
+            playerArray[i].Bust = true;
+            console.log(playerArray);
+            // calls function //
+            endRound();
+        }
+    }
 }
 
 // this function will be called when the user presses the stay button //
