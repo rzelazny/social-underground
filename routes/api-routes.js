@@ -107,6 +107,22 @@ module.exports = function(app) {
     }
   });
 
+// Route for retrieving a photo
+app.get("/api/photo", function(req, res) {
+  db.photo.findOne({
+    where: {
+      table_id: {
+        [Op.eq]: req.body.table
+      },
+      user_id: {
+        [Op.eq]: req.body.user
+      }
+    }
+  }).then(function(results){
+    res.send(results);
+  })
+});
+
   //create a new gaming table
   app.post("/api/newtable", function(req, res) {
 

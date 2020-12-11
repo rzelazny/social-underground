@@ -4,28 +4,23 @@ $(document).ready(function() {
     var hitButton = document.getElementById("hitButton");
     var stayButton = document.getElementById("stayButton");
     var newRound = document.getElementById("newRound");
-    var chatScroll = $("#chat-log");
-    var chatInput = $("#chat-input");
-    
+
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
+
+    //Elements and vars for chat log
     let chatLength = 0;
+    var chatScroll = $("#chat-log");
+    var chatInput = $("#chat-input");
 
     //webcam stuff, user is user facing camera mode, not userID
     const webcamElement = document.getElementById('webcam');
     const canvasElement = document.getElementById('snapShot');
     const webcam = new Webcam(webcamElement, 'user', canvasElement);
-    
-    
-    // //mirror webcam
-    // if(webcam._facingMode == 'user'){
-    //     webcam._webcamElement.style.transform = "scale(-1,1)";
-    // }
-
-
 
     //populate chat log
     $.get("/api/chat" + curTable, function(chatLog){
+        //chat length is used to check for new messages being posted
         chatLength = chatLog.length;
         for(i=0; i < chatLength; i++) {
             var chatLine = $("<li>")
@@ -41,8 +36,6 @@ $(document).ready(function() {
     function chatTimer() {
         
         setInterval(function() {
-            // let lookingFor = {audio: false, video: true}
-            // console.log(navigator.mediaDevices.getUserMedia(lookingFor));
             $.get("/api/chat" + curTable, function(chatLog){
                 if(chatLog.length > chatLength){
                     location.reload();
@@ -114,6 +107,34 @@ $(document).ready(function() {
         $.post("/api/photo/", picture);
 
         document.querySelector('#download-photo').href = picture.photo;
+    })
+
+    let timer = 3
+    //Play Rock Paper Scissors
+    $("#camBtnRPS").on("click", function(event) {
+        let rpsTimer = setInterval(function() {
+            timer--
+            $("#rpsCountdown").text(timer);
+            console.log(timer);
+        }, 1000);
+        
+        if(timer === 0){
+            clearInterval(rpsTimer);
+            let sendPic = {
+                photo: webcam.snap(),
+                table: curTable
+            }
+            console.log("Sending photo");
+            $.post("/api/photo/", sendPic);
+
+            let getPic = {
+                table: curTable,
+                user: 1
+            }
+            $.get("/api/photo/", getPic);
+
+            document.querySelector('#download-photo').href = getPic.photo;
+        }
     })
 });
 
