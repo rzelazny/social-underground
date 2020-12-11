@@ -1,7 +1,6 @@
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
-var gameBody =  document.querySelector('#gameBody');
 var players =  document.querySelector('#players');
 
 var startBtn = document.querySelector('#start');
@@ -12,18 +11,13 @@ var stayBtn = document.querySelector('#stay');
 // hard coded for now but will use players from db
 let playerArray = [];
 
-let score = [];
-
-var wins = 0;
-var losses = 0;
-var ties = 0;
-
 let hand = [];
 
 //making a global variable to be used throughout several functions//
 var divPlayer = null;
 var divHand = null;
 var divPoints = null;
+var divScore = null;
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
@@ -54,8 +48,8 @@ function drawCards () {
             drawCards()
         }
         else {
-            createElements();
             totalPoints();
+            createElements();
         }
     })
 }
@@ -98,36 +92,43 @@ function createElements() {
         divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
-        divPoints.innerHTML = `Points: ` + playerArray[i].Points
+        divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
+
+        divScore = document.createElement('div');
+        divScore.className = ('score');
+        divScore.id = ('score' + playerArray[i].Name);
+        divScore.innerHTML = `Score: ${playerArray[i].Score} `;
 
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
         divPlayer.appendChild(divHand);
         divPlayer.appendChild(divPoints);
+        divPlayer.appendChild(divScore);
         players.appendChild(divPlayer);
     }
 }
 
 function addPlayers() {
-    
-    var house = { Name: 'House', ID: 0, Points: 0, Hand: hand[0] };
-
-    var player1 = { Name: 'Player1',  ID: 1, Points: 0, Hand: hand[1] };
-
-    // var player2 = { Name: 'Player2',  ID: 2, Points: 0, Hand: hand[2] };
-
+    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Hand: hand[0] };
+    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Hand: hand[1] };
     playerArray.push(house, player1);
-    // console.log(playerArray);
 }
+
+//currently a hard coded but will need a function where there are actual players
+// // function addPlayers(amount) {
+//     playerArray = [{ Name: House, ID: 0, Points: 0, Hand: hand }];
+//     for (var i = 1; i <= amount; i++) {
+//         var Hand = [];
+//         var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand };
+//         playerArray.push(player)
+//     }
+// }
 
 
 function onStart() {
     console.log('you pressed start')
-
     displayBtns();
-
     addPlayers();
-
     drawCards();
 }
 
@@ -135,15 +136,14 @@ function onRestart() {
     console.log('you pressed restart');
     players.innerHTML = '';
     i = 0;
+    displayBtns();
+    restartBtn.value = "restart";
     drawCards();
 }
 
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
-
-    //house logic function//
-    //total point value
 }
 
 // hard coded for one player // 
@@ -161,56 +161,141 @@ function playerOneHit() {
             };
         var originalHand = playerArray[1].Hand;
         originalHand.push(hitCard);
-
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard' + playerArray[1].Name)
         hitCardImg.src = (hitCard.imgUrl)
-
         console.log(divHand);
         divHand.appendChild(hitCardImg);
+
+        var handVal = 0;
+        for(var i = 0; i < playerArray.length; i++) {
+            playerArray[i].Points = 0;
+            for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+                if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
+                    playerArray[i].Hand[j].value = "10";
+                } 
+                // else if (playerArray[i].Hand[j].value === "ACE") {
+                //     playerArray[i].Hand[j].value = "11";
+                // }
+
+                else if (playerArray[i].Hand[j].value === "ACE" && handVal < 11) {
+                    playerArray[i].Hand[j].value = "11";
+                } else if (playerArray[i].Hand[j].value === "ACE" && handVal > 10) {
+                    playerArray[i].Hand[j].value = "1";
+                }
+                handVal += parseInt(playerArray[i].Hand[j].value);
+            }
+            playerArray[i].Points = handVal;
+            handVal = 0;
+
+            divPoints.innerHTML = ''
+            divPoints = document.createElement('div');
+            divPoints.className = ('points');
+            divPoints.id = ('points' + playerArray[i].Name);
+            divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
+            divPlayer.appendChild(divPoints);
+            
+        }
+        for (var i = 0; i < playerArray.length; i++) {
+            console.log(playerArray[i].Points);
+            if (playerArray[i].Points > 21) {
+                alert("you have bust");
+                endRound();
+            }
+        }
+
     })
 }
 
+
 // to end round //
 function onStay() {
-    //total point value
-
     console.log('you pressed stay');
+    endRound();
     //house logic function//
 }
 
-//house logic function//
-//if the house total is less than player1 hit until more than or bust//
-
-function totalPoints() {
+function endRound() {
+    alert(`Game is over`)
+    // display points from round to user //
     for(var i = 0; i < playerArray.length; i++) {
-
-        if (playerArray[i].Hand[0].value === "JACK" || playerArray[i].Hand[0].value === "QUEEN" || playerArray[i].Hand[0].value === "KING") {
-            playerArray[i].Hand[0].value = "10";
-        } else if (playerArray[i].Hand[0].value === "ACE") {
-            playerArray[i].Hand[0].value = "11";
-        }
-        var cardOneVal = parseInt(playerArray[i].Hand[0].value);
-
-        if (playerArray[i].Hand[1].value === "JACK" || playerArray[i].Hand[1].value === "QUEEN" || playerArray[i].Hand[1].value === "KING") {
-            playerArray[i].Hand[1].value = "10";
-        } else if (playerArray[i].Hand[1].value === "ACE") {
-            playerArray[i].Hand[1].value = "11";
-        }
-        var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
-
-        var handVal = cardOneVal + cardTwoVal;
-        playerArray[i].Points = handVal;
-
         console.log(playerArray[i].Points);
-
-        divPoints.innerHTML = `Points: ` + playerArray[i].Points
+        console.log(`${playerArray[i].Name} has ${playerArray[i].Points} points.`)
+        alert(`${playerArray[i].Name} has ${playerArray[i].Points} points.`)
     }
-    //count values of all cards
-    //if bust logic
+    // if the players tie //
+    if (playerArray[0].Points === playerArray[1].Points) {
+        alert(`You tied.`)
+        // increase both scores by 1 //
+        playerArray[0].Score = playerArray[0].Score + 1;
+        playerArray[1].Score = playerArray[1].Score + 1;
+        // alert the users of current scores //
+        alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`)
+        // update scores on html //
+        divScore.innerHTML = `Score: ${playerArray[0].Score} `;
+        divScore.innerHTML = `Score: ${playerArray[1].Score} `;
+    } 
+    // if the House wins //
+    else if (playerArray[0].Points > playerArray[1].Points) {
+        // alert users //
+        alert(`${playerArray[0].Name} won. ${playerArray[1].Name} lost.`)
+        // increase House points by 2 //
+        playerArray[0].Score = playerArray[0].Score + 2;
+        // alert the users of current scores //
+        alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`)
+        // update scores on html //
+        divScore.innerHTML = `Score: ${playerArray[0].Score} `;
+    }
+    // if player1 wins //
+    else if (playerArray[1].Points > playerArray[0].Points){
+        // alert users //
+        alert (`${playerArray[1].Name} won. ${playerArray[0].Name} lost.`)
+        // increase player1 points by 2 //
+        playerArray[1].Score = playerArray[1].Score + 2;
+        // alert the users of current scores //
+        alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`)
+        // update scores on html //
+        divScore.innerHTML = `Score: ${playerArray[1].Score} `;
+    }
+
+
+    if (hitBtn.style.display === 'block') {
+        hitBtn.style.display = 'none'
+    }
+    if (stayBtn.style.display === 'block') {
+        stayBtn.style.display = 'none'
+    }
+    restartBtn.value = "Play another round";
 }
 
-//hide house cards after game is built//
+
+function totalPoints() {
+    var handVal = 0;
+    for(var i = 0; i < playerArray.length; i++) {
+        playerArray[i].Points = 0;
+        for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+            if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
+                playerArray[i].Hand[j].value = "10";
+            } 
+            if (playerArray[i].Hand[0].value === "ACE") {
+                playerArray[i].Hand[0].value = "11";
+            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value < 11) {
+                playerArray[i].Hand[1].value = "11";
+            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value > 10) {
+                playerArray[i].Hand[1].value = "1";
+            }
+
+            handVal += parseInt(playerArray[i].Hand[j].value);
+        }
+        playerArray[i].Points = handVal;
+        handVal = 0;
+    }
+}
+
+//house logic function//
+//if the house total is less than player1 hit until more than or bust OR Dealer will hit until his/her cards total 17 or higher//
+
+//hide house cards after game is built //
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
