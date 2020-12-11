@@ -56,7 +56,6 @@ function drawCards () {
         else {
             totalPoints();
             createElements();
-            // totalPoints();
         }
     })
 }
@@ -152,7 +151,7 @@ function onRestart() {
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
-    // totalPoints();
+    totalPoints();
 
     //house logic function//
     //total point value
@@ -181,7 +180,6 @@ function playerOneHit() {
         console.log(divHand);
         divHand.appendChild(hitCardImg);
     })
-    // totalPoints(); // work on recalculating points on hit
 }
 
 // to end round //
@@ -210,6 +208,7 @@ function totalPoints() {
         
         playerArray[i].Points = handVal;
 
+        handVal = 0;
     }
     //count values of all cards
     //if bust logic
