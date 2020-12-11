@@ -6,7 +6,7 @@ var players =  document.querySelector('#players');
 var startBtn = document.querySelector('#start');
 var restartBtn = document.querySelector('#restart');
 var hitBtn = document.querySelector('#hit');
-var stayBtn = document.querySelector('#stay');
+var standBtn = document.querySelector('#stand');
 
 // hard coded for now but will use players from db
 let playerArray = [];
@@ -61,8 +61,8 @@ function displayBtns() {
     if (hitBtn.style.display === 'none') {
         hitBtn.style.display = 'block'
     }
-    if (stayBtn.style.display === 'none') {
-        stayBtn.style.display = 'block'
+    if (standBtn.style.display === 'none') {
+        standBtn.style.display = 'block'
     }
     if (restartBtn.style.display === 'none') {
         restartBtn.style.display = 'block'
@@ -262,8 +262,8 @@ function endRound() {
     if (hitBtn.style.display === 'block') {
         hitBtn.style.display = 'none'
     }
-    if (stayBtn.style.display === 'block') {
-        stayBtn.style.display = 'none'
+    if (standBtn.style.display === 'block') {
+        standBtn.style.display = 'none'
     }
     restartBtn.value = "Play another round";
 }
@@ -304,4 +304,4 @@ function totalPoints() {
 startBtn.addEventListener('click', onStart);
 restartBtn.addEventListener('click', onRestart);
 hitBtn.addEventListener('click', onHit);
-stayBtn.addEventListener('click', onStay);
+standBtn.addEventListener('click', onStay);
