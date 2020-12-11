@@ -71,8 +71,8 @@ function displayBtns() {
 // hard coded for one player to play against the House //
 function addPlayers() {
     // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
-    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Hand: hand[0] };
-    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Hand: hand[1] };
+    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0] };
+    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1] };
     // appends the objects created above to the playerArray //
     playerArray.push(house, player1);
 }
@@ -278,15 +278,19 @@ function playerOneHit() {
             divPlayer.appendChild(divPoints);
             
         }
-        // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-        for (var i = 0; i < playerArray.length; i++) {
-            console.log(playerArray[i].Points);
-            if (playerArray[i].Points > 21) {
-                alert("you have bust");
-                endRound();
+        // creating a timer function to give time for the card to render before busting //
+        setTimeout(function () {
+            // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+            for (var i = 0; i < playerArray.length; i++) {
+                console.log(playerArray[i].Points);
+                if (playerArray[i].Points > 21) {
+                    alert("you bust");
+                    playerArray[i].Bust = true;
+                    console.log(playerArray);
+                    endRound();
+                }
             }
-        }
-
+        }, 500);
     })
     houseLogic();
 }
@@ -359,10 +363,11 @@ function houseLogic() {
     if (playerArray[0].Points < playerArray[1].Points) {
     console.log("I can see that the house has less points than the player")
 }
-//if the house total is less than player1 hit until more than or bust OR Dealer will hit until his/her cards total 17 or higher//
+//if the house total is less than player1 points when hit/stay add another card until houses points are more than/ equal to bust 
+// OR Dealer will hit until his/her cards total 17 or higher//
 }
 
-//hide house cards after game is built //
+// hide house cards & points from user during game. At the end of the game display cards and points //
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
