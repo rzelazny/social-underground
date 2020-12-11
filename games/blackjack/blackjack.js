@@ -133,22 +133,24 @@ function createElements() {
     }
 }
 
-function addPlayers() {
-    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Hand: hand[0] };
-    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Hand: hand[1] };
-    playerArray.push(house, player1);
-}
-
-//currently a hard coded but will need a function where there are actual players
-// // function addPlayers(amount) {
-//     playerArray = [{ Name: House, ID: 0, Points: 0, Hand: hand }];
-//     for (var i = 1; i <= amount; i++) {
-//         var Hand = [];
-//         var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand };
-//         playerArray.push(player)
-//     }
+// currently a hard coded below but will need a more in-depth function where we use the logged in players //
+// function addPlayers(amount) {
+    // playerArray = [{ Name: House, ID: 0, Score: 0, Points: 0, Hand: hand }];
+    //     for (var i = 1; i <= amount; i++) {
+    //         var Hand = [];
+    //         var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Hand: hand };
+    //         playerArray.push(player)
+    //     }
 // }
 
+// hard coded for one player to play against the House //
+function addPlayers() {
+    // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
+    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Hand: hand[0] };
+    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Hand: hand[1] };
+    // appends the objects created above to the playerArray //
+    playerArray.push(house, player1);
+}
 
 function onStart() {
     console.log('you pressed start')
