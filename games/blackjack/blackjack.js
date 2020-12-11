@@ -54,8 +54,8 @@ function drawCards () {
             drawCards()
         }
         else {
-            createElements();
             totalPoints();
+            createElements();
         }
     })
 }
@@ -98,7 +98,7 @@ function createElements() {
         divPoints = document.createElement('div');
         divPoints.className = ('points');
         divPoints.id = ('points' + playerArray[i].Name);
-        divPoints.innerHTML = `Points: `;
+        divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
 
         divHand.appendChild(cardOneImg);
         divHand.appendChild(cardTwoImg);
@@ -119,6 +119,16 @@ function addPlayers() {
     playerArray.push(house, player1);
     // console.log(playerArray);
 }
+
+//currently a hard coded but will need a function where there are actual players
+// // function addPlayers(amount) {
+//     playerArray = [{ Name: House, ID: 0, Points: 0, Hand: hand }];
+//     for (var i = 1; i <= amount; i++) {
+//         var Hand = [];
+//         var player = { Name: 'Player ' + i, ID: i, Points: 0, Hand: hand };
+//         playerArray.push(player)
+//     }
+// }
 
 
 function onStart() {
@@ -161,13 +171,34 @@ function playerOneHit() {
             };
         var originalHand = playerArray[1].Hand;
         originalHand.push(hitCard);
-
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard' + playerArray[1].Name)
         hitCardImg.src = (hitCard.imgUrl)
-
         console.log(divHand);
         divHand.appendChild(hitCardImg);
+
+        var handVal = 0;
+        for(var i = 0; i < playerArray.length; i++) {
+            playerArray[i].Points = 0;
+            for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+                if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
+                    playerArray[i].Hand[j].value = "10";
+                } else if (playerArray[i].Hand[j].value === "ACE") {
+                    playerArray[i].Hand[j].value = "11";
+                }
+                handVal += parseInt(playerArray[i].Hand[j].value);
+            }
+            console.log(handVal);
+            playerArray[i].Points = handVal;
+            handVal = 0;
+
+            divPoints.innerHTML = ''
+            divPoints = document.createElement('div');
+            divPoints.className = ('points');
+            divPoints.id = ('points' + playerArray[i].Name);
+            divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
+            divPlayer.appendChild(divPoints);
+        }
     })
 }
 
@@ -179,37 +210,28 @@ function onStay() {
     //house logic function//
 }
 
-//house logic function//
-//if the house total is less than player1 hit until more than or bust//
-
 function totalPoints() {
+    var handVal = 0;
     for(var i = 0; i < playerArray.length; i++) {
-
-        if (playerArray[i].Hand[0].value === "JACK" || playerArray[i].Hand[0].value === "QUEEN" || playerArray[i].Hand[0].value === "KING") {
-            playerArray[i].Hand[0].value = "10";
-        } else if (playerArray[i].Hand[0].value === "ACE") {
-            playerArray[i].Hand[0].value = "11";
+        playerArray[i].Points = 0;
+        for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+            if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
+                playerArray[i].Hand[j].value = "10";
+            } else if (playerArray[i].Hand[j].value === "ACE") {
+                playerArray[i].Hand[j].value = "11";
+            }
+            handVal += parseInt(playerArray[i].Hand[j].value);
         }
-        var cardOneVal = parseInt(playerArray[i].Hand[0].value);
-
-        if (playerArray[i].Hand[1].value === "JACK" || playerArray[i].Hand[1].value === "QUEEN" || playerArray[i].Hand[1].value === "KING") {
-            playerArray[i].Hand[1].value = "10";
-        } else if (playerArray[i].Hand[1].value === "ACE") {
-            playerArray[i].Hand[1].value = "11";
-        }
-        var cardTwoVal = parseInt(playerArray[i].Hand[1].value);
-
-        var handVal = cardOneVal + cardTwoVal;
         playerArray[i].Points = handVal;
-
-        console.log(playerArray[i].Points);
-        divPoints.innerHTML = `Points: ${playerArray[i].Points} `
+        handVal = 0;
     }
-    //count values of all cards
     //if bust logic
 }
 
-//hide house cards after game is built//
+//house logic function//
+//if the house total is less than player1 hit until more than or bust//
+
+//hide house cards after game is built OR Dealer will hit until his/her cards total 17 or higher //
 
 ///////////////////////////////////////////////
 //                On Clicks                  //
