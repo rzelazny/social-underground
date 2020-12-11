@@ -6,7 +6,7 @@ body {
 }
 
 canvas {
-    background-image: url(./images/casinoentrance.jpg);
+    background-image: url(../images/casinoentrance.jpg);
     display: inline;
     background-size: cover;
 }

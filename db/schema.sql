@@ -1,12 +1,12 @@
--- Drops the blogger if it exists currently --
+-- Drops if it exists currently --
 DROP DATABASE IF EXISTS gaming_underground_db;
--- Creates the "blogger" database --
+-- Creates the database --
 CREATE DATABASE gaming_underground_db;
 
 USE gaming_underground_db;
 
 -- table stores login information
-CREATE TABLE user_login(
+CREATE TABLE User_login(
 	id int NOT NULL AUTO_INCREMENT,
 	email varchar(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
@@ -16,12 +16,11 @@ CREATE TABLE user_login(
 );
 
 -- table stores user displayName and win/loss record
-CREATE TABLE user_stats(
+CREATE TABLE User_stat(
     id int NOT NULL AUTO_INCREMENT,
 	login_id int NOT NULL,
     display_name varchar(255) DEFAULT "New Player",
-    wins int DEFAULT 0,
-    losses int DEFAULT 0,
+    wins BOOLEAN DEFAULT FALSE,
 	foreign key (login_id) references user_login(id) on delete cascade,
 	PRIMARY KEY (id)
 );
@@ -49,6 +48,18 @@ CREATE TABLE chat_log(
     table_id int NOT NULL,
     createdAt DATETIME NOT NULL, 
     updatedAt DATETIME NOT NULL,
+    createdAt DATETIME NOT NULL, 
     foreign key (table_id) references gaming_tables(id) on delete cascade,
 	PRIMARY KEY (id)
+);
+
+CREATE TABLE Photo(
+	id int NOT NULL AUTO_INCREMENT,
+	image BLOB,
+    user_id int NOT NULL,
+    table_id int NOT NULL,
+    createdAt DATETIME NOT NULL, 
+    updatedAt DATETIME NOT NULL,
+	PRIMARY KEY (id),
+    foreign key (table_id) references gaming_tables(id) on delete cascade
 );

@@ -2,10 +2,11 @@
 var db = require("../models");
 var passport = require("../config/passport");
 // var User = require("../models/userStat")
-var User = require("../models/userStat")
+var User_stat = db.User_stat
 const { sequelize } = require("../models");
+const user = require("../models/user_login");
 const { Op } = require("sequelize");
-const user = require("../models/user");
+// const user = require("../models/user");
 
 
 module.exports = function(app) {
@@ -36,16 +37,26 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/api/new", function(req, res) {
+  app.post("/api/user_stat", function(req, res) {
     // Take the request...
     var routeName = req.body.name.replace(/\s+/g, "").toLowerCase();
     // Then add the user to the database using sequelize
-    db.user.create({
-      routeName: routeName,
+    User_stat.create({
       name: req.body.name,
-      gamePoints: req.body.gamePoints
+      gamePoints: req.body.gamePoints,
+      bio: req.body.bio
+
+    }).then ((user_stat) => {
+      res.status(201).json(user_stat);
+    })
+  });
+
+  app.get("/api/user_stat", function(req, res) {
+    // Take the request...
+    // Then add the user to the database using sequelize
+    User_stat.findAll().then((user_stat) => {
+      res.json(user_stat);
     });
-    res.status(204).end();
   });
 
   // Route for logging user out
@@ -67,6 +78,19 @@ module.exports = function(app) {
       res.send(results);
     })
 });
+
+// Route for getting chat log data
+  app.get("/api/chat:table", function(req, res) {
+    db.chat_log.findAll({
+      where: {
+        table_id: {
+          [Op.eq]: req.params.table
+        }
+      }
+    }).then(function(results){
+      res.send(results);
+    })
+  });
 
   // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
@@ -94,8 +118,46 @@ module.exports = function(app) {
       game_started: false,
       user1: req.user.email
     })
+    .then(function(results){
+      console.log("sending new table data back")
+      res.send(results);
+    })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
+
+  app.post("/api/chat/", function(req, res) {
+
+    console.log("adding new chat table to table " + JSON.stringify(req.body));
+
+    db.chat_log.create({
+      user: req.user.email,
+      message: req.body.message,
+      table_id: req.body.table
+    })
+    .then(function(results){
+      console.log("sending new table data back")
+      res.send(results);
+    })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
+
+  app.post("/api/photo", function(req, res) {
+
+    console.log("storing photo");
+
+    db.photo.create({
+      photo: req.body.photo,
+      user_id: req.user.email,
+      table_id: req.body.table
+    })
       .catch(function(err) {
         res.status(401).json(err);
       });
   });
 };
+
+

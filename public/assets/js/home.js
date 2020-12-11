@@ -33,7 +33,7 @@ $(document).ready(function() {
     //function lets user join an existing table
     function joinTable() {
         let tableId = $(this).attr("table")
-        window.location.replace("/casino/" + tableId);
+        window.location.assign("/casino" + tableId);
     }
 
     // Getting references to our form and inputs
@@ -43,10 +43,12 @@ $(document).ready(function() {
     $("#newTable").on("click", function(event) {
         console.log("Making a new gaming table ");
         //create a new gaming table
-        $.post("/api/newtable");
+        $.post("/api/newtable", function(newTable){
             console.log("The table was made");
-            window.location.replace("/casino");
-        
+            console.log(newTable);
+            window.location.replace("/casino/" + newTable.id);
+        }
+        );
     })
 
     // $("#joinGame").on("click", function(event) {
