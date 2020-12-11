@@ -151,8 +151,6 @@ function onRestart() {
 function onHit() {
     console.log('you pressed hit me');
     playerOneHit();
-    totalPoints();
-
     //house logic function//
     //total point value
 }
@@ -180,6 +178,7 @@ function playerOneHit() {
         console.log(divHand);
         divHand.appendChild(hitCardImg);
     })
+    totalPoints();
 }
 
 // to end round //
@@ -190,29 +189,27 @@ function onStay() {
     //house logic function//
 }
 
-//house logic function//
-//if the house total is less than player1 hit until more than or bust//
-
 function totalPoints() {
     var handVal = 0;
     for(var i = 0; i < playerArray.length; i++) {
+        playerArray[i].Points = 0;
         for (var j = 0; j < (playerArray[i].Hand).length; j++) {
             if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
                 playerArray[i].Hand[j].value = "10";
             } else if (playerArray[i].Hand[j].value === "ACE") {
                 playerArray[i].Hand[j].value = "11";
             }
-
             handVal += parseInt(playerArray[i].Hand[j].value);
         }
-        
+        console.log(handVal);
         playerArray[i].Points = handVal;
-
         handVal = 0;
     }
-    //count values of all cards
     //if bust logic
 }
+
+//house logic function//
+//if the house total is less than player1 hit until more than or bust//
 
 //hide house cards after game is built OR Dealer will hit until his/her cards total 17 or higher //
 
