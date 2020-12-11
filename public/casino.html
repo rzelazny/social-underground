@@ -11,16 +11,6 @@
     <link rel="stylesheet" href="./assets/stylesheets/casino.css">
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <title>Casino</title>
-
-    <!-- <script>
-    var host = location.origin.replace(/^http/, 'ws')
-    var ws = new WebSocket(host);
-    ws.onmessage = function (event) {
-      var li = document.createElement('li');
-      li.innerHTML = JSON.parse(event.data);
-      document.querySelector('#pings').appendChild(li);
-    };
-  </script> -->
 </head>
 
 <body>
@@ -73,6 +63,9 @@
         <button id="camBtnOn">Camera On</button>
         <button id="camBtnSnap">Camera Snap</button>
         <button id="camBtnOff">Camera Off</button>
+        <br>
+        <button id="camBtnRPS">Play Rock Paper Scissors</button>
+        <div id="rpsCountdown"></div>
         <a id="download-photo">
         
         <!-- <label class="switch">
