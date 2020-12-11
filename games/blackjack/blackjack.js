@@ -293,13 +293,11 @@ function playerOneHit() {
 
 function itsABust() {
     for (var i = 0; i < playerArray.length; i++) {
-        console.log(playerArray[i].Points);
         if (playerArray[i].Points > 21) {
             //sends user alert //
             alert("you bust");
             // sets bst property to true //
             playerArray[i].Bust = true;
-            console.log(playerArray);
             // calls function //
             endRound();
         }
