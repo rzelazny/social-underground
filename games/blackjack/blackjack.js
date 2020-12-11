@@ -226,8 +226,12 @@ function endRound() {
     if (playerArray[0].Points === playerArray[1].Points) {
         alert(`You tied.`)
 
-    } else if (playerArray[0].Points > playerArray[1].Points) {
+    } 
+    else if (playerArray[0].Points > playerArray[1].Points) {
         alert(`${playerArray[0].Name} won. ${playerArray[1].Name} lost.`)
+    }
+    else if (playerArray[1].Points > playerArray[0].Points){
+        alert (`${playerArray[1].Name} won. ${playerArray[0].Name} lost.`)
     }
      // add stats & update "score"
     if (hitBtn.style.display === 'block') {
