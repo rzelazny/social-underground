@@ -11,7 +11,6 @@ var stayBtn = document.querySelector('#stay');
 // hard coded for now but will use players from db
 let playerArray = [];
 
-
 let hand = [];
 
 //making a global variable to be used throughout several functions//
@@ -218,22 +217,48 @@ function onStay() {
 
 function endRound() {
     alert(`Game is over`)
+    // display points from round to user //
     for(var i = 0; i < playerArray.length; i++) {
         console.log(playerArray[i].Points);
         console.log(`${playerArray[i].Name} has ${playerArray[i].Points} points.`)
         alert(`${playerArray[i].Name} has ${playerArray[i].Points} points.`)
     }
+    // if the players tie //
     if (playerArray[0].Points === playerArray[1].Points) {
         alert(`You tied.`)
-
+        // increase both scores by 1 //
+        playerArray[0].Score = playerArray[0].Score + 1;
+        playerArray[1].Score = playerArray[1].Score + 1;
+        // alert the users of current scores //
+        alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`)
+        // update scores on html //
+        divScore.innerHTML = `Score: ${playerArray[0].Score} `;
+        divScore.innerHTML = `Score: ${playerArray[1].Score} `;
     } 
+    // if the House wins //
     else if (playerArray[0].Points > playerArray[1].Points) {
+        // alert users //
         alert(`${playerArray[0].Name} won. ${playerArray[1].Name} lost.`)
+        // increase House points by 2 //
+        playerArray[0].Score = playerArray[0].Score + 2;
+        // alert the users of current scores //
+        alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`)
+        // update scores on html //
+        divScore.innerHTML = `Score: ${playerArray[0].Score} `;
     }
+    // if player1 wins //
     else if (playerArray[1].Points > playerArray[0].Points){
+        // alert users //
         alert (`${playerArray[1].Name} won. ${playerArray[0].Name} lost.`)
+        // increase player1 points by 2 //
+        playerArray[1].Score = playerArray[1].Score + 2;
+        // alert the users of current scores //
+        alert(`${playerArray[0].Name}: ${playerArray[0].Score}. ${playerArray[1].Name}: ${playerArray[1].Score}.`)
+        // update scores on html //
+        divScore.innerHTML = `Score: ${playerArray[1].Score} `;
     }
-     // add stats & update "score"
+
+
     if (hitBtn.style.display === 'block') {
         hitBtn.style.display = 'none'
     }
