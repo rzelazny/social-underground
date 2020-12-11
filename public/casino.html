@@ -4,20 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
     <link rel="stylesheet" href="./assets/stylesheets/casino.css">
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <title>Casino</title>
 
     <!-- <script>
-        var host = location.origin.replace(/^http/, 'ws')
-        var ws = new WebSocket(host);
-        ws.onmessage = function (event) {
-          var li = document.createElement('li');
-          li.innerHTML = JSON.parse(event.data);
-          document.querySelector('#pings').appendChild(li);
-        };
-      </script> -->
+    var host = location.origin.replace(/^http/, 'ws')
+    var ws = new WebSocket(host);
+    ws.onmessage = function (event) {
+      var li = document.createElement('li');
+      li.innerHTML = JSON.parse(event.data);
+      document.querySelector('#pings').appendChild(li);
+    };
+  </script> -->
 </head>
 
 <body>
@@ -56,16 +59,14 @@
             </li>
         </ul>
     </div>
-<<<<<<< HEAD
 
-        <div style="position: relative; left:60%" class="container" id="chat-container">
+        <div style="position: relative; left:35%" class="container" id="chat-container">
             <div id="chat-log"></div>
             <form class="form-inline" id="chat-entry">
                 <input type="text" class="form-control" id="chat-input" placeholder="Talk smack here">
                 <button type="submit" class="btn btn-default" id="send-chat"><i class="fas fa-share"></i></button>
             </form>
         </div>
-=======
     <div class="container" id="webcam1">
         <video id="webcam" autoplay playsinline width="320" height="240"></video>
         <canvas id="snapShot" class="d-none"></canvas>
@@ -79,8 +80,10 @@
             <span class="slider round"></span>
         </label> -->
     </div>
->>>>>>> main
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 <footer>
@@ -90,9 +93,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/js/casino.js"></script>
-<<<<<<< HEAD
 
-=======
 <!-- <script src="./assets/js/websocket.js"></script> -->
->>>>>>> main
+
 </html>
