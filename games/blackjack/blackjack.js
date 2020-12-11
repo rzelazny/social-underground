@@ -254,11 +254,12 @@ function playerOneHit() {
 }
 
 
-// to end round //
+// this function will be called when the user presses the stay button //
 function onStay() {
-    console.log('you pressed stay');
-    endRound();
     //house logic function//
+    
+    // calls to end game //
+    endRound();
 }
 
 function endRound() {
