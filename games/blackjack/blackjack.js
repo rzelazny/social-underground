@@ -1,16 +1,16 @@
 // current issues //
 
-// 1. stand function //
+// 1. when player 1 STANDS and house hits again and busts it gets double alerts
+
+// 2. TEST if house cards > 17 stand //
 
 // to do //
 
-// 1. if house cards > 17 stand //
+// 1. hide house cards & points from user during game. At the end of the game display cards and points //
 
-// 2. hide house cards & points from user during game. At the end of the game display cards and points //
+alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has more than 17 points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts.")
 
-// 3. write directions pop up //
-
-
+alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be delt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 1 point each. If you win you will be awarded 2 points and if the House wins it will be awarded two points.")
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
@@ -319,12 +319,11 @@ function itsABust() {
 }
 
 function hitHouseLogic() {
+    // house will currently stand if it has > 17 points or is higher than player points //
     if (playerArray[0].Points > playerArray[1].Points) {
         playerArray[0].Stand = true;
-        console.log("hit house logic: house points > player points = currently standing");
     }
     else if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
-        console.log("hit house logic: house points < player points = house will hit");
         var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
         $.ajax({
             url: docUrl,
@@ -383,45 +382,55 @@ function hitHouseLogic() {
         })
     }
     else {
-        console.log("house hit function -> testing ?")
+        playerArray[0].Stand = true;
     }
 }
 
 function houseBust() {
     if (playerArray[0].Points > 21) {
+        console.log("inside bust function")
         //sends user alert //
         alert("the house bust");
         // sets bst property to true //
         playerArray[0].Bust = true;
         // calls function //
-        endRound();
+        setTimeout(function () {
+            console.log("sending busted house to stand to end game")
+            onStand();
+        }, 500);
     }
 }
 
 // this function will be called when the user presses the stand button //
 function onStand() {
     playerArray[1].Stand = true;
+    if (playerArray[0].Points > 17 || playerArray[0].Points > playerArray[1].Points) {
+        playerArray[0].Stand = true;
+    }
     if (playerArray[0].Stand === true & playerArray[1].Stand === true) {
-        console.log("on stand fcn: both players standing");
         endRound();
     } 
     else{
-        console.log("on stand fcn: house is not standing")
+
         hitHouseLogic();
         setTimeout(function () {
-            testing();
+            if (playerArray[1].Bust === false) {
+                testing();
+            }
+            else {
+                console.log("house busted")
+            }
         }, 500);
     }
 }
 
 function testing() {
-    console.log("rethrow stand function");
     onStand();
 }
 
 // when this function is called the game is ended //
 function endRound() {
-    console.log("======ending round===========")
+    console.log("======ending round========")
     // the users will get an alert that the game is over //
     alert(`round over`)
     // display points from round to user //
