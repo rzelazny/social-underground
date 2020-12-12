@@ -1,12 +1,4 @@
-// current issues //
-    // HOUSE BUSTING //
-    // on stand - if house hits & busts then 
-        // alert round ends (round end fuct) - says house wins & adds 2 to House score
-        // (bust function) alerts bust & adds 2 to player score 
-
-    // after hit when house busts everything is good //
-
-alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has more than 17 points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. I also think the houses cards and hand points should be hid from player until the end of the round function has ran. I am just leaving them up for building purposes.")
+alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has 17 or more points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. I also think the houses cards and hand points should be hid from player until the end of the round function has ran. I am just leaving them up for building purposes.")
 
 alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be delt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 1 point each. If you win you will be awarded 2 points and if the House wins it will be awarded two points.")
 ///////////////////////////////////////////////
@@ -320,7 +312,7 @@ function itsABust() {
 
 function hitHouseLogic() {
     // house will currently stand if it has > 17 points or is higher than player points //
-    if (playerArray[0].Points > playerArray[1].Points || playerArray[0].Points > 17) {
+    if (playerArray[0].Points > playerArray[1].Points || playerArray[0].Points > 16) {
         playerArray[0].Stand = true;
     }
     else if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
@@ -408,7 +400,7 @@ function onStand() {
         console.log("if busted why did it come here???")
     }
     else{
-        if (playerArray[0].Points > 17 || playerArray[0].Points > playerArray[1].Points) {
+        if (playerArray[0].Points > 16 || playerArray[0].Points > playerArray[1].Points) {
             playerArray[0].Stand = true;
             console.log("house standing ends the round");
             endRound();
