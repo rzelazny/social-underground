@@ -4,11 +4,7 @@
 
 // 2. TEST if house cards > 17 stand //
 
-// to do //
-
-// 1. hide house cards & points from user during game. At the end of the game display cards and points //
-
-alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has more than 17 points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts.")
+alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has more than 17 points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. I also think the houses cards and hand points should be hid from player until the end of the round function has ran. I am just leaving them up for building purposes.")
 
 alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be delt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 1 point each. If you win you will be awarded 2 points and if the House wins it will be awarded two points.")
 ///////////////////////////////////////////////
