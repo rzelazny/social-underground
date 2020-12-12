@@ -9,9 +9,9 @@ $(document).ready(function() {
     var curTable = document.defaultView.location.pathname.split("casino").pop();
 
     //Elements and vars for chat log
-    let chatLength = 0;
     var chatScroll = $("#chat-log");
     var chatInput = $("#chat-input");
+    let chatLength = 0;
 
     //webcam stuff, user is user facing camera mode, not userID
     const webcamElement = document.getElementById('webcam');
@@ -45,7 +45,7 @@ $(document).ready(function() {
         }, 3000);
     }
 
-    //chatTimer();
+    chatTimer();
 
     //submit chat button
     $("#send-chat").on("click", function(event) {
@@ -61,17 +61,17 @@ $(document).ready(function() {
     })
 
     //functions with event listners 
-    hitButton.addEventListener("click", function hitButton() {
-        console.log("Hit me baby one more time ;)");
-    });
+    // hitButton.addEventListener("click", function hitButton() {
+    //     console.log("Hit me baby one more time ;)");
+    // });
 
-    stayButton.addEventListener("click", function stayButton() {
-        console.log("Stay with me cause you're all I need");
-    });
+    // stayButton.addEventListener("click", function stayButton() {
+    //     console.log("Stay with me cause you're all I need");
+    // });
 
-    newRound.addEventListener("click", function newRound() {
-        console.log("Final round...FIGHT");
-    });
+    // newRound.addEventListener("click", function newRound() {
+    //     console.log("Final round...FIGHT");
+    // });
 
     //Navigation button: Log out
     $("#navBtnLogOut").on("click", function(event) {
@@ -92,9 +92,9 @@ $(document).ready(function() {
     })
 
     //Turn off the camera
-    // $("#camBtnOff").on("click", function(event) {
-    //     webcam.stop();
-    // })
+    $("#camBtnOff").on("click", function(event) {
+        webcam.stop();
+    })
 
     //Take photo
     $("#camBtnSnap").on("click", function(event) {
@@ -123,18 +123,20 @@ $(document).ready(function() {
                     table: curTable
                 }
                 console.log("Sending photo");
-                document.querySelector('#snap-photo').href = sendPic.photo;
+                //document.querySelector('#snap-photo').href = sendPic.photo;
                 $.post("/api/photo/", sendPic);
+
+                $.get("/api/photo/1/" + curTable).then(function(data){
+                    console.log("data: ", atob(data.photo));
+                    console.log("photo: ", data);
+                    document.querySelector('#download-photo').href = "data:image/png;base64," + atob(data.photo);
+                })
             }
         }, 1000);
     })
 
     $("#camBtnOff").on("click", function(event) {
-        $.get("/api/photo/1/" + curTable).then(function(data){
-            console.log("data: ", atob(data.photo));
-            console.log("photo: ", data);
-            document.querySelector('#download-photo').href = "data:image/png;base64," + atob(data.photo);
-        })
+        
         
         
     })
