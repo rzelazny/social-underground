@@ -1,0 +1,16 @@
+form.login {
+    margin-top: 50px;
+  }
+
+body {
+    background-image: url("../images/Bellagio.jpg");
+    background-repeat: no-repeat;
+    background-size: 2000px;
+}
+
+.box{
+    border-radius: 20px;
+    background-color: white;
+    margin-top: 300px;
+    width: 40em;
+}
