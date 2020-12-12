@@ -71,7 +71,7 @@ module.exports = function(app) {
   app.get("/api/tables", function(req, res) {
     db.gaming_table.findAll({
       where: {
-        game_started: {
+        game_ended: {
           [Op.eq]: false
         }
       }
