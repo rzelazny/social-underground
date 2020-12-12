@@ -14,7 +14,11 @@ module.exports = function(sequelize, DataTypes) {
     // chat logs are per gaming table
     table_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: "gaming_table",
+            key: "id",
+        }
     }
     });
     return ChatLog;
