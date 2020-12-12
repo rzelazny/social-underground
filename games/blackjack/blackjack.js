@@ -1,12 +1,14 @@
 // current issues //
 
-// 1. house hit & stand functions //
+// 1. stand function //
 
 // to do //
 
-// 1. hide house cards & points from user during game. At the end of the game display cards and points //
+// 1. if house cards > 17 stand //
 
-// 2. write directions pop up //
+// 2. hide house cards & points from user during game. At the end of the game display cards and points //
+
+// 3. write directions pop up //
 
 
 ///////////////////////////////////////////////
@@ -207,6 +209,11 @@ function createElements() {
 
 // this function will be called when the user presses restart button //
 function onRestart() {
+    // reset player values //
+    playerArray[0].Bust = false;
+    playerArray[1].Bust = false;
+    playerArray[0].Stand = false;
+    playerArray[1].Stand = false;
     // will clear everything on the gameboard //
     players.innerHTML = '';
     // reset i back to 0 for drawCards function //
@@ -311,17 +318,6 @@ function itsABust() {
     }
 }
 
-function houseBust() {
-    if (playerArray[0].Points > 21) {
-        //sends user alert //
-        alert("the house bust");
-        // sets bst property to true //
-        playerArray[0].Bust = true;
-        // calls function //
-        endRound();
-    }
-}
-
 function hitHouseLogic() {
     if (playerArray[0].Points > playerArray[1].Points) {
         playerArray[0].Stand = true;
@@ -389,31 +385,58 @@ function hitHouseLogic() {
             }, 500);
         })
     }
+    else {
+        console.log("doesnt effect?")
+    }
+}
+
+function houseBust() {
+    if (playerArray[0].Points > 21) {
+        //sends user alert //
+        alert("the house bust");
+        // sets bst property to true //
+        playerArray[0].Bust = true;
+        // calls function //
+        endRound();
+    }
 }
 
 // this function will be called when the user presses the stand button //
 function onStand() {
-    playerArray[1].Stand = true
-    playerArray[0].Stand = true
+    playerArray[1].Stand = true;
     if (playerArray[0].Stand === true & playerArray[1].Stand === true) {
+        console.log(playerArray);
         endRound();
+    } 
+    else{
+        console.log("house is not standing?")
+        hitHouseLogic();
+        testing();
     }
-    // afterStandHouseLogic();
 }
 
-// function afterStandHouseLogic() {
-//     if (playerArray[0].Stand === true) {
-//         endRound();
-//     }
-//     else if (playerArray[0].Points > playerArray[1].Points) {
-//         playerArray[0].Stand = true;
-//         endRound();
-//     }
-//     else {
+function testing() {
+    if (playerArray[0].Stand === true & playerArray[1].Stand === true) {
+        console.log(playerArray);
+        endRound();
+    } 
+    else {
+        "after stand, ran hit house logic, still not standing"
+    }
+}
+
+// function onStandHouseHit() {
+//     console.log("calling stand house hit")
+//     if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
 //         hitHouseLogic();
+//         setTimeout(function () {
+//             onStandHouseHit();
+//         }, 500);
+//     } else {
+//         playerArray[0].Stand === true;
+//         onStand();
 //     }
 // }
-
 
 // when this function is called the game is ended //
 function endRound() {
