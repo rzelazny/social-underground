@@ -9,10 +9,10 @@ $(document).ready(function() {
             var card = $("<div>").addClass("card");
             var cardBody = $("<div>").addClass("card-body");
             cardBody.attr("id", "resultCardBody");
+            card.attr("width", 200);
 
             //append current stats to card
-            var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id);
-            var game = $("<p>").addClass("card-text").text("Game: " + curTables[i].game);
+            var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id + " - " + curTables[i].game);
             var user1 = $("<p>").addClass("card-text").text("Player 1: " + curTables[i].user1);
             var user2 = $("<p>").addClass("card-text").text("Player 2: " + curTables[i].user2);
             var user3 = $("<p>").addClass("card-text").text("Player 3: " + curTables[i].user3);
@@ -24,7 +24,7 @@ $(document).ready(function() {
                 table: curTables[i].id,
                 click: joinTable
             })
-            cardBody.append(id, game, user1, user2, user3, user4, user5, joinBtn);
+            cardBody.append(id, user1, user2, user3, user4, user5, joinBtn);
             card.append(cardBody);
             $("#current-tables").append(card);
         };

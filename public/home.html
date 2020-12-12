@@ -11,7 +11,18 @@
     <link rel="stylesheet" href="./assets/stylesheets/home.css">
     <title>home</title>
 </head>
+<nav class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Main Menu
+    </a>
 
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="./home.html">Home</a>
+        <a class="dropdown-item" href="./members.html">Membership</a>
+        <a class="dropdown-item" href="/logout">Log Out</a>
+    </div>
+</nav>
 <body>
     <div class="wrapper">
         <div class="neon-wrapper">
@@ -19,19 +30,7 @@
         </div>
     </div>
 
-    <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Dropdown link
-        </a>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="./members.html">Membership</a>
-            <a class="dropdown-item" href="#">Another action</a>
-        </div>
-    </div>
-
-    <div id="current-tables"></div>
 
     <div style="position: relative; left:40%; top:600px">
         <ul>
@@ -55,9 +54,10 @@
             </li>
         </ul>
     </div>
-
-    <div>
-        <canvas id="canvas" width="1100" height="650"></canvas>
+    <div class="container" id="entrance">
+        <div id="current-tables">
+            <!-- <canvas id="canvas" </canvas></canvas> -->
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
