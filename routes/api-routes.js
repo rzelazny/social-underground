@@ -27,7 +27,7 @@ module.exports = function(app) {
 
     console.log("My email is: " + req.body.email + " my pass is: " + req.body.password);
     console.log()
-    db.User_login.create({
+    db.user_login.create({
       email: req.body.email,
       password: req.body.password
     })
@@ -69,7 +69,7 @@ module.exports = function(app) {
 
  // Route for finding existing game tables
   app.get("/api/tables", function(req, res) {
-    db.gaming_tables.findAll({
+    db.gaming_table.findAll({
       where: {
         game_started: {
           [Op.eq]: false
@@ -139,7 +139,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
     console.log("api new table running");
 
     console.log("User ID is: " + req.user.email);
-    db.gaming_tables.create({
+    db.gaming_table.create({
       game: "Just Chatting",
       game_started: false,
       user1: req.user.email
