@@ -303,7 +303,7 @@ function itsABust() {
             //sends user alert //
             alert("you busted");
             // sets bst property to true //
-            playerArray[i].Bust = true;
+            playerArray[i].Bust === true;
             console.log(playerArray[i]);
             // calls function //
             console.log("this itsabust fcn is what is ending the round");
@@ -417,14 +417,15 @@ function onStand() {
             console.log("player1 stands // house does not - hits again")
             hitHouseLogic();
             setTimeout(function () {
-                if (playerArray[1].Bust === false) {
+                console.log(playerArray[0]);
+                if (playerArray[0].Points < 22) {
                     console.log("house didnt bust - send to testing")
                     testing();
                 }
                 else {
                     console.log("house busted - why am i seeing in here????")
                 }
-            }, 500);
+            }, 1000);
         }
     }
 }
