@@ -221,6 +221,11 @@ function onRestart() {
 function onHit() {
     // will call player one hit function //
     playerOneHit();
+    // creating a timer function to give time for the card to render before busting //
+    setTimeout(function () {
+        // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        itsABust();
+    }, 500); 
 }
 
 // hard coded for one player // 
@@ -282,15 +287,7 @@ function playerOneHit() {
             divPlayer.appendChild(divPoints);
             
         }
-        // creating a timer function to give time for the card to render before busting //
-        setTimeout(function () {
-            // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-            itsABust();
-        }, 500);
     })
-    setTimeout(function () {
-        hitHouseLogic();
-    }, 1000);
 }
 
 function itsABust() {
@@ -304,18 +301,25 @@ function itsABust() {
             endRound();
         }
     }
+    // hard coded house logic //
+    if (playerArray[1].Points < 22) {
+        setTimeout(function () {
+            hitHouseLogic();
+        }, 500);
+    }
 }
 
 function hitHouseLogic() {
     if (playerArray[1].Bust === true) {
         console.log("end round already called")
+        console.log(playerArray);
     }
     else if (playerArray[0].Points > playerArray[1].Points) {
         playerArray[0].Stand = true;
-        console.log("else if");
+        console.log("else if statement being reached");
         console.log(playerArray);
     }
-    else {
+    else if (playerArray[0].Points < playerArray[1].Points) {
         console.log("house needs to add a card here");
         playerArray[0].Points = 20;
         console.log(playerArray);
