@@ -6,7 +6,14 @@ module.exports = function (sequelize, DataTypes){
             defaultValue: "New Player"
         },
         gamePoints: DataTypes.INTEGER,
-        bio: DataTypes.STRING
+        bio: DataTypes.STRING,
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: User,
+                key: 'id',
+            }
+        }
     });
     return User_Stat;
 };

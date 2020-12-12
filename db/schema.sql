@@ -29,7 +29,7 @@ CREATE TABLE user_stat(
 CREATE TABLE gaming_table(
     id int NOT NULL AUTO_INCREMENT,
 	game varchar(30) NOT NULL DEFAULT "Just Chatting",
-    game_started BOOLEAN DEFAULT FALSE,
+    game_ended BOOLEAN DEFAULT FALSE,
     user1 varchar(255),
     user2 varchar(255),
     user3 varchar(255),
@@ -48,17 +48,17 @@ CREATE TABLE chat_log(
     table_id int NOT NULL,
     createdAt DATETIME NOT NULL, 
     updatedAt DATETIME NOT NULL,
-    foreign key (table_id) references gaming_tables(id) on delete cascade,
+    foreign key (table_id) references gaming_table(id) on delete cascade,
 	PRIMARY KEY (id)
 );
 
 CREATE TABLE photo(
     id int NOT NULL AUTO_INCREMENT,
 	photo MEDIUMBLOB NOT NULL,
-    user_id varchar(255) NOT NULL,
+    user_id int NOT NULL,
     table_id int NOT NULL,
     createdAt DATETIME NOT NULL, 
     updatedAt DATETIME NOT NULL,
-    foreign key (table_id) references gaming_tables(id) on delete cascade,
+    foreign key (table_id) references gaming_table(id) on delete cascade,
 	PRIMARY KEY (id)
 );
