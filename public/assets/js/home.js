@@ -1,17 +1,15 @@
 $(document).ready(function() {
 
-    //find which gaming tables exist already
-
+    //get the gaming tables that already exist and display them
     $.get("api/tables", function(curTables){
 
-        console.log(curTables);
         for(i=0; i < curTables.length; i++) {
-            var card = $("<div>").addClass("card");
+            var columnCount = i;
+            var card = $("<div>").addClass("card game-table");
             var cardBody = $("<div>").addClass("card-body");
             cardBody.attr("id", "resultCardBody");
-            card.attr("width", 200);
 
-            //append current stats to card
+            //create stats to append
             var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id + " - " + curTables[i].game);
             var user1 = $("<p>").addClass("card-text").text("Player 1: " + curTables[i].user1);
             var user2 = $("<p>").addClass("card-text").text("Player 2: " + curTables[i].user2);
@@ -24,9 +22,17 @@ $(document).ready(function() {
                 table: curTables[i].id,
                 click: joinTable
             })
+            //append stats to the card
             cardBody.append(id, user1, user2, user3, user4, user5, joinBtn);
             card.append(cardBody);
-            $("#current-tables").append(card);
+
+            //there are 3 columns we append in sequence, the 4th table should be in the first column again.
+            while(columnCount > 2){
+                columnCount -= 3;
+            }
+
+            //append card to the correct column on the homepage
+            $("#current-tables" + columnCount).append(card);
         };
     });
 

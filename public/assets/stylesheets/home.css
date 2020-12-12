@@ -131,3 +131,13 @@ to {
     background: #fceb00 !important;
   }
   
+
+  .game-table{
+    background-image: url(../images/pool_table.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 8%;
+    color: white;
+    width: 350px;
+    margin-bottom: 5px;
+  }
