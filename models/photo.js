@@ -4,14 +4,10 @@ module.exports = function(sequelize, DataTypes) {
 
     photo: {
         type: DataTypes.BLOB('long'),
-        allowNull: false
-        // get () { // define a getter
-        //     const data = this.getDataValue('photo')
-        //     return data ? data.toString('base64') : ''
-        // },
-        // set(val) {
-        //     this.setDataValue('photo', val);
-        // }
+        allowNull: false,
+        get() {
+            return this.getDataValue('photo').toString('base64');
+        },
     },
     user_id: {
         type: DataTypes.INTEGER,

@@ -131,6 +131,7 @@ $(document).ready(function() {
 
     $("#camBtnOff").on("click", function(event) {
         $.get("/api/photo/1/" + curTable).then(function(data){
+            console.log("data: ", atob(data.photo));
             console.log("photo: ", data);
             document.querySelector('#download-photo').href = "data:image/png;base64," + atob(data.photo);
         })
