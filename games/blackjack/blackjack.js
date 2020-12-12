@@ -321,10 +321,10 @@ function itsABust() {
 function hitHouseLogic() {
     if (playerArray[0].Points > playerArray[1].Points) {
         playerArray[0].Stand = true;
-        console.log("house currently standing");
+        console.log("hit house logic: house points > player points = currently standing");
     }
     else if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
-        console.log("hit house logic -> house needs to add a card here");
+        console.log("hit house logic: house points < player points = house will hit");
         var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
         $.ajax({
             url: docUrl,
@@ -383,7 +383,7 @@ function hitHouseLogic() {
         })
     }
     else {
-        console.log("doesnt effect?")
+        console.log("house hit function -> testing ?")
     }
 }
 
@@ -402,11 +402,11 @@ function houseBust() {
 function onStand() {
     playerArray[1].Stand = true;
     if (playerArray[0].Stand === true & playerArray[1].Stand === true) {
-        console.log("both players standing");
+        console.log("on stand fcn: both players standing");
         endRound();
     } 
     else{
-        console.log("house is not standing")
+        console.log("on stand fcn: house is not standing")
         hitHouseLogic();
         setTimeout(function () {
             testing();
@@ -418,19 +418,6 @@ function testing() {
     console.log("rethrow stand function");
     onStand();
 }
-
-// function onStandHouseHit() {
-//     console.log("calling stand house hit")
-//     if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
-//         hitHouseLogic();
-//         setTimeout(function () {
-//             onStandHouseHit();
-//         }, 500);
-//     } else {
-//         playerArray[0].Stand === true;
-//         onStand();
-//     }
-// }
 
 // when this function is called the game is ended //
 function endRound() {
