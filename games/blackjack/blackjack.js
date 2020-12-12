@@ -311,6 +311,17 @@ function itsABust() {
     }
 }
 
+function houseBust() {
+    if (playerArray[0].Points > 21) {
+        //sends user alert //
+        alert("the house bust");
+        // sets bst property to true //
+        playerArray[0].Bust = true;
+        // calls function //
+        endRound();
+    }
+}
+
 function hitHouseLogic() {
     if (playerArray[0].Points > playerArray[1].Points) {
         playerArray[0].Stand = true;
@@ -320,7 +331,59 @@ function hitHouseLogic() {
     else if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
         console.log("house needs to add a card here");
         console.log(playerArray);
+
+        var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
+        $.ajax({
+            url: docUrl,
+            method: "GET"
+        }).then(function (data) {
+            // this object holds all the data needed for the card //
+            hitCard = {
+                    code: data.cards[0].code,
+                    suit: data.cards[0].suit,
+                    value: data.cards[0].value,
+                    imgUrl: data.cards[0].image
+                };
+            // this variable = the players original cards
+            var originalHand = playerArray[0].Hand;
+            // this pushes the new card into the array of cards
+            originalHand.push(hitCard); 
+            // then, the image is created and appended to the hand div with the other cards //
+
+            var houseHitCard = document.querySelector("#handHouse");
+            var hitCardImg = document.createElement('img');
+            hitCardImg.className = ('hitCard' + playerArray[0].Name)
+            hitCardImg.src = (hitCard.imgUrl)
+            houseHitCard.appendChild(hitCardImg);
+            
+            // resets value of hand to zero //
+            var handVal = 0;
+            // resets players points //
+            playerArray[0].Points = 0;
+            for (var j = 0; j < (playerArray[0].Hand).length; j++) {
+                // sets values for face cards //
+                if (playerArray[0].Hand[j].value === "JACK" || playerArray[0].Hand[j].value === "QUEEN" || playerArray[0].Hand[j].value === "KING") {
+                    playerArray[0].Hand[j].value = "10";
+                } 
+                // sets value for ace depending on previous hand value //
+                else if (playerArray[0].Hand[j].value === "ACE" && handVal < 11) {
+                    playerArray[0].Hand[j].value = "11";
+                } else if (playerArray[0].Hand[j].value === "ACE" && handVal > 10) {
+                    playerArray[0].Hand[j].value = "1";
+                }
+                // adds all cards in hand to create new value //
+                handVal += parseInt(playerArray[0].Hand[j].value);
+            }
+            // sets the points equal to the new value //
+            playerArray[0].Points = handVal;
+            // resets handVal back to zero //
+            handVal = 0;
+            // clears points on html & recreates the elements to display the new points //
+            var housePointsDiv = document.querySelector("#pointsHouse");
+            housePointsDiv.innerHTML = `Points: ${playerArray[0].Points} `;
+        })
     }
+    houseBust();
 }
 
 // this function will be called when the user presses the stand button //
