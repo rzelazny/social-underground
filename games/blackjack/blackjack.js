@@ -322,12 +322,9 @@ function hitHouseLogic() {
     if (playerArray[0].Points > playerArray[1].Points) {
         playerArray[0].Stand = true;
         console.log("house currently standing");
-        console.log(playerArray);
     }
     else if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
-        console.log("house needs to add a card here");
-        console.log(playerArray);
-
+        console.log("hit house logic -> house needs to add a card here");
         var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
         $.ajax({
             url: docUrl,
@@ -405,24 +402,21 @@ function houseBust() {
 function onStand() {
     playerArray[1].Stand = true;
     if (playerArray[0].Stand === true & playerArray[1].Stand === true) {
-        console.log(playerArray);
+        console.log("both players standing");
         endRound();
     } 
     else{
-        console.log("house is not standing?")
+        console.log("house is not standing")
         hitHouseLogic();
-        testing();
+        setTimeout(function () {
+            testing();
+        }, 500);
     }
 }
 
 function testing() {
-    if (playerArray[0].Stand === true & playerArray[1].Stand === true) {
-        console.log(playerArray);
-        endRound();
-    } 
-    else {
-        "after stand, ran hit house logic, still not standing"
-    }
+    console.log("rethrow stand function");
+    onStand();
 }
 
 // function onStandHouseHit() {
@@ -440,6 +434,7 @@ function testing() {
 
 // when this function is called the game is ended //
 function endRound() {
+    console.log("======ending round===========")
     // the users will get an alert that the game is over //
     alert(`round over`)
     // display points from round to user //
@@ -482,6 +477,8 @@ function endRound() {
         scorePlayer1 = document.querySelector("#scorePlayer1");
         scorePlayer1.innerHTML = `Score: ${playerArray[1].Score} `;
     }
+
+    console.log("=========================")
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
     if (hitBtn.style.display === 'block') {
