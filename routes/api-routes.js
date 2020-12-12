@@ -3,9 +3,11 @@ var db = require("../models");
 var passport = require("../config/passport");
 var User_stat = db.User_stat
 var fs = require("fs");
+var path = require("path");
 const { sequelize } = require("../models");
 const user = require("../models/user_login");
 const { Op } = require("sequelize");
+const { pathToFileURL } = require("url");
 // const user = require("../models/user");
 
 
@@ -25,7 +27,7 @@ module.exports = function(app) {
 
     console.log("My email is: " + req.body.email + " my pass is: " + req.body.password);
     console.log()
-    db.User_login.create({
+    db.user_login.create({
       email: req.body.email,
       password: req.body.password
     })
@@ -65,9 +67,9 @@ module.exports = function(app) {
 
  // Route for finding existing game tables
   app.get("/api/tables", function(req, res) {
-    db.gaming_tables.findAll({
+    db.gaming_table.findAll({
       where: {
-        game_started: {
+        game_ended: {
           [Op.eq]: false
         }
       }
@@ -110,6 +112,7 @@ module.exports = function(app) {
 app.get("/api/photo/:id/:table", function(req, res) {
   console.log("getting photo for user", req.params.id)
   console.log("getting photo for table", req.params.table)
+
   db.photo.findOne({
     where: {
       table_id: {
@@ -120,8 +123,12 @@ app.get("/api/photo/:id/:table", function(req, res) {
       }
     }
   }).then(function(results){
-    res.send(results);
-  })
+    console.log("I got results");
+    return res.json(results);
+  }).catch(function(err) {
+    return res.status(401).json(err);
+  });
+  
 });
 
   //create a new gaming table
@@ -130,17 +137,17 @@ app.get("/api/photo/:id/:table", function(req, res) {
     console.log("api new table running");
 
     console.log("User ID is: " + req.user.email);
-    db.gaming_tables.create({
+    db.gaming_table.create({
       game: "Just Chatting",
       game_started: false,
       user1: req.user.email
     })
     .then(function(results){
       console.log("sending new table data back")
-      res.send(results);
+      return res.send(results);
     })
       .catch(function(err) {
-        res.status(401).json(err);
+        return res.status(401).json(err);
       });
   });
 
@@ -165,17 +172,39 @@ app.get("/api/photo/:id/:table", function(req, res) {
   app.post("/api/photo", function(req, res) {
 
     console.log("storing photo");
-    
-    let data = req.body.photo;
-    let base64Data = data.replace(/^data:image\/png;base64,/, "");
+    console.log(req.user.id);
+    console.log(req.body.table);
 
-    fs.writeFile("tbl_" + req.body.table + "_user_" + req.user.id + ".png", base64Data, 'base64', 
-    function(err, data) {
-    if (err) {
-        console.log('err', err);
-    }
-      console.log('success');
-    });
+    let data = req.body.photo;
+    let base64Data = data.replace("data:image/png;base64,", "");
+    db.photo.create({
+      photo: base64Data,
+      user_id: req.user.id,
+      table_id: req.body.table
+    })
+    .then(function(results){
+      console.log("sending new table data back")
+      res.send(results);
+    })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+
+    // This successfully stores the photo as a png file in the public/assets/imgages folder, but the page can't use the images as a src
+    // console.log("storing photo");
+    // let data = req.body.photo;
+    // let base64Data = data.replace(/^data:image\/png;base64,/, "");
+    // let pathName = path.join(__dirname, "..");
+
+    // fs.writeFile(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png", base64Data, 'base64', 
+    // function(err, data) {
+    // if (err) {
+    //     console.log('err', err);
+    // }
+    //   console.log('success');
+    
+    //   res.send(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png");
+    //});
   });
 };
 

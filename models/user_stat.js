@@ -1,12 +1,21 @@
 // Creates a "Character" model that matches up with DB
 module.exports = function (sequelize, DataTypes){
-    return sequelize.define("User_stat", {
-        name: DataTypes.STRING,
+    var User_Stat = sequelize.define("user_stat", {
+        name: {
+            type: DataTypes.STRING,
+            defaultValue: "New Player"
+        },
         gamePoints: DataTypes.INTEGER,
-        bio: DataTypes.STRING
-    }, {
-        freezeTableName: true
+        bio: DataTypes.STRING,
+        user_id: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: "user_login",
+                key: "id",
+            }
+        }
     });
+    return User_Stat;
 };
 // // Syncs with DB
 // User.sync();

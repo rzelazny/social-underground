@@ -1,18 +1,16 @@
 $(document).ready(function() {
 
-    //find which gaming tables exist already
-
+    //get the gaming tables that already exist and display them
     $.get("api/tables", function(curTables){
 
-        console.log(curTables);
         for(i=0; i < curTables.length; i++) {
-            var card = $("<div>").addClass("card");
+            var columnCount = i;
+            var card = $("<div>").addClass("card game-table");
             var cardBody = $("<div>").addClass("card-body");
             cardBody.attr("id", "resultCardBody");
 
-            //append current stats to card
-            var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id);
-            var game = $("<p>").addClass("card-text").text("Game: " + curTables[i].game);
+            //create stats to append
+            var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id + " - " + curTables[i].game);
             var user1 = $("<p>").addClass("card-text").text("Player 1: " + curTables[i].user1);
             var user2 = $("<p>").addClass("card-text").text("Player 2: " + curTables[i].user2);
             var user3 = $("<p>").addClass("card-text").text("Player 3: " + curTables[i].user3);
@@ -24,9 +22,17 @@ $(document).ready(function() {
                 table: curTables[i].id,
                 click: joinTable
             })
-            cardBody.append(id, game, user1, user2, user3, user4, user5, joinBtn);
+            //append stats to the card
+            cardBody.append(id, user1, user2, user3, user4, user5, joinBtn);
             card.append(cardBody);
-            $("#current-tables").append(card);
+
+            //there are 3 columns we append in sequence, the 4th table should be in the first column again.
+            while(columnCount > 2){
+                columnCount -= 3;
+            }
+
+            //append card to the correct column on the homepage
+            $("#current-tables" + columnCount).append(card);
         };
     });
 
@@ -37,16 +43,16 @@ $(document).ready(function() {
     }
 
     // Getting references to our form and inputs
-    var joinGame = document.getElementById("joinGame");
+    //var joinGame = document.getElementById("joinGame");
 
     // When the form is submitted, we validate there's an email and password entered
     $("#newTable").on("click", function(event) {
         console.log("Making a new gaming table ");
         //create a new gaming table
-        $.post("/api/newtable", function(newTable){
+        $.post("/api/newtable").then(function(newTable){
             console.log("The table was made");
             console.log(newTable);
-            window.location.replace("/casino/" + newTable.id);
+            window.location.assign("/casino" + tableId);
         }
         );
     })

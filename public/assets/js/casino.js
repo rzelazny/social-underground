@@ -9,9 +9,9 @@ $(document).ready(function() {
     var curTable = document.defaultView.location.pathname.split("casino").pop();
 
     //Elements and vars for chat log
-    let chatLength = 0;
     var chatScroll = $("#chat-log");
     var chatInput = $("#chat-input");
+    let chatLength = 0;
 
     //webcam stuff, user is user facing camera mode, not userID
     const webcamElement = document.getElementById('webcam');
@@ -61,29 +61,17 @@ $(document).ready(function() {
     })
 
     //functions with event listners 
-    hitButton.addEventListener("click", function hitButton() {
-        console.log("Hit me baby one more time ;)");
-    });
+    // hitButton.addEventListener("click", function hitButton() {
+    //     console.log("Hit me baby one more time ;)");
+    // });
 
-    stayButton.addEventListener("click", function stayButton() {
-        console.log("Stay with me cause you're all I need");
-    });
+    // stayButton.addEventListener("click", function stayButton() {
+    //     console.log("Stay with me cause you're all I need");
+    // });
 
-    newRound.addEventListener("click", function newRound() {
-        console.log("Final round...FIGHT");
-    });
-
-    //Navigation button: Log out
-    $("#navBtnLogOut").on("click", function(event) {
-        console.log("Logging out");
-        $.get("/logout");
-        location.reload();
-    })
-
-    //Navigation button: Go back to homepage
-    $("#navBtnHome").on("click", function(event) {
-        window.location.replace("/home");
-    })
+    // newRound.addEventListener("click", function newRound() {
+    //     console.log("Final round...FIGHT");
+    // });
 
     //Turn on the camera
     $("#camBtnOn").on("click", function(event) {
@@ -106,12 +94,12 @@ $(document).ready(function() {
 
         $.post("/api/photo/", picture);
 
-        document.querySelector('#download-photo').href = picture.photo;
+        document.querySelector('#snap-photo').href = picture.photo;
     })
 
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
-        let timer = 3
+        let timer = 1
         let rpsTimer = setInterval(function() {
             timer--
             $("#rpsCountdown").text(timer);
@@ -123,17 +111,17 @@ $(document).ready(function() {
                     table: curTable
                 }
                 console.log("Sending photo");
+                //document.querySelector('#snap-photo').href = sendPic.photo;
                 $.post("/api/photo/", sendPic);
-                
-                let oppID = 7;
-                $.get("/api/photo/" + oppID + "/" + curTable).then(function(getPic){
-                    console.log(getPic.photo);
-                    document.querySelector('#download-photo').href = "data:image/png;base64," + getPic.photo;
-                });
-        
-                
+
+                $.get("/api/photo/1/" + curTable).then(function(data){
+                    console.log("data: ", atob(data.photo));
+                    console.log("photo: ", data);
+                    document.querySelector('#download-photo').href = "data:image/png;base64," + atob(data.photo);
+                })
             }
         }, 1000);
     })
+
 });
 
