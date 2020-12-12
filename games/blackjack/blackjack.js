@@ -381,9 +381,14 @@ function hitHouseLogic() {
             // clears points on html & recreates the elements to display the new points //
             var housePointsDiv = document.querySelector("#pointsHouse");
             housePointsDiv.innerHTML = `Points: ${playerArray[0].Points} `;
+
+            //timeout function to give html time to append card and points before running bust function //
+            setTimeout(function () {
+                // if the hit card makes the points go over 21 the house will get a bust alert and the game will end //
+                houseBust()
+            }, 500);
         })
     }
-    houseBust();
 }
 
 // this function will be called when the user presses the stand button //
