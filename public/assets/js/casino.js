@@ -73,18 +73,6 @@ $(document).ready(function() {
     //     console.log("Final round...FIGHT");
     // });
 
-    //Navigation button: Log out
-    $("#navBtnLogOut").on("click", function(event) {
-        console.log("Logging out");
-        $.get("/logout");
-        location.reload();
-    })
-
-    //Navigation button: Go back to homepage
-    $("#navBtnHome").on("click", function(event) {
-        window.location.replace("/home");
-    })
-
     //Turn on the camera
     $("#camBtnOn").on("click", function(event) {
         //prompt user to start their camera
@@ -133,12 +121,6 @@ $(document).ready(function() {
                 })
             }
         }, 1000);
-    })
-
-    $("#camBtnOff").on("click", function(event) {
-        
-        
-        
     })
 
 });
