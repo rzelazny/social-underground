@@ -1,10 +1,12 @@
 // current issues //
 
-// 1. 
+// 1. house hit & stand functions //
 
 // to do //
 
 // 1. hide house cards & points from user during game. At the end of the game display cards and points //
+
+// 2. write directions pop up //
 
 
 ///////////////////////////////////////////////
@@ -310,18 +312,13 @@ function itsABust() {
 }
 
 function hitHouseLogic() {
-    if (playerArray[1].Bust === true) {
-        console.log("end round already called")
-        console.log(playerArray);
-    }
-    else if (playerArray[0].Points > playerArray[1].Points) {
+    if (playerArray[0].Points > playerArray[1].Points) {
         playerArray[0].Stand = true;
-        console.log("else if statement being reached");
+        console.log("house currently standing");
         console.log(playerArray);
     }
-    else if (playerArray[0].Points < playerArray[1].Points) {
+    else if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
         console.log("house needs to add a card here");
-        playerArray[0].Points = 20;
         console.log(playerArray);
     }
 }
