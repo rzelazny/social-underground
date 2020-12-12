@@ -288,7 +288,9 @@ function playerOneHit() {
             itsABust();
         }, 500);
     })
-    // hitHouseLogic();
+    setTimeout(function () {
+        hitHouseLogic();
+    }, 1000);
 }
 
 function itsABust() {
@@ -304,23 +306,29 @@ function itsABust() {
     }
 }
 
-// function hitHouseLogic() {
-//     if (playerArray[0].Points < playerArray[1].Points) {
-//         console.log("house needs to add a card here");
-//         // playerArray[0].Points = 100;
-//     }
-//     else {
-//         playerArray[0].Stand = true;
-//         onStand();
-//     }
-// }
+function hitHouseLogic() {
+    if (playerArray[1].Bust === true) {
+        console.log("end round already called")
+    }
+    else if (playerArray[0].Points > playerArray[1].Points) {
+        playerArray[0].Stand = true;
+        console.log("else if");
+        console.log(playerArray);
+    }
+    else {
+        console.log("house needs to add a card here");
+        playerArray[0].Points = 20;
+        console.log(playerArray);
+    }
+}
 
 // this function will be called when the user presses the stand button //
 function onStand() {
-    playerArray[1].Stand = true;
-    console.log(playerArray);
-    // temp //
-    endRound();
+    playerArray[1].Stand = true
+    playerArray[0].Stand = true
+    if (playerArray[0].Stand === true & playerArray[1].Stand === true) {
+        endRound();
+    }
     // afterStandHouseLogic();
 }
 
