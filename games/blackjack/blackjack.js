@@ -298,18 +298,18 @@ function playerOneHit() {
 }
 
 function itsABust() {
-    // for (var i = 0; i < playerArray.length; i++) {
-        if (playerArray[1].Points > 21) {
+    for (var i = 0; i < playerArray.length; i++) {
+        if (playerArray[i].Points > 21) {
             //sends user alert //
             alert("you busted");
             // sets bst property to true //
-            playerArray[1].Bust = true;
-            console.log(playerArray[1]);
+            playerArray[i].Bust = true;
+            console.log(playerArray[i]);
             // calls function //
             console.log("this itsabust fcn is what is ending the round");
             endRound();
         }
-    // }
+    }
     // hard coded house logic //
     if (playerArray[1].Points < 22) {
         setTimeout(function () {
