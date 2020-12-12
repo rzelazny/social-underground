@@ -1,8 +1,10 @@
 // current issues //
+    // HOUSE BUSTING //
+    // on stand - if house hits & busts then 
+        // alert round ends (round end fuct) - says house wins & adds 2 to House score
+        // (bust function) alerts bust & adds 2 to player score 
 
-// 1. when player 1 STANDS and house hits again and busts it gets double alerts
-
-// 2. TEST if house cards > 17 stand //
+    // after hit when house busts everything is good //
 
 alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has more than 17 points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. I also think the houses cards and hand points should be hid from player until the end of the round function has ran. I am just leaving them up for building purposes.")
 
@@ -296,16 +298,18 @@ function playerOneHit() {
 }
 
 function itsABust() {
-    for (var i = 0; i < playerArray.length; i++) {
-        if (playerArray[i].Points > 21) {
+    // for (var i = 0; i < playerArray.length; i++) {
+        if (playerArray[1].Points > 21) {
             //sends user alert //
-            alert("you bust");
+            alert("you busted");
             // sets bst property to true //
-            playerArray[i].Bust = true;
+            playerArray[1].Bust = true;
+            console.log(playerArray[1]);
             // calls function //
+            console.log("this itsabust fcn is what is ending the round");
             endRound();
         }
-    }
+    // }
     // hard coded house logic //
     if (playerArray[1].Points < 22) {
         setTimeout(function () {
@@ -316,7 +320,7 @@ function itsABust() {
 
 function hitHouseLogic() {
     // house will currently stand if it has > 17 points or is higher than player points //
-    if (playerArray[0].Points > playerArray[1].Points) {
+    if (playerArray[0].Points > playerArray[1].Points || playerArray[0].Points > 17) {
         playerArray[0].Stand = true;
     }
     else if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
@@ -384,39 +388,44 @@ function hitHouseLogic() {
 
 function houseBust() {
     if (playerArray[0].Points > 21) {
-        console.log("inside bust function")
+        console.log("inside the bust function")
         //sends user alert //
-        alert("the house bust");
+        alert("the house busted");
         // sets bst property to true //
         playerArray[0].Bust = true;
         // calls function //
         setTimeout(function () {
-            console.log("sending busted house to stand to end game")
-            onStand();
+            endRound();
         }, 500);
     }
 }
 
 // this function will be called when the user presses the stand button //
 function onStand() {
+    console.log("running through stand function")
     playerArray[1].Stand = true;
-    if (playerArray[0].Points > 17 || playerArray[0].Points > playerArray[1].Points) {
-        playerArray[0].Stand = true;
+    if (playerArray[0].Bust === true) {
+        console.log("if busted why did it come here???")
     }
-    if (playerArray[0].Stand === true & playerArray[1].Stand === true) {
-        endRound();
-    } 
     else{
-
-        hitHouseLogic();
-        setTimeout(function () {
-            if (playerArray[1].Bust === false) {
-                testing();
-            }
-            else {
-                console.log("house busted")
-            }
-        }, 500);
+        if (playerArray[0].Points > 17 || playerArray[0].Points > playerArray[1].Points) {
+            playerArray[0].Stand = true;
+            console.log("house standing ends the round");
+            endRound();
+        }
+        else{
+            console.log("player1 stands // house does not - hits again")
+            hitHouseLogic();
+            setTimeout(function () {
+                if (playerArray[1].Bust === false) {
+                    console.log("house didnt bust - send to testing")
+                    testing();
+                }
+                else {
+                    console.log("house busted - why am i seeing in here????")
+                }
+            }, 500);
+        }
     }
 }
 
@@ -469,7 +478,7 @@ function endRound() {
         scorePlayer1 = document.querySelector("#scorePlayer1");
         scorePlayer1.innerHTML = `Score: ${playerArray[1].Score} `;
     }
-
+    console.log(playerArray);
     console.log("=========================")
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
