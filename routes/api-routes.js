@@ -126,9 +126,9 @@ app.get("/api/photo/:id/:table", function(req, res) {
     }
   }).then(function(results){
     console.log("I got results", results.photo);
-    res.send(results.photo);
+    return res.json(results);
   }).catch(function(err) {
-    res.status(401).json(err);
+    return res.status(401).json(err);
   });
   
 });
