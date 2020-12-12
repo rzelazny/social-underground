@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     photo: {
         type: DataTypes.BLOB('long'),
         allowNull: false,
-        get() {
+        get() { //make sure the data returns as base64 string
             return this.getDataValue('photo').toString('base64');
         },
     },
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     }
     });
 
-    sequelize.sync({
-        force: true})
+    // sequelize.sync({
+    //     force: true})
     return Photo;
 }; 

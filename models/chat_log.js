@@ -3,7 +3,6 @@ module.exports = function(sequelize, DataTypes) {
     console.log("ChatLog sequelize.define")
     var ChatLog = sequelize.define("chat_log", {
     
-    //
     user: {
         type: DataTypes.STRING,
         allowNull: false,

@@ -1,15 +1,14 @@
 // Creating our model of the gaming/socializing tables
 module.exports = function(sequelize, DataTypes) {
     console.log("Table sequelize.define")
-    var Table = sequelize.define("gaming_tables", {
+    var Table = sequelize.define("gaming_table", {
     
-    // The email cannot be null, and must be a proper email before creation
     game: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: "Just Chatting"
     },
-    game_started: {
+    game_ended: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
