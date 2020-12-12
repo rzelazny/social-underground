@@ -54,7 +54,7 @@ CREATE TABLE chat_log(
 
 CREATE TABLE photo(
     id int NOT NULL AUTO_INCREMENT,
-	photo BLOB NOT NULL,
+	photo MEDIUMBLOB NOT NULL,
     user_id varchar(255) NOT NULL,
     table_id int NOT NULL,
     createdAt DATETIME NOT NULL, 

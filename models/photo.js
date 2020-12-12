@@ -3,15 +3,15 @@ module.exports = function(sequelize, DataTypes) {
     var Photo = sequelize.define("photo", {
 
     photo: {
-        type: DataTypes.BLOB,
-        allowNull: false,
-        get () { // define a getter
-            const data = this.getDataValue('photo')
-            return data ? data.toString('base64') : ''
-        },
-        set(val) {
-            this.setDataValue('photo', val);
-        }
+        type: DataTypes.BLOB('long'),
+        allowNull: false
+        // get () { // define a getter
+        //     const data = this.getDataValue('photo')
+        //     return data ? data.toString('base64') : ''
+        // },
+        // set(val) {
+        //     this.setDataValue('photo', val);
+        // }
     },
     user_id: {
         type: DataTypes.INTEGER,
@@ -23,5 +23,8 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
     }
     });
+
+    sequelize.sync({
+        force: true})
     return Photo;
 }; 

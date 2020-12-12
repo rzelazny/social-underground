@@ -125,8 +125,11 @@ app.get("/api/photo/:id/:table", function(req, res) {
       }
     }
   }).then(function(results){
-    res.send(results);
-  })
+    console.log("I got results", results.photo);
+    res.send(results.photo);
+  }).catch(function(err) {
+    res.status(401).json(err);
+  });
   
 });
 
@@ -171,9 +174,11 @@ app.get("/api/photo/:id/:table", function(req, res) {
   app.post("/api/photo", function(req, res) {
 
     console.log("storing photo");
-    let data = req.body.photo;
-    let base64Data = data.replace(/^data:image\/png;base64,/, "");
+    console.log(req.user.id);
+    console.log(req.body.table);
 
+    let data = req.body.photo;
+    let base64Data = data.replace("data:image/png;base64,", "");
     db.photo.create({
       photo: base64Data,
       user_id: req.user.id,

@@ -45,7 +45,7 @@ $(document).ready(function() {
         }, 3000);
     }
 
-    chatTimer();
+    //chatTimer();
 
     //submit chat button
     $("#send-chat").on("click", function(event) {
@@ -92,9 +92,9 @@ $(document).ready(function() {
     })
 
     //Turn off the camera
-    $("#camBtnOff").on("click", function(event) {
-        webcam.stop();
-    })
+    // $("#camBtnOff").on("click", function(event) {
+    //     webcam.stop();
+    // })
 
     //Take photo
     $("#camBtnSnap").on("click", function(event) {
@@ -106,12 +106,12 @@ $(document).ready(function() {
 
         $.post("/api/photo/", picture);
 
-        document.querySelector('#download-photo').href = picture.photo;
+        document.querySelector('#snap-photo').href = picture.photo;
     })
 
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
-        let timer = 3
+        let timer = 1
         let rpsTimer = setInterval(function() {
             timer--
             $("#rpsCountdown").text(timer);
@@ -123,14 +123,20 @@ $(document).ready(function() {
                     table: curTable
                 }
                 console.log("Sending photo");
-                $.post("/api/photo/", sendPic)
-                
-                $.get("/api/photo/" + 1 + "/" + curTable).then(function(photo){
-                    console.log("photo: ", photo);
-                    document.querySelector('#download-photo').href = "data:image/png;base64," + photo.photo;
-                })
+                document.querySelector('#snap-photo').href = sendPic.photo;
+                $.post("/api/photo/", sendPic);
             }
         }, 1000);
     })
+
+    $("#camBtnOff").on("click", function(event) {
+        $.get("/api/photo/1/" + curTable, function(data){
+            console.log("photo: ", data);
+            document.querySelector('#download-photo').href = "data:image/png;base64," + atob(data.photo);
+        })
+        
+        
+    })
+
 });
 
