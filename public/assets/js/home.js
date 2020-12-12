@@ -37,16 +37,16 @@ $(document).ready(function() {
     }
 
     // Getting references to our form and inputs
-    var joinGame = document.getElementById("joinGame");
+    //var joinGame = document.getElementById("joinGame");
 
     // When the form is submitted, we validate there's an email and password entered
     $("#newTable").on("click", function(event) {
         console.log("Making a new gaming table ");
         //create a new gaming table
-        $.post("/api/newtable", function(newTable){
+        $.post("/api/newtable").then(function(newTable){
             console.log("The table was made");
             console.log(newTable);
-            window.location.replace("/casino/" + newTable.id);
+            window.location.assign("/casino" + tableId);
         }
         );
     })

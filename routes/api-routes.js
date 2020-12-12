@@ -146,10 +146,10 @@ app.get("/api/photo/:id/:table", function(req, res) {
     })
     .then(function(results){
       console.log("sending new table data back")
-      res.send(results);
+      return res.send(results);
     })
       .catch(function(err) {
-        res.status(401).json(err);
+        return res.status(401).json(err);
       });
   });
 
