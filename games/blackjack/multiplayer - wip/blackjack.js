@@ -11,12 +11,6 @@ var gameContainer =  document.querySelector('#gameContainer');
 var startBtn = document.querySelector('#start');
 // var goBackBtn = document.querySelector('#goBack');
 
-var hitBtnP1 = document.querySelector('#hitPlayer1');
-var standBtnP1 = document.querySelector('#standPlayer1');
-
-var hitBtnP2 = document.querySelector('#hitPlayer2');
-var standBtnP2 = document.querySelector('#standPlayer2');
-
 //making global variables to be used throughout several functions//
 let hand = [];
 var divPlayer = null;
@@ -30,6 +24,8 @@ let playerArray = [];
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
+
+startBtn.addEventListener('click', onStart);
 
 // this function will be called when the start btn is pressed //
 function onStart() {
@@ -272,10 +268,27 @@ function createElements() {
         // appends points to player //
         divPlayer.appendChild(divPoints);
     }
+
+    // var created in function //
+    
     var restartBtnP1 = document.querySelector('#restartPlayer1');
     var restartBtnP2 = document.querySelector('#restartPlayer2');
+    var hitBtnP1 = document.querySelector('#hitPlayer1');
+    var standBtnP1 = document.querySelector('#standPlayer1');
+
+    var hitBtnP2 = document.querySelector('#hitPlayer2');
+    var standBtnP2 = document.querySelector('#standPlayer2');
+
+    // event listeners //
+    
     restartBtnP1.addEventListener('click', onRestartP1);
     restartBtnP2.addEventListener('click', onRestartP2);
+
+    hitBtnP1.addEventListener('click', onHitPlayer1);
+    hitBtnP2.addEventListener('click', onHitPlayer2);
+
+    standBtnP1.addEventListener('click', onStandPlayer1);
+    standBtnP2.addEventListener('click', onStandPlayer2);
 }
 
             // when making new restart button on click make sure - if id value = restart then .... if id value = ___ then ...
@@ -599,11 +612,3 @@ function onRestartP2() {
 //     playerArray[0].Stand = false;
 //     playerArray[1].Stand = false;
 // }
-
-// ///////////////////////////////////////////////
-// //                On Clicks                  //
-// ///////////////////////////////////////////////
-
-startBtn.addEventListener('click', onStart);
-// hitBtn.addEventListener('click', onHit);
-// standBtn.addEventListener('click', onStand);
