@@ -40,24 +40,44 @@ $(document).ready(function() {
     function joinTable() {
         let tableId = $(this).attr("table")
         let newMessage = {};
-        $.get("/api/table" + tableId).then(function(tableData){
-
-            //TO DO: need to check for open seats here
-
-            $.get("/api/user_data").then(function(userData){
-                //post message that player has joined the table
-                newMessage = {
-                    message: userData.email +" has entered chat.",
-                    table: tableId
+        let openSeat = ""
+        $.get("/api/table" + tableId).then( function(tableData){
+            //make sure there's room at the table
+            if(tableData[0].user1 === "Open Seat"){
+                openSeat = "user1";
+            }else if(tableData[0].user2 === "Open Seat"){
+                openSeat = "user2";
+            }else if(tableData[0].user3 === "Open Seat"){
+                openSeat = "user3";
+            }else if(tableData[0].user4 === "Open Seat"){
+                openSeat = "user4";
+            }else if(tableData[0].user5 === "Open Seat"){
+                openSeat = "user5";
+            }else{
+                //if the table is full refresh the page, it shouldn't show up as available anymore
+                location.reload();
+                return
+            }
+            $.get("/api/user_data", function(userData){
+                let tableUpdate = {
+                    column: openSeat,
+                    data: userData.email
                 }
-                //post the joining chat message
-                $.post("/api/chat/", newMessage).then(function(){
-                    //join the table
-                    window.location.assign("/casino" + tableId);
-                });
+                //update the table with the new user
+                $.post("/api/table"+ tableId, tableUpdate).then(function(){
+                    //post message that player has joined the table
+                    newMessage = {
+                        message: userData.email +" has entered chat.",
+                        table: tableId
+                    }
+                    //post the joining chat message
+                    $.post("/api/chat/", newMessage, function(){
+                        //join the table
+                        window.location.assign("/casino" + tableId);
+                    });
+                })
             })
         })
-        
     }
 
     // Create a new gaming table on click

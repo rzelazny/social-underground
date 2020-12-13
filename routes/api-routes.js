@@ -104,13 +104,14 @@ module.exports = function(app) {
           }
       }]},
     }).then(function(results){
-      console.log("sending table data back")
-      res.send(results);
+      console.log("sending table data back", results);
+      return res.send(results);
     })
 });
 
  // Route for finding data on a given table
 app.get("/api/table:table", function(req, res) {
+  console.log("get api table is running")
   db.gaming_table.findAll({
     where: {
       id: {
@@ -152,7 +153,7 @@ app.get("/api/table:table", function(req, res) {
 
   // // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
-    console.log("app.get api user data")
+    console.log("get api user data is running")
     if (!req.user) {
       // The user is not logged in, send back an empty object
       res.json({});
@@ -209,14 +210,24 @@ app.get("/api/photo/:id/:table", function(req, res) {
   });
 
     //update an existing table
-    app.put("/api/table:table", function(req, res) {
+    app.post("/api/table:table", function(req, res) {
 
       console.log("Updating table ", req.params.table);
+      console.log("User is: ", req.body.data);
       let updateCol = req.body.column
       switch(updateCol){
         case "user1":
-          db.gaming_table.update({
+          db.gaming_table.update(
+            {
             user1: req.body.data
+          },
+          {
+            where: 
+            {
+              id: {
+                [Op.eq]: req.params.table
+              }
+            }
           })
           .then(function(results){
             console.log("sending new table data back")
@@ -227,8 +238,17 @@ app.get("/api/photo/:id/:table", function(req, res) {
             });
         break;
         case "user2":
-          db.gaming_table.update({
+          db.gaming_table.update(
+            {
             user2: req.body.data
+          },
+          {
+            where: 
+            {
+              id: {
+                [Op.eq]: req.params.table
+              }
+            }
           })
           .then(function(results){
             console.log("sending new table data back")
@@ -239,8 +259,17 @@ app.get("/api/photo/:id/:table", function(req, res) {
             });
         break;
         case "user3":
-          db.gaming_table.update({
+          db.gaming_table.update(
+            {
             user3: req.body.data
+          },
+          {
+            where: 
+            {
+              id: {
+                [Op.eq]: req.params.table
+              }
+            }
           })
           .then(function(results){
             console.log("sending new table data back")
@@ -251,8 +280,17 @@ app.get("/api/photo/:id/:table", function(req, res) {
             });
         break;
         case "user4":
-          db.gaming_table.update({
+          db.gaming_table.update(
+            {
             user4: req.body.data
+          },
+          {
+            where: 
+            {
+              id: {
+                [Op.eq]: req.params.table
+              }
+            }
           })
           .then(function(results){
             console.log("sending new table data back")
@@ -263,8 +301,17 @@ app.get("/api/photo/:id/:table", function(req, res) {
             });
         break;
         case "user5":
-          db.gaming_table.update({
+          db.gaming_table.update(
+            {
             user5: req.body.data
+          },
+          {
+            where: 
+            {
+              id: {
+                [Op.eq]: req.params.table
+              }
+            }
           })
           .then(function(results){
             console.log("sending new table data back")
