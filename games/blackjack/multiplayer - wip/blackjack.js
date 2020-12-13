@@ -9,14 +9,16 @@
 var gameContainer =  document.querySelector('#gameContainer');
 
 var startBtn = document.querySelector('#start');
-var restartBtn = document.querySelector('#restart');
-var goBackBtn = document.querySelector('#goBack');
+// var goBackBtn = document.querySelector('#goBack');
 
-var hitBtnP1 = document.querySelector('#hitP1');
-var standBtnP1 = document.querySelector('#standP1');
+var hitBtnP1 = document.querySelector('#hitPlayer1');
+var standBtnP1 = document.querySelector('#standPlayer1');
 
-var hitBtnP2 = document.querySelector('#hitP2');
-var standBtnP2 = document.querySelector('#standP2');
+var hitBtnP2 = document.querySelector('#hitPlayer2');
+var standBtnP2 = document.querySelector('#standPlayer2');
+
+var restartBtnP1 = document.querySelector('#restartPlayer1');
+var restartBtnP2 = document.querySelector('#restartPlayer2');
 
 //making global variables to be used throughout several functions//
 let hand = [];
@@ -275,34 +277,45 @@ function createElements() {
     }
 }
 
-
-
-
-
-
-
             // when making new restart button on click make sure - if id value = restart then .... if id value = ___ then ...
     //when _ player hits the btn  then alert - player i do u want to ... 
 
 
-// // this function will be called when the user presses restart button //
-// function onRestart() {
-//     // reset player values //
-//     playerArray[0].Bust = false;
-//     playerArray[1].Bust = false;
-//     playerArray[0].Stand = false;
-//     playerArray[1].Stand = false;
-//     // will clear everything on the gameboard //
-//     players.innerHTML = '';
-//     // reset i back to 0 for drawCards function //
-//     i = 0;
-//     // makes sure the buttons are displayed in case the round ended previously and buttons were hidden //
-//     displayBtns();
-//     // sets the restart btn text back to restart in case the round ended previously and the value said to play another round //
-//     restartBtn.value = "restart";
-//     // redraws cards for all players in session //
-//     drawCards();
-// }
+// this function will be called when the user presses restart button //
+function onRestartP1() {
+    // reset player values //
+    playerArray[0].Bust = false;
+    playerArray[1].Bust = false;
+    playerArray[0].Stand = false;
+    playerArray[1].Stand = false;
+    // will clear everything on the gameboard //
+    houseRow.innerHTML = '';
+    playersRow.innerHTML = '';
+    // reset i back to 0 for drawCards function //
+    i = 0;
+    // sets the restart btn text back to restart in case the round ended previously and the value said to play another round //
+    restartBtn.value = "restart";
+    // redraws cards for all players in session //
+    drawCards();
+}
+
+// this function will be called when the user presses restart button //
+function onRestartP2() {
+    // reset player values //
+    playerArray[0].Bust = false;
+    playerArray[1].Bust = false;
+    playerArray[0].Stand = false;
+    playerArray[1].Stand = false;
+    // will clear everything on the gameboard //
+    houseRow.innerHTML = '';
+    playersRow.innerHTML = '';
+    // reset i back to 0 for drawCards function //
+    i = 0;
+    // sets the restart btn text back to restart in case the round ended previously and the value said to play another round //
+    restartBtn.value = "restart";
+    // redraws cards for all players in session //
+    drawCards();
+}
 
 // // this function will be called when the user presses the hit button //
 // function onHit() {
@@ -583,6 +596,7 @@ function createElements() {
 // ///////////////////////////////////////////////
 
 startBtn.addEventListener('click', onStart);
-// restartBtn.addEventListener('click', onRestart);
+restartBtnP1.addEventListener('click', onRestartP1);
+restartBtnP1.addEventListener('click', onRestartP2);
 // hitBtn.addEventListener('click', onHit);
 // standBtn.addEventListener('click', onStand);
