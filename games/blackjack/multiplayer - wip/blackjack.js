@@ -61,6 +61,7 @@ function addPlayers() {
     var player2 = { Name: 'Player2',  ID: 2, Score: 0, Points: 0, Bust: false, Hand: hand[2], Stand: 'false' };
     // appends the objects created above to the playerArray //
     playerArray.push(house, player1, player2);
+    console.log(playerArray);
 }
 
 // this function is called at the start of the game //
