@@ -104,7 +104,7 @@ module.exports = function(app) {
           }
       }]},
     }).then(function(results){
-      console.log("sending table data back");
+      console.log("get tables returning data");
       return res.send(results);
     })
 });
@@ -118,8 +118,8 @@ app.get("/api/table:table", function(req, res) {
         [Op.eq]: req.params.table
       }
   }}).then(function(results){
-    console.log("sending table data back")
-    res.send(results);
+    console.log("sending table data back");
+    return res.send(results);
   })
 });
 
