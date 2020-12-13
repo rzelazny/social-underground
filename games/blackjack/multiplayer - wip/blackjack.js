@@ -167,9 +167,25 @@ function createElements() {
     houseScore = document.createElement('div');
     houseScore.id = ('houseScore');
     houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
+    houseRow.appendChild(houseScore);
 
+    //creates div where cards will be appended //
+    houseHand = document.createElement("div");
+    houseHand.id = ('houseHand');
+    houseRow.appendChild(houseHand);
 
-        //append player score, hand (cards), points of hand
+    // creates element to display card one image //
+    var cardOneImg = document.createElement('img');
+    cardOneImg.id = ('cardOneHouse')
+    cardOneImg.src = (playerArray[0].Hand[0].imgUrl)
+    houseHand.appendChild(cardOneImg);
+
+    // creates element to display card two image //
+    var cardTwoImg = document.createElement('img');
+    cardTwoImg.id = ('cardTwoHouse')
+    cardTwoImg.src = (playerArray[0].Hand[1].imgUrl)
+
+        //append player points of hand
 
     // create loop to make col in payers row
         // in col dynamically append name, hand (w/ cards), points of hand, player score, along with hit, stand, and restart buttons to each players col
