@@ -19,7 +19,7 @@ var divPoints = null;
 var divScore = null;
 
 // hard coded for now but will use players from db
-let playerArray = [];
+let playerArray = [{ Name: "House", ID: 0, Score: 0, Points: 0, Hand: hand[0], Stand: 'false' }];
 
 ///////////////////////////////////////////////
 //                Functions                  //
@@ -40,6 +40,16 @@ function onStart() {
 }
 
 // CONNECT DB HERE TO ADD PLAYERS BASED ON PEOPLE AT TABLE -- up to 7 //
+// currently a hard coded below but will need a more in-depth function where we use the logged in players //
+// function addPlayers(amount) {
+// playerArray = [{ Name: House, ID: 0, Score: 0, Points: 0, Hand: hand }];
+//     for (var i = 1; i <= amount; i++) {
+//         var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand, Stand: 'false' };
+//         playerArray.push(player)
+//     }
+// }
+
+// able to add up to 7 players //
 function addPlayers() {
     var amount = prompt("How many players would you like to add?");
     // makes sure the user enters correct amount of players //
@@ -47,36 +57,13 @@ function addPlayers() {
         alert("Amount of players needs to be between 2 and 7.");
         amount = prompt("How many players would you like to add?");
     }
-    // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
-    var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' };
-    var player1 = { Name: 'Player1', ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
-    playerArray.push(house, player1);
 
-    if (amount === 2) {
-        var player2 = { Name: 'Player2', ID: 2, Score: 0, Points: 0, Bust: false, Hand: hand[2], Stand: 'false' };
-        playerArray.push(player2);
-    }
-    else if (amount === 3) {
-        var player3 = { Name: 'Player3', ID: 3, Score: 0, Points: 0, Bust: false, Hand: hand[3], Stand: 'false' };
-        playerArray.push(player3);
-    }
-    else if (amount === 4) {
-        var player4 = { Name: 'Player4', ID: 4, Score: 0, Points: 0, Bust: false, Hand: hand[4], Stand: 'false' };
-        playerArray.push(player4);
-    }
-    else if (amount === 5) {
-        var player5 = { Name: 'Player5', ID: 5, Score: 0, Points: 0, Bust: false, Hand: hand[5], Stand: 'false' };
-        playerArray.push(player5);
-    }
-    else if (amount === 6) {
-        var player6 = { Name: 'Player6', ID: 6, Score: 0, Points: 0, Bust: false, Hand: hand[6], Stand: 'false' };
-        playerArray.push(player6);
-    }
-    else if (amount === 7) {
-        var player7 = { Name: 'Player7', ID: 7, Score: 0, Points: 0, Bust: false, Hand: hand[7], Stand: 'false' };
-        playerArray.push(player7);
-    }
+    console.log(playerArray);
 
+    for (var i = 1; i <= amount; i++) {
+        var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand, Stand: 'false' };
+        playerArray.push(player)
+    }
     console.log(playerArray);
 }
 
