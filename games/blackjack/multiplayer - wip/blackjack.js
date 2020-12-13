@@ -368,8 +368,21 @@ function onRestartP2() {
         // reset player values //
         playerArray[0].Bust = false;
         playerArray[1].Bust = false;
+        playerArray[2].Bust = false;
+        playerArray[3].Bust = false;
+        playerArray[4].Bust = false;
+        playerArray[5].Bust = false;
+        playerArray[6].Bust = false;
+        playerArray[7].Bust = false;
+
         playerArray[0].Stand = false;
         playerArray[1].Stand = false;
+        playerArray[2].Stand = false;
+        playerArray[3].Stand = false;
+        playerArray[4].Stand = false;
+        playerArray[5].Stand = false;
+        playerArray[6].Stand = false;
+        playerArray[7].Stand = false;
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -382,7 +395,182 @@ function onRestartP2() {
         alert("Player declines to restart the game.")
     }
 }
-// can add duplicates of this function for up to 7 players //
+
+// this function will be called when the user presses restart button //
+function onRestartP3() {
+    question = confirm("Player 3 wants to restart the game. Do you accept?")
+    if (question === true) {
+        // reset player values //
+        playerArray[0].Bust = false;
+        playerArray[1].Bust = false;
+        playerArray[2].Bust = false;
+        playerArray[3].Bust = false;
+        playerArray[4].Bust = false;
+        playerArray[5].Bust = false;
+        playerArray[6].Bust = false;
+        playerArray[7].Bust = false;
+
+        playerArray[0].Stand = false;
+        playerArray[1].Stand = false;
+        playerArray[2].Stand = false;
+        playerArray[3].Stand = false;
+        playerArray[4].Stand = false;
+        playerArray[5].Stand = false;
+        playerArray[6].Stand = false;
+        playerArray[7].Stand = false;
+        // will clear everything on the gameboard //
+        houseRow.innerHTML = '';
+        playersRow.innerHTML = '';
+        // reset i back to 0 for drawCards function //
+        i = 0;
+        // redraws cards for all players in session //
+        drawCards();
+    }
+    else{
+        alert("Player declines to restart the game.")
+    }
+}
+
+// this function will be called when the user presses restart button //
+function onRestartP4() {
+    question = confirm("Player 4 wants to restart the game. Do you accept?")
+    if (question === true) {
+        // reset player values //
+        playerArray[0].Bust = false;
+        playerArray[1].Bust = false;
+        playerArray[2].Bust = false;
+        playerArray[3].Bust = false;
+        playerArray[4].Bust = false;
+        playerArray[5].Bust = false;
+        playerArray[6].Bust = false;
+        playerArray[7].Bust = false;
+
+        playerArray[0].Stand = false;
+        playerArray[1].Stand = false;
+        playerArray[2].Stand = false;
+        playerArray[3].Stand = false;
+        playerArray[4].Stand = false;
+        playerArray[5].Stand = false;
+        playerArray[6].Stand = false;
+        playerArray[7].Stand = false;
+        // will clear everything on the gameboard //
+        houseRow.innerHTML = '';
+        playersRow.innerHTML = '';
+        // reset i back to 0 for drawCards function //
+        i = 0;
+        // redraws cards for all players in session //
+        drawCards();
+    }
+    else{
+        alert("Player declines to restart the game.")
+    }
+}
+
+// this function will be called when the user presses restart button //
+function onRestartP5() {
+    question = confirm("Player 5 wants to restart the game. Do you accept?")
+    if (question === true) {
+        // reset player values //
+        playerArray[0].Bust = false;
+        playerArray[1].Bust = false;
+        playerArray[2].Bust = false;
+        playerArray[3].Bust = false;
+        playerArray[4].Bust = false;
+        playerArray[5].Bust = false;
+        playerArray[6].Bust = false;
+        playerArray[7].Bust = false;
+
+        playerArray[0].Stand = false;
+        playerArray[1].Stand = false;
+        playerArray[2].Stand = false;
+        playerArray[3].Stand = false;
+        playerArray[4].Stand = false;
+        playerArray[5].Stand = false;
+        playerArray[6].Stand = false;
+        playerArray[7].Stand = false;
+        // will clear everything on the gameboard //
+        houseRow.innerHTML = '';
+        playersRow.innerHTML = '';
+        // reset i back to 0 for drawCards function //
+        i = 0;
+        // redraws cards for all players in session //
+        drawCards();
+    }
+    else{
+        alert("Player declines to restart the game.")
+    }
+}
+
+// this function will be called when the user presses restart button //
+function onRestartP6() {
+    question = confirm("Player 6 wants to restart the game. Do you accept?")
+    if (question === true) {
+        // reset player values //
+        playerArray[0].Bust = false;
+        playerArray[1].Bust = false;
+        playerArray[2].Bust = false;
+        playerArray[3].Bust = false;
+        playerArray[4].Bust = false;
+        playerArray[5].Bust = false;
+        playerArray[6].Bust = false;
+        playerArray[7].Bust = false;
+
+        playerArray[0].Stand = false;
+        playerArray[1].Stand = false;
+        playerArray[2].Stand = false;
+        playerArray[3].Stand = false;
+        playerArray[4].Stand = false;
+        playerArray[5].Stand = false;
+        playerArray[6].Stand = false;
+        playerArray[7].Stand = false;
+        // will clear everything on the gameboard //
+        houseRow.innerHTML = '';
+        playersRow.innerHTML = '';
+        // reset i back to 0 for drawCards function //
+        i = 0;
+        // redraws cards for all players in session //
+        drawCards();
+    }
+    else{
+        alert("Player declines to restart the game.")
+    }
+}
+
+// this function will be called when the user presses restart button //
+function onRestartP7() {
+    question = confirm("Player 7 wants to restart the game. Do you accept?")
+    if (question === true) {
+        // reset player values //
+        playerArray[0].Bust = false;
+        playerArray[1].Bust = false;
+        playerArray[2].Bust = false;
+        playerArray[3].Bust = false;
+        playerArray[4].Bust = false;
+        playerArray[5].Bust = false;
+        playerArray[6].Bust = false;
+        playerArray[7].Bust = false;
+
+        playerArray[0].Stand = false;
+        playerArray[1].Stand = false;
+        playerArray[2].Stand = false;
+        playerArray[3].Stand = false;
+        playerArray[4].Stand = false;
+        playerArray[5].Stand = false;
+        playerArray[6].Stand = false;
+        playerArray[7].Stand = false;
+        // will clear everything on the gameboard //
+        houseRow.innerHTML = '';
+        playersRow.innerHTML = '';
+        // reset i back to 0 for drawCards function //
+        i = 0;
+        // redraws cards for all players in session //
+        drawCards();
+    }
+    else{
+        alert("Player declines to restart the game.")
+    }
+}
+
 
 function onHitPlayer1() {
 
@@ -392,6 +580,53 @@ function onHitPlayer2() {
     
 }
 
+function onHitPlayer3() {
+
+}
+
+function onHitPlayer4() {
+    
+}
+
+function onHitPlayer5() {
+
+}
+
+function onHitPlayer6() {
+    
+}
+
+function onHitPlayer7() {
+    
+}
+
+function onStandPlayer1() {
+
+}
+
+function onStandPlayer2() {
+    
+}
+
+function onStandPlayer3() {
+
+}
+
+function onStandPlayer4() {
+    
+}
+
+function onStandPlayer5() {
+
+}
+
+function onStandPlayer6() {
+    
+}
+
+function onStandPlayer7() {
+    
+}
 // // this function will be called when the user presses the hit button //
 // function onHit() {
 //     // will call player one hit function //
