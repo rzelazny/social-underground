@@ -7,7 +7,8 @@ $(document).ready(function() {
 
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
-
+    let email = "";
+    let curSeat = "";
     //Elements and vars for chat log
     var chatScroll = $("#chat-log");
     var chatInput = $("#chat-input");
@@ -22,9 +23,25 @@ $(document).ready(function() {
     //function sets up the page, including querying the db for chat logs and our game
     function init(){
         getChatLogs();
-        joinTable();
         getGame();
         chatTimer();
+
+        $.get("/api/user_data").then(function(userData){
+            email = userData.email;
+            $.get("/api/table" + curTable).then(function(tableData){
+                if(tableData[0].user1 === email){
+                    curSeat = "user1";
+                }else if(tableData[0].user2 === email){
+                    curSeat = "user2";
+                }else if(tableData[0].user3 === email){
+                    curSeat = "user3";
+                }else if(tableData[0].user4 === email){
+                    curSeat = "user4";
+                }else if(tableData[0].user5 === email){
+                    curSeat = "user5";
+                }
+            })
+        })
     }
 
     init();
@@ -73,13 +90,6 @@ $(document).ready(function() {
         })
     }
 
-    //on joining the table post a message and update the table database
-    function joinTable(){
-        // $.put("api/table", function(){
-        
-        // })
-    }
-
     //functions with event listners 
     // hitButton.addEventListener("click", function hitButton() {
     //     console.log("Hit me baby one more time ;)");
@@ -118,6 +128,27 @@ $(document).ready(function() {
         console.log("Sending photo");
         $.post("/api/photo/", picture);
         document.querySelector('#snap-photo').href = picture.photo;
+    })
+
+    //Navigate to home and free up user's seat at the table.
+    $("#goHome").on("click", function(event) {
+        $.get("/api/table" + curTable).then(function(tableData){
+            console.log("Data: " + JSON.stringify(tableData));
+            // for(i=0; i < tableData.length;i++){
+            //     if(tableData[i] === userData.email){
+            //         curSeat = tableData[i];
+            //     }
+            // }
+            // console.log(curSeat);
+            // let updateSeat = {
+            //     column: curSeat,
+            //     data: "Open Seat"
+            // }
+            // $.post("/api/table"+ curTable, updateSeat).then(function(){
+            //     console.log("am i running?")
+            //     window.location.assign("/home");
+            // })
+        })
     })
 
     //Play Rock Paper Scissors
