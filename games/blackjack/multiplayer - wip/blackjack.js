@@ -18,6 +18,7 @@ var divHand = null;
 var divPoints = null;
 var divScore = null;
 
+var amount = 0;
 // hard coded for now but will use players from db
 let playerArray = [{ Name: "House", ID: 0, Score: 0, Points: 0, Hand: hand[0], Stand: 'false' }];
 
@@ -40,18 +41,8 @@ function onStart() {
 }
 
 // CONNECT DB HERE TO ADD PLAYERS BASED ON PEOPLE AT TABLE -- up to 7 //
-// currently a hard coded below but will need a more in-depth function where we use the logged in players //
-// function addPlayers(amount) {
-// playerArray = [{ Name: House, ID: 0, Score: 0, Points: 0, Hand: hand }];
-//     for (var i = 1; i <= amount; i++) {
-//         var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand, Stand: 'false' };
-//         playerArray.push(player)
-//     }
-// }
-
-// able to add up to 7 players //
 function addPlayers() {
-    var amount = prompt("How many players would you like to add?");
+    amount = prompt("How many players would you like to add?");
     // makes sure the user enters correct amount of players //
     for (amount === false; amount < 2 || amount > 7;) {
         alert("Amount of players needs to be between 2 and 7.");
@@ -61,7 +52,7 @@ function addPlayers() {
     console.log(playerArray);
 
     for (var i = 1; i <= amount; i++) {
-        var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand, Stand: 'false' };
+        var player = { Name: 'Player' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand, Stand: 'false' };
         playerArray.push(player)
     }
     console.log(playerArray);
@@ -335,26 +326,13 @@ function createElements() {
 // this function will be called when the user presses restart button //
 function onRestartP1() {
     var question = confirm("Player 1 wants to restart the game. Do you accept?")
+    // reset player values // -- breaking code
     if (question === true) {
-        // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
-        playerArray[7].Bust = false;
-
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
-        playerArray[7].Stand = false;
-
+        // for (var i = 0; i < playerArray.length; i++) {
+        //     playerArray[i].Bust = false;
+        //     playerArray[i].Stand = false;
+        // }
+        
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -362,6 +340,8 @@ function onRestartP1() {
         i = 0;
         // redraws cards for all players in session //
         drawCards();
+        
+        // drawCards();
     }
     else {
         alert("Player declines to restart the game.")
@@ -373,23 +353,10 @@ function onRestartP2() {
     question = confirm("Player 2 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
-        playerArray[7].Bust = false;
-
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
-        playerArray[7].Stand = false;
+        // for (var i = 0; i <= playerArray.length; i++) {
+        //     playerArray[i].Bust = false;
+        //     playerArray[i].Stand = false;
+        // }
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -408,23 +375,10 @@ function onRestartP3() {
     question = confirm("Player 3 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
-        playerArray[7].Bust = false;
-
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
-        playerArray[7].Stand = false;
+        // for (var i = 0; i <= playerArray.length; i++) {
+        //     playerArray[i].Bust = false;
+        //     playerArray[i].Stand = false;
+        // }
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -443,23 +397,10 @@ function onRestartP4() {
     question = confirm("Player 4 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
-        playerArray[7].Bust = false;
-
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
-        playerArray[7].Stand = false;
+        // for (var i = 0; i <= playerArray.length; i++) {
+        //     playerArray[i].Bust = false;
+        //     playerArray[i].Stand = false;
+        // }
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -478,23 +419,10 @@ function onRestartP5() {
     question = confirm("Player 5 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
-        playerArray[7].Bust = false;
-
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
-        playerArray[7].Stand = false;
+        // for (var i = 0; i <= playerArray.length; i++) {
+        //     playerArray[i].Bust = false;
+        //     playerArray[i].Stand = false;
+        // }
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -513,23 +441,10 @@ function onRestartP6() {
     question = confirm("Player 6 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
-        playerArray[7].Bust = false;
-
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
-        playerArray[7].Stand = false;
+        // for (var i = 0; i <= playerArray.length; i++) {
+        //     playerArray[i].Bust = false;
+        //     playerArray[i].Stand = false;
+        // }
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -548,23 +463,10 @@ function onRestartP7() {
     question = confirm("Player 7 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
-        playerArray[7].Bust = false;
-
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
-        playerArray[7].Stand = false;
+        // for (var i = 0; i <= playerArray.length; i++) {
+        //     playerArray[i].Bust = false;
+        //     playerArray[i].Stand = false;
+        // }
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
