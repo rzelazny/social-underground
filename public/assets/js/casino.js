@@ -18,23 +18,36 @@ $(document).ready(function() {
     const canvasElement = document.getElementById('snapShot');
     const webcam = new Webcam(webcamElement, 'user', canvasElement);
 
+    
+    //function sets up the page, including querying the db for chat logs and our game
+    function init(){
+        getChatLogs();
+        joinTable();
+        getGame();
+        chatTimer();
+        console.log(user)
+    }
+
+    init();
+
     //populate chat log
-    $.get("/api/chat" + curTable, function(chatLog){
-        //chat length is used to check for new messages being posted
-        chatLength = chatLog.length;
-        for(i=0; i < chatLength; i++) {
-            var chatLine = $("<li>")
-
-            chatLine.attr("id", "chat-line-" + i);
-            chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
-            $("#chat-log").append(chatLine);
-        };
-        chatScroll.scrollTop(1000);
-    });
-
+    function getChatLogs(){
+        $.get("/api/chat" + curTable, function(chatLog){
+            //chat length is used to check for new messages being posted
+            chatLength = chatLog.length;
+            for(i=0; i < chatLength; i++) {
+                var chatLine = $("<li>")
+                //chatLine.attr("id", "chat-line-" + i);
+                chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
+                $("#chat-log").append(chatLine);
+            };
+            //scroll to the bottom
+            chatScroll.scrollTop(1000);
+        });
+    }
+    
     //Function checks the chat log db for changes every 3s and refreshes the page if someone has posted a message to the chat log
     function chatTimer() {
-        
         setInterval(function() {
             $.get("/api/chat" + curTable, function(chatLog){
                 if(chatLog.length > chatLength){
@@ -45,20 +58,28 @@ $(document).ready(function() {
         }, 3000);
     }
 
-    chatTimer();
-
-    //submit chat button
-    $("#send-chat").on("click", function(event) {
-        event.preventDefault();
+    //Function posts a message to the chat log
+    function sendMessage(msg){
         let newMessage = {
-            message: chatInput.val(),
+            message: msg,
             table: curTable
         }
-        console.log("Sending chat");
-
         $.post("/api/chat/", newMessage);
         location.reload();
-    })
+    }
+
+    function getGame(){
+        $.get("/api/table:" + curTable, function(table){
+            let tableGame = table.game;
+        })
+    }
+
+    //on joining the table post a message and update the table database
+    function joinTable(){
+        // $.put("api/table", function(){
+        
+        // })
+    }
 
     //functions with event listners 
     // hitButton.addEventListener("click", function hitButton() {
@@ -73,6 +94,11 @@ $(document).ready(function() {
     //     console.log("Final round...FIGHT");
     // });
 
+    //send chat button
+    $("#send-chat").on("click", function(event) {
+        event.preventDefault();
+        sendMessage(chatInput.val());
+    })
     //Turn on the camera
     $("#camBtnOn").on("click", function(event) {
         //prompt user to start their camera
@@ -91,9 +117,7 @@ $(document).ready(function() {
             table: curTable
         }
         console.log("Sending photo");
-
         $.post("/api/photo/", picture);
-
         document.querySelector('#snap-photo').href = picture.photo;
     })
 
@@ -122,6 +146,5 @@ $(document).ready(function() {
             }
         }, 1000);
     })
-
 });
 
