@@ -65,14 +65,44 @@ module.exports = function(app) {
     res.redirect("/");
   });
 
- // Route for finding existing game tables
+ // Route for finding existing game tables that have room and an ongoing game
   app.get("/api/tables", function(req, res) {
     db.gaming_table.findAll({
       where: {
         game_ended: {
           [Op.eq]: false
-        }
-      }
+        },
+        [Op.or]: [
+        {
+          user1: 
+          {
+            [Op.eq]: "Open Seat"
+          }
+        }, 
+        {
+          user2: 
+          {
+            [Op.eq]: "Open Seat"
+          }
+        }, 
+        {
+          user3: 
+          {
+            [Op.eq]: "Open Seat"
+          }
+        }, 
+        {
+          user4: 
+          {
+            [Op.eq]: "Open Seat"
+          }
+        }, 
+        {
+          user5: 
+          {
+            [Op.eq]: "Open Seat"
+          }
+      }]},
     }).then(function(results){
       console.log("sending table data back")
       res.send(results);
@@ -80,14 +110,13 @@ module.exports = function(app) {
 });
 
  // Route for finding data on a given table
- app.get("/api/table:table", function(req, res) {
+app.get("/api/table:table", function(req, res) {
   db.gaming_table.findAll({
     where: {
       id: {
         [Op.eq]: req.params.table
       }
-    }
-  }).then(function(results){
+  }}).then(function(results){
     console.log("sending table data back")
     return res.send(results);
   })
@@ -184,7 +213,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
 
       console.log("Updating table ", req.params.table);
   
-      db.gaming_table.create({
+      db.gaming_table.update({
         game: "Just Chatting",
         game_started: false,
         user1: req.user.email
