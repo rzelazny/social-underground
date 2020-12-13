@@ -212,19 +212,69 @@ app.get("/api/photo/:id/:table", function(req, res) {
     app.put("/api/table:table", function(req, res) {
 
       console.log("Updating table ", req.params.table);
-  
-      db.gaming_table.update({
-        game: "Just Chatting",
-        game_started: false,
-        user1: req.user.email
-      })
-      .then(function(results){
-        console.log("sending new table data back")
-        return res.json(results);
-      })
-        .catch(function(err) {
-          return res.status(401).json(err);
-        });
+      let updateCol = req.body.column
+      switch(updateCol){
+        case "user1":
+          db.gaming_table.update({
+            user1: req.body.data
+          })
+          .then(function(results){
+            console.log("sending new table data back")
+            return res.json(results);
+          })
+            .catch(function(err) {
+              return res.status(401).json(err);
+            });
+        break;
+        case "user2":
+          db.gaming_table.update({
+            user2: req.body.data
+          })
+          .then(function(results){
+            console.log("sending new table data back")
+            return res.json(results);
+          })
+            .catch(function(err) {
+              return res.status(401).json(err);
+            });
+        break;
+        case "user3":
+          db.gaming_table.update({
+            user3: req.body.data
+          })
+          .then(function(results){
+            console.log("sending new table data back")
+            return res.json(results);
+          })
+            .catch(function(err) {
+              return res.status(401).json(err);
+            });
+        break;
+        case "user4":
+          db.gaming_table.update({
+            user4: req.body.data
+          })
+          .then(function(results){
+            console.log("sending new table data back")
+            return res.json(results);
+          })
+            .catch(function(err) {
+              return res.status(401).json(err);
+            });
+        break;
+        case "user5":
+          db.gaming_table.update({
+            user5: req.body.data
+          })
+          .then(function(results){
+            console.log("sending new table data back")
+            return res.json(results);
+          })
+            .catch(function(err) {
+              return res.status(401).json(err);
+            });
+        break;
+      }
     });
 
   //post a new chat message
