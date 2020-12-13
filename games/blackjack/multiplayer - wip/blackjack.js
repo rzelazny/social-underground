@@ -223,64 +223,55 @@ function createElements() {
         playersBtns.appendChild(standBtn);
         playersBtns.appendChild(restartBtn);
 
+        // creates div to hold data and display name //
+        divPlayer = document.createElement('div');
+        divPlayer.className = ('player');
+        divPlayer.id = playerArray[i].Name;
+        divPlayer.innerHTML = (playerArray[i].Name);
+        // append player to col //
+        playersCol.appendChild(divPlayer);
 
-        // in col dynamically append name, hand (w/ cards), points of hand, player score, along with hit, stand, and restart buttons to each players col
+        // creates div where the users session score will be held and displayed //
+        divScore = document.createElement('div');
+        divScore.className = ('score');
+        divScore.id = ('score' + playerArray[i].Name);
+        divScore.innerHTML = `Score: ${playerArray[i].Score} `;
+        // append score to col //
+        divPlayer.appendChild(divScore);
 
+        //creates div where cards will be appended //
+        divHand = document.createElement("div");
+        divHand.id = ("hand" + playerArray[i].Name);
+
+        // creates element to display card one image //
+        var cardOneImg = document.createElement('img');
+        cardOneImg.id = ('cardOne' + playerArray[i].Name)
+        cardOneImg.src = (playerArray[i].Hand[0].imgUrl)
+
+        // creates element to display card two image //
+        var cardTwoImg = document.createElement('img');
+        cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
+        cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
+
+        divPlayer.appendChild(divHand);
+        // appends cards to hand div //
+        divHand.appendChild(cardOneImg);
+        divHand.appendChild(cardTwoImg);
+
+        // creates div where the point value of the hand will be held and displayed  //
+        divPoints = document.createElement('div');
+        divPoints.className = ('points');
+        divPoints.id = ('points' + playerArray[i].Name);
+        divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
+        // appends points to player //
+        divPlayer.appendChild(divPoints);
     }
-
-
-
-
-    // // in this loop, we will create elements for each player //
-    // for (var i = 1; i < playerArray.length; i++) {
-
-    //     // the two col each w their own sections?
-
-    //     // creates div where all player data will be held, displays name //
-    //     divPlayer = document.createElement('div');
-    //     divPlayer.className = ('player');
-    //     divPlayer.id = playerArray[i].Name;
-    //     divPlayer.innerHTML = (playerArray[i].Name);
-
-    //     //creates div where cards will be appended //
-    //     divHand = document.createElement("div");
-    //     divHand.id = ("hand" + playerArray[i].Name);
-
-    //     // creates element to display card one image //
-    //     var cardOneImg = document.createElement('img');
-    //     cardOneImg.id = ('cardOne' + playerArray[i].Name)
-    //     cardOneImg.src = (playerArray[i].Hand[0].imgUrl)
-
-    //     // creates element to display card two image //
-    //     var cardTwoImg = document.createElement('img');
-    //     cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
-    //     cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
-
-    //     // creates div where the point value of the hand will be held and displayed  //
-    //     divPoints = document.createElement('div');
-    //     divPoints.className = ('points');
-    //     divPoints.id = ('points' + playerArray[i].Name);
-    //     divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
-
-    //     // creates div where the users session score will be held and displayed //
-    //     divScore = document.createElement('div');
-    //     divScore.className = ('score');
-    //     divScore.id = ('score' + playerArray[i].Name);
-    //     divScore.innerHTML = `Score: ${playerArray[i].Score} `;
-
-    //     // appends cards to hand div //
-    //     divHand.appendChild(cardOneImg);
-    //     divHand.appendChild(cardTwoImg);
-
-    //     // appends hand, points, and score divs to the player div //
-    //     divPlayer.appendChild(divHand);
-    //     divPlayer.appendChild(divPoints);
-    //     divPlayer.appendChild(divScore);
-
-    //     // appends all the data held in the player div to the gameboard
-    //     players.appendChild(divPlayer);
-    // }
 }
+
+
+
+
+
 
 
             // when making new restart button on click make sure - if id value = restart then .... if id value = ___ then ...
