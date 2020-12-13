@@ -25,7 +25,6 @@ $(document).ready(function() {
         joinTable();
         getGame();
         chatTimer();
-        console.log(user)
     }
 
     init();
