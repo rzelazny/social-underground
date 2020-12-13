@@ -200,15 +200,23 @@ function createElements() {
         var hitBtn = document.createElement('input');
         hitBtn.className = ('btn');
         hitBtn.id = ('hit' + playerArray[i].Name);
-        // type="button" id="hit" value="hit me" style="display: none;"
+        hitBtn.setAttribute("type", "button");
+        hitBtn.setAttribute("value", "hit me");
+        hitBtn.setAttribute("style", "display:block");
+
         var standBtn = document.createElement('input');
         standBtn.className = ('btn');
         standBtn.id = ('stand' + playerArray[i].Name);
-        // type="button" id="hit" value="hit me" style="display: none;"
+        standBtn.setAttribute("type", "button");
+        standBtn.setAttribute("value", "stand");
+        standBtn.setAttribute("style", "display:block;");
+
         var restartBtn = document.createElement('input');
         restartBtn.className = ('btn');
         restartBtn.id = ('restart' + playerArray[i].Name);
-        // type="button" id="restart" value="restart" style="display: none;">
+        restartBtn.setAttribute("type", "button");
+        restartBtn.setAttribute("value", "restart");
+        restartBtn.setAttribute("style", "display:block;");
 
         // append buttons to playersBtns div //
         playersBtns.appendChild(hitBtn);
