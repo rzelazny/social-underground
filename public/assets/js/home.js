@@ -1,8 +1,7 @@
 $(document).ready(function() {
 
     function init(){
-        cleanupTables();
-        getTables();
+        cleanupTables()
     }
 
     init();
@@ -11,6 +10,7 @@ $(document).ready(function() {
     function cleanupTables(){
         $.post("api/cleanup", function(){
             console.log("table cleanup complete");
+            getTables();
         })
     }
 
