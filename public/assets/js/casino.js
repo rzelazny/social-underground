@@ -85,9 +85,23 @@ $(document).ready(function() {
         location.reload();
     }
 
+    //Function finds out what game is set at the table and adjusts what containers are visible
     function getGame(){
-        $.get("/api/table:" + curTable, function(table){
-            let tableGame = table.game;
+        $.get("/api/table" + curTable).then( function(table){
+            var tableGame = JSON.stringify(table[0].game).replace(/"/g, '');
+
+            console.log("gonna try: ", tableGame.replace(/"/g, ''));
+            switch(tableGame){
+                case "Just Chatting":
+                    $("#containerBlackJack").css("display", "none");
+                break;
+                case "Black Jack":
+                    $("#gameChoice").css("display", "none");
+                break;
+                default:
+                    console.log("default running");
+
+            }
         })
     }
     function giveUpSeat(goTo){
