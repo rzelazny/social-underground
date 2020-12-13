@@ -140,7 +140,11 @@ function totalPoints() {
 function createElements() {
     // create house and players sections to add to the game container //
     houseRow = document.createElement('div');
+    houseRow.className = ('row');
+    houseRow.setAttribute('style', 'margin:20px; display:block;')
     playersRow = document.createElement('div');
+    playersRow.className = ('row');
+    playersRow.setAttribute('style', 'margin:20px; display:block;')
     gameContainer.appendChild(houseRow);
     gameContainer.appendChild(playersRow);
 
@@ -152,18 +156,19 @@ function createElements() {
     divHouse = document.createElement('section');
     divHouse.id = ('house');
     divHouse.innerHTML = (playerArray[0].Name);
+    divHouse.setAttribute('style', 'text-align:center;')
     houseRow.appendChild(divHouse);
 
     // creates div where the houses session score will be held and displayed //
     houseScore = document.createElement('div');
     houseScore.id = ('houseScore');
     houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
-    houseRow.appendChild(houseScore);
+    divHouse.appendChild(houseScore);
 
     //creates div where cards will be appended //
     houseHand = document.createElement("div");
     houseHand.id = ('houseHand');
-    houseRow.appendChild(houseHand);
+    divHouse.appendChild(houseHand);
 
     // creates element to display card one image //
     var cardOneImg = document.createElement('img');
@@ -181,14 +186,15 @@ function createElements() {
     housePoints = document.createElement('div');
     housePoints.id = ('housePoints');
     housePoints.innerHTML = `Points: ${playerArray[0].Points} `;
-    houseRow.appendChild(housePoints);
+    divHouse.appendChild(housePoints);
 
     // make loop to create same elements for each player //
     for (var i = 1; i < playerArray.length; i++) {
         // create cols for each player to store their elements and append to players row //
         var playersCol = document.createElement('div');
-        playersCol.className = ('col-6');
+        playersCol.className = ('col-md-6');
         playersCol.id = (playerArray[i].Name);
+        playersCol.setAttribute("style", "margin:20px; display:block; float:left;")
         playersRow.appendChild(playersCol);
 
         // create game option buttons for each player //
@@ -228,6 +234,7 @@ function createElements() {
         divPlayer.className = ('player');
         divPlayer.id = playerArray[i].Name;
         divPlayer.innerHTML = (playerArray[i].Name);
+        divPlayer.setAttribute('style', 'text-align:center;')
         // append player to col //
         playersCol.appendChild(divPlayer);
 
