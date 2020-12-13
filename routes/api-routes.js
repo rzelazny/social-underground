@@ -79,6 +79,35 @@ module.exports = function(app) {
     })
 });
 
+ // Route for finding data on a given table
+ app.get("/api/table:table", function(req, res) {
+  db.gaming_table.findAll({
+    where: {
+      id: {
+        [Op.eq]: req.params.table
+      }
+    }
+  }).then(function(results){
+    console.log("sending table data back")
+    return res.send(results);
+  })
+});
+
+
+// Route for finding existing game tables
+// app.get("/api/findseat", function(req, res) {
+//   db.gaming_table.findAll({
+//     where: {
+//       game_ended: {
+//         [Op.eq]: false
+//       }
+//     }
+//   }).then(function(results){
+//     console.log("sending table data back")
+//     return res.send(results);
+//   })
+// });
+
 // Route for getting chat log data
   app.get("/api/chat:table", function(req, res) {
     db.chat_log.findAll({
@@ -92,7 +121,7 @@ module.exports = function(app) {
     })
   });
 
-  // Route for getting some data about our user to be used client side
+  // // Route for getting some data about our user to be used client side
   app.get("/api/user_data", function(req, res) {
     console.log("app.get api user data")
     if (!req.user) {
@@ -149,6 +178,25 @@ app.get("/api/photo/:id/:table", function(req, res) {
         return res.status(401).json(err);
       });
   });
+
+    //update an existing table
+    app.put("/api/table:table", function(req, res) {
+
+      console.log("Updating table ", req.params.table);
+  
+      db.gaming_table.create({
+        game: "Just Chatting",
+        game_started: false,
+        user1: req.user.email
+      })
+      .then(function(results){
+        console.log("sending new table data back")
+        return res.json(results);
+      })
+        .catch(function(err) {
+          return res.status(401).json(err);
+        });
+    });
 
   //post a new chat message
   app.post("/api/chat/", function(req, res) {
