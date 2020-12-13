@@ -150,7 +150,6 @@ function createElements() {
     // create house and players sections to add to the game container
     houseRow = document.createElement('div');
     playersRow = document.createElement('div');
-
     gameContainer.appendChild(houseRow);
     gameContainer.appendChild(playersRow);
 
@@ -158,8 +157,17 @@ function createElements() {
     houseRow.innerHTML = '';
     playersRow.innerHTML = '';
 
+    // create house row elements //
+    divHouse = document.createElement('div');
+    divHouse.id = ('house');
+    divHouse.innerHTML = (playerArray[i].Name);
+    houseRow.appendChild(divHouse);
+
+
+        //append player score, hand (cards), points of hand
+
     // create loop to make col in payers row
-        // in col dynamically append hand (w/ cards), points of hand, player score, along with hit, stand, and restart buttons to each players col
+        // in col dynamically append name, hand (w/ cards), points of hand, player score, along with hit, stand, and restart buttons to each players col
 
 
 
