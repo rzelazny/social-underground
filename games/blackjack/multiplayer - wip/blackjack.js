@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
-var gameContainer =  document.querySelector('#gameContainer');
+var gameContainer = document.querySelector('#gameContainer');
 
 var startBtn = document.querySelector('#start');
 // var goBackBtn = document.querySelector('#goBack');
@@ -40,29 +40,49 @@ function onStart() {
 }
 
 // CONNECT DB HERE TO ADD PLAYERS BASED ON PEOPLE AT TABLE -- up to 7 //
-// currently a hard coded below but will need a more in-depth function where we use the logged in players //
-// function addPlayers(amount) {
-    // playerArray = [{ Name: House, ID: 0, Score: 0, Points: 0, Hand: hand }];
-    //     for (var i = 1; i <= amount; i++) {
-    //         var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand };
-    //         playerArray.push(player)
-    //     }
-// }
-
-// hard coded for two players to play - should be able to add up to 7 players //
 function addPlayers() {
+    var amount = prompt("How many players would you like to add?");
+    // makes sure the user enters correct amount of players //
+    for (amount === false; amount < 2 || amount > 7;) {
+        alert("Amount of players needs to be between 2 and 7.");
+        amount = prompt("How many players would you like to add?");
+    }
     // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
     var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' };
-    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
-    var player2 = { Name: 'Player2',  ID: 2, Score: 0, Points: 0, Bust: false, Hand: hand[2], Stand: 'false' };
-    // appends the objects created above to the playerArray //
-    playerArray.push(house, player1, player2);
+    var player1 = { Name: 'Player1', ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
+    playerArray.push(house, player1);
+
+    if (amount === 2) {
+        var player2 = { Name: 'Player2', ID: 2, Score: 0, Points: 0, Bust: false, Hand: hand[2], Stand: 'false' };
+        playerArray.push(player2);
+    }
+    else if (amount === 3) {
+        var player3 = { Name: 'Player3', ID: 3, Score: 0, Points: 0, Bust: false, Hand: hand[3], Stand: 'false' };
+        playerArray.push(player3);
+    }
+    else if (amount === 4) {
+        var player4 = { Name: 'Player4', ID: 4, Score: 0, Points: 0, Bust: false, Hand: hand[4], Stand: 'false' };
+        playerArray.push(player4);
+    }
+    else if (amount === 5) {
+        var player5 = { Name: 'Player5', ID: 5, Score: 0, Points: 0, Bust: false, Hand: hand[5], Stand: 'false' };
+        playerArray.push(player5);
+    }
+    else if (amount === 6) {
+        var player6 = { Name: 'Player6', ID: 6, Score: 0, Points: 0, Bust: false, Hand: hand[6], Stand: 'false' };
+        playerArray.push(player6);
+    }
+    else if (amount === 7) {
+        var player7 = { Name: 'Player7', ID: 7, Score: 0, Points: 0, Bust: false, Hand: hand[7], Stand: 'false' };
+        playerArray.push(player7);
+    }
+
     console.log(playerArray);
 }
 
 // setting i to 0 so that we can control the synchronicity //
 let i = 0;
-function drawCards () {
+function drawCards() {
     // this api link will draw 2 random cards //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
     $.ajax({
@@ -72,19 +92,19 @@ function drawCards () {
         // we will save the data in an array. each object will hold the cards code, suit, value, and image //
         playerHand = [
             {
-                code: data.cards[ 0 ].code,
-                suit: data.cards[ 0 ].suit,
-                value: data.cards[ 0 ].value,
-                imgUrl: data.cards[ 0 ].image
+                code: data.cards[0].code,
+                suit: data.cards[0].suit,
+                value: data.cards[0].value,
+                imgUrl: data.cards[0].image
             }, {
-                code: data.cards[ 1 ].code,
-                suit: data.cards[ 1 ].suit,
-                value: data.cards[ 1 ].value,
-                imgUrl: data.cards[ 1 ].image
+                code: data.cards[1].code,
+                suit: data.cards[1].suit,
+                value: data.cards[1].value,
+                imgUrl: data.cards[1].image
             }
         ];
         // this will give the drawn set of cards to whichever player is 'i' //
-        playerArray[ i ].Hand = playerHand
+        playerArray[i].Hand = playerHand
         // this will increment i so that it will keep running the draw cards function for each player //
         i++
         if (i < playerArray.length) {
@@ -104,14 +124,14 @@ function drawCards () {
 function totalPoints() {
     // handVal is set to 0 //
     var handVal = 0;
-    for(var i = 0; i < playerArray.length; i++) {
+    for (var i = 0; i < playerArray.length; i++) {
         // resets players points //
         playerArray[i].Points = 0;
         for (var j = 0; j < (playerArray[i].Hand).length; j++) {
             // sets values for face cards //
             if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
                 playerArray[i].Hand[j].value = "10";
-            } 
+            }
             // sets value for ace depending on current point value
             if (playerArray[i].Hand[0].value === "ACE") {
                 playerArray[i].Hand[0].value = "11";
@@ -299,7 +319,7 @@ function createElements() {
     var standBtnP7 = document.querySelector('#standPlayer7');
 
     // event listeners //
-    
+
     restartBtnP1.addEventListener('click', onRestartP1);
     restartBtnP2.addEventListener('click', onRestartP2);
     restartBtnP3.addEventListener('click', onRestartP3);
@@ -356,7 +376,7 @@ function onRestartP1() {
         // redraws cards for all players in session //
         drawCards();
     }
-    else{
+    else {
         alert("Player declines to restart the game.")
     }
 }
@@ -391,7 +411,7 @@ function onRestartP2() {
         // redraws cards for all players in session //
         drawCards();
     }
-    else{
+    else {
         alert("Player declines to restart the game.")
     }
 }
@@ -426,7 +446,7 @@ function onRestartP3() {
         // redraws cards for all players in session //
         drawCards();
     }
-    else{
+    else {
         alert("Player declines to restart the game.")
     }
 }
@@ -461,7 +481,7 @@ function onRestartP4() {
         // redraws cards for all players in session //
         drawCards();
     }
-    else{
+    else {
         alert("Player declines to restart the game.")
     }
 }
@@ -496,7 +516,7 @@ function onRestartP5() {
         // redraws cards for all players in session //
         drawCards();
     }
-    else{
+    else {
         alert("Player declines to restart the game.")
     }
 }
@@ -531,7 +551,7 @@ function onRestartP6() {
         // redraws cards for all players in session //
         drawCards();
     }
-    else{
+    else {
         alert("Player declines to restart the game.")
     }
 }
@@ -566,7 +586,7 @@ function onRestartP7() {
         // redraws cards for all players in session //
         drawCards();
     }
-    else{
+    else {
         alert("Player declines to restart the game.")
     }
 }
@@ -577,7 +597,7 @@ function onHitPlayer1() {
 }
 
 function onHitPlayer2() {
-    
+
 }
 
 function onHitPlayer3() {
@@ -585,7 +605,7 @@ function onHitPlayer3() {
 }
 
 function onHitPlayer4() {
-    
+
 }
 
 function onHitPlayer5() {
@@ -593,11 +613,11 @@ function onHitPlayer5() {
 }
 
 function onHitPlayer6() {
-    
+
 }
 
 function onHitPlayer7() {
-    
+
 }
 
 function onStandPlayer1() {
@@ -605,7 +625,7 @@ function onStandPlayer1() {
 }
 
 function onStandPlayer2() {
-    
+
 }
 
 function onStandPlayer3() {
@@ -613,7 +633,7 @@ function onStandPlayer3() {
 }
 
 function onStandPlayer4() {
-    
+
 }
 
 function onStandPlayer5() {
@@ -621,11 +641,11 @@ function onStandPlayer5() {
 }
 
 function onStandPlayer6() {
-    
+
 }
 
 function onStandPlayer7() {
-    
+
 }
 // // this function will be called when the user presses the hit button //
 // function onHit() {
@@ -662,7 +682,7 @@ function onStandPlayer7() {
 //         hitCardImg.className = ('hitCard' + playerArray[1].Name)
 //         hitCardImg.src = (hitCard.imgUrl)
 //         divHand.appendChild(hitCardImg);
-        
+
 //         // resets value of hand to zero //
 //         var handVal = 0;
 //         for(var i = 0; i < playerArray.length; i++) {
@@ -695,7 +715,7 @@ function onStandPlayer7() {
 //             divPoints.id = ('points' + playerArray[i].Name);
 //             divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
 //             divPlayer.appendChild(divPoints);
-            
+
 //         }
 //     })
 // }
@@ -750,7 +770,7 @@ function onStandPlayer7() {
 //             hitCardImg.className = ('hitCard' + playerArray[0].Name)
 //             hitCardImg.src = (hitCard.imgUrl)
 //             houseHitCard.appendChild(hitCardImg);
-            
+
 //             // resets value of hand to zero //
 //             var handVal = 0;
 //             // resets players points //
