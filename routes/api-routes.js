@@ -119,7 +119,7 @@ app.get("/api/table:table", function(req, res) {
       }
   }}).then(function(results){
     console.log("sending table data back")
-    return res.send(results);
+    res.send(results);
   })
 });
 
@@ -347,8 +347,19 @@ app.get("/api/photo/:id/:table", function(req, res) {
       }
     })
     .then(function(results){
-      console.log("deleting empty table", results)
-      res.send(results);
+      if(results != null){
+        for(i=0; i < results.length; i++){
+          db.gaming_table.destroy({
+            where: {
+              id: {
+                [Op.eq]: results[i].id
+              }
+            }
+          })
+          console.log("deleting empty table", results[i].id)
+        }
+        res.send(results);
+      }
     })
       .catch(function(err) {
         res.status(401).json(err);
