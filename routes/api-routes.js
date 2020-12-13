@@ -213,7 +213,6 @@ app.get("/api/photo/:id/:table", function(req, res) {
     app.post("/api/table:table", function(req, res) {
 
       console.log("Updating table ", req.params.table);
-      console.log("User is: ", req.body.data);
       let updateCol = req.body.column
       switch(updateCol){
         case "user1":
