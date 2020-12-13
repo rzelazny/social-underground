@@ -35,11 +35,13 @@ let playerArray = [];
 
 // this function will be called when the start btn is pressed //
 function onStart() {
+    // the start button is hidden //
+    if (startBtn.style.display === 'block') {
+        startBtn.style.display = 'none'
+    }
     // will add the players hard coded in the allPlayers function to the session //
     addPlayers();
-    // will display game buttons  //
-    displayBtns();
-    // will draw cards for all players using the drawCards function //
+    // will draw cards for all players using the drawCards function then dynamically create html elements//
     drawCards();
 }
 
@@ -62,20 +64,6 @@ function addPlayers() {
     // appends the objects created above to the playerArray //
     playerArray.push(house, player1, player2);
     console.log(playerArray);
-}
-
-// this function is called at the start of the game //
-function displayBtns() {
-    // the start button is hidden //
-    if (startBtn.style.display === 'block') {
-        startBtn.style.display = 'none'
-    }
-    // when making new restart button make sure - if id value = restart then .... if id value = ___ then ...
-    //when _ player hits the btn (as well as go back) then alert - player i do u want to ... 
-    // the restart button is displayed and replaces the spot of the start button //
-    if (restartBtn.style.display === 'none') {
-        restartBtn.style.display = 'block'
-    }
 }
 
 // setting i to 0 so that we can control the synchronicity //
@@ -152,6 +140,8 @@ function totalPoints() {
     // for (var i = 1; i < playerArray.length; i++) {
         // <input class="btn" type="button" id="hit" value="hit me" style="display: none;">
         // <input class="btn" type="button" id="stand" value="stand" style="display: none;">
+            // when making new restart button make sure - if id value = restart then .... if id value = ___ then ...
+    //when _ player hits the btn  then alert - player i do u want to ... 
         // <input class="btn" type="button" id="restart" value="restart" style="display: none;">
 
     // }
