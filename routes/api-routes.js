@@ -134,9 +134,8 @@ app.get("/api/photo/:id/:table", function(req, res) {
   //create a new gaming table
   app.post("/api/newtable", function(req, res) {
 
-    console.log("api new table running");
+    console.log("Creating a new table");
 
-    console.log("User ID is: " + req.user.email);
     db.gaming_table.create({
       game: "Just Chatting",
       game_started: false,
@@ -144,7 +143,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
     })
     .then(function(results){
       console.log("sending new table data back")
-      return res.send(results);
+      return res.json(results);
     })
       .catch(function(err) {
         return res.status(401).json(err);

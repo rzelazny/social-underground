@@ -42,17 +42,12 @@ $(document).ready(function() {
         window.location.assign("/casino" + tableId);
     }
 
-    // Getting references to our form and inputs
-    //var joinGame = document.getElementById("joinGame");
-
-    // When the form is submitted, we validate there's an email and password entered
+    // Create a new gaming table on click
     $("#newTable").on("click", function(event) {
         console.log("Making a new gaming table ");
         //create a new gaming table
         $.post("/api/newtable").then(function(newTable){
-            console.log("The table was made");
-            console.log(newTable);
-            window.location.assign("/casino" + tableId);
+            window.location.assign("/casino" + newTable.id);
         }
         );
     })
