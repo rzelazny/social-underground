@@ -37,7 +37,7 @@ $(document).ready(function() {
             chatLength = chatLog.length;
             for(i=0; i < chatLength; i++) {
                 var chatLine = $("<li>")
-                //chatLine.attr("id", "chat-line-" + i);
+                //chatLine.attr("list-style", "none");
                 chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
                 $("#chat-log").append(chatLine);
             };

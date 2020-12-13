@@ -117,6 +117,10 @@ ul li:nth-child(4):hover span {
     overflow-y:scroll;
 }
 
+#chat-log li{
+    list-style-type: none;
+}
+
 #chat-entry{
     padding: 10px 0px 0px 10px;
 }
