@@ -37,8 +37,7 @@ let playerArray = [];
 function onStart() {
     // will add the players hard coded in the allPlayers function to the session //
     addPlayers();
-    // will create then display game buttons  //
-    createBtns();
+    // will display game buttons  //
     displayBtns();
     // will draw cards for all players using the drawCards function //
     drawCards();
@@ -69,15 +68,6 @@ function displayBtns() {
     // the start button is hidden //
     if (startBtn.style.display === 'block') {
         startBtn.style.display = 'none'
-    }
-    // dynamically create hit, stay, and restart buttons buttons
-    // the hit button is displayed //
-    if (hitBtn.style.display === 'none') {
-        hitBtn.style.display = 'block'
-    }
-    // the stand button is displayed //
-    if (standBtn.style.display === 'none') {
-        standBtn.style.display = 'block'
     }
     // when making new restart button make sure - if id value = restart then .... if id value = ___ then ...
     //when _ player hits the btn (as well as go back) then alert - player i do u want to ... 
@@ -161,6 +151,8 @@ function totalPoints() {
     // for (var i = 1; i < playerArray.length; i++) {
         // <input class="btn" type="button" id="hit" value="hit me" style="display: none;">
         // <input class="btn" type="button" id="stand" value="stand" style="display: none;">
+        // <input class="btn" type="button" id="restart" value="restart" style="display: none;">
+
     // }
 
 // this function dynamically creates elements to display the game to the user  //
