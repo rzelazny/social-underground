@@ -39,7 +39,25 @@ $(document).ready(function() {
     //function lets user join an existing table
     function joinTable() {
         let tableId = $(this).attr("table")
-        window.location.assign("/casino" + tableId);
+        let newMessage = {};
+        $.get("/api/table" + tableId).then(function(tableData){
+
+            //TO DO: need to check for open seats here
+
+            $.get("/api/user_data").then(function(userData){
+                //post message that player has joined the table
+                newMessage = {
+                    message: userData.email +" has entered chat.",
+                    table: tableId
+                }
+                //post the joining chat message
+                $.post("/api/chat/", newMessage).then(function(){
+                    //join the table
+                    window.location.assign("/casino" + tableId);
+                });
+            })
+        })
+        
     }
 
     // Create a new gaming table on click
