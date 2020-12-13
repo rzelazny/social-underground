@@ -49,7 +49,7 @@ function onStart() {
     //     }
 // }
 
-// hard coded for two players to play //
+// hard coded for two players to play - should be able to add up to 7 players //
 function addPlayers() {
     // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
     var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' };
@@ -269,31 +269,61 @@ function createElements() {
         divPlayer.appendChild(divPoints);
     }
 
-    // var created in function //
-    
+    // variables created in function for up to 7 players//
     var restartBtnP1 = document.querySelector('#restartPlayer1');
-    var restartBtnP2 = document.querySelector('#restartPlayer2');
     var hitBtnP1 = document.querySelector('#hitPlayer1');
     var standBtnP1 = document.querySelector('#standPlayer1');
 
+    var restartBtnP2 = document.querySelector('#restartPlayer2');
     var hitBtnP2 = document.querySelector('#hitPlayer2');
     var standBtnP2 = document.querySelector('#standPlayer2');
+
+    var restartBtnP3 = document.querySelector('#restartPlayer3');
+    var hitBtnP3 = document.querySelector('#hitPlayer3');
+    var standBtnP3 = document.querySelector('#standPlayer3');
+
+    var restartBtnP4 = document.querySelector('#restartPlayer4');
+    var hitBtnP4 = document.querySelector('#hitPlayer4');
+    var standBtnP4 = document.querySelector('#standPlayer4');
+
+    var restartBtnP5 = document.querySelector('#restartPlayer5');
+    var hitBtnP5 = document.querySelector('#hitPlayer5');
+    var standBtnP5 = document.querySelector('#standPlayer5');
+
+    var restartBtnP6 = document.querySelector('#restartPlayer6');
+    var hitBtnP6 = document.querySelector('#hitPlayer6');
+    var standBtnP6 = document.querySelector('#standPlayer6');
+
+    var restartBtnP7 = document.querySelector('#restartPlayer7');
+    var hitBtnP7 = document.querySelector('#hitPlayer7');
+    var standBtnP7 = document.querySelector('#standPlayer7');
 
     // event listeners //
     
     restartBtnP1.addEventListener('click', onRestartP1);
     restartBtnP2.addEventListener('click', onRestartP2);
+    restartBtnP3.addEventListener('click', onRestartP3);
+    restartBtnP4.addEventListener('click', onRestartP4);
+    restartBtnP5.addEventListener('click', onRestartP5);
+    restartBtnP6.addEventListener('click', onRestartP6);
+    restartBtnP7.addEventListener('click', onRestartP7);
 
     hitBtnP1.addEventListener('click', onHitPlayer1);
     hitBtnP2.addEventListener('click', onHitPlayer2);
+    hitBtnP3.addEventListener('click', onHitPlayer3);
+    hitBtnP4.addEventListener('click', onHitPlayer4);
+    hitBtnP5.addEventListener('click', onHitPlayer5);
+    hitBtnP6.addEventListener('click', onHitPlayer6);
+    hitBtnP7.addEventListener('click', onHitPlayer7);
 
     standBtnP1.addEventListener('click', onStandPlayer1);
     standBtnP2.addEventListener('click', onStandPlayer2);
+    standBtnP3.addEventListener('click', onStandPlayer3);
+    standBtnP4.addEventListener('click', onStandPlayer4);
+    standBtnP5.addEventListener('click', onStandPlayer5);
+    standBtnP6.addEventListener('click', onStandPlayer6);
+    standBtnP7.addEventListener('click', onStandPlayer7);
 }
-
-            // when making new restart button on click make sure - if id value = restart then .... if id value = ___ then ...
-    //when _ player hits the btn  then alert - player i do u want to ... 
-
 
 // this function will be called when the user presses restart button //
 function onRestartP1() {
@@ -302,8 +332,22 @@ function onRestartP1() {
         // reset player values //
         playerArray[0].Bust = false;
         playerArray[1].Bust = false;
+        playerArray[2].Bust = false;
+        playerArray[3].Bust = false;
+        playerArray[4].Bust = false;
+        playerArray[5].Bust = false;
+        playerArray[6].Bust = false;
+        playerArray[7].Bust = false;
+
         playerArray[0].Stand = false;
         playerArray[1].Stand = false;
+        playerArray[2].Stand = false;
+        playerArray[3].Stand = false;
+        playerArray[4].Stand = false;
+        playerArray[5].Stand = false;
+        playerArray[6].Stand = false;
+        playerArray[7].Stand = false;
+
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -338,6 +382,15 @@ function onRestartP2() {
         alert("Player declines to restart the game.")
     }
 }
+// can add duplicates of this function for up to 7 players //
+
+function onHitPlayer1() {
+
+}
+
+function onHitPlayer2() {
+    
+}
 
 // // this function will be called when the user presses the hit button //
 // function onHit() {
@@ -350,7 +403,7 @@ function onRestartP2() {
 //     }, 500); 
 // }
 
-// // hard coded for one player // 
+// // hard coded for first player // 
 // function playerOneHit() {
 //     // calls to the api to get one shuffled card //
 //     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
