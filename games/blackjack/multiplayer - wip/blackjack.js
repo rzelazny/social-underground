@@ -98,7 +98,9 @@ function drawCards () {
         // if there isnt any more players it will stop drawing cards and run the following functions //
         else {
             totalPoints();
-            createElements();
+            setTimeout(function () {
+                createElements();
+            }, 500);
         }
     })
 }
@@ -149,7 +151,7 @@ function createElements() {
     // create house row elements //
     divHouse = document.createElement('section');
     divHouse.id = ('house');
-    divHouse.innerHTML = (playerArray[i].Name);
+    divHouse.innerHTML = (playerArray[0].Name);
     houseRow.appendChild(divHouse);
 
     // creates div where the houses session score will be held and displayed //
@@ -173,11 +175,12 @@ function createElements() {
     var cardTwoImg = document.createElement('img');
     cardTwoImg.id = ('cardTwoHouse')
     cardTwoImg.src = (playerArray[0].Hand[1].imgUrl)
+    houseHand.appendChild(cardTwoImg);
 
     // creates div where the point value of the hand will be held and displayed  //
     housePoints = document.createElement('div');
     housePoints.id = ('housePoints');
-    divPoints.innerHTML = `Points: ${playerArray[0].Points} `;
+    housePoints.innerHTML = `Points: ${playerArray[0].Points} `;
     houseRow.appendChild(housePoints);
 
 
