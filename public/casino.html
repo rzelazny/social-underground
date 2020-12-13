@@ -12,7 +12,18 @@
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <title>Casino</title>
 </head>
+<nav class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Main Menu
+    </a>
 
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="./home.html">Home</a>
+        <a class="dropdown-item" href="./members.html">Membership</a>
+        <a class="dropdown-item" href="/logout">Log Out</a>
+    </div>
+</nav>
 <body>
     <canvas id="canvas" width="1100" height="650"></canvas>
 
@@ -50,15 +61,14 @@
         </ul>
     </div>
 
-    <div style="position: relative; left:35%" class="container" id="chat-container">
-        <div id="chat-log"></div>
-        <form class="form-inline" id="chat-entry">
-            <input type="text" class="form-control" id="chat-input" placeholder="Talk smack here">
-            <button type="submit" class="btn btn-default" id="send-chat"><i class="fas fa-share"></i></button>
-        </form>
-    </div>
-
-    <div class="container" id="webcam1">
+        <div style="position: relative; left:35%" class="container" id="chat-container">
+            <div id="chat-log"></div>
+            <form class="form-inline" id="chat-entry">
+                <input type="text" class="form-control" id="chat-input" placeholder="Talk smack here">
+                <button type="submit" class="btn btn-default" id="send-chat"><i class="fas fa-share"></i></button>
+            </form>
+        </div>
+    <div class="container" id="webcam1", style="display:none">
         <video id="webcam" autoplay playsinline width="320" height="240"></video>
         <canvas id="snapShot" class="d-none"></canvas>
         <button id="camBtnOn">Camera On</button>
@@ -67,9 +77,9 @@
         <br>
         <button id="camBtnRPS">Play Rock Paper Scissors</button>
         <div id="rpsCountdown"></div>
-        <a id="download-photo">
-
-            <!-- <label class="switch">
+        <a id="snap-photo"></a>
+        <a id="download-photo"></a>
+        <!-- <label class="switch">
             <input type="checkbox" checked>
             <span class="slider round"></span>
         </label> -->
@@ -79,11 +89,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
-<footer>
-    <button id="navBtnLogOut">Log Out</button>
-    <button id="navBtnHome">Home</button>
-</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/js/casino.js"></script>
