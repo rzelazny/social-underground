@@ -163,6 +163,11 @@ function createElements() {
     divHouse.innerHTML = (playerArray[i].Name);
     houseRow.appendChild(divHouse);
 
+    // creates div where the houses session score will be held and displayed //
+    houseScore = document.createElement('div');
+    houseScore.id = ('houseScore');
+    houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
+
 
         //append player score, hand (cards), points of hand
 
