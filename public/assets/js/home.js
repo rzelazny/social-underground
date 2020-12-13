@@ -1,40 +1,56 @@
 $(document).ready(function() {
 
+    function init(){
+        cleanupTables();
+        getTables();
+    }
+
+    init();
+
+    //function clears out any tables with no users or that haven't been updated recently
+    function cleanupTables(){
+        $.post("api/cleanup", function(){
+            console.log("table cleanup complete");
+        })
+    }
+
     //get the gaming tables that already exist and display them
-    $.get("api/tables", function(curTables){
+    function getTables(){
+        $.get("api/tables", function(curTables){
 
-        for(i=0; i < curTables.length; i++) {
-            var columnCount = i;
-            var card = $("<div>").addClass("card game-table");
-            var cardBody = $("<div>").addClass("card-body");
-            cardBody.attr("id", "resultCardBody");
-
-            //create stats to append
-            var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id + " - " + curTables[i].game);
-            var user1 = $("<p>").addClass("card-text").text("Player 1: " + curTables[i].user1);
-            var user2 = $("<p>").addClass("card-text").text("Player 2: " + curTables[i].user2);
-            var user3 = $("<p>").addClass("card-text").text("Player 3: " + curTables[i].user3);
-            var user4 = $("<p>").addClass("card-text").text("Player 4: " + curTables[i].user4);
-            var user5 = $("<p>").addClass("card-text").text("Player 5: " + curTables[i].user5);
-            var joinBtn = $('<button/>', {
-                text: "Join Table",
-                id: "btnJoin",
-                table: curTables[i].id,
-                click: joinTable
-            })
-            //append stats to the card
-            cardBody.append(id, user1, user2, user3, user4, user5, joinBtn);
-            card.append(cardBody);
-
-            //there are 3 columns we append in sequence, the 4th table should be in the first column again.
-            while(columnCount > 2){
-                columnCount -= 3;
-            }
-
-            //append card to the correct column on the homepage
-            $("#current-tables" + columnCount).append(card);
-        };
-    });
+            for(i=0; i < curTables.length; i++) {
+                var columnCount = i;
+                var card = $("<div>").addClass("card game-table");
+                var cardBody = $("<div>").addClass("card-body");
+                cardBody.attr("id", "resultCardBody");
+    
+                //create stats to append
+                var id = $("<h4>").addClass("card-text").text("Table: " + curTables[i].id + " - " + curTables[i].game);
+                var user1 = $("<p>").addClass("card-text").text("Player 1: " + curTables[i].user1);
+                var user2 = $("<p>").addClass("card-text").text("Player 2: " + curTables[i].user2);
+                var user3 = $("<p>").addClass("card-text").text("Player 3: " + curTables[i].user3);
+                var user4 = $("<p>").addClass("card-text").text("Player 4: " + curTables[i].user4);
+                var user5 = $("<p>").addClass("card-text").text("Player 5: " + curTables[i].user5);
+                var joinBtn = $('<button/>', {
+                    text: "Join Table",
+                    id: "btnJoin",
+                    table: curTables[i].id,
+                    click: joinTable
+                })
+                //append stats to the card
+                cardBody.append(id, user1, user2, user3, user4, user5, joinBtn);
+                card.append(cardBody);
+    
+                //there are 3 columns we append in sequence, the 4th table should be in the first column again.
+                while(columnCount > 2){
+                    columnCount -= 3;
+                }
+    
+                //append card to the correct column on the homepage
+                $("#current-tables" + columnCount).append(card);
+            };
+        });
+    }
 
     //function lets user join an existing table
     function joinTable() {

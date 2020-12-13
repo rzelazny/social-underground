@@ -1,13 +1,13 @@
 // Requiring our models and passport as we've configured it
 var db = require("../models");
 var passport = require("../config/passport");
-var User_stat = db.User_stat
-var fs = require("fs");
-var path = require("path");
-const { sequelize } = require("../models");
-const user = require("../models/user_login");
+var User_stat = db.user_stat
+// var fs = require("fs");
+// var path = require("path");
+// const { sequelize } = require("../models");
+// const user = require("../models/user_login");
 const { Op } = require("sequelize");
-const { pathToFileURL } = require("url");
+//const { pathToFileURL } = require("url");
 // const user = require("../models/user");
 
 
@@ -104,14 +104,14 @@ module.exports = function(app) {
           }
       }]},
     }).then(function(results){
-      console.log("sending table data back", results);
+      console.log("sending table data back");
       return res.send(results);
     })
 });
 
  // Route for finding data on a given table
 app.get("/api/table:table", function(req, res) {
-  console.log("get api table is running")
+  console.log("getting info for table: ", req.params.table);
   db.gaming_table.findAll({
     where: {
       id: {
@@ -209,119 +209,151 @@ app.get("/api/photo/:id/:table", function(req, res) {
       });
   });
 
-    //update an existing table
-    app.post("/api/table:table", function(req, res) {
+  //update an existing table
+  app.post("/api/table:table", function(req, res) {
 
-      console.log("Updating table ", req.params.table);
-      let updateCol = req.body.column
-      switch(updateCol){
-        case "user1":
-          db.gaming_table.update(
-            {
-            user1: req.body.data
-          },
+    console.log("Updating table ", req.params.table);
+    let updateCol = req.body.column
+    switch(updateCol){
+      case "user1":
+        db.gaming_table.update(
           {
-            where: 
-            {
-              id: {
-                [Op.eq]: req.params.table
-              }
-            }
-          })
-          .then(function(results){
-            console.log("sending new table data back")
-            return res.json(results);
-          })
-            .catch(function(err) {
-              return res.status(401).json(err);
-            });
-        break;
-        case "user2":
-          db.gaming_table.update(
-            {
-            user2: req.body.data
-          },
+          user1: req.body.data
+        },
+        {
+          where: 
           {
-            where: 
-            {
-              id: {
-                [Op.eq]: req.params.table
-              }
+            id: {
+              [Op.eq]: req.params.table
             }
-          })
-          .then(function(results){
-            console.log("sending new table data back")
-            return res.json(results);
-          })
-            .catch(function(err) {
-              return res.status(401).json(err);
-            });
-        break;
-        case "user3":
-          db.gaming_table.update(
-            {
-            user3: req.body.data
-          },
+          }
+        })
+        .then(function(results){
+          console.log("sending new table data back")
+          return res.json(results);
+        })
+          .catch(function(err) {
+            return res.status(401).json(err);
+          });
+      break;
+      case "user2":
+        db.gaming_table.update(
           {
-            where: 
-            {
-              id: {
-                [Op.eq]: req.params.table
-              }
-            }
-          })
-          .then(function(results){
-            console.log("sending new table data back")
-            return res.json(results);
-          })
-            .catch(function(err) {
-              return res.status(401).json(err);
-            });
-        break;
-        case "user4":
-          db.gaming_table.update(
-            {
-            user4: req.body.data
-          },
+          user2: req.body.data
+        },
+        {
+          where: 
           {
-            where: 
-            {
-              id: {
-                [Op.eq]: req.params.table
-              }
+            id: {
+              [Op.eq]: req.params.table
             }
-          })
-          .then(function(results){
-            console.log("sending new table data back")
-            return res.json(results);
-          })
-            .catch(function(err) {
-              return res.status(401).json(err);
-            });
-        break;
-        case "user5":
-          db.gaming_table.update(
-            {
-            user5: req.body.data
-          },
+          }
+        })
+        .then(function(results){
+          console.log("sending new table data back")
+          return res.json(results);
+        })
+          .catch(function(err) {
+            return res.status(401).json(err);
+          });
+      break;
+      case "user3":
+        db.gaming_table.update(
           {
-            where: 
-            {
-              id: {
-                [Op.eq]: req.params.table
-              }
+          user3: req.body.data
+        },
+        {
+          where: 
+          {
+            id: {
+              [Op.eq]: req.params.table
             }
-          })
-          .then(function(results){
-            console.log("sending new table data back")
-            return res.json(results);
-          })
-            .catch(function(err) {
-              return res.status(401).json(err);
-            });
-        break;
+          }
+        })
+        .then(function(results){
+          console.log("sending new table data back")
+          return res.json(results);
+        })
+          .catch(function(err) {
+            return res.status(401).json(err);
+          });
+      break;
+      case "user4":
+        db.gaming_table.update(
+          {
+          user4: req.body.data
+        },
+        {
+          where: 
+          {
+            id: {
+              [Op.eq]: req.params.table
+            }
+          }
+        })
+        .then(function(results){
+          console.log("sending new table data back")
+          return res.json(results);
+        })
+          .catch(function(err) {
+            return res.status(401).json(err);
+          });
+      break;
+      case "user5":
+        db.gaming_table.update(
+          {
+          user5: req.body.data
+        },
+        {
+          where: 
+          {
+            id: {
+              [Op.eq]: req.params.table
+            }
+          }
+        })
+        .then(function(results){
+          console.log("sending new table data back")
+          return res.json(results);
+        })
+          .catch(function(err) {
+            return res.status(401).json(err);
+          });
+      break;
+    }
+  });
+  
+  //clean out tables that have no users or TODO: that haven't been updated recently
+  app.post("/api/cleanup", function(req, res) {
+    
+    console.log("cleanup running");
+    db.gaming_table.findAll({
+      where: {
+        user1: {
+          [Op.eq]: "Open Seat"
+        },
+        user2: {
+          [Op.eq]: "Open Seat"
+        },
+        user3: {
+          [Op.eq]: "Open Seat"
+        },
+        user4: {
+          [Op.eq]: "Open Seat"
+        },
+        user5: {
+          [Op.eq]: "Open Seat"
+        }
       }
-    });
+    })
+    .then(function(results){
+      console.log("deleting empty table", results)
+      res.send(results);
+    })
+      .catch(function(err) {
+        res.status(401).json(err);
+      });
+  });
 
   //post a new chat message
   app.post("/api/chat/", function(req, res) {
