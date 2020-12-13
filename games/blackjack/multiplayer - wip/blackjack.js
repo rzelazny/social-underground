@@ -2,7 +2,7 @@
 
 alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has 17 or more points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. Once we are creating the actual page the houses cards and hand points should be hidden from the player until the end of the round function has ran. I am just leaving them up for building purposes.")
 
-alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be delt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 1 point each. If you win you will be awarded 2 points and if the House wins it will be awarded two points.")
+alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be dealt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 1 point each. If you win you will be awarded 2 points and if the House wins it will be awarded two points.")
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
@@ -68,13 +68,14 @@ function displayBtns() {
     //     }
 // }
 
-// hard coded for one player to play against the House //
+// hard coded for two players to play against each other //
 function addPlayers() {
     // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
     var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' };
     var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
+    var player2 = { Name: 'Player2',  ID: 2, Score: 0, Points: 0, Bust: false, Hand: hand[2], Stand: 'false' };
     // appends the objects created above to the playerArray //
-    playerArray.push(house, player1);
+    playerArray.push(house, player1, player2);
 }
 
 // setting i to 0 so that we can control the synchronicity //
