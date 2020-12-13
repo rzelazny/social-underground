@@ -6,8 +6,7 @@
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
-var players =  document.querySelector('#players');
-var house = document.querySelector('#house');
+var gameContainer =  document.querySelector('#gameContainer');
 
 var startBtn = document.querySelector('#start');
 var restartBtn = document.querySelector('#restart');
@@ -148,10 +147,28 @@ function totalPoints() {
 
 // this function dynamically creates elements to display the game to the user  //
 function createElements() {
-    players.innerHTML = ''; // this clears the gameboard //
+    // create house and players sections to add to the game container
+    houseRow = document.createElement('div');
+    playersRow = document.createElement('div');
+
+    gameContainer.appendChild(houseRow);
+    gameContainer.appendChild(playersRow);
+
+    // this clears the rows // -- may not be needed
+    houseRow.innerHTML = '';
+    playersRow.innerHTML = '';
+
+    // create loop to make col in payers row
+        // in col dynamically append hand (w/ cards), points of hand, player score, along with hit, stand, and restart buttons to each players col
+
+
+
+
+
+
 
     // in this loop, we will create elements for each player //
-    for(var i = 0; i < playerArray.length; i++) {
+    for (var i = 1; i < playerArray.length; i++) {
 
         // creates div where all player data will be held, displays name //
         divPlayer = document.createElement('div');
