@@ -187,25 +187,40 @@ function createElements() {
     for (var i = 1; i < playerArray.length; i++) {
         // create cols for each player to store their elements and append to players row //
         var playersCol = document.createElement('div');
-        playersCol.className = ('col-sm-6');
+        playersCol.className = ('col-6');
         playersCol.id = (playerArray[i].Name);
-        playersRow.appendChild(playerCol);
+        playersRow.appendChild(playersCol);
 
         // create game option buttons for each player //
         var playersBtns = document.createElement('div');
         playersBtns.className = ('playersGameOptions');
         playersBtns.id = ('buttons' + playerArray[i].Name);
-        playersRow.appendChild(playersBtns);
+        playersCol.appendChild(playersBtns);
+
+        var hitBtn = document.createElement('input');
+        hitBtn.className = ('btn');
+        hitBtn.id = ('hit' + playerArray[i].Name);
+        // type="button" id="hit" value="hit me" style="display: none;"
+        var standBtn = document.createElement('input');
+        standBtn.className = ('btn');
+        standBtn.id = ('stand' + playerArray[i].Name);
+        // type="button" id="hit" value="hit me" style="display: none;"
+        var restartBtn = document.createElement('input');
+        restartBtn.className = ('btn');
+        restartBtn.id = ('restart' + playerArray[i].Name);
+        // type="button" id="restart" value="restart" style="display: none;">
+
+        // append buttons to playersBtns div //
+        playersBtns.appendChild(hitBtn);
+        playersBtns.appendChild(standBtn);
+        playersBtns.appendChild(restartBtn);
+
 
         // in col dynamically append name, hand (w/ cards), points of hand, player score, along with hit, stand, and restart buttons to each players col
 
     }
 
-        // <input class="btn" type="button" id="hit" value="hit me" style="display: none;">
-        // <input class="btn" type="button" id="stand" value="stand" style="display: none;">
-            // when making new restart button make sure - if id value = restart then .... if id value = ___ then ...
-    //when _ player hits the btn  then alert - player i do u want to ... 
-        // <input class="btn" type="button" id="restart" value="restart" style="display: none;">
+
 
 
     // // in this loop, we will create elements for each player //
@@ -258,6 +273,11 @@ function createElements() {
     //     players.appendChild(divPlayer);
     // }
 }
+
+
+            // when making new restart button on click make sure - if id value = restart then .... if id value = ___ then ...
+    //when _ player hits the btn  then alert - player i do u want to ... 
+
 
 // // this function will be called when the user presses restart button //
 // function onRestart() {
