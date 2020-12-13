@@ -26,6 +26,7 @@ $(document).ready(function() {
         getGame();
         chatTimer();
 
+        //get the current user's email and which seat they're in
         $.get("/api/user_data").then(function(userData){
             email = userData.email;
             $.get("/api/table" + curTable).then(function(tableData){
@@ -89,6 +90,15 @@ $(document).ready(function() {
             let tableGame = table.game;
         })
     }
+    function giveUpSeat(goTo){
+        let updateSeat = {
+            column: curSeat,
+            data: "Open Seat"
+        }
+        $.post("/api/table"+ curTable, updateSeat).then(function(){
+            window.location.assign(goTo);
+        })
+    }
 
     //functions with event listners 
     // hitButton.addEventListener("click", function hitButton() {
@@ -132,23 +142,15 @@ $(document).ready(function() {
 
     //Navigate to home and free up user's seat at the table.
     $("#goHome").on("click", function(event) {
-        $.get("/api/table" + curTable).then(function(tableData){
-            console.log("Data: " + JSON.stringify(tableData));
-            // for(i=0; i < tableData.length;i++){
-            //     if(tableData[i] === userData.email){
-            //         curSeat = tableData[i];
-            //     }
-            // }
-            // console.log(curSeat);
-            // let updateSeat = {
-            //     column: curSeat,
-            //     data: "Open Seat"
-            // }
-            // $.post("/api/table"+ curTable, updateSeat).then(function(){
-            //     console.log("am i running?")
-            //     window.location.assign("/home");
-            // })
-        })
+        giveUpSeat("/home");
+    })
+
+    $("#memberPage").on("click", function(event) {
+        giveUpSeat("/members");
+    })
+    //Navigate to home and free up user's seat at the table.
+    $("#logOut").on("click", function(event) {
+        giveUpSeat("/logout");
     })
 
     //Play Rock Paper Scissors
