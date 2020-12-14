@@ -55,7 +55,18 @@
     <div class="container" id="containerBlackJack">
         <canvas id="canvas" width="1100" height="650"></canvas>
         <br>
-        <div>
+        <div id="gameBody">
+            <div class= "gameOptions" id="gameOptions">
+                <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
+                <input class="btn btn-dark type="button" id="start" value="start" style="display: block;">
+                <input class="btn btn-dark" type="button" id="restart" value="restart" style="display: none;">
+                <input class="btn btn-dark" type="button" id="hit" value="hit me" style="display: none;">
+                <input class="btn btn-dark" type="button" id="stand" value="stand" style="display: none;">
+            </div>
+            <div class="players" id="players"></div>
+        </div>
+    </div>
+        <!-- <div>
             <ul>
                 <li>
                     <a href="#">
@@ -85,7 +96,7 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
     <div class="container" style="position: relative; left:35%"  id="chat-container">
         <div id="chat-log"></div>
@@ -118,6 +129,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/js/casino.js"></script>
+<script src="./assets/js/blackjack.js"></script>
 
 <!-- <script src="./assets/js/websocket.js"></script> -->
 

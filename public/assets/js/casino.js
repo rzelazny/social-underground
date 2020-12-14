@@ -52,7 +52,7 @@ $(document).ready(function() {
         $.get("/api/chat" + curTable, function(chatLog){
             //chat length is used to check for new messages being posted
             chatLength = chatLog.length;
-            for(i=0; i < chatLength; i++) {
+            for(let i=0; i < chatLength; i++) {
                 var chatLine = $("<li>")
                 //chatLine.attr("list-style", "none");
                 chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
@@ -93,10 +93,14 @@ $(document).ready(function() {
             console.log("gonna try: ", tableGame.replace(/"/g, ''));
             switch(tableGame){
                 case "Just Chatting":
+                    console.log("Just chatting setup")
                     $("#containerBlackJack").css("display", "none");
                 break;
                 case "Black Jack":
+                    console.log("Black Jack setup");
                     $("#gameChoice").css("display", "none");
+                    $("#containerBlackJack").css("display", "block");
+                    $("#start").css("display", "block");
                 break;
                 default:
                     console.log("default running");
