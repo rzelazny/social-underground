@@ -1968,20 +1968,41 @@ function endRound() {
     // if p1 > p2 -> p1 wins (add p1 > p3)
     // if p1 < p2 -> p2 wins (add p2 > p3)
     // if p3> p1 & p3 > p2 = p3 wins *
-    
     //if p1 busts
-    // h wins
-    // p2 wins
+    // h wins (add p3)
+    // p2 wins (add p3)
+    // p3 wins *
     //if p2 busts
-    // house wins
-    // p1 wins
+    // house wins (add p3)
+    // p1 wins (add p3)
+    //p3 wins*
     // if p3 busts *
+    // h wins *
+    // p1 wins *
+    // p2 wins *
 
 
-    // if two players bust 
-    //if house and p1 bust -> p2 win
-    // if house and p2 bust -> p1 win
-    // if p1 and p2 bust -> house win
+    // if two players bust --- recreate these functions
+    //if house and p1 bust
+        //p2 win *
+        //p3 win*
+    // if house and p2 bust 
+        // p1 win *
+        // p3 win *
+    // if p1 and p2 bust
+        // house win *
+        // p3 win*
+    // if p3 & house bust*
+        // p1 win *
+        // p2 win *
+    // if p3 & p1 bust *
+        // h win *
+        // p2 win *
+    // if p3 & p2 bust *
+        //if h win *
+        // if p1 win*
+
+    // if two players bust --- create these functions entirely
 
     // if all players bust -> no one wins
 
