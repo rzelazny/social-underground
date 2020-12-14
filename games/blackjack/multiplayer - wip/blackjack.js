@@ -427,7 +427,7 @@ function onRestartP1() {
 
         playerArray[0].Stand = false;
         playerArray[1].Stand = false;
-        
+
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
         playersRow.innerHTML = '';
@@ -435,7 +435,7 @@ function onRestartP1() {
         i = 0;
         // redraws cards for all players in session //
         drawCards();
-        
+
         // drawCards();
     }
     else {
@@ -625,7 +625,7 @@ function onHitPlayer1() {
     setTimeout(function () {
         // if the hit card makes the points go over 21 the user will get a bust alert //
         itsABust();
-    }, 500); 
+    }, 500);
 }
 function player1Hit() {
     // calls to the api to get one shuffled card //
@@ -636,15 +636,15 @@ function player1Hit() {
     }).then(function (data) {
         // this object holds all the data needed for the card //
         hitCard = {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            };
+            code: data.cards[0].code,
+            suit: data.cards[0].suit,
+            value: data.cards[0].value,
+            imgUrl: data.cards[0].image
+        };
         // this variable = the players original cards
         var originalHand = playerArray[1].Hand;
         // this pushes the new card into the array of cards
-        originalHand.push(hitCard); 
+        originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard1')
@@ -655,14 +655,14 @@ function player1Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for(var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < playerArray.length; a++) {
             // resets players points //
             playerArray[a].Points = 0;
             for (var j = 0; j < (playerArray[a].Hand).length; j++) {
                 // sets values for face cards //
                 if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
                     playerArray[a].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[a].Hand[j].value = "11";
@@ -687,13 +687,13 @@ function player1Hit() {
 }
 
 function onHitPlayer2() {
-        // will call player one hit function //
-        player2Hit();
-        // creating a timer function to give time for the card to render before busting //
-        setTimeout(function () {
-            // if the hit card makes the points go over 21 the user will get a bust alert//
-            itsABust();
-        }, 500); 
+    // will call player one hit function //
+    player2Hit();
+    // creating a timer function to give time for the card to render before busting //
+    setTimeout(function () {
+        // if the hit card makes the points go over 21 the user will get a bust alert//
+        itsABust();
+    }, 500);
 }
 function player2Hit() {
     // calls to the api to get one shuffled card //
@@ -704,15 +704,15 @@ function player2Hit() {
     }).then(function (data) {
         // this object holds all the data needed for the card //
         hitCard = {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            };
+            code: data.cards[0].code,
+            suit: data.cards[0].suit,
+            value: data.cards[0].value,
+            imgUrl: data.cards[0].image
+        };
         // this variable = the players original cards
         var originalHand = playerArray[2].Hand;
         // this pushes the new card into the array of cards
-        originalHand.push(hitCard); 
+        originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard2')
@@ -723,14 +723,14 @@ function player2Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for(var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < playerArray.length; a++) {
             // resets players points //
             playerArray[a].Points = 0;
             for (var j = 0; j < (playerArray[a].Hand).length; j++) {
                 // sets values for face cards //
                 if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
                     playerArray[a].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[a].Hand[j].value = "11";
@@ -755,13 +755,13 @@ function player2Hit() {
 }
 
 function onHitPlayer3() {
-        // will call player one hit function //
-        player3Hit();
-        // creating a timer function to give time for the card to render before busting //
-        setTimeout(function () {
-            // if the hit card makes the points go over 21 the user will get a bust alert //
-            itsABust();
-        }, 500); 
+    // will call player one hit function //
+    player3Hit();
+    // creating a timer function to give time for the card to render before busting //
+    setTimeout(function () {
+        // if the hit card makes the points go over 21 the user will get a bust alert //
+        itsABust();
+    }, 500);
 }
 function player3Hit() {
     // calls to the api to get one shuffled card //
@@ -772,15 +772,15 @@ function player3Hit() {
     }).then(function (data) {
         // this object holds all the data needed for the card //
         hitCard = {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            };
+            code: data.cards[0].code,
+            suit: data.cards[0].suit,
+            value: data.cards[0].value,
+            imgUrl: data.cards[0].image
+        };
         // this variable = the players original cards
         var originalHand = playerArray[3].Hand;
         // this pushes the new card into the array of cards
-        originalHand.push(hitCard); 
+        originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard3')
@@ -791,14 +791,14 @@ function player3Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for(var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < playerArray.length; a++) {
             // resets players points //
             playerArray[a].Points = 0;
             for (var j = 0; j < (playerArray[a].Hand).length; j++) {
                 // sets values for face cards //
                 if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
                     playerArray[a].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[a].Hand[j].value = "11";
@@ -823,13 +823,13 @@ function player3Hit() {
 }
 
 function onHitPlayer4() {
-        // will call player one hit function //
-        player4Hit();
-        // creating a timer function to give time for the card to render before busting //
-        setTimeout(function () {
-            // if the hit card makes the points go over 21 the user will get a bust alert //
-            itsABust();
-        }, 500); 
+    // will call player one hit function //
+    player4Hit();
+    // creating a timer function to give time for the card to render before busting //
+    setTimeout(function () {
+        // if the hit card makes the points go over 21 the user will get a bust alert //
+        itsABust();
+    }, 500);
 }
 function player4Hit() {
     // calls to the api to get one shuffled card //
@@ -840,15 +840,15 @@ function player4Hit() {
     }).then(function (data) {
         // this object holds all the data needed for the card //
         hitCard = {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            };
+            code: data.cards[0].code,
+            suit: data.cards[0].suit,
+            value: data.cards[0].value,
+            imgUrl: data.cards[0].image
+        };
         // this variable = the players original cards
         var originalHand = playerArray[4].Hand;
         // this pushes the new card into the array of cards
-        originalHand.push(hitCard); 
+        originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard4')
@@ -859,14 +859,14 @@ function player4Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for(var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < playerArray.length; a++) {
             // resets players points //
             playerArray[a].Points = 0;
             for (var j = 0; j < (playerArray[a].Hand).length; j++) {
                 // sets values for face cards //
                 if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
                     playerArray[a].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[a].Hand[j].value = "11";
@@ -891,13 +891,13 @@ function player4Hit() {
 }
 
 function onHitPlayer5() {
-        // will call player one hit function //
-        player5Hit();
-        // creating a timer function to give time for the card to render before busting //
-        setTimeout(function () {
-            // if the hit card makes the points go over 21 the user will get a bust alert //
-            itsABust();
-        }, 500); 
+    // will call player one hit function //
+    player5Hit();
+    // creating a timer function to give time for the card to render before busting //
+    setTimeout(function () {
+        // if the hit card makes the points go over 21 the user will get a bust alert //
+        itsABust();
+    }, 500);
 }
 function player5Hit() {
     // calls to the api to get one shuffled card //
@@ -908,15 +908,15 @@ function player5Hit() {
     }).then(function (data) {
         // this object holds all the data needed for the card //
         hitCard = {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            };
+            code: data.cards[0].code,
+            suit: data.cards[0].suit,
+            value: data.cards[0].value,
+            imgUrl: data.cards[0].image
+        };
         // this variable = the players original cards
         var originalHand = playerArray[5].Hand;
         // this pushes the new card into the array of cards
-        originalHand.push(hitCard); 
+        originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard5')
@@ -927,14 +927,14 @@ function player5Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for(var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < playerArray.length; a++) {
             // resets players points //
             playerArray[a].Points = 0;
             for (var j = 0; j < (playerArray[a].Hand).length; j++) {
                 // sets values for face cards //
                 if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
                     playerArray[a].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[a].Hand[j].value = "11";
@@ -959,13 +959,13 @@ function player5Hit() {
 }
 
 function onHitPlayer6() {
-        // will call player one hit function //
-        player6Hit();
-        // creating a timer function to give time for the card to render before busting //
-        setTimeout(function () {
-            // if the hit card makes the points go over 21 the user will get a bust alert //
-            itsABust();
-        }, 500); 
+    // will call player one hit function //
+    player6Hit();
+    // creating a timer function to give time for the card to render before busting //
+    setTimeout(function () {
+        // if the hit card makes the points go over 21 the user will get a bust alert //
+        itsABust();
+    }, 500);
 }
 function player6Hit() {
     // calls to the api to get one shuffled card //
@@ -976,15 +976,15 @@ function player6Hit() {
     }).then(function (data) {
         // this object holds all the data needed for the card //
         hitCard = {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            };
+            code: data.cards[0].code,
+            suit: data.cards[0].suit,
+            value: data.cards[0].value,
+            imgUrl: data.cards[0].image
+        };
         // this variable = the players original cards
         var originalHand = playerArray[6].Hand;
         // this pushes the new card into the array of cards
-        originalHand.push(hitCard); 
+        originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard6')
@@ -995,14 +995,14 @@ function player6Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for(var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < playerArray.length; a++) {
             // resets players points //
             playerArray[a].Points = 0;
             for (var j = 0; j < (playerArray[a].Hand).length; j++) {
                 // sets values for face cards //
                 if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
                     playerArray[a].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[a].Hand[j].value = "11";
@@ -1027,13 +1027,13 @@ function player6Hit() {
 }
 
 function onHitPlayer7() {
-        // will call player one hit function //
-        player7Hit();
-        // creating a timer function to give time for the card to render before busting //
-        setTimeout(function () {
-            // if the hit card makes the points go over 21 the user will get a bust alert //
-            itsABust();
-        }, 500); 
+    // will call player one hit function //
+    player7Hit();
+    // creating a timer function to give time for the card to render before busting //
+    setTimeout(function () {
+        // if the hit card makes the points go over 21 the user will get a bust alert //
+        itsABust();
+    }, 500);
 }
 function player7Hit() {
     // calls to the api to get one shuffled card //
@@ -1044,15 +1044,15 @@ function player7Hit() {
     }).then(function (data) {
         // this object holds all the data needed for the card //
         hitCard = {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            };
+            code: data.cards[0].code,
+            suit: data.cards[0].suit,
+            value: data.cards[0].value,
+            imgUrl: data.cards[0].image
+        };
         // this variable = the players original cards
         var originalHand = playerArray[7].Hand;
         // this pushes the new card into the array of cards
-        originalHand.push(hitCard); 
+        originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard7')
@@ -1063,14 +1063,14 @@ function player7Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for(var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < playerArray.length; a++) {
             // resets players points //
             playerArray[a].Points = 0;
             for (var j = 0; j < (playerArray[a].Hand).length; j++) {
                 // sets values for face cards //
                 if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
                     playerArray[a].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[a].Hand[j].value = "11";
@@ -1144,7 +1144,7 @@ function checkStandStat() {
             console.log("all players are standing");
             houseLogic();
         }
-        else{
+        else {
             console.log("waiting for all players to be standing");
             console.log(playerArray);
         }
@@ -1155,7 +1155,7 @@ function checkStandStat() {
             console.log("all players are standing");
             houseLogic();
         }
-        else{
+        else {
             console.log("waiting for all players to be standing");
             console.log(playerArray);
         }
@@ -1166,7 +1166,7 @@ function checkStandStat() {
             console.log("all players are standing");
             houseLogic();
         }
-        else{
+        else {
             console.log("waiting for all players to be standing");
             console.log(playerArray);
         }
@@ -1177,7 +1177,7 @@ function checkStandStat() {
             console.log("all players are standing");
             houseLogic();
         }
-        else{
+        else {
             console.log("waiting for all players to be standing");
             console.log(playerArray);
         }
@@ -1188,7 +1188,7 @@ function checkStandStat() {
             console.log("all players are standing");
             houseLogic();
         }
-        else{
+        else {
             console.log("waiting for all players to be standing");
             console.log(playerArray);
         }
@@ -1199,7 +1199,7 @@ function checkStandStat() {
             console.log("all players are standing");
             houseLogic();
         }
-        else{
+        else {
             console.log("waiting for all players to be standing");
             console.log(playerArray);
         }
@@ -1240,31 +1240,72 @@ function houseLogic() {
             console.log("we will run end round");
             // endRound();
         }
+        // house will hit if
+        // p1 points > house BUT < 22
+        else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // p2 points > house BUT < 22
+        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // player 1 tied && points < 17
+        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
+        // player 2 tied && points < 17
+        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
         else {
-            // house will hit if
-            // p1 points > house BUT < 22
-            if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
-                console.log("house will hit")
-            }
-            // p2 points > house BUT < 22
-            else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
-                console.log("house will hit")
-            }
-            // player 1 tied && points < 17
-            else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
-                console.log("house will hit")
-            }
-            // player 2 tied && points < 17
-            else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
-                console.log("house will hit")
-            }
-            else {
-                console.log("error something isnt right");
-            }
+            console.log("something fell through the cracks");
         }
     }
-    else {
-        console.log("something fell through the cracksss");
+
+    // when all 3 players are standing ... //
+    if (playerArray.length === 4) {
+        // house will stand if ... //
+        // house 17+ points
+        if (playerArray[0].Points >= 17) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // all players bust
+        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // all players points < house 
+        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // house will stand if ... //
+
+
+    }
+
+    // when all 4 players are standing ... //
+    if (playerArray.length === 5) {
+
+    }
+
+    // when all 5 players are standing ... //
+    if (playerArray.length === 6) {
+
+    }
+
+    // when all 6 players are standing ... //
+    if (playerArray.length === 7) {
+
+    }
+
+    // when all 7 players are standing ... //
+    if (playerArray.length === 8) {
+
     }
 }
 
