@@ -1811,9 +1811,16 @@ function endRound() {
     // if all players bust -> no one wins
 
 
+    // increase winners scores by 1 //
+    // alert users of all current scores //
 
-    console.log(playerArray);
-    console.log("=========================")
+    // update scores on html //
+    houseScore = document.getElementById("houseScore");
+    scoreP1 = document.getElementById("scorePlayer1");
+    scoreP2 = document.getElementById("scorePlayer2");
+    houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
+    scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
+    scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
     hitBtnP1.style.display = 'block';
@@ -1827,44 +1834,5 @@ function endRound() {
     playerArray[0].Stand = false;
     playerArray[1].Stand = false;
 
-
-
-
-
-
-
-
-//     // if the players tie //
-//     if (playerArray[0].Points === playerArray[1].Points) {
-//         alert(`you tied`)
-//         // increase both scores by 1 //
-//         playerArray[0].Score = playerArray[0].Score + 1;
-//         playerArray[1].Score = playerArray[1].Score + 1;
-//         // alert the users of current scores //
-//         alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`)
-//         // update scores on html //
-//         divScore.innerHTML = `Score: ${playerArray[0].Score} `;
-//         divScore.innerHTML = `Score: ${playerArray[1].Score} `;
-//     } 
-//     // if the House wins //
-//     else if (playerArray[1].Bust === true || playerArray[1].Points > 21 || playerArray[0].Bust === false && playerArray[0].Points > playerArray[1].Points) {
-//         // alert users //
-//         alert(`${playerArray[0].Name} won || ${playerArray[1].Name} lost`)
-//         // increase House points by 2 //
-//         playerArray[0].Score = playerArray[0].Score + 2;
-//         // alert the users of current scores //
-//         alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`) 
-//         scoreHouse = document.querySelector("#scoreHouse");
-//         scoreHouse.innerHTML = `Score: ${playerArray[0].Score} `;
-
-//     }
-//     // if player1 wins //
-//     else if (playerArray[0].Bust === true || playerArray[0].Points > 21 || playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points){
-//         // alert users //
-//         alert (`${playerArray[0].Name} lost || ${playerArray[1].Name} won`)
-//         // increase player1 points by 2 //
-//         playerArray[1].Score = playerArray[1].Score + 2;
-//         // alert the users of current scores //
-//         alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`)
-//         scorePlayer1 = document.querySelector("#scorePlayer1");
-//         scorePlayer1.innerHTML = `Score: ${playerArray[1].Score} `;
+    console.log(playerArray);
+    console.log("=========================")
