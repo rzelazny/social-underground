@@ -1090,7 +1090,7 @@ function checkStandStat() {
         }
     }
     // if there are 3 players //
-    if (playerArray.length === 4) {
+    else if (playerArray.length === 4) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true) {
             console.log("all players are standing");
         }
@@ -1099,8 +1099,35 @@ function checkStandStat() {
         }
     }
     // if there are 4 players //
-    if (playerArray.length === 5) {
+    else if (playerArray.length === 5) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true) {
+            console.log("all players are standing");
+        }
+        else{
+            console.log("waiting for all players to be standing");
+        }
+    }
+    // if there are 5 players //
+    else if (playerArray.length === 6) {
+        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true) {
+            console.log("all players are standing");
+        }
+        else{
+            console.log("waiting for all players to be standing");
+        }
+    }
+    // if there are 6 players //
+    else if (playerArray.length === 7) {
+        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true && playerArray[6].Stand === true) {
+            console.log("all players are standing");
+        }
+        else{
+            console.log("waiting for all players to be standing");
+        }
+    }
+    // if there are 7 players //
+    else if (playerArray.length === 8) {
+        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true && playerArray[6].Stand === true && playerArray[8].Stand === true) {
             console.log("all players are standing");
         }
         else{
