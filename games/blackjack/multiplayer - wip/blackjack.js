@@ -1941,7 +1941,251 @@ function endRound() {
 
 
 
-    // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC //
+    // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC // for 3 player
+    // display all players points to user //
+    alert(`end of round point values:
+    ${playerArray[0].Name} has ${playerArray[0].Points} points
+    ${playerArray[1].Name} has ${playerArray[1].Points} points
+    ${playerArray[2].Name} has ${playerArray[2].Points} points
+    ${playerArray[3].Name} has ${playerArray[3].Points} points`)
+
+    // if no one busts -
+    // if they all tie -
+
+    // if h > p1 & h > p2 -> h wins  (add h > p3)
+    // if p1 > h & p1 > p2 -> p1 wins (add p1 > p3)
+    // if p2 > h & p2 > p1 -> p2 wins (add p2>p3)
+    // if p3 > h & > p1 & > p2 = p3 wins *
+    // if h = p1 & > p2 -> h & p1 tie  (add & > pm)
+    // -> h & p2 tie  (add > p3)
+    // p1 & p2 tie (add > p3)
+    // if h & p3 tie *
+    //if p1 & p3 tie *
+    // if p2 and p3 tie *
+
+    // if one player busts
+    // if house busts
+    // if p1 > p2 -> p1 wins (add p1 > p3)
+    // if p1 < p2 -> p2 wins (add p2 > p3)
+    // if p3> p1 & p3 > p2 = p3 wins *
+    //if p1 busts
+    // h wins (add p3)
+    // p2 wins (add p3)
+    // p3 wins *
+    //if p2 busts
+    // house wins (add p3)
+    // p1 wins (add p3)
+    //p3 wins*
+    // if p3 busts *
+    // h wins *
+    // p1 wins *
+    // p2 wins *
+
+
+    // if two players bust --- recreate these functions
+    //if house and p1 bust
+        //p2 win *
+        //p3 win*
+    // if house and p2 bust 
+        // p1 win *
+        // p3 win *
+    // if p1 and p2 bust
+        // house win *
+        // p3 win*
+    // if p3 & house bust*
+        // p1 win *
+        // p2 win *
+    // if p3 & p1 bust *
+        // h win *
+        // p2 win *
+    // if p3 & p2 bust *
+        //if h win *
+        // if p1 win*
+
+    // if three players bust --- create these functions entirely
+        // if h, p1, p2 bust - p3 wins
+        // if h, p1, p3 bust - p2 wins
+        // if h, p2, p3 bust - p1 wins
+        // if p1, p2, p3 bust - h wins
+
+    // if all players bust -> no one wins
+
+
+    // increase winners scores by 1 //
+    // alert the winner //
+
+    // if no one busts 
+    if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false && playerArray[3].Bust === false) {
+        // if they all tie
+        if (playerArray[0].Points === playerArray[1].Points && playerArray[1].Points === playerArray[2].Points && playerArray[2].Points === playerArray[3].Points) {
+            alert("talk about the odds... all players have tied");
+        }
+        // if h > p1 & h > p2 -> h wins
+        else if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
+            playerArray[0].Score = playerArray[0].Score + 1;
+            alert("House wins");
+        }
+        // if p1 > h & p1 > p2 -> p1 wins
+        else if (playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[2].Points) {
+            playerArray[1].Score = playerArray[1].Score + 1;
+            alert("Player1 wins");
+        }
+        // if p2 > h & p2 > p1 -> p2 wins
+        else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[1].Points) {
+            playerArray[2].Score = playerArray[2].Score + 1;
+            alert("Player2 wins");
+        }
+        // if h = p1 & > p2 -> h & p1 tie
+        else if (playerArray[0].Points === playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
+            alert("House and Player1 tie, there is no winner");
+        }
+        // -> h & p2 tie
+        else if (playerArray[0].Points === playerArray[2].Points && playerArray[0].Points > playerArray[1].Points) {
+            alert("House and Player2 tie, there is no winner");
+        }
+        // p1 & p2 tie
+        else if (playerArray[1].Points === playerArray[2].Points && playerArray[1].Points > playerArray[0].Points) {
+            alert("Player1 and Player2 tie, there is no winner");
+        }
+        else {
+            console.log("something has gone wrong... check it out")
+        }
+    }
+    // if one player busts
+    // if house busts
+    else if (playerArray[0].Bust === true) {
+        // if p1 > p2 -> p1 wins
+        if (playerArray[1].Points > playerArray[2].Points) {
+            playerArray[1].Score = playerArray[1].Score + 1;
+            alert("Player1 wins");
+        }
+        // if p1 < p2 -> p2 wins
+        else if (playerArray[1].Points < playerArray[2].Points) {
+            playerArray[2].Score = playerArray[2].Score + 1;
+            alert("Player2 wins");
+        }
+        else {
+            console.log("something has gone wrong... check it out")
+        }
+    }
+    //if p1 busts
+    else if (playerArray[1].Bust === true) {
+        // h wins
+        if (playerArray[0].Points > playerArray[2].Points) {
+            playerArray[0].Score = playerArray[0].Score + 1;
+            alert("House wins");
+        }
+        // p2 wins
+        else if (playerArray[2].Points > playerArray[0].Points) {
+            playerArray[2].Score = playerArray[2].Score + 1;
+            alert("Player2 wins");
+        }
+        else {
+            console.log("something has gone wrong... check it out")
+        }
+    }
+    //if p2 busts
+    else if (playerArray[2].Bust === true) {
+        // house wins
+        if (playerArray[0].Points > playerArray[1].Points) {
+            playerArray[0].Score = playerArray[0].Score + 1;
+            alert("House wins");
+        }
+        // p1 wins
+        else if (playerArray[0].Points < playerArray[1].Points) {
+            playerArray[1].Score = playerArray[1].Score + 1;
+            alert("Player1 wins");
+        }
+        else {
+            console.log("something has gone wrong... check it out")
+        }
+    }
+    // if two players bust 
+    //if house and p1 bust -> p2 win
+    else if (playerArray[0].Bust === true && playerArray[1].Bust === true) {
+        playerArray[2].Score = playerArray[2].Score + 1;
+        alert("Player2 wins");
+    }
+    // if house and p2 bust -> p1 win
+    else if (playerArray[0].Bust === true && playerArray[2].Bust === true) {
+        playerArray[1].Score = playerArray[1].Score + 1;
+        alert("Player1 wins");
+    }
+    // if p1 and p2 bust -> house win
+    else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
+        playerArray[0].Score = playerArray[0].Score + 1;
+        alert("House wins");
+    }
+
+    // if all players bust -> no one wins
+    else if (playerArray[0].Bust === true && playerArray[1].Bust === true && playerArray[2].Bust === true) {
+        alert("talk about the odds... all players have busted")
+    }
+    else {
+        console.log("something has gone wrong... check it out")
+    }
+
+    // alert users of all current scores //
+    alert(`end of round updated scores:
+    ${playerArray[0].Name}: ${playerArray[0].Score}
+    ${playerArray[1].Name}: ${playerArray[1].Score}
+    ${playerArray[2].Name}: ${playerArray[2].Score}
+    ${playerArray[3].Name}: ${playerArray[3].Score}`);
+
+    // update scores on html //
+    houseScore = document.getElementById("houseScore");
+    scoreP1 = document.getElementById("scorePlayer1");
+    scoreP2 = document.getElementById("scorePlayer2");
+    scoreP3 = document.getElementById("scorePlayer3");
+    
+    houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
+    scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
+    scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
+    scoreP3.innerHTML = `Score: ${playerArray[3].Score} `;
+
+    // hides all game buttons besides and changes the value to ask user if they want to play another game //
+    var hitBtnP1 = document.getElementById("hitPlayer1");
+    hitBtnP1.style.display = 'block';
+    var standBtnP1 = document.getElementById("standPlayer1");
+    standBtnP1.style.display = 'block';
+    var restartBtnP1 = document.getElementById("restartPlayer1");
+    restartBtnP1.value = 'play another round';
+
+    var hitBtnP2 = document.getElementById("hitPlayer2");
+    hitBtnP2.style.display = 'block';
+    var standBtnP2 = document.getElementById("standPlayer2");
+    standBtnP2.style.display = 'block';
+    var restartBtnP2 = document.getElementById("restartPlayer2");
+    restartBtnP2.value = 'play another round';
+
+    var hitBtnP3 = document.getElementById("hitPlayer3");
+    hitBtnP3.style.display = 'block';
+    var standBtnP3 = document.getElementById("standPlayer3");
+    standBtnP3.style.display = 'block';
+    var restartBtnP3 = document.getElementById("restartPlayer3");
+    restartBtnP3.value = 'play another round';
+
+    // reset player values //
+    playerArray[0].Bust = false;
+    playerArray[1].Bust = false;
+    playerArray[2].Bust = false;
+    playerArray[3].Bust = false;
+
+    playerArray[0].Stand = false;
+    playerArray[1].Stand = false;
+    playerArray[2].Stand = false;
+    playerArray[3].Stand = false;
+
+    console.log(playerArray);
+    console.log("=========================")
+
+
+
+
+
+
+
+    // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC // for 4 players
     // display all players points to user //
     alert(`end of round point values:
     ${playerArray[0].Name} has ${playerArray[0].Points} points
