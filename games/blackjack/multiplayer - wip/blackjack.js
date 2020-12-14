@@ -1949,25 +1949,34 @@ function endRound() {
     ${playerArray[2].Name} has ${playerArray[2].Points} points
     ${playerArray[3].Name} has ${playerArray[3].Points} points`)
 
-        // if no one busts 
-    // if they all tie
-    // if h > p1 & h > p2 -> h wins
-    // if p1 > h & p1 > p2 -> p1 wins
-    // if p2 > h & p2 > p1 -> p2 wins
-    // if h = p1 & > p2 -> h & p1 tie
-    // -> h & p2 tie
-    // p1 & p2 tie
+    // if no one busts -
+    // if they all tie -
+
+    // if h > p1 & h > p2 -> h wins  (add h > p3)
+    // if p1 > h & p1 > p2 -> p1 wins (add p1 > p3)
+    // if p2 > h & p2 > p1 -> p2 wins (add p2>p3)
+    // if p3 > h & > p1 & > p2 = p3 wins *
+    // if h = p1 & > p2 -> h & p1 tie  (add & > pm)
+    // -> h & p2 tie  (add > p3)
+    // p1 & p2 tie (add > p3)
+    // if h & p3 tie *
+    //if p1 & p3 tie *
+    // if p2 and p3 tie *
 
     // if one player busts
     // if house busts
-    // if p1 > p2 -> p1 wins
-    // if p1 < p2 -> p2 wins
+    // if p1 > p2 -> p1 wins (add p1 > p3)
+    // if p1 < p2 -> p2 wins (add p2 > p3)
+    // if p3> p1 & p3 > p2 = p3 wins *
+    
     //if p1 busts
     // h wins
     // p2 wins
     //if p2 busts
     // house wins
     // p1 wins
+    // if p3 busts *
+
 
     // if two players bust 
     //if house and p1 bust -> p2 win
@@ -1981,9 +1990,9 @@ function endRound() {
     // alert the winner //
 
     // if no one busts 
-    if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false) {
+    if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false && playerArray[3].Bust === false) {
         // if they all tie
-        if (playerArray[0].Points === playerArray[1].Points && playerArray[1].Points === playerArray[2].Points) {
+        if (playerArray[0].Points === playerArray[1].Points && playerArray[1].Points === playerArray[2].Points && playerArray[2].Points === playerArray[3].Points) {
             alert("talk about the odds... all players have tied");
         }
         // if h > p1 & h > p2 -> h wins
