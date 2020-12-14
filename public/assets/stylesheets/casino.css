@@ -97,7 +97,7 @@ ul li:nth-child(3):hover span {
     background: #009919 !important;
 }
 ul li:nth-child(4):hover span {
-    background: #fceb00 !important;
+    background: #8200b6 !important;
 }
 /* Game selection css */
 #gameChoice{
@@ -106,20 +106,19 @@ ul li:nth-child(4):hover span {
 }
 
 /*Chat Css*/
-.container {
-    float: right 75%;
-}
 #chat-container{
     text-align: left;
     height: 200px;
     width: 400px;
-    background-color: beige;
-}
+    background-image: url(../images/dicebackground.jpg);
+    background-size: contain;
+    color: white;
+  }
 
 #chat-log{
     height: 80%;
-    overflow:hidden; 
-    overflow-y:scroll;
+    overflow: hidden; 
+    overflow-y: scroll;
 }
 
 #chat-log li{
@@ -127,9 +126,16 @@ ul li:nth-child(4):hover span {
 }
 
 #chat-entry{
-    padding: 10px 0px 0px 10px;
+  padding: 10px 0px 0px 10px;
 }
 
 #chat-input{
     width: 90%;
+    background-color: rgb(109, 104, 104);
+    color: white;
 }
+
+/*Video*/
+/* #webcam1 {
+  
+} */
