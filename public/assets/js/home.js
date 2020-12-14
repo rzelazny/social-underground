@@ -97,7 +97,7 @@ $(document).ready(function() {
     }
 
     // Create a new gaming table on click
-    $("#newTable").on("click", function(event) {
+    $("#newTableSpan").on("click", function(event) {
         console.log("Making a new gaming table ");
         //create a new gaming table
         $.post("/api/newtable").then(function(newTable){
