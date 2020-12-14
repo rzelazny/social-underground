@@ -1380,6 +1380,72 @@ function houseLogic() {
 
     // when all 5 players are standing ... //
     if (playerArray.length === 6) {
+        // house will stand if ... //
+        // house 17+ points
+        if (playerArray[0].Points >= 17) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // all players bust
+        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // all players points < house 
+        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // house will hit if ... //
+        // p1 points > house BUT < 22
+        else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // p2 points > house BUT < 22
+        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // p3 points > house BUT < 22
+        else if (playerArray[3].Bust === false && playerArray[3].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // p4 points > house BUT < 22
+        else if (playerArray[4].Bust === false && playerArray[4].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // p5 points > house BUT < 22
+        else if (playerArray[5].Bust === false && playerArray[5].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // player 1 tied && points < 17
+        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
+        // player 2 tied && points < 17
+        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
+        // player 3 tied && points < 17
+        else if (playerArray[3].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
+        // player 4 tied && points < 17
+        else if (playerArray[4].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
+        // player 5 tied && points < 17
+        else if (playerArray[5].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
+        // stand //
+        else {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
 
     }
 
