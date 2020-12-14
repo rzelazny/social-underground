@@ -26,7 +26,31 @@
 </nav>
 <body>
     <div class="container"id=gameChoice>
-
+        <form>
+            <h2>Game mode</h2>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radioMulti" value="Multiplayer" checked>
+                <label class="form-check-label" for="inlineRadio1">Multiplayer</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radioSingle" value="Single Player">
+                <label class="form-check-label" for="inlineRadio2">Single Player</label>
+            </div>
+            <h2>Choose a game</h2>
+            <select class="form-control" id="multiSelect">
+                <option>Just Chatting M</option>
+                <option>Black Jack</option>
+                <option>Rock Paper Scissors</option>
+                <option>Monopoly</option>
+            </select>
+            <select class="form-control"id="singleSelect" style="display:none">
+                <option>Just Chatting S</option>
+                <option>Black Jack</option>
+                <option>Rock Paper Scissors</option>
+                <option>Monopoly</option>
+            </select>
+            <button type="submit" class="btn btn-default" id="chooseGame">Start Playing</button>
+        </form>
     </div>
     <div class="container" id="containerBlackJack">
         <canvas id="canvas" width="1100" height="650"></canvas>

@@ -127,6 +127,19 @@ $(document).ready(function() {
     //     console.log("Final round...FIGHT");
     // });
 
+    //Show multiplayer game choices
+    $("#radioMulti").on("click", function(event) {
+        $("#singleSelect").css("display", "none");
+        $("#multiSelect").css("display", "block");
+    })
+
+    //Show single player game choices
+    $("#radioSingle").on("click", function(event) {
+        $("#singleSelect").css("display", "block");
+        $("#multiSelect").css("display", "none");
+        
+    })
+
     //send chat button
     $("#send-chat").on("click", function(event) {
         event.preventDefault();

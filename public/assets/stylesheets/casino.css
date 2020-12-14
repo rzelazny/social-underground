@@ -99,6 +99,11 @@ ul li:nth-child(3):hover span {
 ul li:nth-child(4):hover span {
     background: #fceb00 !important;
 }
+/* Game selection css */
+#gameChoice{
+    background: #009919;
+    margin-bottom: 5px;
+}
 
 /*Chat Css*/
 .container {
