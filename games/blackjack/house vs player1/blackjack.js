@@ -1,8 +1,8 @@
 // THIS GAME IS CURRENTLY CODED FOR ONE PLAYER VS THE HOUSE //
 
-alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has 17 or more points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. Once we are creating the actual page the houses cards and hand points should be hidden from the player until the end of the round function has ran. I am just leaving them up for building purposes.")
+alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has 17 or more points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. Once we are creating the actual page the houses cards should have the first card up the other face down (hit cards should also be face down) and hand points should be hidden from the player until the end of the round function has ran. I am just leaving them up for building purposes.")
 
-alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be delt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 1 point each. If you win you will be awarded 2 points and if the House wins it will be awarded two points.")
+alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be dealt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 0 points. If you win you will be awarded 1 point and if the House wins it will be awarded 1 point.")
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
@@ -440,22 +440,22 @@ function endRound() {
     }
     // if the players tie //
     if (playerArray[0].Points === playerArray[1].Points) {
-        alert(`you tied`)
-        // increase both scores by 1 //
-        playerArray[0].Score = playerArray[0].Score + 1;
-        playerArray[1].Score = playerArray[1].Score + 1;
+        alert(`you tied, no one was awarded points.`)
+        // // increase both scores by 1 //
+        // playerArray[0].Score = playerArray[0].Score + 1;
+        // playerArray[1].Score = playerArray[1].Score + 1;
         // alert the users of current scores //
         alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`)
-        // update scores on html //
-        divScore.innerHTML = `Score: ${playerArray[0].Score} `;
-        divScore.innerHTML = `Score: ${playerArray[1].Score} `;
+        // // update scores on html //
+        // divScore.innerHTML = `Score: ${playerArray[0].Score} `;
+        // divScore.innerHTML = `Score: ${playerArray[1].Score} `;
     } 
     // if the House wins //
     else if (playerArray[1].Bust === true || playerArray[1].Points > 21 || playerArray[0].Bust === false && playerArray[0].Points > playerArray[1].Points) {
         // alert users //
         alert(`${playerArray[0].Name} won || ${playerArray[1].Name} lost`)
         // increase House points by 2 //
-        playerArray[0].Score = playerArray[0].Score + 2;
+        playerArray[0].Score = playerArray[0].Score + 1;
         // alert the users of current scores //
         alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`) 
         scoreHouse = document.querySelector("#scoreHouse");
@@ -467,7 +467,7 @@ function endRound() {
         // alert users //
         alert (`${playerArray[0].Name} lost || ${playerArray[1].Name} won`)
         // increase player1 points by 2 //
-        playerArray[1].Score = playerArray[1].Score + 2;
+        playerArray[1].Score = playerArray[1].Score + 1;
         // alert the users of current scores //
         alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`)
         scorePlayer1 = document.querySelector("#scorePlayer1");
