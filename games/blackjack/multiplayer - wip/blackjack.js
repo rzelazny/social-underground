@@ -1885,18 +1885,18 @@ function endRound() {
         scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
 
         // hides all game buttons besides and changes the value to ask user if they want to play another game //
-        var hitBtnP1 = document.getElementById("hitP1");
+        var hitBtnP1 = document.getElementById("hitPlayer1");
         hitBtnP1.style.display = 'block';
-        var standBtnP1 = document.getElementById("standP1");
+        var standBtnP1 = document.getElementById("standPlayer1");
         standBtnP1.style.display = 'block';
-        var restartBtnP1 = document.getElementById("restartP1");
+        var restartBtnP1 = document.getElementById("restartPlayer1");
         restartBtnP1.value = 'play another round';
 
-        var hitBtnP2 = document.getElementById("hitP2");
+        var hitBtnP2 = document.getElementById("hitPlayer2");
         hitBtnP2.style.display = 'block';
-        var standBtnP2 = document.getElementById("standP2");
+        var standBtnP2 = document.getElementById("standPlayer2");
         standBtnP2.style.display = 'block';
-        var restartBtnP2 = document.getElementById("restartP2");
+        var restartBtnP2 = document.getElementById("restartPlayer2");
         restartBtnP2.value = 'play another round';
 
         // reset player values //
