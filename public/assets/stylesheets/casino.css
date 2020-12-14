@@ -134,10 +134,14 @@ ul li:nth-child(4):hover span {
 #chat-container{
     text-align: left;
     height: 200px;
-    width: 800px;
+    width: 90%;
     background-image: url(../images/dicebackground.jpg);
     background-size: contain;
     color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0px 0px 20px 20px;
 }
 
 #chat-log{
@@ -147,15 +151,15 @@ ul li:nth-child(4):hover span {
 }
 
 #chat-log li{
+    font-size: 18px;
+    font-weight: bold;
     list-style-type: none;
-}
-
-#chat-entry{
-    padding: 10px 0px 0px 10px;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: red;
 }
 
 #chat-input{
     width: 90%;
-    background-color: rgb(109, 104, 104);
-    color: white;
+    background-color: rgb(245, 235, 235);
+    color: black;
 }
