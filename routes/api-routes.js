@@ -320,6 +320,27 @@ app.get("/api/photo/:id/:table", function(req, res) {
             return res.status(401).json(err);
           });
       break;
+      case "game":
+        db.gaming_table.update(
+          {
+          game: req.body.data
+        },
+        {
+          where: 
+          {
+            id: {
+              [Op.eq]: req.params.table
+            }
+          }
+        })
+        .then(function(results){
+          console.log("sending new table data back")
+          return res.json(results);
+        })
+          .catch(function(err) {
+            return res.status(401).json(err);
+          });
+      break;
     }
   });
   
