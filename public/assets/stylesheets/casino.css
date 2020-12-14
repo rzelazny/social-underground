@@ -105,10 +105,21 @@ ul li:nth-child(4):hover span {
 } */
 /* Game selection css */
 #gameChoice{
-    background: #009919;
+    background-image: url(../images/felt.png);
     margin-bottom: 5px;
+    padding: 5px;
+    color: white;
+    
+    text-align: center;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
 }
-
+#gameChoice h2{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
 /* RPS css */
 #containerRPS{
     background: #009919;
@@ -123,7 +134,7 @@ ul li:nth-child(4):hover span {
 #chat-container{
     text-align: left;
     height: 200px;
-    width: 400px;
+    width: 800px;
     background-image: url(../images/dicebackground.jpg);
     background-size: contain;
     color: white;
@@ -140,7 +151,7 @@ ul li:nth-child(4):hover span {
 }
 
 #chat-entry{
-  padding: 10px 0px 0px 10px;
+    padding: 10px 0px 0px 10px;
 }
 
 #chat-input{
@@ -148,8 +159,3 @@ ul li:nth-child(4):hover span {
     background-color: rgb(109, 104, 104);
     color: white;
 }
-
-/*Video*/
-/* #webcam1 {
-  
-} */
