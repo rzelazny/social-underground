@@ -298,7 +298,7 @@ function createElements() {
 
     // event listeners //
 
-    if (playerArray.length === 2) {
+    if (playerArray.length === 3) {
         restartBtnP1.addEventListener('click', onRestartP1);
         restartBtnP2.addEventListener('click', onRestartP2);
 
@@ -307,19 +307,6 @@ function createElements() {
 
         standBtnP1.addEventListener('click', onStandPlayer1);
         standBtnP2.addEventListener('click', onStandPlayer2);
-    }
-    else if (playerArray.length === 3) {
-        restartBtnP1.addEventListener('click', onRestartP1);
-        restartBtnP2.addEventListener('click', onRestartP2);
-        restartBtnP3.addEventListener('click', onRestartP3);
-
-        hitBtnP1.addEventListener('click', onHitPlayer1);
-        hitBtnP2.addEventListener('click', onHitPlayer2);
-        hitBtnP3.addEventListener('click', onHitPlayer3);
-
-        standBtnP1.addEventListener('click', onStandPlayer1);
-        standBtnP2.addEventListener('click', onStandPlayer2);
-        standBtnP3.addEventListener('click', onStandPlayer3);
     }
     else if (playerArray.length === 4) {
         restartBtnP1.addEventListener('click', onRestartP1);
