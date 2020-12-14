@@ -109,6 +109,16 @@ ul li:nth-child(4):hover span {
     margin-bottom: 5px;
 }
 
+/* RPS css */
+#containerRPS{
+    background: #009919;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+/* #rps-start{
+    content
+} */
 /*Chat Css*/
 #chat-container{
     text-align: left;
@@ -117,7 +127,7 @@ ul li:nth-child(4):hover span {
     background-image: url(../images/dicebackground.jpg);
     background-size: contain;
     color: white;
-  }
+}
 
 #chat-log{
     height: 80%;

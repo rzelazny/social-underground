@@ -197,15 +197,15 @@ $(document).ready(function() {
     })
 
     //Take photo for testing
-    // $("#camBtnSnap").on("click", function(event) {
-    //     let picture = {
-    //         photo: webcam.snap(),
-    //         table: curTable
-    //     }
-    //     console.log("Sending photo");
-    //     document.getElementById("my-photo").src = picture.photo;
-    //     $.post("/api/photo/", picture);
-    // })
+    $("#camSnap").on("click", function(event) {
+        let picture = {
+            photo: webcam.snap(),
+            table: curTable
+        }
+        console.log("Sending photo");
+        document.getElementById("my-photo").src = picture.photo;
+        $.post("/api/photo/", picture);
+    })
 
     //Navigate to home and free up user's seat at the table.
     $("#goHome").on("click", function(event) {
@@ -240,7 +240,7 @@ $(document).ready(function() {
                 document.getElementById("my-photo").src = sendPic.photo;
                 $.post("/api/photo/", sendPic);
 
-                $.get("/api/photo/1/" + curTable).then(function(data){
+                $.get("/api/photo/" + email + "/" + curTable).then(function(data){
                     console.log("data: ", atob(data.photo));
                     console.log("photo: ", data);
                     document.getElementById("their-photo").src = "data:image/png;base64," + atob(data.photo);

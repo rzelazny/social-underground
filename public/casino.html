@@ -67,29 +67,54 @@
         </div>
     </div>
     <div class="container" id="containerRPS", style="display:none">
-        <video id="webcam" autoplay playsinline width="320" height="240"></video>
-        <canvas id="snapShot" class="d-none"></canvas>
-        <img id="my-photo" src="">
-        <img id="their-photo" src="">
-        <br>
-        <button id="camBtnOn">Camera On</button>
-        <!-- <button id="camBtnSnap">Camera Snap</button> -->
-        <button id="camBtnOff">Camera Off</button>
-        <br>
-        <select class="form-control" id="select-RPS-opponent">
-            <option>user1</option>
-            <option>user2</option>
-            <option>user3</option>
-            <option>user4</option>
-            <option>user5</option>
-        </select>
-        <button id="camBtnRPS">Play Rock Paper Scissors</button>
-        <div id="rpsCountdown"></div>
-        <!-- <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider round"></span>
-        </label> -->
-    </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <video id="webcam" autoplay playsinline width="320" height="240"></video>
+                <canvas id="snapShot" class="d-none"></canvas>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button id="camBtnOn">Camera On</button>
+                        <!-- <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                        </label> -->
+                    </div>
+                    <div class="col-lg-6">
+                        <button id="camBtnOff">Camera Off</button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img id="my-photo" src="">
+                    <div id="rpsCountdown"></div>
+                </div>
+                <div class="col-lg-4">
+                    <img id="their-photo" src="">
+                    <button id="camSnap">Camera Test</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <label for="form-group row">Who do you challenge?</label>
+                    <select class="col-sm-7" id="select-RPS-opponent">
+                        <option>user1</option>
+                        <option>user2</option>
+                        <option>user3</option>
+                        <option>user4</option>
+                        <option>user5</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button id="camBtnRPS">Play Rock Paper Scissors</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
         <!-- <div>
             <ul>
                 <li>
