@@ -20,7 +20,7 @@ var divScore = null;
 
 var amount = 0;
 // hard coded for now but will use players from db
-let playerArray = [{ Name: "House", ID: 0, Score: 0, Points: 0, Hand: hand[0], Stand: 'false' }];
+let playerArray = [{ Name: "House", ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' }];
 
 
 ///////////////////////////////////////////////
@@ -50,13 +50,10 @@ function addPlayers() {
         amount = prompt("How many players would you like to add?");
     }
 
-    console.log(playerArray);
-
     for (var i = 1; i <= amount; i++) {
         var player = { Name: 'Player' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand, Stand: 'false' };
         playerArray.push(player)
     }
-    console.log(playerArray);
 }
 
 // setting i to 0 so that we can control the synchronicity //
@@ -1770,17 +1767,17 @@ function endRound() {
             }
             // if h > p1 & h > p2 -> h wins
             else if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
-                playerArray[0].Score = playerArray[0].Score++;
+                playerArray[0].Score = playerArray[0].Score + 1;
                 alert("House wins");
             }
             // if p1 > h & p1 > p2 -> p1 wins
             else if (playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[2].Points) {
-                playerArray[1].Score = playerArray[1].Score++;
+                playerArray[1].Score = playerArray[1].Score + 1;
                 alert("Player1 wins");
             }
             // if p2 > h & p2 > p1 -> p2 wins
             else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[1].Points) {
-                playerArray[2].Score = playerArray[2].Score++;
+                playerArray[2].Score = playerArray[2].Score + 1;
                 alert("Player2 wins");
             }
             // if h = p1 & > p2 -> h & p1 tie
@@ -1804,12 +1801,12 @@ function endRound() {
         else if (playerArray[0].Bust === true) {
             // if p1 > p2 -> p1 wins
             if (playerArray[1].Points > playerArray[1].Points) {
-                playerArray[1].Score = playerArray[1].Score++;
+                playerArray[1].Score = playerArray[1].Score + 1;
                 alert("Player1 wins");
             }
             // if p1 < p2 -> p2 wins
             else if (playerArray[1].Points > playerArray[2].Points) {
-                playerArray[2].Score = playerArray[2].Score++;
+                playerArray[2].Score = playerArray[2].Score + 1;
                 alert("Player2 wins");
             }
             else {
@@ -1820,12 +1817,12 @@ function endRound() {
         else if (playerArray[1].Bust === true) {
             // h wins
             if (playerArray[0].Points > playerArray[2].Points) {
-                playerArray[0].Score = playerArray[0].Score++;
+                playerArray[0].Score = playerArray[0].Score + 1;
                 alert("House wins");
             }
             // p2 wins
             else if (playerArray[2].Points > playerArray[0].Points) {
-                playerArray[2].Score = playerArray[2].Score++;
+                playerArray[2].Score = playerArray[2].Score + 1;
                 alert("Player2 wins");
             }
             else {
@@ -1836,12 +1833,12 @@ function endRound() {
         else if (playerArray[2].Bust === true) {
             // house wins
             if (playerArray[0].Points > playerArray[1].Points) {
-                playerArray[0].Score = playerArray[0].Score++;
+                playerArray[0].Score = playerArray[0].Score + 1;
                 alert("House wins");
             }
             // p1 wins
             else if (playerArray[0].Points < playerArray[1].Points) {
-                playerArray[1].Score = playerArray[1].Score++;
+                playerArray[1].Score = playerArray[1].Score + 1;
                 alert("Player1 wins");
             }
             else {
@@ -1851,17 +1848,17 @@ function endRound() {
         // if two players bust 
         //if house and p1 bust -> p2 win
         else if (playerArray[0].Bust === true && playerArray[1] === true) {
-            playerArray[2].Score = playerArray[2].Score++;
+            playerArray[2].Score = playerArray[2].Score + 1;
             alert("Player2 wins");
         }
         // if house and p2 bust -> p1 win
         else if (playerArray[0].Bust === true && playerArray[2] === true) {
-            playerArray[1].Score = playerArray[1].Score++;
+            playerArray[1].Score = playerArray[1].Score + 1;
             alert("Player1 wins");
         }
         // if p1 and p2 bust -> house win
         else if (playerArray[1].Bust === true && playerArray[2] === true) {
-            playerArray[0].Score = playerArray[0].Score++;
+            playerArray[0].Score = playerArray[0].Score + 1;
             alert("House wins");
         }
 
@@ -1877,7 +1874,7 @@ function endRound() {
         alert(`end of round updated scores:
         ${playerArray[0].Name}: ${playerArray[0].Score}
         ${playerArray[1].Name}: ${playerArray[1].Score}
-        ${playerArray[2].Name} has ${playerArray[2].Score}`);
+        ${playerArray[2].Name}: ${playerArray[2].Score}`);
 
         // update scores on html //
         houseScore = document.getElementById("houseScore");
@@ -1888,16 +1885,28 @@ function endRound() {
         scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
 
         // hides all game buttons besides and changes the value to ask user if they want to play another game //
+        var hitBtnP1 = document.getElementById("hitP1");
         hitBtnP1.style.display = 'block';
+        var standBtnP1 = document.getElementById("standP1");
         standBtnP1.style.display = 'block';
+        var restartBtnP1 = document.getElementById("restartP1");
         restartBtnP1.value = 'play another round';
+
+        var hitBtnP2 = document.getElementById("hitP2");
+        hitBtnP2.style.display = 'block';
+        var standBtnP2 = document.getElementById("standP2");
+        standBtnP2.style.display = 'block';
+        var restartBtnP2 = document.getElementById("restartP2");
+        restartBtnP2.value = 'play another round';
 
         // reset player values //
         playerArray[0].Bust = false;
         playerArray[1].Bust = false;
+        playerArray[2].Bust = false;
 
         playerArray[0].Stand = false;
         playerArray[1].Stand = false;
+        playerArray[2].Stand = false;
 
         console.log(playerArray);
         console.log("=========================")
