@@ -177,7 +177,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
       table_id: {
         [Op.eq]: req.params.table
       },
-      user_id: {
+      user_email: {
         [Op.eq]: req.params.id
       }
     }
@@ -408,12 +408,12 @@ app.get("/api/photo/:id/:table", function(req, res) {
   app.post("/api/photo/cleanup", function(req, res) {
 
   console.log("photo cleanup for table: ", req.body.table);
-  console.log("removing photos of user: ", req.user.id);
+  console.log("removing photos of user: ", req.user.email);
 
   db.photo.findAll({
     where: {
-      user_id: {
-        [Op.eq]: req.user.id
+      user_email: {
+        [Op.eq]: req.user.email
       },
       table_id: {
         [Op.eq]: req.body.table
@@ -425,8 +425,8 @@ app.get("/api/photo/:id/:table", function(req, res) {
       for(i=0; i < results.length; i++){
         db.photo.destroy({
           where: {
-            user_id: {
-              [Op.eq]: req.user.id
+            user_email: {
+              [Op.eq]: req.user.email
             },
             table_id: {
               [Op.eq]: req.body.table
@@ -447,14 +447,14 @@ app.get("/api/photo/:id/:table", function(req, res) {
   app.post("/api/photo", function(req, res) {
 
     console.log("storing photo");
-    console.log(req.user.id);
+    console.log(req.user.email);
     console.log(req.body.table);
 
     let data = req.body.photo;
     let base64Data = data.replace("data:image/png;base64,", "");
     db.photo.create({
       photo: base64Data,
-      user_id: req.user.id,
+      user_email: req.user.email,
       table_id: req.body.table
     })
     .then(function(results){
