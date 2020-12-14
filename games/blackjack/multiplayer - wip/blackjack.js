@@ -1782,15 +1782,40 @@ function endRound() {
     }
 
     // if no one busts 
+    if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false) {
         // if they all tie
-
+        if (playerArray[0].Points === playerArray[1].Points === playerArray[2].Points) {
+            alert("talk about the odds... all players have tied");
+        }
         // if h > p1 & h > p2 -> h wins
+        else if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
+            playerArray[0].Score = playerArray[0].Score++;
+            alert("House wins");
+        }
         // if p1 > h & p1 > p2 -> p1 wins
+        else if (playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[2].Points) {
+            playerArray[1].Score = playerArray[1].Score++;
+            alert("Player1 wins");
+        }
         // if p2 > h & p2 > p1 -> p2 wins
-
+        else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[1].Points) {
+            playerArray[2].Score = playerArray[2].Score++;
+            alert("Player2 wins");
+        }
         // if h = p1 & > p2 -> h & p1 tie
+        else if (playerArray[0].Points === playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
+            alert("House and Player1 tie, there is no winner");
+        }
         // -> h & p2 tie
+        else if (playerArray[0].Points === playerArray[2].Points && playerArray[0].Points > playerArray[1].Points) {
+            alert("House and Player2 tie, there is no winner");
+        }
         // p1 & p2 tie
+        else if (playerArray[1].Points === playerArray[2].Points && playerArray[1].Points > playerArray[0].Points) {
+            alert("Player1 and Player2 tie, there is no winner");
+        }
+    }
+
 
     // if one player busts
         // if house busts
@@ -1820,7 +1845,6 @@ function endRound() {
     ${playerArray[0].Name}: ${playerArray[0].Score}
     ${playerArray[1].Name}: ${playerArray[1].Score}
     ${playerArray[2].Name} has ${playerArray[2].Score}`)
-    }
 
     // update scores on html //
     houseScore = document.getElementById("houseScore");
