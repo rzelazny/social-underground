@@ -181,3 +181,7 @@ ul li:nth-child(4):hover span {
     background-color: rgb(245, 235, 235);
     color: black;
 }
+
+#start {
+    margin: 5px;
+}
