@@ -565,10 +565,10 @@ function onHitPlayer1() {
     // will call player one hit function //
     player1Hit();
     // creating a timer function to give time for the card to render before busting //
-    // setTimeout(function () {
-    //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-    //     itsABust();
-    // }, 500); 
+    setTimeout(function () {
+        // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        itsABust();
+    }, 500); 
 }
 
 function player1Hit() {
@@ -630,6 +630,28 @@ function player1Hit() {
     })
 }
 
+function itsABust() {
+    for (var i = 0; i < playerArray.length; i++) {
+        if (playerArray[i].Points > 21) {
+            // sets bst property to true //
+            playerArray[i].Bust === true;
+            //sends user alert //
+            alert(`${playerArray[i].Name} busted`);
+            console.log(playerArray[i]);
+            // calls function //
+            console.log("this itsabust fcn is what is ending the round");
+            // endRound();
+            //playerArray[i].Bust === false;
+        }
+    }
+    // hard coded house logic //
+    // if (playerArray[1].Points < 22) {
+    //     setTimeout(function () {
+    //         hitHouseLogic();
+    //     }, 500);
+    // }
+}
+
 function onHitPlayer2() {
         // will call player one hit function //
         player2Hit();
@@ -639,7 +661,6 @@ function onHitPlayer2() {
         //     itsABust();
         // }, 500); 
 }
-
 function player2Hit() {
     // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
@@ -708,7 +729,6 @@ function onHitPlayer3() {
         //     itsABust();
         // }, 500); 
 }
-
 function player3Hit() {
     // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
@@ -777,7 +797,6 @@ function onHitPlayer4() {
         //     itsABust();
         // }, 500); 
 }
-
 function player4Hit() {
     // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
@@ -846,7 +865,6 @@ function onHitPlayer5() {
         //     itsABust();
         // }, 500); 
 }
-
 function player5Hit() {
     // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
@@ -915,7 +933,6 @@ function onHitPlayer6() {
         //     itsABust();
         // }, 500); 
 }
-
 function player6Hit() {
     // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
@@ -984,7 +1001,6 @@ function onHitPlayer7() {
         //     itsABust();
         // }, 500); 
 }
-
 function player7Hit() {
     // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
@@ -1058,27 +1074,6 @@ function onStandPlayer6() {
 }
 function onStandPlayer7() {
 }
-
-// function itsABust() {
-//     for (var i = 0; i < playerArray.length; i++) {
-//         if (playerArray[i].Points > 21) {
-//             //sends user alert //
-//             alert("you busted");
-//             // sets bst property to true //
-//             playerArray[i].Bust === true;
-//             console.log(playerArray[i]);
-//             // calls function //
-//             console.log("this itsabust fcn is what is ending the round");
-//             endRound();
-//         }
-//     }
-//     // hard coded house logic //
-//     if (playerArray[1].Points < 22) {
-//         setTimeout(function () {
-//             hitHouseLogic();
-//         }, 500);
-//     }
-// }
 
 // function hitHouseLogic() {
 //     // house will currently stand if it has > 17 points or is higher than player points //
