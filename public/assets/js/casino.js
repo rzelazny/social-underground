@@ -8,6 +8,7 @@ $(document).ready(function() {
     let email = "";
     let curSeat = "";
     let maxUsers = 5;
+    let oppEmail = "";
     //Elements and vars for chat log
     var chatScroll = $("#chat-log");
     var chatInput = $("#chat-input");
@@ -225,7 +226,10 @@ $(document).ready(function() {
 
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
-        let timer = 1
+        //let timer = 3
+        
+        oppEmail = $("#select-RPS-opponent").val();
+        console.log(oppEmail);
         let rpsTimer = setInterval(function() {
             timer--
             $("#rpsCountdown").text(timer);
@@ -240,7 +244,7 @@ $(document).ready(function() {
                 document.getElementById("my-photo").src = sendPic.photo;
                 $.post("/api/photo/", sendPic);
 
-                $.get("/api/photo/" + email + "/" + curTable).then(function(data){
+                $.get("/api/photo/" + oppEmail + "/" + curTable).then(function(data){
                     console.log("data: ", atob(data.photo));
                     console.log("photo: ", data);
                     document.getElementById("their-photo").src = "data:image/png;base64," + atob(data.photo);
