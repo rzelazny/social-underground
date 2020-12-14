@@ -1041,7 +1041,7 @@ function itsABust() {
     for (var i = 0; i < playerArray.length; i++) {
         if (playerArray[i].Points > 21) {
             // sets bst property to true //
-            playerArray[i].Bust === true;
+            playerArray[i].Bust = true;
             //sends user alert // -- we need to set this to only display to the user who busted
             alert(`${playerArray[i].Name} busted`);
         }
@@ -1049,37 +1049,44 @@ function itsABust() {
 }
 
 function onStandPlayer1() {
-    playerArray[1].Stand === true;
+    playerArray[1].Stand = true;
+    console.log(playerArray[1])
     checkStandStat();
 }
 function onStandPlayer2() {
-    playerArray[2].Stand === true;
+    playerArray[2].Stand = true;
     checkStandStat();
 }
 function onStandPlayer3() {
-    playerArray[3].Stand === true;
+    playerArray[3].Stand = true;
     checkStandStat();
 }
 function onStandPlayer4() {
-    playerArray[4].Stand === true;
+    playerArray[4].Stand = true;
     checkStandStat();
 }
 function onStandPlayer5() {
-    playerArray[5].Stand === true;
+    playerArray[5].Stand = true;
     checkStandStat();
 }
 function onStandPlayer6() {
-    playerArray[6].Stand === true;
+    playerArray[6].Stand = true;
     checkStandStat();
 }
 function onStandPlayer7() {
-    playerArray[7].Stand === true;
+    playerArray[7].Stand = true;
     checkStandStat();
 }
 
 function checkStandStat() {
-    if (amount === 2) {
-        
+    console.log("i can see")
+    if (playerArray.length === 3) {
+        if (playerArray[1].Stand === true && playerArray[2].Stand === true) {
+            console.log("both players are standing");
+        }
+        else{
+            console.log("waiting for all players to be standing");
+        }
     }
 }
 
