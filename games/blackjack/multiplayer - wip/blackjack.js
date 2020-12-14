@@ -1215,51 +1215,55 @@ function houseLogic() {
             console.log("we will run end round");
             // endRound();
         }
-        //player 1 busts & player 2 busts
+        // all players bust
         else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
-        // player 1 busts & player 2 points < house or 17+
-        else if (playerArray[1].Bust === true && playerArray[2].Points > 17 || playerArray[1].Bust === false && playerArray[2].Points < playerArray[0].Points) {
+        // p1 bust & p2 points < house
+        else if (playerArray[1].Bust === true && playerArray[2].Points < playerArray[0].Points) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
-        // player 1 points < house or 17+ or player 2 busts
-        else if (playerArray[2].Bust === true && playerArray[1].Points > 17 || playerArray[2].Bust === false && playerArray[1].Points < playerArray[0].Points) {
+        // p1 points < house & p2 bust
+        else if (playerArray[2].Bust === true && playerArray[1].Points < playerArray[0].Points) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
-        // player 1 & 2 points < 17
+        // all players points < house 
         else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
-
-        // house will hit if
-        // player 1 points > house BUT < 22
-        if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
-            console.log("house will hit")
-        }
-        // player 2 points > house BUT < 22
-        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
-            console.log("house will hit")
-        }
-        // player 1 tied && points < 17
-        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
-            console.log("house will hit")
-        }
-        // player 2 tied && points < 17
-        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
-            console.log("house will hit")
-        }
         else {
-            console.log("something fell through the cracks");
+            // house will hit if
+            // p1 points > house BUT < 22
+            if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+                console.log("house will hit")
+            }
+            // p2 points > house BUT < 22
+            else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+                console.log("house will hit")
+            }
+            // player 1 tied && points < 17
+            else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+                console.log("house will hit")
+            }
+            // player 2 tied && points < 17
+            else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+                console.log("house will hit")
+            }
+            else {
+                console.log("something fell through the cracks");
+            }
         }
+    }
+    else {
+        console.log("house logic only set up for 2 player game for now");
     }
 }
 
