@@ -1150,23 +1150,64 @@ function checkStandStat() {
 }
 
 function houseLogic() {
-    if (allStanding === true) {
-        if (playerArray.length === 3) {
-            if (playerArray[0].Points > playerArray[1] && playerArray[2] || playerArray[0] > 16) {
-                playerArray[0].Stand = true;
-            }
+    // when all 2 players are standing ... //
+    if (playerArray.length === 3) {
+        // house will stand if ... //
+        // house 17+ points
+        if (playerArray[0].Points >= 17) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
         }
-    }
-    else {
-        console.log("there must be an error");
+        //player 1 busts & player 2 busts
+        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // player 1 busts & player 2 points < house or 17+
+        else if (playerArray[1].Bust === true && playerArray[2].Points > 17 || playerArray[1].Bust === false && playerArray[2].Points < playerArray[0].Points) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // player 1 points < house or 17+ or player 2 busts
+        else if (playerArray[2].Bust === true && playerArray[1].Points > 17 || playerArray[2].Bust === false && playerArray[1].Points < playerArray[0].Points) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+        // player 1 & 2 points < 17
+        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
+            playerArray[0].Stand = true;
+            console.log("we will run end round");
+            // endRound();
+        }
+
+        // house will hit if
+        // player 1 points > house BUT < 22
+        if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // player 2 points > house BUT < 22
+        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+            console.log("house will hit")
+        }
+        // player 1 tied && points < 17
+        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
+        // player 2 tied && points < 17
+        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+            console.log("house will hit")
+        }
+        else {
+            console.log("something fell through the cracks");
+        }
     }
 }
 
-// function hitHouseLogic() {
-//     // house will currently stand if it has > 17 points or is higher than player points //
-//     if (playerArray[0].Points > playerArray[1].Points || playerArray[0].Points > 16) {
-//         playerArray[0].Stand = true;
-//     }
+
 //     else if (playerArray[0].Points < playerArray[1].Points || playerArray[0].Points === playerArray[1].Points && playerArray[0].Points < 17) {
 //         var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
 //         $.ajax({
