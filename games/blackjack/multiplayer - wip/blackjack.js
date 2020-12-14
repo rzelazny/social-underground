@@ -1099,6 +1099,7 @@ function itsABust() {
         if (playerArray[i].Points > 21) {
             // sets bst property to true //
             playerArray[i].Bust = true;
+            playerArray[i].Stand = true;
             //sends user alert // -- we need to set this to only display to the user who busted
             alert(`${playerArray[i].Name} busted`);
         }
@@ -1258,12 +1259,12 @@ function houseLogic() {
                 console.log("house will hit")
             }
             else {
-                console.log("something fell through the cracks");
+                console.log("error something isnt right");
             }
         }
     }
     else {
-        console.log("house logic only set up for 2 player game for now");
+        console.log("something fell through the cracksss");
     }
 }
 
