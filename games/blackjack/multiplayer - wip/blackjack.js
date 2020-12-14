@@ -2416,14 +2416,15 @@ function endRound() {
     console.log(playerArray);
     console.log("=========================")
 
-    // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC // for 4 players
+    // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC // for 5 players
     // display all players points to user //
     alert(`end of round point values:
     ${playerArray[0].Name} has ${playerArray[0].Points} points
     ${playerArray[1].Name} has ${playerArray[1].Points} points
     ${playerArray[2].Name} has ${playerArray[2].Points} points
     ${playerArray[3].Name} has ${playerArray[3].Points} points
-    ${playerArray[4].Name} has ${playerArray[4].Points} points`)
+    ${playerArray[4].Name} has ${playerArray[4].Points} points
+    ${playerArray[5].Name} has ${playerArray[5].Points} points`)
 
 // 5 player function //
     // if all players bust -> no one wins
@@ -2746,7 +2747,8 @@ function endRound() {
     ${playerArray[1].Name}: ${playerArray[1].Score}
     ${playerArray[2].Name}: ${playerArray[2].Score}
     ${playerArray[3].Name}: ${playerArray[3].Score}
-    ${playerArray[4].Name}: ${playerArray[4].Score}`);
+    ${playerArray[4].Name}: ${playerArray[4].Score}
+    ${playerArray[5].Name}: ${playerArray[5].Score}`);
 
     // update scores on html //
     houseScore = document.getElementById("houseScore");
@@ -2754,12 +2756,14 @@ function endRound() {
     scoreP2 = document.getElementById("scorePlayer2");
     scoreP3 = document.getElementById("scorePlayer3");
     scoreP4 = document.getElementById("scorePlayer4");
+    scoreP5 = document.getElementById("scorePlayer5");
     
     houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
     scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
     scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
     scoreP3.innerHTML = `Score: ${playerArray[3].Score} `;
     scoreP4.innerHTML = `Score: ${playerArray[4].Score} `;
+    scoreP5.innerHTML = `Score: ${playerArray[5].Score} `;
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
     var hitBtnP1 = document.getElementById("hitPlayer1");
@@ -2790,18 +2794,27 @@ function endRound() {
     var restartBtnP4 = document.getElementById("restartPlayer4");
     restartBtnP4.value = 'play another round';
 
+    var hitBtnP5 = document.getElementById("hitPlayer5");
+    hitBtnP5.style.display = 'block';
+    var standBtnP5 = document.getElementById("standPlayer5");
+    standBtnP5.style.display = 'block';
+    var restartBtnP5 = document.getElementById("restartPlayer5");
+    restartBtnP5.value = 'play another round';
+
     // reset player values //
     playerArray[0].Bust = false;
     playerArray[1].Bust = false;
     playerArray[2].Bust = false;
     playerArray[3].Bust = false;
     playerArray[4].Bust = false;
+    playerArray[5].Bust = false;
 
     playerArray[0].Stand = false;
     playerArray[1].Stand = false;
     playerArray[2].Stand = false;
     playerArray[3].Stand = false;
     playerArray[4].Stand = false;
+    playerArray[5].Stand = false;
 
     console.log(playerArray);
     console.log("=========================")
