@@ -1948,25 +1948,7 @@ function endRound() {
     ${playerArray[2].Name} has ${playerArray[2].Points} points
     ${playerArray[3].Name} has ${playerArray[3].Points} points`)
 
-        
 
-    // if one player busts
-        // if house busts
-            // if p1 > p2 -> p1 wins (add p1 > p3)
-            // if p1 < p2 -> p2 wins (add p2 > p3)
-            // if p3> p1 & p3 > p2 = p3 wins *
-        //if p1 busts
-            // h wins (add p3)
-            // p2 wins (add p3)
-            // p3 wins *
-        //if p2 busts
-            // house wins (add p3)
-            // p1 wins (add p3)
-            // p3 wins *
-        //p3 busts **
-            // h wins *
-            // p1 wins *
-            // p2 wins *
 
     // if two players bust
         //if house and p1 bust
@@ -2078,15 +2060,20 @@ function endRound() {
     // if one player busts
     // if house busts
     else if (playerArray[0].Bust === true) {
-        // if p1 > p2 -> p1 wins
-        if (playerArray[1].Points > playerArray[2].Points) {
+        //  p1 wins
+        if (playerArray[1].Points > playerArray[2].Points && playerArray[1].Points > playerArray[3].Points) {
             playerArray[1].Score = playerArray[1].Score + 1;
             alert("Player1 wins");
         }
-        // if p1 < p2 -> p2 wins
-        else if (playerArray[1].Points < playerArray[2].Points) {
+        // p2 wins
+        else if (playerArray[1].Points < playerArray[2].Points && playerArray[3].Points < playerArray[2].Points) {
             playerArray[2].Score = playerArray[2].Score + 1;
             alert("Player2 wins");
+        }
+        // p3 wins
+        else if (playerArray[1].Points < playerArray[3].Points && playerArray[2].Points < playerArray[3].Points) {
+            playerArray[3].Score = playerArray[3].Score + 1;
+            alert("Player3 wins");
         }
         else {
             console.log("something has gone wrong... check it out")
@@ -2095,14 +2082,19 @@ function endRound() {
     //if p1 busts
     else if (playerArray[1].Bust === true) {
         // h wins
-        if (playerArray[0].Points > playerArray[2].Points) {
+        if (playerArray[0].Points > playerArray[2].Points && playerArray[0].Points > playerArray[3].Points) {
             playerArray[0].Score = playerArray[0].Score + 1;
             alert("House wins");
         }
         // p2 wins
-        else if (playerArray[2].Points > playerArray[0].Points) {
+        else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[3].Points) {
             playerArray[2].Score = playerArray[2].Score + 1;
             alert("Player2 wins");
+        }
+        // p3 wins
+        else if (playerArray[3].Points > playerArray[0].Points && playerArray[3].Points > playerArray[2].Points) {
+            playerArray[3].Score = playerArray[3].Score + 1;
+            alert("Player3 wins");
         }
         else {
             console.log("something has gone wrong... check it out")
@@ -2111,19 +2103,46 @@ function endRound() {
     //if p2 busts
     else if (playerArray[2].Bust === true) {
         // house wins
-        if (playerArray[0].Points > playerArray[1].Points) {
+        if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[3].Points) {
             playerArray[0].Score = playerArray[0].Score + 1;
             alert("House wins");
         }
         // p1 wins
-        else if (playerArray[0].Points < playerArray[1].Points) {
+        else if (playerArray[0].Points < playerArray[1].Points && playerArray[1].Points > playerArray[3].Points) {
             playerArray[1].Score = playerArray[1].Score + 1;
             alert("Player1 wins");
+        }
+        // p3 wins
+        else if (playerArray[0].Points < playerArray[3].Points && playerArray[3].Points > playerArray[1].Points) {
+            playerArray[3].Score = playerArray[3].Score + 1;
+            alert("Player3 wins");
         }
         else {
             console.log("something has gone wrong... check it out")
         }
     }
+    //if p3 busts
+    else if (playerArray[3].Bust === true) {
+        // house wins
+        if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
+            playerArray[0].Score = playerArray[0].Score + 1;
+            alert("House wins");
+        }
+        // p1 wins
+        else if (playerArray[0].Points < playerArray[1].Points && playerArray[1].Points > playerArray[2].Points) {
+            playerArray[1].Score = playerArray[1].Score + 1;
+            alert("Player1 wins");
+        }
+        // p2 wins
+        else if (playerArray[0].Points < playerArray[2].Points && playerArray[2].Points > playerArray[1].Points) {
+            playerArray[2].Score = playerArray[2].Score + 1;
+            alert("Player2 wins");
+        }
+        else {
+            console.log("something has gone wrong... check it out")
+        }
+    }
+
     // if two players bust 
     //if house and p1 bust -> p2 win
     else if (playerArray[0].Bust === true && playerArray[1].Bust === true) {
