@@ -2416,7 +2416,14 @@ function endRound() {
     console.log(playerArray);
     console.log("=========================")
 
-
+    // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC // for 4 players
+    // display all players points to user //
+    alert(`end of round point values:
+    ${playerArray[0].Name} has ${playerArray[0].Points} points
+    ${playerArray[1].Name} has ${playerArray[1].Points} points
+    ${playerArray[2].Name} has ${playerArray[2].Points} points
+    ${playerArray[3].Name} has ${playerArray[3].Points} points
+    ${playerArray[4].Name} has ${playerArray[4].Points} points`)
 
 // 5 player function //
     // if all players bust -> no one wins
@@ -2732,3 +2739,69 @@ function endRound() {
 
     // increase winners scores by 1 //
     // alert the winner //
+
+    // alert users of all current scores //
+    alert(`end of round updated scores:
+    ${playerArray[0].Name}: ${playerArray[0].Score}
+    ${playerArray[1].Name}: ${playerArray[1].Score}
+    ${playerArray[2].Name}: ${playerArray[2].Score}
+    ${playerArray[3].Name}: ${playerArray[3].Score}
+    ${playerArray[4].Name}: ${playerArray[4].Score}`);
+
+    // update scores on html //
+    houseScore = document.getElementById("houseScore");
+    scoreP1 = document.getElementById("scorePlayer1");
+    scoreP2 = document.getElementById("scorePlayer2");
+    scoreP3 = document.getElementById("scorePlayer3");
+    scoreP4 = document.getElementById("scorePlayer4");
+    
+    houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
+    scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
+    scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
+    scoreP3.innerHTML = `Score: ${playerArray[3].Score} `;
+    scoreP4.innerHTML = `Score: ${playerArray[4].Score} `;
+
+    // hides all game buttons besides and changes the value to ask user if they want to play another game //
+    var hitBtnP1 = document.getElementById("hitPlayer1");
+    hitBtnP1.style.display = 'block';
+    var standBtnP1 = document.getElementById("standPlayer1");
+    standBtnP1.style.display = 'block';
+    var restartBtnP1 = document.getElementById("restartPlayer1");
+    restartBtnP1.value = 'play another round';
+
+    var hitBtnP2 = document.getElementById("hitPlayer2");
+    hitBtnP2.style.display = 'block';
+    var standBtnP2 = document.getElementById("standPlayer2");
+    standBtnP2.style.display = 'block';
+    var restartBtnP2 = document.getElementById("restartPlayer2");
+    restartBtnP2.value = 'play another round';
+
+    var hitBtnP3 = document.getElementById("hitPlayer3");
+    hitBtnP3.style.display = 'block';
+    var standBtnP3 = document.getElementById("standPlayer3");
+    standBtnP3.style.display = 'block';
+    var restartBtnP3 = document.getElementById("restartPlayer3");
+    restartBtnP3.value = 'play another round';
+
+    var hitBtnP4 = document.getElementById("hitPlayer4");
+    hitBtnP4.style.display = 'block';
+    var standBtnP4 = document.getElementById("standPlayer4");
+    standBtnP4.style.display = 'block';
+    var restartBtnP4 = document.getElementById("restartPlayer4");
+    restartBtnP4.value = 'play another round';
+
+    // reset player values //
+    playerArray[0].Bust = false;
+    playerArray[1].Bust = false;
+    playerArray[2].Bust = false;
+    playerArray[3].Bust = false;
+    playerArray[4].Bust = false;
+
+    playerArray[0].Stand = false;
+    playerArray[1].Stand = false;
+    playerArray[2].Stand = false;
+    playerArray[3].Stand = false;
+    playerArray[4].Stand = false;
+
+    console.log(playerArray);
+    console.log("=========================")
