@@ -1080,9 +1080,28 @@ function onStandPlayer7() {
 
 function checkStandStat() {
     console.log("i can see")
+    // if there are 2 players ... //
     if (playerArray.length === 3) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true) {
-            console.log("both players are standing");
+            console.log("all players are standing");
+        }
+        else{
+            console.log("waiting for all players to be standing");
+        }
+    }
+    // if there are 3 players //
+    if (playerArray.length === 4) {
+        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true) {
+            console.log("all players are standing");
+        }
+        else{
+            console.log("waiting for all players to be standing");
+        }
+    }
+    // if there are 4 players //
+    if (playerArray.length === 5) {
+        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true) {
+            console.log("all players are standing");
         }
         else{
             console.log("waiting for all players to be standing");
