@@ -1,14 +1,13 @@
 $(document).ready(function() {
 
     //variables
-    var hitButton = document.getElementById("hitButton");
-    var stayButton = document.getElementById("stayButton");
-    var newRound = document.getElementById("newRound");
+    var rpsOpponent = document.getElementById("select-RPS-opponent")
 
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
     let email = "";
     let curSeat = "";
+    let maxUsers = 5;
     //Elements and vars for chat log
     var chatScroll = $("#chat-log");
     var chatInput = $("#chat-input");
@@ -108,11 +107,19 @@ $(document).ready(function() {
                     $("#containerRPS").css("display", "block");
 
                     //get the opponent list from the users at the table
-                    document.getElementById("select-RPS-opponent")[0].innerHTML = "Water"
-                    document.getElementById("select-RPS-opponent")[1].disabled = true;
-                    console.log(document.getElementById("select-RPS-opponent")[0]);
+                    $.get("/api/table" + curTable).then(function(tableData){
+                        rpsOpponent[0].innerHTML = tableData[0].user1
+                        rpsOpponent[1].innerHTML = tableData[0].user2
+                        rpsOpponent[2].innerHTML = tableData[0].user3
+                        rpsOpponent[3].innerHTML = tableData[0].user4
+                        rpsOpponent[4].innerHTML = tableData[0].user5
 
-                    
+                        for(let i=0; i<maxUsers; i++){
+                            if (rpsOpponent[i].innerHTML === "Open Seat"|| rpsOpponent[i].innerHTML === email){
+                                rpsOpponent[i].disabled = true;
+                            }
+                        }
+                    })
                 break;
                 default:
                     console.log("default running");
