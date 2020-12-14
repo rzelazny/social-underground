@@ -769,10 +769,10 @@ function onHitPlayer4() {
         // will call player one hit function //
         player4Hit();
         // creating a timer function to give time for the card to render before busting //
-        // setTimeout(function () {
-        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-        //     itsABust();
-        // }, 500); 
+        setTimeout(function () {
+            // if the hit card makes the points go over 21 the user will get a bust alert //
+            itsABust();
+        }, 500); 
 }
 function player4Hit() {
     // calls to the api to get one shuffled card //
@@ -837,10 +837,10 @@ function onHitPlayer5() {
         // will call player one hit function //
         player5Hit();
         // creating a timer function to give time for the card to render before busting //
-        // setTimeout(function () {
-        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-        //     itsABust();
-        // }, 500); 
+        setTimeout(function () {
+            // if the hit card makes the points go over 21 the user will get a bust alert //
+            itsABust();
+        }, 500); 
 }
 function player5Hit() {
     // calls to the api to get one shuffled card //
@@ -905,10 +905,10 @@ function onHitPlayer6() {
         // will call player one hit function //
         player6Hit();
         // creating a timer function to give time for the card to render before busting //
-        // setTimeout(function () {
-        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-        //     itsABust();
-        // }, 500); 
+        setTimeout(function () {
+            // if the hit card makes the points go over 21 the user will get a bust alert //
+            itsABust();
+        }, 500); 
 }
 function player6Hit() {
     // calls to the api to get one shuffled card //
@@ -973,10 +973,10 @@ function onHitPlayer7() {
         // will call player one hit function //
         player7Hit();
         // creating a timer function to give time for the card to render before busting //
-        // setTimeout(function () {
-        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-        //     itsABust();
-        // }, 500); 
+        setTimeout(function () {
+            // if the hit card makes the points go over 21 the user will get a bust alert //
+            itsABust();
+        }, 500); 
 }
 function player7Hit() {
     // calls to the api to get one shuffled card //
