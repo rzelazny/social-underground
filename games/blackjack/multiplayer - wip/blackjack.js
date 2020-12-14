@@ -22,6 +22,10 @@ var amount = 0;
 // hard coded for now but will use players from db
 let playerArray = [{ Name: "House", ID: 0, Score: 0, Points: 0, Hand: hand[0], Stand: 'false' }];
 
+// checks if all users are standing //
+let allStanding = false;
+
+
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
@@ -1084,6 +1088,7 @@ function checkStandStat() {
     if (playerArray.length === 3) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true) {
             console.log("all players are standing");
+            allStanding = true;
         }
         else{
             console.log("waiting for all players to be standing");
@@ -1094,6 +1099,7 @@ function checkStandStat() {
     else if (playerArray.length === 4) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true) {
             console.log("all players are standing");
+            allStanding = true;
         }
         else{
             console.log("waiting for all players to be standing");
@@ -1104,6 +1110,7 @@ function checkStandStat() {
     else if (playerArray.length === 5) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true) {
             console.log("all players are standing");
+            allStanding = true;
         }
         else{
             console.log("waiting for all players to be standing");
@@ -1114,6 +1121,7 @@ function checkStandStat() {
     else if (playerArray.length === 6) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true) {
             console.log("all players are standing");
+            allStanding = true;
         }
         else{
             console.log("waiting for all players to be standing");
@@ -1124,6 +1132,7 @@ function checkStandStat() {
     else if (playerArray.length === 7) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true && playerArray[6].Stand === true) {
             console.log("all players are standing");
+            allStanding = true;
         }
         else{
             console.log("waiting for all players to be standing");
@@ -1134,12 +1143,17 @@ function checkStandStat() {
     else if (playerArray.length === 8) {
         if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true && playerArray[6].Stand === true && playerArray[7].Stand === true) {
             console.log("all players are standing");
+            allStanding = true;
         }
         else{
             console.log("waiting for all players to be standing");
             console.log(playerArray);
         }
     }
+}
+
+function houseLogic() {
+    
 }
 
 // function hitHouseLogic() {
@@ -1287,4 +1301,5 @@ function checkStandStat() {
 //     playerArray[1].Bust = false;
 //     playerArray[0].Stand = false;
 //     playerArray[1].Stand = false;
+//  allStanding = false;
 // }
