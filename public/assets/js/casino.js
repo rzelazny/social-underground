@@ -102,12 +102,18 @@ $(document).ready(function() {
                     $("#containerBlackJack").css("display", "block");
                     $("#start").css("display", "block");
                 break;
+                case "Rock Paper Scissors":
+                    console.log("RPS setup");
+                    $("#gameChoice").css("display", "none");
+                    $("#containerRPS").css("display", "block");
+                    
+                break;
                 default:
                     console.log("default running");
-
             }
         })
     }
+    //Remove user from their seat at the gaming table and redirect them
     function giveUpSeat(goTo){
         let updateSeat = {
             column: curSeat,
@@ -116,6 +122,12 @@ $(document).ready(function() {
         $.post("/api/table"+ curTable, updateSeat).then(function(){
             window.location.assign(goTo);
         })
+    }
+    //Function deletes user photos
+    function cleanupPhotos(){
+        console.log("cleaning photos");
+        let tblCleanUp = {table: curTable};
+        $.post("/api/photo/cleanup", tblCleanUp);
     }
 
     //functions with event listners 
@@ -189,20 +201,24 @@ $(document).ready(function() {
             table: curTable
         }
         console.log("Sending photo");
-        $.post("/api/photo/", picture);
         document.querySelector('#snap-photo').href = picture.photo;
+        $.post("/api/photo/", picture);
+        
     })
 
     //Navigate to home and free up user's seat at the table.
     $("#goHome").on("click", function(event) {
+        cleanupPhotos();
         giveUpSeat("/home");
     })
 
     $("#memberPage").on("click", function(event) {
+        cleanupPhotos();
         giveUpSeat("/members");
     })
     //Navigate to home and free up user's seat at the table.
     $("#logOut").on("click", function(event) {
+        cleanupPhotos();
         giveUpSeat("/logout");
     })
 
@@ -220,7 +236,7 @@ $(document).ready(function() {
                     table: curTable
                 }
                 console.log("Sending photo");
-                //document.querySelector('#snap-photo').href = sendPic.photo;
+                document.querySelector('#snap-photo').href = sendPic.photo;
                 $.post("/api/photo/", sendPic);
 
                 $.get("/api/photo/1/" + curTable).then(function(data){

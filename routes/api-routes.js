@@ -404,6 +404,45 @@ app.get("/api/photo/:id/:table", function(req, res) {
       });
   });
 
+  //deletes photos from a given table
+  app.post("/api/photo/cleanup", function(req, res) {
+
+  console.log("photo cleanup for table: ", req.body.table);
+  console.log("removing photos of user: ", req.user.id);
+
+  db.photo.findAll({
+    where: {
+      user_id: {
+        [Op.eq]: req.user.id
+      },
+      table_id: {
+        [Op.eq]: req.body.table
+      }
+    }
+  })
+  .then(function(results){
+    if(results != null){
+      for(i=0; i < results.length; i++){
+        db.photo.destroy({
+          where: {
+            user_id: {
+              [Op.eq]: req.user.id
+            },
+            table_id: {
+              [Op.eq]: req.body.table
+            }
+          }
+        })
+        console.log("deleting photo ", results[i].id)
+      }
+      res.send(results);
+    }
+  })
+    .catch(function(err) {
+      res.status(401).json(err);
+    });
+});
+
   //stores a photo captured from the webcam to the photo table
   app.post("/api/photo", function(req, res) {
 
@@ -425,7 +464,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
       .catch(function(err) {
         res.status(401).json(err);
       });
-
+    });
     // This successfully stores the photo as a png file in the public/assets/imgages folder, but the page can't use the images as a src
     // console.log("storing photo");
     // let data = req.body.photo;
@@ -441,7 +480,6 @@ app.get("/api/photo/:id/:table", function(req, res) {
     
     //   res.send(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png");
     //});
-  });
 };
 
 
