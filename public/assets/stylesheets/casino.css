@@ -5,6 +5,11 @@ body {
     /* text-align: center; */
 }
 
+.navbar {
+    background-color: black;
+    margin-bottom: 40px;
+  }
+
 select option[disabled] {
     display: none;
 }
@@ -105,8 +110,10 @@ ul li:nth-child(4):hover span {
 } */
 /* Game selection css */
 #gameChoice{
-    background: #009919;
-    margin-bottom: 5px;
+    background: #5cb85c;
+    margin: 10px;
+    padding:10px;
+    text-align: center;
 }
 
 /* RPS css */
@@ -153,3 +160,7 @@ ul li:nth-child(4):hover span {
 /* #webcam1 {
   
 } */
+
+#chooseGame {
+    margin-top: 10px;
+}

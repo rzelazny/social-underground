@@ -13,16 +13,20 @@
     <title>Casino</title>
 </head>
 <nav class="dropdown">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Main Menu
-    </a>
-
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" id="goHome" href="#">Home</a>
-        <a class="dropdown-item" id="memberPage" href="#">Membership</a>
-        <a class="dropdown-item" id="logOut" href="#">Log Out</a>
-    </div>
+    <nav class="navbar navbar-dark">
+        <nav class="dropdown ml-auto " style="display: inline;">
+            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="margin:10px;">
+                Main Menu
+            </a>
+        
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="./home.html">Home</a>
+                <a class="dropdown-item" href="./members.html">Membership</a>
+                <a class="dropdown-item" href="/logout">Log Out</a>
+            </div>
+        </nav>
+      </nav>
 </nav>
 <body>
     <div class="container"id=gameChoice>
@@ -37,19 +41,19 @@
                 <label class="form-check-label" for="inlineRadio2">Single Player</label>
             </div>
             <h2>Choose a game</h2>
-            <select class="form-control" id="multi-select">
+            <select class="form-control" id="multi-select" style="width: 50%; text-align: center; display:block;">
                 <option>Just Chatting Multi</option>
-                <option>Black Jack</option>
+                <option>Blackjack</option>
                 <option>Rock Paper Scissors</option>
                 <option>Monopoly</option>
             </select>
             <select class="form-control"id="single-select" style="display:none">
                 <option>Just Chatting</option>
-                <option>Black Jack</option>
+                <option>Blackjack</option>
                 <option>Rock Paper Scissors</option>
                 <option>Monopoly</option>
             </select>
-            <button type="submit" class="btn btn-default" id="chooseGame">Start Playing</button>
+            <button type="submit" class="btn btn-danger" id="chooseGame">Start Playing</button>
         </form>
     </div>
     <div class="container" id="containerBlackJack">
