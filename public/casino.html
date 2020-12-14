@@ -21,13 +21,12 @@
             </a>
         
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="./home.html">Home</a>
-                <a class="dropdown-item" href="./members.html">Membership</a>
-                <a class="dropdown-item" href="/logout">Log Out</a>
+                <a class="dropdown-item" id="goHome" href="#">Home</a>
+                <a class="dropdown-item" id="memberPage" href="#">Membership</a>
+                <a class="dropdown-item" id="logOut" href="#">Log Out</a>
             </div>
         </nav>
     </nav>
-
 </nav>
 <body>
     <div class="container"id=gameChoice>
@@ -48,7 +47,7 @@
                 <select class="custom-select my-1 mr-sm-2" id="multi-select">
                     <option selected>Pick a Game...</option>
                         <!-- <option>Just Chatting</option> -->
-                        <option>Blackjack</option>
+                        <option>Blackjack Multiplayer</option>
                         <option>Rock Paper Scissors</option>
                 </select>
                 <select class="custom-select my-1 mr-sm-2" id="single-select" style="display:none">
@@ -60,13 +59,13 @@
             </form>
         </form>
     </div>
-    <div class="container" id="containerBlackJack">
+    <div class="container" id="cont-blackjack-single">
         <!-- <canvas id="canvas" width="1100" height="650"></canvas> -->
         <br>
         <div id="gameBody">
             <div class= "gameOptions" id="gameOptions">
                 <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
-                <input class="btn btn-success type="button" id="start" value="start" style="display: none;">
+                <input class="btn btn-success" type="button" id="start" value="start" style="display: none;">
                 <input class="btn btn-success" type="button" id="restart" value="restart" style="display: none;">
                 <input class="btn btn-success" type="button" id="hit" value="hit me" style="display: none;">
                 <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;">
@@ -74,6 +73,9 @@
             </div>
             <div class="players" id="players"></div>
         </div>
+    </div>
+    <div class="container" id="cont-blackjack-multi">
+        
     </div>
     <div class="container" id="containerRPS", style="display:none">
         <div class="row">

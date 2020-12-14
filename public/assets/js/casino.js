@@ -103,13 +103,19 @@ $(document).ready(function() {
             switch(tableGame){
                 case "Just Chatting":
                     console.log("Just chatting setup")
-                    $("#containerBlackJack").css("display", "none");
+                    $("#cont-blackjack").css("display", "none");
                 break;
                 case "Blackjack":
-                    console.log("Black Jack setup");
+                    console.log("Blackjack single setup");
                     $("#gameChoice").css("display", "none");
-                    $("#containerBlackJack").css("display", "block");
+                    $("#cont-blackjack").css("display", "block");
                     $("#start").css("display", "block");
+                break;
+                case "Blackjack Multiplayer":
+                    console.log("Blackjack multi setup");
+                    $("#gameChoice").css("display", "none");
+                    $("#cont-blackjack-multi").css("display", "block");
+                    // $("#start").css("display", "block");
                 break;
                 case "Rock Paper Scissors":
                     console.log("RPS setup");
@@ -143,6 +149,7 @@ $(document).ready(function() {
             data: "Open Seat"
         }
         $.post("/api/table"+ curTable, updateSeat).then(function(){
+            console.log("leave table running");
             window.location.assign(goTo);
         })
     }
