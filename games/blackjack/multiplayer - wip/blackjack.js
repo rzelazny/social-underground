@@ -708,6 +708,66 @@ function onHitPlayer3() {
         //     itsABust();
         // }, 500); 
 }
+
+function player3Hit() {
+    // calls to the api to get one shuffled card //
+    var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
+    $.ajax({
+        url: docUrl,
+        method: "GET"
+    }).then(function (data) {
+        // this object holds all the data needed for the card //
+        hitCard = {
+                code: data.cards[0].code,
+                suit: data.cards[0].suit,
+                value: data.cards[0].value,
+                imgUrl: data.cards[0].image
+            };
+        // this variable = the players original cards
+        var originalHand = playerArray[3].Hand;
+        // this pushes the new card into the array of cards
+        originalHand.push(hitCard); 
+        // then, the image is created and appended to the hand div with the other cards //
+        var hitCardImg = document.createElement('img');
+        hitCardImg.className = ('hitCard3')
+        hitCardImg.src = (hitCard.imgUrl)
+
+        divHand = document.getElementById(("handPlayer3"));
+        divHand.appendChild(hitCardImg);
+
+        // resets value of hand to zero //
+        var handVal = 0;
+        for(var a = 0; a < playerArray.length; a++) {
+            // resets players points //
+            playerArray[a].Points = 0;
+            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+                // sets values for face cards //
+                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
+                    playerArray[a].Hand[j].value = "10";
+                } 
+                // sets value for ace depending on previous hand value //
+                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    playerArray[a].Hand[j].value = "11";
+                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    playerArray[a].Hand[j].value = "1";
+                }
+
+                // adds all cards in hand to create new value //
+                handVal += parseInt(playerArray[a].Hand[j].value);
+            }
+            // sets the points equal to the new value //
+            playerArray[a].Points = handVal;
+            // resets handVal back to zero //
+            handVal = 0;
+
+            // display the new points //
+            divPoints = document.getElementById('pointsPlayer3');
+            divPoints.innerHTML = `Points: ${playerArray[3].Points} `;
+
+        }
+    })
+}
+
 function onHitPlayer4() {
         // will call player one hit function //
         player4Hit();
