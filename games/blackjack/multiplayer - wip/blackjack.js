@@ -1215,31 +1215,31 @@ function houseLogic() {
         if (playerArray[0].Points >= 17) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
-            // endRound();
+            endRound();
         }
         // all players bust
         else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
-            // endRound();
+            endRound();
         }
         // p1 bust & p2 points < house
         else if (playerArray[1].Bust === true && playerArray[2].Points < playerArray[0].Points) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
-            // endRound();
+            endRound();
         }
         // p1 points < house & p2 bust
         else if (playerArray[2].Bust === true && playerArray[1].Points < playerArray[0].Points) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
-            // endRound();
+            endRound();
         }
         // all players points < house 
         else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
             playerArray[0].Stand = true;
             console.log("we will run end round");
-            // endRound();
+            endRound();
         }
         // house will hit if
         // p1 points > house BUT < 22
@@ -1738,8 +1738,14 @@ function houseBust() {
         // alert("the house busted");
         // calls function //
         setTimeout(function () {
-            // endRound();
+            endRound();
         }, 500);
+    }
+    else if (playerArray[0].Points < 22) {
+        houseLogic();
+    }
+    else {
+        console.log(`something fell through the cracks ... check it out`)
     }
 }
 
