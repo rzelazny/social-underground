@@ -69,13 +69,20 @@
     <div class="container" id="containerRPS", style="display:none">
         <video id="webcam" autoplay playsinline width="320" height="240"></video>
         <canvas id="snapShot" class="d-none"></canvas>
-        <a id="snap-photo">
-        <a id="download-photo">
+        <img id="my-photo" src="">
+        <img id="their-photo" src="">
         <br>
         <button id="camBtnOn">Camera On</button>
-        <button id="camBtnSnap">Camera Snap</button>
+        <!-- <button id="camBtnSnap">Camera Snap</button> -->
         <button id="camBtnOff">Camera Off</button>
         <br>
+        <select class="form-control" id="select-RPS-opponent">
+            <option>user1</option>
+            <option>user2</option>
+            <option>user3</option>
+            <option>user4</option>
+            <option>user5</option>
+        </select>
         <button id="camBtnRPS">Play Rock Paper Scissors</button>
         <div id="rpsCountdown"></div>
         <!-- <label class="switch">

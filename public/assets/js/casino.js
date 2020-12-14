@@ -85,7 +85,7 @@ $(document).ready(function() {
         location.reload();
     }
 
-    //Function finds out what game is set at the table and adjusts what containers are visible
+    //Function finds out what game is set at the table and adjusts what elements are visible
     function getGame(){
         $.get("/api/table" + curTable).then( function(table){
             var tableGame = JSON.stringify(table[0].game).replace(/"/g, '');
@@ -106,6 +106,12 @@ $(document).ready(function() {
                     console.log("RPS setup");
                     $("#gameChoice").css("display", "none");
                     $("#containerRPS").css("display", "block");
+
+                    //get the opponent list from the users at the table
+                    document.getElementById("select-RPS-opponent")[0].innerHTML = "Water"
+                    document.getElementById("select-RPS-opponent")[1].disabled = true;
+                    console.log(document.getElementById("select-RPS-opponent")[0]);
+
                     
                 break;
                 default:
@@ -129,27 +135,16 @@ $(document).ready(function() {
         let tblCleanUp = {table: curTable};
         $.post("/api/photo/cleanup", tblCleanUp);
     }
-
-    //functions with event listners 
-    // hitButton.addEventListener("click", function hitButton() {
-    //     console.log("Hit me baby one more time ;)");
-    // });
-
-    // stayButton.addEventListener("click", function stayButton() {
-    //     console.log("Stay with me cause you're all I need");
-    // });
-
-    // newRound.addEventListener("click", function newRound() {
-    //     console.log("Final round...FIGHT");
-    // });
-    //var choosenAnswer = document.querySelector('input[name="OptRadio"]:checked').getAttribute("id"); 
     
     //Choosing a game
     $("#chooseGame").on("click", function(event) {
         event.preventDefault();
         let gameChoice = "";
+        //see if single or multiplayer has been selected
         let gameToggle = document.querySelector('input[name="inlineRadioOptions"]:checked').getAttribute("id"); 
         console.log($("#multi-select").val());
+
+        //get the game choice from the appropriate dropdown
         if(gameToggle === "radio-multi"){
             gameChoice = $("#multi-select").val();
         }else{
@@ -194,17 +189,16 @@ $(document).ready(function() {
         webcam.stop();
     })
 
-    //Take photo
-    $("#camBtnSnap").on("click", function(event) {
-        let picture = {
-            photo: webcam.snap(),
-            table: curTable
-        }
-        console.log("Sending photo");
-        document.querySelector('#snap-photo').href = picture.photo;
-        $.post("/api/photo/", picture);
-        
-    })
+    //Take photo for testing
+    // $("#camBtnSnap").on("click", function(event) {
+    //     let picture = {
+    //         photo: webcam.snap(),
+    //         table: curTable
+    //     }
+    //     console.log("Sending photo");
+    //     document.getElementById("my-photo").src = picture.photo;
+    //     $.post("/api/photo/", picture);
+    // })
 
     //Navigate to home and free up user's seat at the table.
     $("#goHome").on("click", function(event) {
@@ -236,13 +230,13 @@ $(document).ready(function() {
                     table: curTable
                 }
                 console.log("Sending photo");
-                document.querySelector('#snap-photo').href = sendPic.photo;
+                document.getElementById("my-photo").src = sendPic.photo;
                 $.post("/api/photo/", sendPic);
 
                 $.get("/api/photo/1/" + curTable).then(function(data){
                     console.log("data: ", atob(data.photo));
                     console.log("photo: ", data);
-                    document.querySelector('#download-photo').href = "data:image/png;base64," + atob(data.photo);
+                    document.getElementById("their-photo").src = "data:image/png;base64," + atob(data.photo);
                 })
             }
         }, 1000);

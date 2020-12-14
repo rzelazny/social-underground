@@ -5,6 +5,10 @@ body {
     /* text-align: center; */
 }
 
+select option[disabled] {
+    display: none;
+}
+
 /* #canvas {
     background-image: url(../images/blackjacktable2.png);
 
