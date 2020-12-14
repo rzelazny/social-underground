@@ -1050,24 +1050,37 @@ function itsABust() {
 
 function onStandPlayer1() {
     playerArray[1].Stand === true;
+    checkStandStat();
 }
 function onStandPlayer2() {
     playerArray[2].Stand === true;
+    checkStandStat();
 }
 function onStandPlayer3() {
     playerArray[3].Stand === true;
+    checkStandStat();
 }
 function onStandPlayer4() {
     playerArray[4].Stand === true;
+    checkStandStat();
 }
 function onStandPlayer5() {
     playerArray[5].Stand === true;
+    checkStandStat();
 }
 function onStandPlayer6() {
     playerArray[6].Stand === true;
+    checkStandStat();
 }
 function onStandPlayer7() {
     playerArray[7].Stand === true;
+    checkStandStat();
+}
+
+function checkStandStat() {
+    if (amount === 2) {
+        
+    }
 }
 
 // function hitHouseLogic() {
