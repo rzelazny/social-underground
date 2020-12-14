@@ -394,7 +394,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
   app.post("/api/chat/", function(req, res) {
 
     db.chat_log.create({
-      user: req.user.id,
+      user: req.user.email,
       message: req.body.message,
       table_id: req.body.table
     })
