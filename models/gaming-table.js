@@ -19,15 +19,19 @@ module.exports = function(sequelize, DataTypes) {
     },
     user2: {
         type: DataTypes.STRING,
+        defaultValue: "Open Seat"
     },
     user3: {
         type: DataTypes.STRING,
+        defaultValue: "Open Seat"
     },
     user4: {
         type: DataTypes.STRING,
+        defaultValue: "Open Seat"
     },
     user5: {
         type: DataTypes.STRING,
+        defaultValue: "Open Seat"
     }
     });
 
