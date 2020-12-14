@@ -1781,29 +1781,34 @@ function endRound() {
     ${playerArray[2].Name} has ${playerArray[2].Points} points`)
     }
 
-    // House //
-    // if (playerArray[0].Bust)
+    // if no one busts 
+        // if they all tie
 
-    // P1 //
+        // if h > p1 & h > p2 -> h wins
+        // if p1 > h & p1 > p2 -> p1 wins
+        // if p2 > h & p2 > p1 -> p2 wins
 
-    // P2 //
+        // if h = p1 & > p2 -> h & p1 tie
+        // -> h & p2 tie
+        // p1 & p2 tie
 
-    // ties //
-    if (playerArray[10].Points === playerArray[1].Points === playerArray[2].Points) {
-        console.log(`All players tie.`)
-    }
-    else if (playerArray[0].Points === playerArray[1].Points) {
-        console.log(`House and Player1 tie.`)
-    }
-    else if (playerArray[0].Points === playerArray[2].Points) {
-        console.log(`House and Player2 tie.`)
-    }
-    else if (playerArray[1].Points === playerArray[2].Points) {
-        console.log(`Player1 and Player2 tie.`)
-    }
+    // if one player busts
+        // if house busts
+            // if p1 > p2 -> p1 wins
+            // if p1 < p2 -> p2 wins
+        //if p1 busts
+            // h wins
+            // p2 wins
+        //if p2 busts
+            // house wins
+            // p1 wins
 
-    // busts //
-    if (playerArray[o])
+    // if two players bust 
+        //if house and p1 bust -> p2 win
+        // if house and p2 bust -> p1 win
+        // if p1 and p2 bust -> house win
+
+    // if all players bust -> no one wins
 
 
 
@@ -1863,6 +1868,3 @@ function endRound() {
 //         alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`)
 //         scorePlayer1 = document.querySelector("#scorePlayer1");
 //         scorePlayer1.innerHTML = `Score: ${playerArray[1].Score} `;
-//     }
-
-}
