@@ -2002,13 +2002,13 @@ function endRound() {
         //if h win *
         // if p1 win*
 
-    // if three players bust --- create these functions entirely
-        // if h, p1, p2 bust - p3 wins
-        // if h, p1, p3 bust - p2 wins
-        // if h, p2, p3 bust - p1 wins
-        // if p1, p2, p3 bust - h wins
+    // if three players bust --- create these functions entirely *
+        // if h, p1, p2 bust - p3 wins*
+        // if h, p1, p3 bust - p2 wins*
+        // if h, p2, p3 bust - p1 wins*
+        // if p1, p2, p3 bust - h wins*
 
-    // if all players bust -> no one wins
+    // if all players bust -> no one wins*
 
 
     // increase winners scores by 1 //
@@ -2191,7 +2191,8 @@ function endRound() {
     ${playerArray[0].Name} has ${playerArray[0].Points} points
     ${playerArray[1].Name} has ${playerArray[1].Points} points
     ${playerArray[2].Name} has ${playerArray[2].Points} points
-    ${playerArray[3].Name} has ${playerArray[3].Points} points`)
+    ${playerArray[3].Name} has ${playerArray[3].Points} points
+    ${playerArray[4].Name} has ${playerArray[4].Points} points`)
 
     // if no one busts -
     // if they all tie -
@@ -2246,142 +2247,38 @@ function endRound() {
         //if h win *
         // if p1 win*
 
-    // if two players bust --- create these functions entirely
+    // if three players bust --- create these functions entirely *
+        // if h, p1, p2 bust - p3 wins*
+        // if h, p1, p3 bust - p2 wins*
+        // if h, p2, p3 bust - p1 wins*
+        // if p1, p2, p3 bust - h wins*
 
-    // if all players bust -> no one wins
+    // if all players bust -> no one wins*
 
 
     // increase winners scores by 1 //
     // alert the winner //
-
-    // if no one busts 
-    if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false && playerArray[3].Bust === false) {
-        // if they all tie
-        if (playerArray[0].Points === playerArray[1].Points && playerArray[1].Points === playerArray[2].Points && playerArray[2].Points === playerArray[3].Points) {
-            alert("talk about the odds... all players have tied");
-        }
-        // if h > p1 & h > p2 -> h wins
-        else if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
-            alert("House wins");
-        }
-        // if p1 > h & p1 > p2 -> p1 wins
-        else if (playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[2].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
-            alert("Player1 wins");
-        }
-        // if p2 > h & p2 > p1 -> p2 wins
-        else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[1].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
-            alert("Player2 wins");
-        }
-        // if h = p1 & > p2 -> h & p1 tie
-        else if (playerArray[0].Points === playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
-            alert("House and Player1 tie, there is no winner");
-        }
-        // -> h & p2 tie
-        else if (playerArray[0].Points === playerArray[2].Points && playerArray[0].Points > playerArray[1].Points) {
-            alert("House and Player2 tie, there is no winner");
-        }
-        // p1 & p2 tie
-        else if (playerArray[1].Points === playerArray[2].Points && playerArray[1].Points > playerArray[0].Points) {
-            alert("Player1 and Player2 tie, there is no winner");
-        }
-        else {
-            console.log("something has gone wrong... check it out")
-        }
-    }
-    // if one player busts
-    // if house busts
-    else if (playerArray[0].Bust === true) {
-        // if p1 > p2 -> p1 wins
-        if (playerArray[1].Points > playerArray[2].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
-            alert("Player1 wins");
-        }
-        // if p1 < p2 -> p2 wins
-        else if (playerArray[1].Points < playerArray[2].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
-            alert("Player2 wins");
-        }
-        else {
-            console.log("something has gone wrong... check it out")
-        }
-    }
-    //if p1 busts
-    else if (playerArray[1].Bust === true) {
-        // h wins
-        if (playerArray[0].Points > playerArray[2].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
-            alert("House wins");
-        }
-        // p2 wins
-        else if (playerArray[2].Points > playerArray[0].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
-            alert("Player2 wins");
-        }
-        else {
-            console.log("something has gone wrong... check it out")
-        }
-    }
-    //if p2 busts
-    else if (playerArray[2].Bust === true) {
-        // house wins
-        if (playerArray[0].Points > playerArray[1].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
-            alert("House wins");
-        }
-        // p1 wins
-        else if (playerArray[0].Points < playerArray[1].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
-            alert("Player1 wins");
-        }
-        else {
-            console.log("something has gone wrong... check it out")
-        }
-    }
-    // if two players bust 
-    //if house and p1 bust -> p2 win
-    else if (playerArray[0].Bust === true && playerArray[1].Bust === true) {
-        playerArray[2].Score = playerArray[2].Score + 1;
-        alert("Player2 wins");
-    }
-    // if house and p2 bust -> p1 win
-    else if (playerArray[0].Bust === true && playerArray[2].Bust === true) {
-        playerArray[1].Score = playerArray[1].Score + 1;
-        alert("Player1 wins");
-    }
-    // if p1 and p2 bust -> house win
-    else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
-        playerArray[0].Score = playerArray[0].Score + 1;
-        alert("House wins");
-    }
-
-    // if all players bust -> no one wins
-    else if (playerArray[0].Bust === true && playerArray[1].Bust === true && playerArray[2].Bust === true) {
-        alert("talk about the odds... all players have busted")
-    }
-    else {
-        console.log("something has gone wrong... check it out")
-    }
 
     // alert users of all current scores //
     alert(`end of round updated scores:
     ${playerArray[0].Name}: ${playerArray[0].Score}
     ${playerArray[1].Name}: ${playerArray[1].Score}
     ${playerArray[2].Name}: ${playerArray[2].Score}
-    ${playerArray[3].Name}: ${playerArray[3].Score}`);
+    ${playerArray[3].Name}: ${playerArray[3].Score}
+    ${playerArray[4].Name}: ${playerArray[4].Score}`);
 
     // update scores on html //
     houseScore = document.getElementById("houseScore");
     scoreP1 = document.getElementById("scorePlayer1");
     scoreP2 = document.getElementById("scorePlayer2");
     scoreP3 = document.getElementById("scorePlayer3");
+    scoreP4 = document.getElementById("scorePlayer4");
     
     houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
     scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
     scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
     scoreP3.innerHTML = `Score: ${playerArray[3].Score} `;
+    scoreP4.innerHTML = `Score: ${playerArray[4].Score} `;
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
     var hitBtnP1 = document.getElementById("hitPlayer1");
@@ -2405,16 +2302,25 @@ function endRound() {
     var restartBtnP3 = document.getElementById("restartPlayer3");
     restartBtnP3.value = 'play another round';
 
+    var hitBtnP4 = document.getElementById("hitPlayer4");
+    hitBtnP4.style.display = 'block';
+    var standBtnP4 = document.getElementById("standPlayer4");
+    standBtnP4.style.display = 'block';
+    var restartBtnP4 = document.getElementById("restartPlayer4");
+    restartBtnP4.value = 'play another round';
+
     // reset player values //
     playerArray[0].Bust = false;
     playerArray[1].Bust = false;
     playerArray[2].Bust = false;
     playerArray[3].Bust = false;
+    playerArray[4].Bust = false;
 
     playerArray[0].Stand = false;
     playerArray[1].Stand = false;
     playerArray[2].Stand = false;
     playerArray[3].Stand = false;
+    playerArray[4].Stand = false;
 
     console.log(playerArray);
     console.log("=========================")
