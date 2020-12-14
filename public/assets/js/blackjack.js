@@ -197,9 +197,10 @@ function createElements() {
         divHand.appendChild(cardTwoImg);
 
         // appends hand, points, and score divs to the player div //
+        divPlayer.appendChild(divScore);
         divPlayer.appendChild(divHand);
         divPlayer.appendChild(divPoints);
-        divPlayer.appendChild(divScore);
+        
 
         // appends all the data held in the player div to the gameboard
         players.appendChild(divPlayer);
