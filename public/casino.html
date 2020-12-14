@@ -12,7 +12,7 @@
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <title>Casino</title>
 </head>
-<nav class="dropdown">
+<nav class="dropdown navbar navbar-expand-lg bg-dark">
     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
         Main Menu
@@ -36,26 +36,91 @@
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio-single" value="Single Player">
                 <label class="form-check-label" for="inlineRadio2">Single Player</label>
             </div>
+            <hr>
             <h2>Choose a game</h2>
-            <select class="form-control" id="multi-select">
-                <option>Just Chatting Multi</option>
-                <option>Black Jack</option>
-                <option>Rock Paper Scissors</option>
-                <option>Monopoly</option>
-            </select>
-            <select class="form-control"id="single-select" style="display:none">
-                <option>Just Chatting</option>
-                <option>Black Jack</option>
-                <option>Rock Paper Scissors</option>
-                <option>Monopoly</option>
-            </select>
-            <button type="submit" class="btn btn-default" id="chooseGame">Start Playing</button>
+            <form class="form-inline">
+                <select class="custom-select my-1 mr-sm-2" id="multi-select">
+                    <option selected>Pick a Game...</option>
+                        <!-- <option>Just Chatting</option> -->
+                        <option>Black Jack</option>
+                        <option>Rock Paper Scissors</option>
+                </select>
+                <select class="custom-select my-1 mr-sm-2" id="single-select" style="display:none">
+                    <option selected>Pick a Game...</option>
+                        <option>Black Jack</option>
+                        <!-- <option>Rock Paper Scissors</option> -->
+                </select>
+                <button type="submit" class="btn btn-dark mb-2" id="chooseGame">Start Playing</button>
+            </form>
         </form>
     </div>
     <div class="container" id="containerBlackJack">
-        <canvas id="canvas" width="1100" height="650"></canvas>
+        <!-- <canvas id="canvas" width="1100" height="650"></canvas> -->
         <br>
-        <div>
+        <div id="gameBody">
+            <div class= "gameOptions" id="gameOptions">
+                <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
+                <input class="btn btn-dark type="button" id="start" value="start" style="display: none;">
+                <input class="btn btn-dark" type="button" id="restart" value="restart" style="display: none;">
+                <input class="btn btn-dark" type="button" id="hit" value="hit me" style="display: none;">
+                <input class="btn btn-dark" type="button" id="stand" value="stand" style="display: none;">
+            </div>
+            <div class="players" id="players"></div>
+        </div>
+    </div>
+    <div class="container" id="containerRPS", style="display:none">
+        <div class="row">
+            <div class="col-lg-4">
+                <video id="webcam" autoplay playsinline width="320" height="240"></video>
+                <canvas id="snapShot" class="d-none"></canvas>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <button id="camBtnOn">Camera On</button>
+                        <!-- <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                        </label> -->
+                    </div>
+                    <div class="col-lg-4">
+                        <button id="camBtnOff">Camera Off</button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button id="camSnap">Snapshot</button>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img id="my-photo" src="">
+                    <div id="rpsCountdown"></div>
+                </div>
+                <div class="col-lg-4">
+                    <img id="their-photo" src="">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <label for="form-group row">Who do you challenge?</label>
+                    <select class="col-sm-7" id="select-RPS-opponent">
+                        <option>user1</option>
+                        <option>user2</option>
+                        <option>user3</option>
+                        <option>user4</option>
+                        <option>user5</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button id="camBtnRPS">Play Rock Paper Scissors</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <!-- <div>
             <ul>
                 <li>
                     <a href="#">
@@ -85,30 +150,14 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
-    <div class="container" style="position: relative; left:35%"  id="chat-container">
+    <div class="container"   id="chat-container">
         <div id="chat-log"></div>
         <form class="form-inline" id="chat-entry">
             <input type="text" class="form-control" id="chat-input" placeholder="Talk smack here">
-            <button type="submit" class="btn btn-default" id="send-chat"><i class="fas fa-share"></i></button>
+            <button type="submit" class="btn btn-dark" id="send-chat"><i class="fas fa-share"></i></button>
         </form>
-    </div>
-    <div class="container" id="webcam1", style="display:none">
-        <video id="webcam" autoplay playsinline width="320" height="240"></video>
-        <canvas id="snapShot" class="d-none"></canvas>
-        <button id="camBtnOn">Camera On</button>
-        <button id="camBtnSnap">Camera Snap</button>
-        <button id="camBtnOff">Camera Off</button>
-        <br>
-        <button id="camBtnRPS">Play Rock Paper Scissors</button>
-        <div id="rpsCountdown"></div>
-        <a id="snap-photo"></a>
-        <a id="download-photo"></a>
-        <!-- <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider round"></span>
-        </label> -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
@@ -118,6 +167,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/js/casino.js"></script>
+<script src="./assets/js/blackjack.js"></script>
 
 <!-- <script src="./assets/js/websocket.js"></script> -->
 
