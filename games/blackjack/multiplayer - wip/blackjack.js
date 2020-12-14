@@ -566,11 +566,10 @@ function onHitPlayer1() {
     player1Hit();
     // creating a timer function to give time for the card to render before busting //
     setTimeout(function () {
-        // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        // if the hit card makes the points go over 21 the user will get a bust alert //
         itsABust();
     }, 500); 
 }
-
 function player1Hit() {
     // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
@@ -630,36 +629,14 @@ function player1Hit() {
     })
 }
 
-function itsABust() {
-    for (var i = 0; i < playerArray.length; i++) {
-        if (playerArray[i].Points > 21) {
-            // sets bst property to true //
-            playerArray[i].Bust === true;
-            //sends user alert //
-            alert(`${playerArray[i].Name} busted`);
-            console.log(playerArray[i]);
-            // calls function //
-            console.log("this itsabust fcn is what is ending the round");
-            // endRound();
-            //playerArray[i].Bust === false;
-        }
-    }
-    // hard coded house logic //
-    // if (playerArray[1].Points < 22) {
-    //     setTimeout(function () {
-    //         hitHouseLogic();
-    //     }, 500);
-    // }
-}
-
 function onHitPlayer2() {
         // will call player one hit function //
         player2Hit();
         // creating a timer function to give time for the card to render before busting //
-        // setTimeout(function () {
-        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-        //     itsABust();
-        // }, 500); 
+        setTimeout(function () {
+            // if the hit card makes the points go over 21 the user will get a bust alert//
+            itsABust();
+        }, 500); 
 }
 function player2Hit() {
     // calls to the api to get one shuffled card //
@@ -724,10 +701,10 @@ function onHitPlayer3() {
         // will call player one hit function //
         player3Hit();
         // creating a timer function to give time for the card to render before busting //
-        // setTimeout(function () {
-        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-        //     itsABust();
-        // }, 500); 
+        setTimeout(function () {
+            // if the hit card makes the points go over 21 the user will get a bust alert //
+            itsABust();
+        }, 500); 
 }
 function player3Hit() {
     // calls to the api to get one shuffled card //
@@ -1058,6 +1035,17 @@ function player7Hit() {
 
         }
     })
+}
+
+function itsABust() {
+    for (var i = 0; i < playerArray.length; i++) {
+        if (playerArray[i].Points > 21) {
+            // sets bst property to true //
+            playerArray[i].Bust === true;
+            //sends user alert // -- we need to set this to only display to the user who busted
+            alert(`${playerArray[i].Name} busted`);
+        }
+    }
 }
 
 function onStandPlayer1() {
