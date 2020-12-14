@@ -1,14 +1,14 @@
 $(document).ready(function() {
 
     //variables
-    var hitButton = document.getElementById("hitButton");
-    var stayButton = document.getElementById("stayButton");
-    var newRound = document.getElementById("newRound");
+    var rpsOpponent = document.getElementById("select-RPS-opponent")
 
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
     let email = "";
     let curSeat = "";
+    let maxUsers = 5;
+    let oppEmail = "";
     //Elements and vars for chat log
     var chatScroll = $("#chat-log");
     var chatInput = $("#chat-input");
@@ -52,7 +52,7 @@ $(document).ready(function() {
         $.get("/api/chat" + curTable, function(chatLog){
             //chat length is used to check for new messages being posted
             chatLength = chatLog.length;
-            for(i=0; i < chatLength; i++) {
+            for(let i=0; i < chatLength; i++) {
                 var chatLine = $("<li>")
                 //chatLine.attr("list-style", "none");
                 chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
@@ -85,7 +85,7 @@ $(document).ready(function() {
         location.reload();
     }
 
-    //Function finds out what game is set at the table and adjusts what containers are visible
+    //Function finds out what game is set at the table and adjusts what elements are visible
     function getGame(){
         $.get("/api/table" + curTable).then( function(table){
             var tableGame = JSON.stringify(table[0].game).replace(/"/g, '');
@@ -93,17 +93,41 @@ $(document).ready(function() {
             console.log("gonna try: ", tableGame.replace(/"/g, ''));
             switch(tableGame){
                 case "Just Chatting":
+                    console.log("Just chatting setup")
                     $("#containerBlackJack").css("display", "none");
                 break;
                 case "Black Jack":
+                    console.log("Black Jack setup");
                     $("#gameChoice").css("display", "none");
+                    $("#containerBlackJack").css("display", "block");
+                    $("#start").css("display", "block");
+                break;
+                case "Rock Paper Scissors":
+                    console.log("RPS setup");
+                    $("#gameChoice").css("display", "none");
+                    $("#containerRPS").css("display", "block");
+
+                    //get the opponent list from the users at the table
+                    $.get("/api/table" + curTable).then(function(tableData){
+                        rpsOpponent[0].innerHTML = tableData[0].user1
+                        rpsOpponent[1].innerHTML = tableData[0].user2
+                        rpsOpponent[2].innerHTML = tableData[0].user3
+                        rpsOpponent[3].innerHTML = tableData[0].user4
+                        rpsOpponent[4].innerHTML = tableData[0].user5
+
+                        for(let i=0; i<maxUsers; i++){
+                            if (rpsOpponent[i].innerHTML === "Open Seat"|| rpsOpponent[i].innerHTML === email){
+                                rpsOpponent[i].disabled = true;
+                            }
+                        }
+                    })
                 break;
                 default:
                     console.log("default running");
-
             }
         })
     }
+    //Remove user from their seat at the gaming table and redirect them
     function giveUpSeat(goTo){
         let updateSeat = {
             column: curSeat,
@@ -113,27 +137,22 @@ $(document).ready(function() {
             window.location.assign(goTo);
         })
     }
-
-    //functions with event listners 
-    // hitButton.addEventListener("click", function hitButton() {
-    //     console.log("Hit me baby one more time ;)");
-    // });
-
-    // stayButton.addEventListener("click", function stayButton() {
-    //     console.log("Stay with me cause you're all I need");
-    // });
-
-    // newRound.addEventListener("click", function newRound() {
-    //     console.log("Final round...FIGHT");
-    // });
-    //var choosenAnswer = document.querySelector('input[name="OptRadio"]:checked').getAttribute("id"); 
+    //Function deletes user photos
+    function cleanupPhotos(){
+        console.log("cleaning photos");
+        let tblCleanUp = {table: curTable};
+        $.post("/api/photo/cleanup", tblCleanUp);
+    }
     
     //Choosing a game
     $("#chooseGame").on("click", function(event) {
         event.preventDefault();
         let gameChoice = "";
+        //see if single or multiplayer has been selected
         let gameToggle = document.querySelector('input[name="inlineRadioOptions"]:checked').getAttribute("id"); 
         console.log($("#multi-select").val());
+
+        //get the game choice from the appropriate dropdown
         if(gameToggle === "radio-multi"){
             gameChoice = $("#multi-select").val();
         }else{
@@ -178,33 +197,39 @@ $(document).ready(function() {
         webcam.stop();
     })
 
-    //Take photo
-    $("#camBtnSnap").on("click", function(event) {
+    //Take photo for testing
+    $("#camSnap").on("click", function(event) {
         let picture = {
             photo: webcam.snap(),
             table: curTable
         }
         console.log("Sending photo");
+        document.getElementById("my-photo").src = picture.photo;
         $.post("/api/photo/", picture);
-        document.querySelector('#snap-photo').href = picture.photo;
     })
 
     //Navigate to home and free up user's seat at the table.
     $("#goHome").on("click", function(event) {
+        cleanupPhotos();
         giveUpSeat("/home");
     })
 
     $("#memberPage").on("click", function(event) {
+        cleanupPhotos();
         giveUpSeat("/members");
     })
     //Navigate to home and free up user's seat at the table.
     $("#logOut").on("click", function(event) {
+        cleanupPhotos();
         giveUpSeat("/logout");
     })
 
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
-        let timer = 1
+        //let timer = 3
+        
+        oppEmail = $("#select-RPS-opponent").val();
+        console.log(oppEmail);
         let rpsTimer = setInterval(function() {
             timer--
             $("#rpsCountdown").text(timer);
@@ -216,13 +241,13 @@ $(document).ready(function() {
                     table: curTable
                 }
                 console.log("Sending photo");
-                //document.querySelector('#snap-photo').href = sendPic.photo;
+                document.getElementById("my-photo").src = sendPic.photo;
                 $.post("/api/photo/", sendPic);
 
-                $.get("/api/photo/1/" + curTable).then(function(data){
+                $.get("/api/photo/" + oppEmail + "/" + curTable).then(function(data){
                     console.log("data: ", atob(data.photo));
                     console.log("photo: ", data);
-                    document.querySelector('#download-photo').href = "data:image/png;base64," + atob(data.photo);
+                    document.getElementById("their-photo").src = "data:image/png;base64," + atob(data.photo);
                 })
             }
         }, 1000);

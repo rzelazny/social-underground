@@ -2,18 +2,22 @@ body {
     background-color: black;
     background-image: url(../images/carpet.jpg);
     background-size: cover;
-    text-align: center;
+    /* text-align: center; */
 }
 
-#canvas {
+select option[disabled] {
+    display: none;
+}
+
+/* #canvas {
     background-image: url(../images/blackjacktable2.png);
 
     display: inline;
     background-size: cover;
-}
+} */
 
 /*Buttons*/
-ul {
+/* ul {
     position: relative;
     display: flex;
     transform-style: preserve-3d;
@@ -98,13 +102,23 @@ ul li:nth-child(3):hover span {
 }
 ul li:nth-child(4):hover span {
     background: #8200b6 !important;
-}
+} */
 /* Game selection css */
 #gameChoice{
     background: #009919;
     margin-bottom: 5px;
 }
 
+/* RPS css */
+#containerRPS{
+    background: #009919;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+/* #rps-start{
+    content
+} */
 /*Chat Css*/
 #chat-container{
     text-align: left;
@@ -113,7 +127,7 @@ ul li:nth-child(4):hover span {
     background-image: url(../images/dicebackground.jpg);
     background-size: contain;
     color: white;
-  }
+}
 
 #chat-log{
     height: 80%;

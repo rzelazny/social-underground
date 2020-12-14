@@ -15,11 +15,7 @@ module.exports = function(sequelize, DataTypes) {
     table_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: "gaming_table",
-            key: "id",
-        }
-    }
+    },
     });
     return ChatLog;
 };
