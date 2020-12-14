@@ -1087,6 +1087,7 @@ function checkStandStat() {
         }
         else{
             console.log("waiting for all players to be standing");
+            console.log(playerArray);
         }
     }
     // if there are 3 players //
@@ -1096,6 +1097,7 @@ function checkStandStat() {
         }
         else{
             console.log("waiting for all players to be standing");
+            console.log(playerArray);
         }
     }
     // if there are 4 players //
@@ -1105,6 +1107,7 @@ function checkStandStat() {
         }
         else{
             console.log("waiting for all players to be standing");
+            console.log(playerArray);
         }
     }
     // if there are 5 players //
@@ -1114,6 +1117,7 @@ function checkStandStat() {
         }
         else{
             console.log("waiting for all players to be standing");
+            console.log(playerArray);
         }
     }
     // if there are 6 players //
@@ -1123,15 +1127,17 @@ function checkStandStat() {
         }
         else{
             console.log("waiting for all players to be standing");
+            console.log(playerArray);
         }
     }
     // if there are 7 players //
     else if (playerArray.length === 8) {
-        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true && playerArray[6].Stand === true && playerArray[8].Stand === true) {
+        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true && playerArray[6].Stand === true && playerArray[7].Stand === true) {
             console.log("all players are standing");
         }
         else{
             console.log("waiting for all players to be standing");
+            console.log(playerArray);
         }
     }
 }
