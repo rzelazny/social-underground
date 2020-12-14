@@ -1950,15 +1950,24 @@ function endRound() {
     ${playerArray[3].Name} has ${playerArray[3].Points} points`)
 
     // if no one busts -
-    // if they all tie -
 
     // if h > p1 & h > p2 -> h wins  (add h > p3)
     // if p1 > h & p1 > p2 -> p1 wins (add p1 > p3)
     // if p2 > h & p2 > p1 -> p2 wins (add p2>p3)
     // if p3 > h & > p1 & > p2 = p3 wins *
+
+    // if they all tie - need to move
+
+    //if 3 tie
+        // h p1 p2 *
+        // h p1 p3 *
+        // p1 p2 p3 *
+        // h p2 p3 *
+
+    // if 2 tie
     // if h = p1 & > p2 -> h & p1 tie  (add & > pm)
-    // -> h & p2 tie  (add > p3)
-    // p1 & p2 tie (add > p3)
+    // if h & p2 tie  (add > p3)
+    // if p1 & p2 tie (add > p3)
     // if h & p3 tie *
     //if p1 & p3 tie *
     // if p2 and p3 tie *
@@ -2194,64 +2203,159 @@ function endRound() {
     ${playerArray[3].Name} has ${playerArray[3].Points} points
     ${playerArray[4].Name} has ${playerArray[4].Points} points`)
 
-    // if no one busts -
-    // if they all tie -
+    // if no one busts 
 
-    // if h > p1 & h > p2 -> h wins  (add h > p3)
-    // if p1 > h & p1 > p2 -> p1 wins (add p1 > p3)
-    // if p2 > h & p2 > p1 -> p2 wins (add p2>p3)
-    // if p3 > h & > p1 & > p2 = p3 wins *
-    // if h = p1 & > p2 -> h & p1 tie  (add & > pm)
-    // -> h & p2 tie  (add > p3)
-    // p1 & p2 tie (add > p3)
-    // if h & p3 tie *
-    //if p1 & p3 tie *
-    // if p2 and p3 tie *
+    // if h > p1 & h > p2 & h > p3-> h wins  (add h > p4) 
+    // if p1 > h & p1 > p2 add p1 > p3 -> p1 wins (add p1 > p4)
+    // if p2 > h & p2 > p1 add p2>p3-> p2 wins (add p2>p4)
+    // if p3 > h & > p1 & > p2 = p3 wins (add p2>p4)
+    // p4 wins if all others are less than p4 *
+
+
+    // if they all tie - need to move
+
+    //if 4 tie *
+        // h p1 p2 p3 *
+        // h p1 p2 p4 *
+        // h p1 p3 p4 *
+        // h p2 p3 p4 *
+        // p1 p2 p3 p4 *
+
+    //if 3 tie
+        // h p1 p2 
+        // h p1 p3 
+        // p1 p2 p3 
+        // h p2 p3 
+        // h p1 p4 *
+        // h p2 p4 *
+        //p1 p2 p4 *
+        // p1 p3 p4 *
+        // p2 p3 p4 *
+
+// if 2 tie
+    // if h = p1 & > p2 (add & > pm)-> h & p1 tie  (add & > p4)
+    // -> h & p2  tie 
+    // p1 & p2 tie 
+    // if h & p3 tie 
+    //if p1 & p3 tie 
+    // if p2 and p3 tie 
+    // if h and p4 tie *
+    // if p1 and p4 tie *
+    // if p2 and p4 tie *
+    // if p3 and p4 tie *
 
     // if one player busts
     // if house busts
-    // if p1 > p2 -> p1 wins (add p1 > p3)
-    // if p1 < p2 -> p2 wins (add p2 > p3)
-    // if p3> p1 & p3 > p2 = p3 wins *
-    //if p1 busts
-    // h wins (add p3)
-    // p2 wins (add p3)
-    // p3 wins *
-    //if p2 busts
-    // house wins (add p3)
-    // p1 wins (add p3)
-    //p3 wins*
-    // if p3 busts *
-    // h wins *
-    // p1 wins *
-    // p2 wins *
+        // p1 wins 
+        // p2 wins 
+        // p3 wins
+        // p4 wins * 
 
+    //if p1 busts
+        // h wins 
+        // p2 wins 
+        // p3 wins 
+        // p4 wins *
+
+    //if p2 busts
+        // house wins 
+        // p1 wins 
+        //p3 wins
+        // p4 wins
+
+    // if p3 busts 
+    // h wins 
+    // p1 wins 
+    // p2 wins 
+    // p4 wins
+
+    //if p4 busts *
+    // h wins *
+    // p 1 wins*
+    // p2 wins*
+    // p3 wins*
 
     // if two players bust --- recreate these functions
     //if house and p1 bust
-        //p2 win *
-        //p3 win*
+        //p2 win 
+        //p3 win
+        //p4 win *
     // if house and p2 bust 
-        // p1 win *
-        // p3 win *
+        // p1 win 
+        // p3 win
+        // p4 win *
     // if p1 and p2 bust
-        // house win *
-        // p3 win*
-    // if p3 & house bust*
-        // p1 win *
-        // p2 win *
-    // if p3 & p1 bust *
-        // h win *
-        // p2 win *
-    // if p3 & p2 bust *
-        //if h win *
-        // if p1 win*
+        // house win 
+        // p3 win
+        // p4 win *
+    // if p3 & house bust
+        // p1 win 
+        // p2 win 
+        // p4 win *
+    // if p3 & p1 bust 
+        // h win 
+        // p2 win 
+        // p4 win *
+    // if p3 & p2 bust **
+        //if h win 
+        // if p1 win
+        // p4 win*
+    // if p4 and house bust **
+        //p1 win
+        // p2 win
+        // p3 win
+    // if p4 and p1 bust **
+        // h win
+        // p2 win
+        // p3 win
+    // if p4 and p2 bust **
+        // h win
+        // p1 win
+        // p3 win
+    // if p4 and p3 bust **
+        // h win
+        // p1 win
+        // p2 win
 
-    // if three players bust --- create these functions entirely *
-        // if h, p1, p2 bust - p3 wins*
-        // if h, p1, p3 bust - p2 wins*
-        // if h, p2, p3 bust - p1 wins*
-        // if p1, p2, p3 bust - h wins*
+    // if three players bust 
+        // if h, p1, p2 bust 
+            //- p3 wins
+            // p4 wins *
+        // if h, p1, p3 bust 
+            //- p2 wins
+            // p4 wins *
+        // if h, p2, p3 bust 
+            //- p1 wins
+            // p4 wins *
+        // if p1, p2, p3 bust 
+            //- h wins
+            // p4 wins*
+        // if p4 p3 p2 bust **
+            // h wins
+            //p1 wins
+        // if p4 p3 p1 bust **
+            // h
+            //p2
+        // id p4 p3 h bust**
+            //p1
+            //p2
+        // if p4 p2 p1 bust**
+            //h
+            //p3
+        // if p4 p2 h bust **
+            //p1
+            //p3
+        // if p4 p1 h bust **
+            //p2
+            //p3
+        
+        
+    // if 4 players bust --- create these functions entirely ***
+    // h win
+    // p1 win 
+    // p2 win
+    // p3 win
+    //p4 win
 
     // if all players bust -> no one wins*
 
