@@ -11,7 +11,7 @@ body {
 }
 
 #newTable {
-  margin: 25px;
+  margin: 20px;
 }
 
 #entrance {
@@ -20,6 +20,7 @@ body {
     min-height: 650px;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-top: 40px;
 }
 
 .wrapper {
