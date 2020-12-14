@@ -1101,7 +1101,8 @@ function itsABust() {
             playerArray[i].Bust = true;
             playerArray[i].Stand = true;
             //sends user alert // -- we need to set this to only display to the user who busted
-            alert(`${playerArray[i].Name} busted`);
+            console.log(`${playerArray[i].Name} busted`)
+            // alert(`${playerArray[i].Name} busted`);
         }
     }
 }
@@ -1734,7 +1735,7 @@ function houseBust() {
         playerArray[0].Bust = true;
         playerArray[0].Stand = true;
         //sends user alert //
-        alert("the house busted");
+        // alert("the house busted");
         // calls function //
         setTimeout(function () {
             // endRound();
@@ -1750,23 +1751,76 @@ function endRound() {
 
     if (playerArray.length === 3) {
 
+
     }
     else if (playerArray.length === 4) {
+
         
     }
     else if (playerArray.length === 5) {
+
         
     }
     else if (playerArray.length === 6) {
+
         
     }
     else if (playerArray.length === 7) {
+
         
     }
     else if (playerArray.length === 8) {
+
         
     }
 
+    // display all players points to user //
+    alert(`end of round point values:
+    ${playerArray[0].Name} has ${playerArray[0].Points} points
+    ${playerArray[1].Name} has ${playerArray[1].Points} points
+    ${playerArray[2].Name} has ${playerArray[2].Points} points`)
+    }
+
+    // House //
+    // if (playerArray[0].Bust)
+
+    // P1 //
+
+    // P2 //
+
+    // ties //
+    if (playerArray[10].Points === playerArray[1].Points === playerArray[2].Points) {
+        console.log(`All players tie.`)
+    }
+    else if (playerArray[0].Points === playerArray[1].Points) {
+        console.log(`House and Player1 tie.`)
+    }
+    else if (playerArray[0].Points === playerArray[2].Points) {
+        console.log(`House and Player2 tie.`)
+    }
+    else if (playerArray[1].Points === playerArray[2].Points) {
+        console.log(`Player1 and Player2 tie.`)
+    }
+
+    // busts //
+    if (playerArray[o])
+
+
+
+    console.log(playerArray);
+    console.log("=========================")
+
+    // hides all game buttons besides and changes the value to ask user if they want to play another game //
+    hitBtnP1.style.display = 'block';
+    standBtnP1.style.display = 'block';
+    restartBtnP1.value = 'play another round';
+
+    // reset player values //
+    playerArray[0].Bust = false;
+    playerArray[1].Bust = false;
+
+    playerArray[0].Stand = false;
+    playerArray[1].Stand = false;
 
 
 
@@ -1775,22 +1829,6 @@ function endRound() {
 
 
 
-
-
-
-
-
-
-
-
-//     console.log("======ending round========")
-//     // the users will get an alert that the game is over //
-//     alert(`round over`)
-//     // display points from round to user //
-//     for(var i = 0; i < playerArray.length; i++) {
-//         console.log(`${playerArray[i].Name} has ${playerArray[i].Points} points`)
-//         alert(`${playerArray[i].Name} has ${playerArray[i].Points} points`)
-//     }
 //     // if the players tie //
 //     if (playerArray[0].Points === playerArray[1].Points) {
 //         alert(`you tied`)
@@ -1826,21 +1864,5 @@ function endRound() {
 //         scorePlayer1 = document.querySelector("#scorePlayer1");
 //         scorePlayer1.innerHTML = `Score: ${playerArray[1].Score} `;
 //     }
-//     console.log(playerArray);
-//     console.log("=========================")
 
-//     // hides all game buttons besides and changes the value to ask user if they want to play another game //
-//     if (hitBtn.style.display === 'block') {
-//         hitBtn.style.display = 'none'
-//     }
-//     if (standBtn.style.display === 'block') {
-//         standBtn.style.display = 'none'
-//     }
-//     restartBtn.value = "play another round";
-
-//     // reset player values //
-//     playerArray[0].Bust = false;
-//     playerArray[1].Bust = false;
-//     playerArray[0].Stand = false;
-//     playerArray[1].Stand = false;
 }
