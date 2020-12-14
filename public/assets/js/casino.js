@@ -105,7 +105,7 @@ $(document).ready(function() {
                     console.log("Just chatting setup")
                     $("#containerBlackJack").css("display", "none");
                 break;
-                case "Black Jack":
+                case "Blackjack":
                     console.log("Black Jack setup");
                     $("#gameChoice").css("display", "none");
                     $("#containerBlackJack").css("display", "block");
