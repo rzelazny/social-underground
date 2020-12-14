@@ -1290,27 +1290,33 @@ function houseLogic() {
         // house will hit if ... //
         // p1 points > house BUT < 22
         else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
-            console.log("house will hit")
+            console.log("house will hit");
+            houseHit();
         }
         // p2 points > house BUT < 22
         else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
-            console.log("house will hit")
+            console.log("house will hit");
+            houseHit();
         }
         // p3 points > house BUT < 22
         else if (playerArray[3].Bust === false && playerArray[3].Points > playerArray[0].Points) {
-            console.log("house will hit")
+            console.log("house will hit");
+            houseHit();
         }
         // player 1 tied && points < 17
         else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
-            console.log("house will hit")
+            console.log("house will hit");
+            houseHit();
         }
         // player 2 tied && points < 17
         else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
-            console.log("house will hit")
+            console.log("house will hit");
+            houseHit();
         }
         // player 3 tied && points < 17
         else if (playerArray[3].Points === playerArray[0].Points && playerArray[0].Points < 17) {
-            console.log("house will hit")
+            console.log("house will hit");
+            houseHit();
         }
         // stand //
         else {
