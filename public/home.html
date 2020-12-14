@@ -11,17 +11,28 @@
     <link rel="stylesheet" href="./assets/stylesheets/home.css">
     <title>home</title>
 </head>
-
 <body>
+    <nav class="dropdown " displau=inline">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Main Menu
+        </a>
+    
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="./home.html">Home</a>
+            <a class="dropdown-item" href="./members.html">Membership</a>
+            <a class="dropdown-item" href="/logout">Log Out</a>
+        </div>
+    </nav>
     <div class="wrapper">
         <div class="neon-wrapper">
             <div class="neon-text">Welcome to the <br> Social Underground</div>
         </div>
     </div>
 
-    <div id="current-tables"></div>
 
-    <div style="position: relative; left:40%; top:600px">
+
+    <!-- <div style="position: relative; left:40%; top:600px">
         <ul>
             <li>
                 <a href="#">
@@ -29,7 +40,7 @@
                     <span></span>
                     <span></span>
                     <span></span>
-                    <span id="newTable">New</span>
+                    <span id="newTableSpan">New</span>
                 </a>
             </li>
             <li>
@@ -42,10 +53,14 @@
                 </a>
             </li>
         </ul>
-    </div>
-
-    <div>
-        <canvas id="canvas" width="1100" height="650"></canvas>
+    </div> -->
+    <div class="container" id="entrance">
+        <div class="row">
+            <div class="col-md-4" id="current-tables0"></div>
+            <div class="col-md-4" id="current-tables1"></div>
+            <div class="col-md-4" id="current-tables2"></div>
+        </div>
+        <button id ="newTable">Create Table</button>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

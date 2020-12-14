@@ -6,7 +6,7 @@ CREATE DATABASE gaming_underground_db;
 USE gaming_underground_db;
 
 -- table stores login information
-CREATE TABLE User_login(
+CREATE TABLE user_login(
 	id int NOT NULL AUTO_INCREMENT,
 	email varchar(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE User_login(
 );
 
 -- table stores user displayName and win/loss record
-CREATE TABLE User_stat(
+CREATE TABLE user_stat(
     id int NOT NULL AUTO_INCREMENT,
 	login_id int NOT NULL,
     display_name varchar(255) DEFAULT "New Player",
@@ -26,15 +26,15 @@ CREATE TABLE User_stat(
 );
 
 -- the list of gaming tables players can sit down at to chat or play a game
-CREATE TABLE gaming_tables(
+CREATE TABLE gaming_table(
     id int NOT NULL AUTO_INCREMENT,
 	game varchar(30) NOT NULL DEFAULT "Just Chatting",
-    game_started BOOLEAN DEFAULT FALSE,
+    game_ended BOOLEAN DEFAULT FALSE,
     user1 varchar(255),
-    user2 varchar(255),
-    user3 varchar(255),
-    user4 varchar(255),
-    user5 varchar(255),
+    user2 varchar(255) DEFAULT "Open Seat",
+    user3 varchar(255) DEFAULT "Open Seat",
+    user4 varchar(255) DEFAULT "Open Seat",
+    user5 varchar(255) DEFAULT "Open Seat",
     createdAt DATETIME NOT NULL, 
     updatedAt DATETIME NOT NULL,
 	PRIMARY KEY (id)
@@ -48,18 +48,17 @@ CREATE TABLE chat_log(
     table_id int NOT NULL,
     createdAt DATETIME NOT NULL, 
     updatedAt DATETIME NOT NULL,
-    createdAt DATETIME NOT NULL, 
-    foreign key (table_id) references gaming_tables(id) on delete cascade,
+    foreign key (table_id) references gaming_table(id) on delete cascade,
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE Photo(
-	id int NOT NULL AUTO_INCREMENT,
-	image BLOB,
+CREATE TABLE photo(
+    id int NOT NULL AUTO_INCREMENT,
+	photo MEDIUMBLOB NOT NULL,
     user_id int NOT NULL,
     table_id int NOT NULL,
     createdAt DATETIME NOT NULL, 
     updatedAt DATETIME NOT NULL,
-	PRIMARY KEY (id),
-    foreign key (table_id) references gaming_tables(id) on delete cascade
+    foreign key (table_id) references gaming_table(id) on delete cascade,
+	PRIMARY KEY (id)
 );

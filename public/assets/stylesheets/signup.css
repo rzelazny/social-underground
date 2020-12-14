@@ -1,0 +1,14 @@
+form.signup {
+  margin-top: 50px;
+}
+
+body {
+    background-image: url("../images/Vegas.jpg")
+}
+
+.box{
+    border-radius: 20px;
+    background-color: white;
+    margin-top: 300px;
+    width: 40em;
+}

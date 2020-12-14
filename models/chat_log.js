@@ -3,7 +3,6 @@ module.exports = function(sequelize, DataTypes) {
     console.log("ChatLog sequelize.define")
     var ChatLog = sequelize.define("chat_log", {
     
-    //
     user: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -15,8 +14,8 @@ module.exports = function(sequelize, DataTypes) {
     // chat logs are per gaming table
     table_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
-    }
+        allowNull: false,
+    },
     });
     return ChatLog;
 };
