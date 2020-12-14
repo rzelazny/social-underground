@@ -1267,7 +1267,7 @@ function houseLogic() {
     }
 
     // when all 3 players are standing ... //
-    if (playerArray.length === 4) {
+    else if (playerArray.length === 4) {
         // house will stand if ... //
         // house 17+ points
         if (playerArray[0].Points >= 17) {
@@ -1327,7 +1327,7 @@ function houseLogic() {
     }
 
     // when all 4 players are standing ... //
-    if (playerArray.length === 5) {
+    else if (playerArray.length === 5) {
         // house will stand if ... //
         // house 17+ points
         if (playerArray[0].Points >= 17) {
@@ -1397,7 +1397,7 @@ function houseLogic() {
     }
 
     // when all 5 players are standing ... //
-    if (playerArray.length === 6) {
+    else if (playerArray.length === 6) {
         // house will stand if ... //
         // house 17+ points
         if (playerArray[0].Points >= 17) {
@@ -1478,7 +1478,7 @@ function houseLogic() {
     }
 
     // when all 6 players are standing ... //
-    if (playerArray.length === 7) {
+    else if (playerArray.length === 7) {
         // house will stand if ... //
         // house 17+ points
         if (playerArray[0].Points >= 17) {
@@ -1568,7 +1568,7 @@ function houseLogic() {
     }
 
     // when all 7 players are standing ... //
-    if (playerArray.length === 8) {
+    else if (playerArray.length === 8) {
         // house will stand if ... //
         // house 17+ points
         if (playerArray[0].Points >= 17) {
@@ -1743,8 +1743,46 @@ function houseBust() {
 }
 
 
-// // when this function is called the game is ended //
-// function endRound() {
+// when this function is called the game is ended //
+function endRound() {
+    console.log("======ending round========");
+    alert(`round over`);
+
+    if (playerArray.length === 3) {
+
+    }
+    else if (playerArray.length === 4) {
+        
+    }
+    else if (playerArray.length === 5) {
+        
+    }
+    else if (playerArray.length === 6) {
+        
+    }
+    else if (playerArray.length === 7) {
+        
+    }
+    else if (playerArray.length === 8) {
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //     console.log("======ending round========")
 //     // the users will get an alert that the game is over //
 //     alert(`round over`)
@@ -1805,4 +1843,4 @@ function houseBust() {
 //     playerArray[1].Bust = false;
 //     playerArray[0].Stand = false;
 //     playerArray[1].Stand = false;
-// }
+}
