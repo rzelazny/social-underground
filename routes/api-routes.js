@@ -8,7 +8,7 @@ const { sequelize } = require("../models");
 const user = require("../models/user_login");
 const { Op } = require("sequelize");
 const { pathToFileURL } = require("url");
-// const user = require("../models/user");
+
 
 
 module.exports = function(app) {
@@ -207,9 +207,12 @@ app.get("/api/photo/:id/:table", function(req, res) {
     //});
 
     app.GET("/api/winLose", function(req, res){
-      
+      res.json(winLose);
     })
 
+    app.PUT("/api/winLose", function (req, res){
+
+    })
   });
 };
 
