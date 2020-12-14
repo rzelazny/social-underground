@@ -127,7 +127,7 @@ ul li:nth-child(4):hover span {
 }
 /* RPS css */
 #containerRPS{
-    background: #009919;
+    background:#006c26;
     padding: 5px;
     margin-bottom: 5px;
 }
@@ -137,6 +137,8 @@ ul li:nth-child(4):hover span {
 } */
 /*Chat Css*/
 #chat-container{
+    margin: 10px;
+    padding:10px;
     text-align: left;
     height: 200px;
     width: 90%;
