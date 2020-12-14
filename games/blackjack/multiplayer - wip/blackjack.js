@@ -1670,26 +1670,27 @@ function houseHit() {
         housePointsDiv.innerHTML = `Points: ${playerArray[0].Points} `;
 
         //timeout function to give html time to append card and points before running bust function //
-        // setTimeout(function () {
-        //     // if the hit card makes the points go over 21 the house will get a bust alert and the game will end //
-        //     houseBust()
-        // }, 500);
+        setTimeout(function () {
+            // if the hit card makes the points go over 21 the house will get a bust alert and the game will end //
+            houseBust()
+        }, 500);
     })
 }
 
-// function houseBust() {
-//     if (playerArray[0].Points > 21) {
-//         console.log("inside the bust function")
-//         //sends user alert //
-//         alert("the house busted");
-//         // sets bst property to true //
-//         playerArray[0].Bust = true;
-//         // calls function //
-//         setTimeout(function () {
-//             endRound();
-//         }, 500);
-//     }
-// }
+function houseBust() {
+    if (playerArray[0].Points > 21) {
+        console.log("inside the bust function")
+        // sets bst property to true //
+        playerArray[0].Bust = true;
+        playerArray[0].Stand = true;
+        //sends user alert //
+        alert("the house busted");
+        // calls function //
+        setTimeout(function () {
+            // endRound();
+        }, 500);
+    }
+}
 
 
 // // when this function is called the game is ended //
