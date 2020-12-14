@@ -110,12 +110,21 @@ ul li:nth-child(4):hover span {
 } */
 /* Game selection css */
 #gameChoice{
-    background: #5cb85c;
+    background-image: url(../images/felt.png);
     margin: 10px;
     padding:10px;
+    color: white;
+    
     text-align: center;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
 }
-
+#gameChoice h2{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
 /* RPS css */
 #containerRPS{
     background: #009919;
@@ -130,10 +139,14 @@ ul li:nth-child(4):hover span {
 #chat-container{
     text-align: left;
     height: 200px;
-    width: 400px;
+    width: 90%;
     background-image: url(../images/dicebackground.jpg);
     background-size: contain;
     color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0px 0px 20px 20px;
 }
 
 #chat-log{
@@ -143,11 +156,11 @@ ul li:nth-child(4):hover span {
 }
 
 #chat-log li{
+    font-size: 18px;
+    font-weight: bold;
     list-style-type: none;
-}
-
-#chat-entry{
-  padding: 10px 0px 0px 10px;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: red;
 }
 
 #chat-input{
@@ -163,4 +176,6 @@ ul li:nth-child(4):hover span {
 
 #chooseGame {
     margin-top: 10px;
+    background-color: rgb(245, 235, 235);
+    color: black;
 }
