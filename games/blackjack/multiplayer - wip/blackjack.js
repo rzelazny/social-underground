@@ -2210,6 +2210,7 @@ function endRound() {
         // p1 wins
         // p2 wins
         // p3 wins
+        // p4 wins *
 
         //if 4 tie **
             // h 1 2 3
@@ -2415,3 +2416,311 @@ function endRound() {
     console.log(playerArray);
     console.log("=========================")
 
+
+
+
+
+
+
+
+// 5 player function //
+    // if all players bust -> no one wins
+    // if no one busts 
+        // if they all tie -
+
+        //winners based off everyone else being less than:
+        // h wins
+        // p1 wins
+        // p2 wins
+        // p3 wins
+        // p4 wins
+        // p5 wins *
+
+        // if 5 tie **
+            // h 1 2 3 4 
+            // h 1 2 3 5
+            // h 1 2 4 5 
+            // h 1 3 4 5
+
+        //if 4 tie 
+            // h 1 2 3
+            // h 1 2 4
+            // h 2 3 4
+            // 5 4 3 2 *
+            // 5 4 3 1 *
+            // 5 4 3 h *
+            // 5 4 2 1 *
+            // 5 4 2 h *
+            // 5 3 2 1 *
+            // 5 3 2 h *
+            // 5 2 1 h *
+
+        //if 3 tie
+            // h p1 p2 
+            // h p1 p3 
+            // p1 p2 p3 
+            // h p2 p3 
+            // 4 3 2 
+            // 4 3 1 
+            // 4 3 h 
+            // 4 2 1 
+            // 4 2 h 
+            // **********
+            // 5 4 3
+            // 5 4 2
+            // 5 4 1
+            // 5 4 h
+            // 5 3 2
+            // 5 3 1
+            // 5 3 h
+            // 5 2 1
+            // 5 2 h
+            // 5 1 h
+
+        // if 2 tie
+            // h & p1 tie
+            // h & p2 tie 
+            // p1 & p2 tie
+            // h & p3 tie 
+            //p1 & p3 tie 
+            // p2 and p3 tie 
+            // 4 3 
+            // 4 2 
+            // 4 1 
+            // 4 h 
+            // **********
+            // 5 4
+            // 5 3
+            // 5 2
+            // 5 1
+            // 5 h
+
+    // if one player busts
+        // if house busts
+            // if p1 > p2 -> p1 wins
+            // if p1 < p2 -> p2 wins
+            // if p3> p1 & p3 > p2 = p3 wins 
+            // p4 
+            // p5
+        //if p1 busts
+            // h wins 
+            // p2 wins
+            // p3 wins 
+            // p4 
+            // p5
+        //if p2 busts
+            // house wins 
+            // p1 wins 
+            // p3 wins 
+            // p4
+            // p5
+        //p3 busts 
+            // h wins 
+            // p1 wins 
+            // p2 wins 
+            // p4 
+            //p5
+        // p4 busts 
+            //h
+            // 1
+            // 2
+            // 3
+            //5
+        // p5 busts **
+            //h
+            //1
+            //2
+            //3
+            //4
+
+
+    // if two players bust
+        //if house and p1 bust
+            //p2 win 
+            //p3 win 
+            // p4 
+            // p5 *
+        // if house and p2 bust 
+            // p1 win 
+            // p3 win 
+            // p4 
+            //p5 *
+        // if p1 and p2 bust
+            // house win 
+            // p3 win 
+            // p4 
+            //p5 *
+        // if p3 & house bust
+            // p1 win 
+            // p2 win 
+            // p4 
+            //p5 *
+        // if p3 & p1 bust 
+            // h win 
+            // p2 win 
+            // p4 
+            //p5 *
+        // if p3 & p2 bust 
+            //if h win 
+            // if p1 win 
+            // p4 
+            //p5 *
+        // if 4 3 
+            // h
+            // 1
+            // 2
+            //p5 *
+        // if 4 2 
+            // 3
+            //1
+            // h
+            //p5 *
+        // if 4 1   
+            //3
+            //2
+            //h
+            //p5 *
+        // if 4 h 
+            //3
+            //2
+            //1
+            //p5 *
+        // ******************
+        // 5 4 bust
+            // h
+            //1
+            //2
+            //3
+        // 5 3
+            //h
+            //1
+            //2
+            //4
+        // 5 2
+            //h
+            //1
+            //3
+            //4
+        // 5 1
+            //h
+            //2
+            //3
+            //4
+            //5
+        // 5 h
+            //1
+            //2
+            //3
+            //4
+
+
+    // if three players bust 
+        // if h, p1, p2 bust 
+            //p3 wins
+            //p4
+            // p5*
+        // if h, p1, p3 bust 
+            //p2 wins
+            //p4 
+            // p5*
+        // if h, p2, p3 bust 
+            //p1 wins
+            //p4 
+            // p5*
+        // if p1, p2, p3 bust 
+            // h wins
+            //p4 
+            // p5*
+        // 4 3 2 
+            // 1
+            // h
+            // p5*
+        // 4 3 1
+            // h
+            //2
+            // p5*
+        // 4 3 h
+            //1
+            //2
+            // p5*
+        // 4 2 1
+            //h
+            //3
+            // p5*
+        // 4 2 h
+            //1
+            //3
+            // p5*
+        //*******************/
+        // 5 4 3
+            //2
+            //1
+            //h
+        // 5 4 2
+            //h
+            //1
+            //3
+        // 5 4 1 
+            //h
+            //2
+            //3
+        // 5 4 h
+            //1
+            //2
+            //3
+        // 5 3 2
+            //h
+            //1
+            //4
+        // 5 3 1
+            //h
+            //2
+            //4
+        // 5 3 h
+            //1
+            //2
+            //4
+        // 5 2 1
+            //h
+            //3
+            //4
+        // 5 2 h
+            //1
+            //3
+            //4
+
+    // if four players bust
+        //h 1 2 3
+            //p4 wins
+            //p5 wins *
+        //h 1 2 4
+            //p3 wins
+            //p5 wins *
+        // h 1 3 4
+            //p2 wins
+            //p5 wins *
+        // h 2 3 4
+            //p1 wins
+            //p5 wins *
+        // 1 2 3 4 
+            //h wins
+            //p5 wins *
+        // ******** 
+        // 5 4 3 2
+        // 5 4 3 1 
+        // 5 4 3 h
+        // 5 3 2 1
+        // 5 3 2 h
+        // 5 2 1 h
+
+     // if 5 players bust ***
+        //p5 wins
+        //p4 wins
+        //p3 wins
+        // p2 wins
+        // p1 wins
+        // h wins
+
+
+    // increase winners scores by 1 //
+    // alert the winner //
