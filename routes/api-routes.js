@@ -205,6 +205,11 @@ app.get("/api/photo/:id/:table", function(req, res) {
     
     //   res.send(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png");
     //});
+
+    app.GET("/api/winLose", function(req, res){
+      
+    })
+
   });
 };
 

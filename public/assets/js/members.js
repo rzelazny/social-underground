@@ -16,6 +16,6 @@ $(document).ready(function() {
 
   //function to obtain all wins and losses from game
   function winLose (){
-
+    
   }
 });
