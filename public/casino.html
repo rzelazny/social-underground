@@ -70,6 +70,7 @@
                 <input class="btn btn-success" type="button" id="restart" value="restart" style="display: none;">
                 <input class="btn btn-success" type="button" id="hit" value="hit me" style="display: none;">
                 <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;">
+
             </div>
             <div class="players" id="players"></div>
         </div>
@@ -81,27 +82,26 @@
                 <canvas id="snapShot" class="d-none"></canvas>
                 <div class="row">
                     <div class="col-lg-4">
-                        <button id="camBtnOn">Camera On</button>
+                        <button id="camBtnOn"class="btn btn-dark mb-1">Cam On</button>
+                    </div>
                         <!-- <label class="switch">
                         <input type="checkbox" checked>
                         <span class="slider round"></span>
                         </label> -->
+                    <div class="col-lg-4">
+                        <button id="camBtnOff"class="btn btn-dark mb-1">Cam Off</button>
                     </div>
                     <div class="col-lg-4">
-                        <button id="camBtnOff">Camera Off</button>
-                    </div>
-                    <div class="col-lg-4">
-                        <button id="camSnap">Snapshot</button>
-                    </div>
+                        <button id="camSnap"class="btn btn-dark mb-1">Snapshot</button>
+                    </div>                        
                 </div>
-                <div class="col-lg-4">
-                    <img id="my-photo" src="">
-                    <div id="rpsCountdown"></div>
-                </div>
-                <div class="col-lg-4">
-                    <img id="their-photo" src="">
-                    
-                </div>
+            </div>
+            <div class="col-lg-4">
+                <img id="my-photo" style="display: none;" src="">
+                <div id="rpsCountdown"></div>
+            </div>
+            <div class="col-lg-4">
+                <img id="their-photo" style="display: none;" src="">
             </div>
         </div>
         <div class="row">
@@ -121,7 +121,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-4">
-                <button id="camBtnRPS">Play Rock Paper Scissors</button>
+                <button id="camBtnRPS"class="btn btn-dark mb-2">Play Rock Paper Scissors</button>
             </div>
             <div class="col-md-4"></div>
         </div>

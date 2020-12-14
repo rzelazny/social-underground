@@ -2,7 +2,8 @@ $(document).ready(function() {
 
     //variables
     var rpsOpponent = document.getElementById("select-RPS-opponent")
-
+    let myPhoto = document.getElementById("my-photo");
+    let theirPhoto = document.getElementById("their-photo");
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
     let email = "";
@@ -205,14 +206,17 @@ $(document).ready(function() {
         webcam.stop();
     })
 
-    //Take photo for testing
+    //Take a phot snapshot
     $("#camSnap").on("click", function(event) {
         let picture = {
             photo: webcam.snap(),
             table: curTable
         }
         console.log("Sending photo");
-        document.getElementById("my-photo").src = picture.photo;
+        //unhide element and set the source to the new image
+        myPhoto.style="display: block;"
+        myPhoto.src = picture.photo;
+        //store the photo in the db so others can access it
         $.post("/api/photo/", picture);
     })
 
@@ -254,12 +258,14 @@ $(document).ready(function() {
                 }
                 //and post it to the db
                 console.log("Sending photo");
-                document.getElementById("my-photo").src = sendPic.photo;
+                myPhoto.src = sendPic.photo;
                 $.post("/api/photo/", sendPic);
 
                 //Then get the opponent's most most recent photo
                 $.get("/api/photo/" + oppEmail + "/" + curTable).then(function(data){
-                    document.getElementById("their-photo").src = "data:image/png;base64," + atob(data[0].photo);
+                    //unhide the photo element and set the source to the decoded image data
+                    theirPhoto.style="display: block;"
+                    theirPhoto.src = "data:image/png;base64," + atob(data[0].photo);
                 })
             }
         }, 1000);
