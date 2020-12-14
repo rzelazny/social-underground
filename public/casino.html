@@ -12,17 +12,22 @@
     <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
     <title>Casino</title>
 </head>
-<nav class="dropdown navbar navbar-expand-lg bg-dark">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Main Menu
-    </a>
+<nav class="dropdown">
+    <nav class="navbar navbar-dark">
+        <nav class="dropdown ml-auto " style="display: inline;">
+            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="margin:10px;">
+                Main Menu
+            </a>
+        
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="./home.html">Home</a>
+                <a class="dropdown-item" href="./members.html">Membership</a>
+                <a class="dropdown-item" href="/logout">Log Out</a>
+            </div>
+        </nav>
+    </nav>
 
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" id="goHome" href="#">Home</a>
-        <a class="dropdown-item" id="memberPage" href="#">Membership</a>
-        <a class="dropdown-item" id="logOut" href="#">Log Out</a>
-    </div>
 </nav>
 <body>
     <div class="container"id=gameChoice>
@@ -38,19 +43,20 @@
             </div>
             <hr>
             <h2>Choose a game</h2>
+
             <form class="form-inline">
                 <select class="custom-select my-1 mr-sm-2" id="multi-select">
                     <option selected>Pick a Game...</option>
                         <!-- <option>Just Chatting</option> -->
-                        <option>Black Jack</option>
+                        <option>Blackjack</option>
                         <option>Rock Paper Scissors</option>
                 </select>
                 <select class="custom-select my-1 mr-sm-2" id="single-select" style="display:none">
                     <option selected>Pick a Game...</option>
-                        <option>Black Jack</option>
+                        <option>Blackjack</option>
                         <!-- <option>Rock Paper Scissors</option> -->
                 </select>
-                <button type="submit" class="btn btn-dark mb-2" id="chooseGame">Start Playing</button>
+                <button type="submit" class="btn btn-light mb-2" id="chooseGame">Start Playing</button>
             </form>
         </form>
     </div>
@@ -60,10 +66,10 @@
         <div id="gameBody">
             <div class= "gameOptions" id="gameOptions">
                 <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
-                <input class="btn btn-dark type="button" id="start" value="start" style="display: none;">
-                <input class="btn btn-dark" type="button" id="restart" value="restart" style="display: none;">
-                <input class="btn btn-dark" type="button" id="hit" value="hit me" style="display: none;">
-                <input class="btn btn-dark" type="button" id="stand" value="stand" style="display: none;">
+                <input class="btn btn-success type="button" id="start" value="start" style="display: none;">
+                <input class="btn btn-success" type="button" id="restart" value="restart" style="display: none;">
+                <input class="btn btn-success" type="button" id="hit" value="hit me" style="display: none;">
+                <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;">
             </div>
             <div class="players" id="players"></div>
         </div>
