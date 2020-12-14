@@ -1812,7 +1812,15 @@ function endRound() {
 
 
     // increase winners scores by 1 //
+    // alert the winner //
+
+
     // alert users of all current scores //
+    alert(`end of round updated scores:
+    ${playerArray[0].Name}: ${playerArray[0].Score}
+    ${playerArray[1].Name}: ${playerArray[1].Score}
+    ${playerArray[2].Name} has ${playerArray[2].Score}`)
+    }
 
     // update scores on html //
     houseScore = document.getElementById("houseScore");
