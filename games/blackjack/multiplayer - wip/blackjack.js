@@ -1049,18 +1049,25 @@ function itsABust() {
 }
 
 function onStandPlayer1() {
+    playerArray[1].Stand === true;
 }
 function onStandPlayer2() {
+    playerArray[2].Stand === true;
 }
 function onStandPlayer3() {
+    playerArray[3].Stand === true;
 }
 function onStandPlayer4() {
+    playerArray[4].Stand === true;
 }
 function onStandPlayer5() {
+    playerArray[5].Stand === true;
 }
 function onStandPlayer6() {
+    playerArray[6].Stand === true;
 }
 function onStandPlayer7() {
+    playerArray[7].Stand === true;
 }
 
 // function hitHouseLogic() {
@@ -1145,39 +1152,6 @@ function onStandPlayer7() {
 //     }
 // }
 
-// // this function will be called when the user presses the stand button //
-// function onStand() {
-//     console.log("running through stand function")
-//     playerArray[1].Stand = true;
-//     if (playerArray[0].Bust === true) {
-//         console.log("if busted why did it come here???")
-//     }
-//     else{
-//         if (playerArray[0].Points > 16 || playerArray[0].Points > playerArray[1].Points) {
-//             playerArray[0].Stand = true;
-//             console.log("house standing ends the round");
-//             endRound();
-//         }
-//         else{
-//             console.log("player1 stands // house does not - hits again")
-//             hitHouseLogic();
-//             setTimeout(function () {
-//                 console.log(playerArray[0]);
-//                 if (playerArray[0].Points < 22) {
-//                     console.log("house didnt bust - send to testing")
-//                     testing();
-//                 }
-//                 else {
-//                     console.log("house busted - why am i seeing in here????")
-//                 }
-//             }, 1000);
-//         }
-//     }
-// }
-
-// function testing() {
-//     onStand();
-// }
 
 // // when this function is called the game is ended //
 // function endRound() {
