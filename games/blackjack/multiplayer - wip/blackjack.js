@@ -1762,7 +1762,7 @@ function endRound() {
         // if no one busts 
         if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false) {
             // if they all tie
-            if (playerArray[0].Points === playerArray[1].Points === playerArray[2].Points) {
+            if (playerArray[0].Points === playerArray[1].Points && playerArray[1].Points === playerArray[2].Points) {
                 alert("talk about the odds... all players have tied");
             }
             // if h > p1 & h > p2 -> h wins
@@ -1800,12 +1800,12 @@ function endRound() {
         // if house busts
         else if (playerArray[0].Bust === true) {
             // if p1 > p2 -> p1 wins
-            if (playerArray[1].Points > playerArray[1].Points) {
+            if (playerArray[1].Points > playerArray[2].Points) {
                 playerArray[1].Score = playerArray[1].Score + 1;
                 alert("Player1 wins");
             }
             // if p1 < p2 -> p2 wins
-            else if (playerArray[1].Points > playerArray[2].Points) {
+            else if (playerArray[1].Points < playerArray[2].Points) {
                 playerArray[2].Score = playerArray[2].Score + 1;
                 alert("Player2 wins");
             }
@@ -1847,17 +1847,17 @@ function endRound() {
         }
         // if two players bust 
         //if house and p1 bust -> p2 win
-        else if (playerArray[0].Bust === true && playerArray[1] === true) {
+        else if (playerArray[0].Bust === true && playerArray[1].Bust === true) {
             playerArray[2].Score = playerArray[2].Score + 1;
             alert("Player2 wins");
         }
         // if house and p2 bust -> p1 win
-        else if (playerArray[0].Bust === true && playerArray[2] === true) {
+        else if (playerArray[0].Bust === true && playerArray[2].Bust === true) {
             playerArray[1].Score = playerArray[1].Score + 1;
             alert("Player1 wins");
         }
         // if p1 and p2 bust -> house win
-        else if (playerArray[1].Bust === true && playerArray[2] === true) {
+        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
             playerArray[0].Score = playerArray[0].Score + 1;
             alert("House wins");
         }
