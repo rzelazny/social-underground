@@ -562,72 +562,16 @@ function onRestartP7() {
 
 // this function will be called when the user presses the hit button //
 function onHitPlayer1() {
-    console.log("i can see")
-    i = 1;
     // will call player one hit function //
-    playerHit();
+    player1Hit();
     // creating a timer function to give time for the card to render before busting //
     // setTimeout(function () {
     //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
     //     itsABust();
     // }, 500); 
-    i = 0;
 }
 
-function onHitPlayer2() {
-
-}
-
-function onHitPlayer3() {
-
-}
-
-function onHitPlayer4() {
-
-}
-
-function onHitPlayer5() {
-
-}
-
-function onHitPlayer6() {
-
-}
-
-function onHitPlayer7() {
-
-}
-
-function onStandPlayer1() {
-
-}
-
-function onStandPlayer2() {
-
-}
-
-function onStandPlayer3() {
-
-}
-
-function onStandPlayer4() {
-
-}
-
-function onStandPlayer5() {
-
-}
-
-function onStandPlayer6() {
-
-}
-
-function onStandPlayer7() {
-
-}
-
-
-function playerHit() {
+function player1Hit() {
     // calls to the api to get one shuffled card //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
     $.ajax({
@@ -642,15 +586,15 @@ function playerHit() {
                 imgUrl: data.cards[0].image
             };
         // this variable = the players original cards
-        var originalHand = playerArray[i].Hand;
+        var originalHand = playerArray[1].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard); 
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
-        hitCardImg.className = ('hitCard' + playerArray[i].Name)
+        hitCardImg.className = ('hitCard1')
         hitCardImg.src = (hitCard.imgUrl)
 
-        divHand = document.getElementById(("hand" + playerArray[i].Name));
+        divHand = document.getElementById(("handPlayer1"));
         divHand.appendChild(hitCardImg);
 
         // resets value of hand to zero //
@@ -678,19 +622,142 @@ function playerHit() {
             // resets handVal back to zero //
             handVal = 0;
 
-            // clears points on html & recreates the elements to display the new points //
-            divPoints = document.getElementById(('points' + playerArray[i].Name));
-            divPoints.innerHTML = ''
-            divPoints = document.createElement('div');
-            divPoints.className = ('points');
-            divPoints.id = ('points' + playerArray[i].Name);
-            divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
-            
-            divPlayer = document.getElementById(playerArray[i].Name);
-            divPlayer.appendChild(divPoints);
+            // display the new points //
+            divPoints = document.getElementById('pointsPlayer1');
+            divPoints.innerHTML = `Points: ${playerArray[1].Points} `;
 
         }
     })
+}
+
+function onHitPlayer2() {
+        // will call player one hit function //
+        player2Hit();
+        // creating a timer function to give time for the card to render before busting //
+        // setTimeout(function () {
+        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        //     itsABust();
+        // }, 500); 
+}
+
+function player2Hit() {
+    // calls to the api to get one shuffled card //
+    var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
+    $.ajax({
+        url: docUrl,
+        method: "GET"
+    }).then(function (data) {
+        // this object holds all the data needed for the card //
+        hitCard = {
+                code: data.cards[0].code,
+                suit: data.cards[0].suit,
+                value: data.cards[0].value,
+                imgUrl: data.cards[0].image
+            };
+        // this variable = the players original cards
+        var originalHand = playerArray[2].Hand;
+        // this pushes the new card into the array of cards
+        originalHand.push(hitCard); 
+        // then, the image is created and appended to the hand div with the other cards //
+        var hitCardImg = document.createElement('img');
+        hitCardImg.className = ('hitCard2')
+        hitCardImg.src = (hitCard.imgUrl)
+
+        divHand = document.getElementById(("handPlayer2"));
+        divHand.appendChild(hitCardImg);
+
+        // resets value of hand to zero //
+        var handVal = 0;
+        for(var a = 0; a < playerArray.length; a++) {
+            // resets players points //
+            playerArray[a].Points = 0;
+            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+                // sets values for face cards //
+                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
+                    playerArray[a].Hand[j].value = "10";
+                } 
+                // sets value for ace depending on previous hand value //
+                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    playerArray[a].Hand[j].value = "11";
+                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    playerArray[a].Hand[j].value = "1";
+                }
+
+                // adds all cards in hand to create new value //
+                handVal += parseInt(playerArray[a].Hand[j].value);
+            }
+            // sets the points equal to the new value //
+            playerArray[a].Points = handVal;
+            // resets handVal back to zero //
+            handVal = 0;
+
+            // display the new points //
+            divPoints = document.getElementById('pointsPlayer2');
+            divPoints.innerHTML = `Points: ${playerArray[2].Points} `;
+
+        }
+    })
+}
+
+function onHitPlayer3() {
+        // will call player one hit function //
+        player3Hit();
+        // creating a timer function to give time for the card to render before busting //
+        // setTimeout(function () {
+        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        //     itsABust();
+        // }, 500); 
+}
+function onHitPlayer4() {
+        // will call player one hit function //
+        player4Hit();
+        // creating a timer function to give time for the card to render before busting //
+        // setTimeout(function () {
+        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        //     itsABust();
+        // }, 500); 
+}
+function onHitPlayer5() {
+        // will call player one hit function //
+        player5Hit();
+        // creating a timer function to give time for the card to render before busting //
+        // setTimeout(function () {
+        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        //     itsABust();
+        // }, 500); 
+}
+function onHitPlayer6() {
+        // will call player one hit function //
+        player6Hit();
+        // creating a timer function to give time for the card to render before busting //
+        // setTimeout(function () {
+        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        //     itsABust();
+        // }, 500); 
+}
+function onHitPlayer7() {
+        // will call player one hit function //
+        player7Hit();
+        // creating a timer function to give time for the card to render before busting //
+        // setTimeout(function () {
+        //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+        //     itsABust();
+        // }, 500); 
+}
+
+function onStandPlayer1() {
+}
+function onStandPlayer2() {
+}
+function onStandPlayer3() {
+}
+function onStandPlayer4() {
+}
+function onStandPlayer5() {
+}
+function onStandPlayer6() {
+}
+function onStandPlayer7() {
 }
 
 // function itsABust() {
