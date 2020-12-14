@@ -5,6 +5,11 @@ body {
     text-align: center;
 }
 
+.navbar {
+  background-color: black;
+  margin-bottom: 40px;
+}
+
 #entrance {
     background-image: url(../images/casinoentrance.jpg);
     min-width: 1100px;
