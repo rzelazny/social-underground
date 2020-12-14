@@ -228,25 +228,27 @@ $(document).ready(function() {
     $("#camBtnRPS").on("click", function(event) {
         let timer = 3
         oppEmail = $("#select-RPS-opponent").val();
-        console.log(oppEmail);
+
+        //set the countdown
         let rpsTimer = setInterval(function() {
             timer--
             $("#rpsCountdown").text(timer);
             console.log(timer);
-            if(timer === 0){
+            if(timer === 0){ //when the timer runs out...
                 clearInterval(rpsTimer);
+                //take the picture
                 let sendPic = {
                     photo: webcam.snap(),
                     table: curTable
                 }
+                //and post it to the db
                 console.log("Sending photo");
                 document.getElementById("my-photo").src = sendPic.photo;
                 $.post("/api/photo/", sendPic);
 
+                //Then get the opponent's most most recent photo
                 $.get("/api/photo/" + oppEmail + "/" + curTable).then(function(data){
-                    console.log("data: ", atob(data.photo));
-                    console.log("photo: ", data);
-                    document.getElementById("their-photo").src = "data:image/png;base64," + atob(data.photo);
+                    document.getElementById("their-photo").src = "data:image/png;base64," + atob(data[0].photo);
                 })
             }
         }, 1000);

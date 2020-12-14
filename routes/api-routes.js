@@ -172,7 +172,9 @@ app.get("/api/photo/:id/:table", function(req, res) {
   console.log("getting photo for user", req.params.id)
   console.log("getting photo for table", req.params.table)
 
-  db.photo.findOne({
+  //finalAll limit 1 instead of findOne so we can sort the results and only get the most recent
+  db.photo.findAll({
+    limit: 1,
     where: {
       table_id: {
         [Op.eq]: req.params.table
@@ -180,7 +182,8 @@ app.get("/api/photo/:id/:table", function(req, res) {
       user_email: {
         [Op.eq]: req.params.id
       }
-    }
+    },
+    order: [[ 'createdAt', 'DESC' ]]
   }).then(function(results){
     console.log("I got results");
     return res.json(results);
