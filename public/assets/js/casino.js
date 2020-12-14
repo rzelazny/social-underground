@@ -226,8 +226,7 @@ $(document).ready(function() {
 
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
-        //let timer = 3
-        
+        let timer = 3
         oppEmail = $("#select-RPS-opponent").val();
         console.log(oppEmail);
         let rpsTimer = setInterval(function() {
