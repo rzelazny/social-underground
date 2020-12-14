@@ -9,6 +9,7 @@ $(document).ready(function() {
     let curSeat = "";
     let maxUsers = 5;
     let oppEmail = "";
+    let chatCheck = "";
     //Elements and vars for chat log
     var chatScroll = $("#chat-log");
     var chatInput = $("#chat-input");
@@ -65,7 +66,7 @@ $(document).ready(function() {
     
     //Function checks the chat log db for changes every 3s and refreshes the page if someone has posted a message to the chat log
     function chatTimer() {
-        setInterval(function() {
+        chatCheck = setInterval(function() {
             $.get("/api/chat" + curTable, function(chatLog){
                 if(chatLog.length > chatLength){
                     location.reload();
@@ -82,7 +83,14 @@ $(document).ready(function() {
             table: curTable
         }
         $.post("/api/chat/", newMessage);
-        location.reload();
+
+        //if we're leaving chat turn off the timer, otherwise refresh the page so the new message is displayed
+        if(msg != " has left chat."){
+            location.reload();
+        }else{
+            clearInterval(chatCheck);
+        }
+        
     }
 
     //Function finds out what game is set at the table and adjusts what elements are visible
@@ -211,16 +219,19 @@ $(document).ready(function() {
     //Navigate to home and free up user's seat at the table.
     $("#goHome").on("click", function(event) {
         cleanupPhotos();
+        sendMessage(" has left chat.");
         giveUpSeat("/home");
     })
 
     $("#memberPage").on("click", function(event) {
         cleanupPhotos();
+        sendMessage(" has left chat.");
         giveUpSeat("/members");
     })
     //Navigate to home and free up user's seat at the table.
     $("#logOut").on("click", function(event) {
         cleanupPhotos();
+        sendMessage(" has left chat.");
         giveUpSeat("/logout");
     })
 

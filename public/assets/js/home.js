@@ -83,7 +83,7 @@ $(document).ready(function() {
                 $.post("/api/table"+ tableId, tableUpdate).then(function(){
                     //post message that player has joined the table
                     newMessage = {
-                        message: userData.email +" has entered chat.",
+                        message: " has entered chat.",
                         table: tableId
                     }
                     //post the joining chat message
@@ -101,9 +101,16 @@ $(document).ready(function() {
         console.log("Making a new gaming table ");
         //create a new gaming table
         $.post("/api/newtable").then(function(newTable){
-            window.location.assign("/casino" + newTable.id);
-        }
-        );
+            //post the joining chat message
+            newMessage = {
+                message: " has entered chat.",
+                table: newTable.id
+            }
+            $.post("/api/chat/", newMessage, function(){
+                //join the table
+                window.location.assign("/casino" + newTable.id);
+            });
+        });
     })
 
     // $("#joinGame").on("click", function(event) {
