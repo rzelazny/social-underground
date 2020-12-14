@@ -126,17 +126,39 @@ $(document).ready(function() {
     // newRound.addEventListener("click", function newRound() {
     //     console.log("Final round...FIGHT");
     // });
+    //var choosenAnswer = document.querySelector('input[name="OptRadio"]:checked').getAttribute("id"); 
+    
+    //Choosing a game
+    $("#chooseGame").on("click", function(event) {
+        event.preventDefault();
+        let gameChoice = "";
+        let gameToggle = document.querySelector('input[name="inlineRadioOptions"]:checked').getAttribute("id"); 
+        console.log($("#multi-select").val());
+        if(gameToggle === "radio-multi"){
+            gameChoice = $("#multi-select").val();
+        }else{
+            gameChoice = $("#single-select").val();
+        }
+
+        let updateGame = {
+            column: "game",
+            data: gameChoice
+        }
+        $.post("/api/table" + curTable, updateGame).then(function(){
+            location.reload();
+        })
+    })
 
     //Show multiplayer game choices
-    $("#radioMulti").on("click", function(event) {
-        $("#singleSelect").css("display", "none");
-        $("#multiSelect").css("display", "block");
+    $("#radio-multi").on("click", function(event) {
+        $("#single-select").css("display", "none");
+        $("#multi-select").css("display", "block");
     })
 
     //Show single player game choices
-    $("#radioSingle").on("click", function(event) {
-        $("#singleSelect").css("display", "block");
-        $("#multiSelect").css("display", "none");
+    $("#radio-single").on("click", function(event) {
+        $("#single-select").css("display", "block");
+        $("#multi-select").css("display", "none");
         
     })
 
