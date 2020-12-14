@@ -1948,30 +1948,7 @@ function endRound() {
     ${playerArray[2].Name} has ${playerArray[2].Points} points
     ${playerArray[3].Name} has ${playerArray[3].Points} points`)
 
-
-    // if all players bust -> no one wins
-    // if no one busts -
-        // if they all tie - 
-
-        //winners based off everyone else being less than:
-        // h wins
-        // p1 wins
-        // p2 wins
-        // p3 wins
-
-        //if 3 tie
-            // h p1 p2 *
-            // h p1 p3 *
-            // p1 p2 p3 *
-            // h p2 p3 *
-
-        // if 2 tie
-            // h & p1 tie
-            // h & p2 tie 
-            // p1 & p2 tie
-            // h & p3 tie *
-            //p1 & p3 tie *
-            // p2 and p3 tie *
+        
 
     // if one player busts
         // if house busts
@@ -2021,38 +1998,78 @@ function endRound() {
     // increase winners scores by 1 //
     // alert the winner //
 
+    // if all players bust -> no one wins
+    if (playerArray[0].Bust === true && playerArray[1].Bust === true && playerArray[2].Bust === true) {
+        alert("talk about the odds... all players have busted")
+    }
     // if no one busts 
-    if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false && playerArray[3].Bust === false) {
+    else if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false && playerArray[3].Bust === false) {
         // if they all tie
         if (playerArray[0].Points === playerArray[1].Points && playerArray[1].Points === playerArray[2].Points && playerArray[2].Points === playerArray[3].Points) {
             alert("talk about the odds... all players have tied");
         }
-        // if h > p1 & h > p2 -> h wins
-        else if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
+        //winners based off everyone else being less than:
+        // h wins
+        else if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points && playerArray[0].Points > playerArray[3].Points) {
             playerArray[0].Score = playerArray[0].Score + 1;
             alert("House wins");
         }
-        // if p1 > h & p1 > p2 -> p1 wins
-        else if (playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[2].Points) {
+        // p1 wins
+        else if (playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[2].Points && playerArray[1].Points > playerArray[3].Points) {
             playerArray[1].Score = playerArray[1].Score + 1;
             alert("Player1 wins");
         }
-        // if p2 > h & p2 > p1 -> p2 wins
-        else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[1].Points) {
+         // p2 wins
+        else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[1].Points && playerArray[2].Points > playerArray[3].Points) {
             playerArray[2].Score = playerArray[2].Score + 1;
             alert("Player2 wins");
         }
-        // if h = p1 & > p2 -> h & p1 tie
-        else if (playerArray[0].Points === playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
+         // p3 wins
+        else if (playerArray[3].Points > playerArray[0].Points && playerArray[3].Points > playerArray[1].Points && playerArray[3].Points > playerArray[2].Points) {
+            playerArray[3].Score = playerArray[3].Score + 1;
+            alert("Player3 wins");
+        }
+        // if 3 players tie & there is no winner //
+        // h p1 p2 *
+        else if ( playerArray[0].Points === playerArray[1] && playerArray[1] === playerArray[2] && playerArray[2] > playerArray[3]) {
+            alert("House, Player1, and Player2 tie, there is no winner");
+        }
+        // h p1 p3 *
+        else if ( playerArray[0].Points === playerArray[1] && playerArray[1] === playerArray[3] && playerArray[3] > playerArray[2]) {
+            alert("House, Player1, and Player3 tie, there is no winner");
+        }
+        // p1 p2 p3 *
+        else if ( playerArray[1].Points === playerArray[2] && playerArray[2] === playerArray[3] && playerArray[3] > playerArray[0]) {
+            alert("Player1, Player2, and Player3 tie, there is no winner");
+        }
+        // h p2 p3 *
+        else if ( playerArray[0].Points === playerArray[2] && playerArray[2] === playerArray[3] && playerArray[3] > playerArray[1]) {
+            alert("House, Player2, and Player3 tie, there is no winner");
+        }
+        // if 2 players tie
+        // h & p1 tie
+        else if (playerArray[0].Points === playerArray[1].Points && playerArray[0].Points > playerArray[2].Points && playerArray[0].Points > playerArray[3].Points) {
             alert("House and Player1 tie, there is no winner");
         }
-        // -> h & p2 tie
-        else if (playerArray[0].Points === playerArray[2].Points && playerArray[0].Points > playerArray[1].Points) {
+        // h & p2 tie
+        else if (playerArray[0].Points === playerArray[2].Points && playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[3].Points) {
             alert("House and Player2 tie, there is no winner");
         }
         // p1 & p2 tie
-        else if (playerArray[1].Points === playerArray[2].Points && playerArray[1].Points > playerArray[0].Points) {
+        else if (playerArray[1].Points === playerArray[2].Points && playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[3].Points) {
             alert("Player1 and Player2 tie, there is no winner");
+        }
+        // h & p3 tie *
+        else if (playerArray[0].Points === playerArray[3].Points && playerArray[3].Points > playerArray[1].Points && playerArray[3].Points > playerArray[2].Points) {
+            alert("House and Player3 tie, there is no winner");
+        }
+        //p1 & p3 tie *
+        else if (playerArray[1].Points === playerArray[3].Points && playerArray[3].Points > playerArray[0].Points && playerArray[3].Points > playerArray[2].Points) {
+            alert("Player1 and Player3 tie, there is no winner");
+        }
+        // p2 and p3 tie *
+        else if (playerArray[2].Points === playerArray[3].Points && playerArray[3].Points > playerArray[0].Points && playerArray[3].Points > playerArray[1].Points) {
+            alert("Player2 and Player3 tie, there is no winner");
         }
         else {
             console.log("something has gone wrong... check it out")
@@ -2123,11 +2140,6 @@ function endRound() {
         playerArray[0].Score = playerArray[0].Score + 1;
         alert("House wins");
     }
-
-    // if all players bust -> no one wins
-    else if (playerArray[0].Bust === true && playerArray[1].Bust === true && playerArray[2].Bust === true) {
-        alert("talk about the odds... all players have busted")
-    }
     else {
         console.log("something has gone wrong... check it out")
     }
@@ -2185,6 +2197,7 @@ function endRound() {
 
     console.log(playerArray);
     console.log("=========================")
+    // dont forget to uncomment the end round functions
 
 
 
