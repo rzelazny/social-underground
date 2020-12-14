@@ -182,6 +182,9 @@ ul li:nth-child(4):hover span {
     color: black;
 }
 
-#start {
+#start,
+#hit, 
+#stand,
+#restart {
     margin: 5px;
 }
