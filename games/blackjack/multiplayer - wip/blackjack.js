@@ -298,32 +298,137 @@ function createElements() {
 
     // event listeners //
 
-    restartBtnP1.addEventListener('click', onRestartP1);
-    restartBtnP2.addEventListener('click', onRestartP2);
-    restartBtnP3.addEventListener('click', onRestartP3);
-    restartBtnP4.addEventListener('click', onRestartP4);
-    restartBtnP5.addEventListener('click', onRestartP5);
-    restartBtnP6.addEventListener('click', onRestartP6);
-    restartBtnP7.addEventListener('click', onRestartP7);
+    if (playerArray.length === 2) {
+        restartBtnP1.addEventListener('click', onRestartP1);
+        restartBtnP2.addEventListener('click', onRestartP2);
 
-    hitBtnP1.addEventListener('click', onHitPlayer1);
-    hitBtnP2.addEventListener('click', onHitPlayer2);
-    hitBtnP3.addEventListener('click', onHitPlayer3);
-    hitBtnP4.addEventListener('click', onHitPlayer4);
-    hitBtnP5.addEventListener('click', onHitPlayer5);
-    hitBtnP6.addEventListener('click', onHitPlayer6);
-    hitBtnP7.addEventListener('click', onHitPlayer7);
+        hitBtnP1.addEventListener('click', onHitPlayer1);
+        hitBtnP2.addEventListener('click', onHitPlayer2);
 
-    standBtnP1.addEventListener('click', onStandPlayer1);
-    standBtnP2.addEventListener('click', onStandPlayer2);
-    standBtnP3.addEventListener('click', onStandPlayer3);
-    standBtnP4.addEventListener('click', onStandPlayer4);
-    standBtnP5.addEventListener('click', onStandPlayer5);
-    standBtnP6.addEventListener('click', onStandPlayer6);
-    standBtnP7.addEventListener('click', onStandPlayer7);
+        standBtnP1.addEventListener('click', onStandPlayer1);
+        standBtnP2.addEventListener('click', onStandPlayer2);
+    }
+    else if (playerArray.length === 3) {
+        restartBtnP1.addEventListener('click', onRestartP1);
+        restartBtnP2.addEventListener('click', onRestartP2);
+        restartBtnP3.addEventListener('click', onRestartP3);
+
+        hitBtnP1.addEventListener('click', onHitPlayer1);
+        hitBtnP2.addEventListener('click', onHitPlayer2);
+        hitBtnP3.addEventListener('click', onHitPlayer3);
+
+        standBtnP1.addEventListener('click', onStandPlayer1);
+        standBtnP2.addEventListener('click', onStandPlayer2);
+        standBtnP3.addEventListener('click', onStandPlayer3);
+    }
+    else if (playerArray.length === 4) {
+        restartBtnP1.addEventListener('click', onRestartP1);
+        restartBtnP2.addEventListener('click', onRestartP2);
+        restartBtnP3.addEventListener('click', onRestartP3);
+
+        hitBtnP1.addEventListener('click', onHitPlayer1);
+        hitBtnP2.addEventListener('click', onHitPlayer2);
+        hitBtnP3.addEventListener('click', onHitPlayer3);
+
+        standBtnP1.addEventListener('click', onStandPlayer1);
+        standBtnP2.addEventListener('click', onStandPlayer2);
+        standBtnP3.addEventListener('click', onStandPlayer3);
+    }
+    else if (playerArray.length === 5) {
+        restartBtnP1.addEventListener('click', onRestartP1);
+        restartBtnP2.addEventListener('click', onRestartP2);
+        restartBtnP3.addEventListener('click', onRestartP3);
+
+        hitBtnP1.addEventListener('click', onHitPlayer1);
+        hitBtnP2.addEventListener('click', onHitPlayer2);
+        hitBtnP3.addEventListener('click', onHitPlayer3);
+
+        standBtnP1.addEventListener('click', onStandPlayer1);
+        standBtnP2.addEventListener('click', onStandPlayer2);
+        standBtnP3.addEventListener('click', onStandPlayer3);
+
+        restartBtnP4.addEventListener('click', onRestartP4);
+        hitBtnP4.addEventListener('click', onHitPlayer4);
+        standBtnP4.addEventListener('click', onStandPlayer4);
+    }
+    else if (playerArray.length === 6) {
+        restartBtnP1.addEventListener('click', onRestartP1);
+        restartBtnP2.addEventListener('click', onRestartP2);
+        restartBtnP3.addEventListener('click', onRestartP3);
+
+        hitBtnP1.addEventListener('click', onHitPlayer1);
+        hitBtnP2.addEventListener('click', onHitPlayer2);
+        hitBtnP3.addEventListener('click', onHitPlayer3);
+
+        standBtnP1.addEventListener('click', onStandPlayer1);
+        standBtnP2.addEventListener('click', onStandPlayer2);
+        standBtnP3.addEventListener('click', onStandPlayer3);
+
+        restartBtnP4.addEventListener('click', onRestartP4);
+        hitBtnP4.addEventListener('click', onHitPlayer4);
+        standBtnP4.addEventListener('click', onStandPlayer4);
+
+        restartBtnP5.addEventListener('click', onRestartP5);
+        hitBtnP5.addEventListener('click', onHitPlayer5);
+        standBtnP5.addEventListener('click', onStandPlayer5);
+    }
+    else if (playerArray.length === 7) {
+        restartBtnP1.addEventListener('click', onRestartP1);
+        restartBtnP2.addEventListener('click', onRestartP2);
+        restartBtnP3.addEventListener('click', onRestartP3);
+
+        hitBtnP1.addEventListener('click', onHitPlayer1);
+        hitBtnP2.addEventListener('click', onHitPlayer2);
+        hitBtnP3.addEventListener('click', onHitPlayer3);
+
+        standBtnP1.addEventListener('click', onStandPlayer1);
+        standBtnP2.addEventListener('click', onStandPlayer2);
+        standBtnP3.addEventListener('click', onStandPlayer3);
+
+        restartBtnP4.addEventListener('click', onRestartP4);
+        hitBtnP4.addEventListener('click', onHitPlayer4);
+        standBtnP4.addEventListener('click', onStandPlayer4);
+
+        restartBtnP5.addEventListener('click', onRestartP5);
+        hitBtnP5.addEventListener('click', onHitPlayer5);
+        standBtnP5.addEventListener('click', onStandPlayer5);
+
+        restartBtnP6.addEventListener('click', onRestartP6);
+        hitBtnP6.addEventListener('click', onHitPlayer6);
+        standBtnP6.addEventListener('click', onStandPlayer6);
+    }
+    else if (playerArray.length === 8) {
+        restartBtnP1.addEventListener('click', onRestartP1);
+        restartBtnP2.addEventListener('click', onRestartP2);
+        restartBtnP3.addEventListener('click', onRestartP3);
+
+        hitBtnP1.addEventListener('click', onHitPlayer1);
+        hitBtnP2.addEventListener('click', onHitPlayer2);
+        hitBtnP3.addEventListener('click', onHitPlayer3);
+
+        standBtnP1.addEventListener('click', onStandPlayer1);
+        standBtnP2.addEventListener('click', onStandPlayer2);
+        standBtnP3.addEventListener('click', onStandPlayer3);
+
+        restartBtnP4.addEventListener('click', onRestartP4);
+        hitBtnP4.addEventListener('click', onHitPlayer4);
+        standBtnP4.addEventListener('click', onStandPlayer4);
+
+        restartBtnP5.addEventListener('click', onRestartP5);
+        hitBtnP5.addEventListener('click', onHitPlayer5);
+        standBtnP5.addEventListener('click', onStandPlayer5);
+
+        restartBtnP6.addEventListener('click', onRestartP6);
+        hitBtnP6.addEventListener('click', onHitPlayer6);
+        standBtnP6.addEventListener('click', onStandPlayer6);
+
+        restartBtnP7.addEventListener('click', onRestartP7);
+        hitBtnP7.addEventListener('click', onHitPlayer7);
+        standBtnP7.addEventListener('click', onStandPlayer7);
+    }
 }
 
-// this function will be called when the user presses restart button //
+// this function will be called when the user presses their restart button //
 function onRestartP1() {
     var question = confirm("Player 1 wants to restart the game. Do you accept?")
     // reset player values // -- breaking code
@@ -347,8 +452,6 @@ function onRestartP1() {
         alert("Player declines to restart the game.")
     }
 }
-
-// this function will be called when the user presses restart button //
 function onRestartP2() {
     question = confirm("Player 2 wants to restart the game. Do you accept?")
     if (question === true) {
@@ -369,8 +472,6 @@ function onRestartP2() {
         alert("Player declines to restart the game.")
     }
 }
-
-// this function will be called when the user presses restart button //
 function onRestartP3() {
     question = confirm("Player 3 wants to restart the game. Do you accept?")
     if (question === true) {
@@ -391,8 +492,6 @@ function onRestartP3() {
         alert("Player declines to restart the game.")
     }
 }
-
-// this function will be called when the user presses restart button //
 function onRestartP4() {
     question = confirm("Player 4 wants to restart the game. Do you accept?")
     if (question === true) {
@@ -413,8 +512,6 @@ function onRestartP4() {
         alert("Player declines to restart the game.")
     }
 }
-
-// this function will be called when the user presses restart button //
 function onRestartP5() {
     question = confirm("Player 5 wants to restart the game. Do you accept?")
     if (question === true) {
@@ -435,8 +532,6 @@ function onRestartP5() {
         alert("Player declines to restart the game.")
     }
 }
-
-// this function will be called when the user presses restart button //
 function onRestartP6() {
     question = confirm("Player 6 wants to restart the game. Do you accept?")
     if (question === true) {
@@ -457,8 +552,6 @@ function onRestartP6() {
         alert("Player declines to restart the game.")
     }
 }
-
-// this function will be called when the user presses restart button //
 function onRestartP7() {
     question = confirm("Player 7 wants to restart the game. Do you accept?")
     if (question === true) {
@@ -480,9 +573,18 @@ function onRestartP7() {
     }
 }
 
-
+// this function will be called when the user presses the hit button //
 function onHitPlayer1() {
-
+    console.log("i can see")
+    i = 1;
+    // will call player one hit function //
+    playerHit();
+    // creating a timer function to give time for the card to render before busting //
+    // setTimeout(function () {
+    //     // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
+    //     itsABust();
+    // }, 500); 
+    i = 0;
 }
 
 function onHitPlayer2() {
@@ -536,78 +638,73 @@ function onStandPlayer6() {
 function onStandPlayer7() {
 
 }
-// // this function will be called when the user presses the hit button //
-// function onHit() {
-//     // will call player one hit function //
-//     playerOneHit();
-//     // creating a timer function to give time for the card to render before busting //
-//     setTimeout(function () {
-//         // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
-//         itsABust();
-//     }, 500); 
-// }
 
-// // hard coded for first player // 
-// function playerOneHit() {
-//     // calls to the api to get one shuffled card //
-//     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
-//     $.ajax({
-//         url: docUrl,
-//         method: "GET"
-//     }).then(function (data) {
-//         // this object holds all the data needed for the card //
-//         hitCard = {
-//                 code: data.cards[0].code,
-//                 suit: data.cards[0].suit,
-//                 value: data.cards[0].value,
-//                 imgUrl: data.cards[0].image
-//             };
-//         // this variable = the players original cards
-//         var originalHand = playerArray[1].Hand;
-//         // this pushes the new card into the array of cards
-//         originalHand.push(hitCard); 
-//         // then, the image is created and appended to the hand div with the other cards //
-//         var hitCardImg = document.createElement('img');
-//         hitCardImg.className = ('hitCard' + playerArray[1].Name)
-//         hitCardImg.src = (hitCard.imgUrl)
-//         divHand.appendChild(hitCardImg);
 
-//         // resets value of hand to zero //
-//         var handVal = 0;
-//         for(var i = 0; i < playerArray.length; i++) {
-//             // resets players points //
-//             playerArray[i].Points = 0;
-//             for (var j = 0; j < (playerArray[i].Hand).length; j++) {
-//                 // sets values for face cards //
-//                 if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
-//                     playerArray[i].Hand[j].value = "10";
-//                 } 
-//                 // sets value for ace depending on previous hand value //
-//                 else if (playerArray[i].Hand[j].value === "ACE" && handVal < 11) {
-//                     playerArray[i].Hand[j].value = "11";
-//                 } else if (playerArray[i].Hand[j].value === "ACE" && handVal > 10) {
-//                     playerArray[i].Hand[j].value = "1";
-//                 }
+function playerHit() {
+    // calls to the api to get one shuffled card //
+    var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=1"
+    $.ajax({
+        url: docUrl,
+        method: "GET"
+    }).then(function (data) {
+        // this object holds all the data needed for the card //
+        hitCard = {
+                code: data.cards[0].code,
+                suit: data.cards[0].suit,
+                value: data.cards[0].value,
+                imgUrl: data.cards[0].image
+            };
+        // this variable = the players original cards
+        var originalHand = playerArray[i].Hand;
+        // this pushes the new card into the array of cards
+        originalHand.push(hitCard); 
+        // then, the image is created and appended to the hand div with the other cards //
+        var hitCardImg = document.createElement('img');
+        hitCardImg.className = ('hitCard' + playerArray[i].Name)
+        hitCardImg.src = (hitCard.imgUrl)
 
-//                 // adds all cards in hand to create new value //
-//                 handVal += parseInt(playerArray[i].Hand[j].value);
-//             }
-//             // sets the points equal to the new value //
-//             playerArray[i].Points = handVal;
-//             // resets handVal back to zero //
-//             handVal = 0;
+        divHand = document.getElementById(("hand" + playerArray[i].Name));
+        divHand.appendChild(hitCardImg);
 
-//             // clears points on html & recreates the elements to display the new points //
-//             divPoints.innerHTML = ''
-//             divPoints = document.createElement('div');
-//             divPoints.className = ('points');
-//             divPoints.id = ('points' + playerArray[i].Name);
-//             divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
-//             divPlayer.appendChild(divPoints);
+        // resets value of hand to zero //
+        var handVal = 0;
+        for(var a = 0; a < playerArray.length; a++) {
+            // resets players points //
+            playerArray[a].Points = 0;
+            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+                // sets values for face cards //
+                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
+                    playerArray[a].Hand[j].value = "10";
+                } 
+                // sets value for ace depending on previous hand value //
+                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    playerArray[a].Hand[j].value = "11";
+                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    playerArray[a].Hand[j].value = "1";
+                }
 
-//         }
-//     })
-// }
+                // adds all cards in hand to create new value //
+                handVal += parseInt(playerArray[a].Hand[j].value);
+            }
+            // sets the points equal to the new value //
+            playerArray[a].Points = handVal;
+            // resets handVal back to zero //
+            handVal = 0;
+
+            // clears points on html & recreates the elements to display the new points //
+            divPoints = document.getElementById(('points' + playerArray[i].Name));
+            divPoints.innerHTML = ''
+            divPoints = document.createElement('div');
+            divPoints.className = ('points');
+            divPoints.id = ('points' + playerArray[i].Name);
+            divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
+            
+            divPlayer = document.getElementById(playerArray[i].Name);
+            divPlayer.appendChild(divPoints);
+
+        }
+    })
+}
 
 // function itsABust() {
 //     for (var i = 0; i < playerArray.length; i++) {
