@@ -107,6 +107,7 @@ function drawCards () {
         console.log("Debug stuff:");
         console.log(i);
         console.log(playerHand);
+        console.log(playerArray);
         console.log(playerArray[ i ].Hand);
         playerArray[ i ].Hand = playerHand
         // this will increment i so that it will keep running the draw cards function for each player //

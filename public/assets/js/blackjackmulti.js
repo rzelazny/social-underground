@@ -27,23 +27,23 @@ let multiPlayerArray = [{ Name: "House", ID: 0, Score: 0, Points: 0, Bust: false
 //                Functions                  //
 ///////////////////////////////////////////////
 
-multistartBtn.addEventListener('click', onStart);
+multistartBtn.addEventListener('click', onStartMulti);
 
 // this function will be called when the start btn is pressed //
-function onStart() {
+function onStartMulti() {
     console.log("I'm running");
     // the start button is hidden //
     if (multistartBtn.style.display === 'block') {
         multistartBtn.style.display = 'none'
     }
     // will add the players hard coded in the allPlayers function to the session //
-    addPlayers();
+    addPlayersMulti();
     // will draw cards for all players using the drawCards function then dynamically create html elements//
-    drawCards();
+    drawCardsMulti();
 }
 
 // CONNECT DB HERE TO ADD PLAYERS BASED ON PEOPLE AT TABLE -- up to 7 //
-function addPlayers() {
+function addPlayersMulti() {
     amount = prompt("How many players would you like to add?");
     // makes sure the user enters correct amount of players //
     for (amount === false; amount < 2 || amount > 7;) {
@@ -59,7 +59,7 @@ function addPlayers() {
 
 // setting i to 0 so that we can control the synchronicity //
 i = 0;
-function drawCards() {
+function drawCardsMulti() {
     // this api link will draw 2 random cards //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
     $.ajax({
@@ -67,7 +67,7 @@ function drawCards() {
         method: "GET"
     }).then(function (data) {
         // we will save the data in an array. each object will hold the cards code, suit, value, and image //
-        playerHand = [
+        playerHandMulti = [
             {
                 code: data.cards[0].code,
                 suit: data.cards[0].suit,
@@ -81,11 +81,11 @@ function drawCards() {
             }
         ];
         // this will give the drawn set of cards to whichever player is 'i' //
-        multiPlayerArray[i].Hand = playerHand
+        multiPlayerArray[i].Hand = playerHandMulti
         // this will increment i so that it will keep running the draw cards function for each player //
         i++
         if (i < multiPlayerArray.length) {
-            drawCards()
+            drawCardsMulti()
         }
         // if there isnt any more players it will stop drawing cards and run the following functions //
         else {
@@ -98,7 +98,7 @@ function drawCards() {
 }
 
 // this function is called after the cards are originally drawn //
-function totalPoints() {
+function totalPointsMulti() {
     // handVal is set to 0 //
     var handVal = 0;
     for (var i = 0; i < multiPlayerArray.length; i++) {
@@ -432,7 +432,7 @@ function onRestartP1() {
         // reset i back to 0 for drawCards function //
         i = 0;
         // redraws cards for all players in session //
-        drawCards();
+        drawCardsMulti();
 
         // drawCards();
     }
@@ -458,7 +458,7 @@ function onRestartP2() {
         // reset i back to 0 for drawCards function //
         i = 0;
         // redraws cards for all players in session //
-        drawCards();
+        drawCardsMulti();
     }
     else {
         alert("Player declines to restart the game.")
@@ -484,7 +484,7 @@ function onRestartP3() {
         // reset i back to 0 for drawCards function //
         i = 0;
         // redraws cards for all players in session //
-        drawCards();
+        drawCardsMulti();
     }
     else {
         alert("Player declines to restart the game.")
@@ -512,7 +512,7 @@ function onRestartP4() {
         // reset i back to 0 for drawCards function //
         i = 0;
         // redraws cards for all players in session //
-        drawCards();
+        drawCardsMulti();
     }
     else {
         alert("Player declines to restart the game.")
@@ -542,7 +542,7 @@ function onRestartP5() {
         // reset i back to 0 for drawCards function //
         i = 0;
         // redraws cards for all players in session //
-        drawCards();
+        drawCardsMulti();
     }
     else {
         alert("Player declines to restart the game.")
@@ -574,7 +574,7 @@ function onRestartP6() {
         // reset i back to 0 for drawCards function //
         i = 0;
         // redraws cards for all players in session //
-        drawCards();
+        drawCardsMulti();
     }
     else {
         alert("Player declines to restart the game.")
@@ -608,7 +608,7 @@ function onRestartP7() {
         // reset i back to 0 for drawCards function //
         i = 0;
         // redraws cards for all players in session //
-        drawCards();
+        drawCardsMulti();
     }
     else {
         alert("Player declines to restart the game.")

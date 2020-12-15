@@ -108,8 +108,8 @@ $(document).ready(function() {
                 case "Blackjack":
                     console.log("Blackjack single setup");
                     $("#gameChoice").css("display", "none");
-                    $("#cont-blackjack").css("display", "block");
-                    $("#start").css("display", "block");
+                    $("#cont-blackjack-single").css("display", "block");
+                    // $("#start").css("display", "block");
                 break;
                 case "Blackjack Multiplayer":
                     console.log("Blackjack multi setup");
