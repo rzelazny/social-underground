@@ -49,15 +49,15 @@ function displayBtns() {
     }
     // the hit button is displayed //
     if (hitBtn.style.display === 'none') {
-        hitBtn.style.display = 'block'
+        hitBtn.style.display = 'inline'
     }
     // the stand button is displayed //
     if (standBtn.style.display === 'none') {
-        standBtn.style.display = 'block'
+        standBtn.style.display = 'inline'
     }
     // the restart button is displayed and replaces the spot of the start button //
     if (restartBtn.style.display === 'none') {
-        restartBtn.style.display = 'block'
+        restartBtn.style.display = 'inline'
     }
 }
 
