@@ -12,18 +12,20 @@
     <title>home</title>
 </head>
 <body>
-    <nav class="dropdown " displau=inline">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Main Menu
-        </a>
-    
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="./home.html">Home</a>
-            <a class="dropdown-item" href="./members.html">Membership</a>
-            <a class="dropdown-item" href="/logout">Log Out</a>
-        </div>
-    </nav>
+    <nav class="navbar navbar-dark">
+        <nav class="dropdown ml-auto " style="display: inline;">
+            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Main Menu
+            </a>
+        
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="./home.html">Home</a>
+                <a class="dropdown-item" href="./members.html">Membership</a>
+                <a class="dropdown-item" href="/logout">Log Out</a>
+            </div>
+        </nav>
+      </nav>
     <div class="wrapper">
         <div class="neon-wrapper">
             <div class="neon-text">Welcome to the <br> Social Underground</div>
@@ -32,7 +34,7 @@
 
 
 
-    <!-- <div style="position: relative; left:40%; top:600px">
+    <div id="newTableSpan" style="position: relative; left:40%">
         <ul>
             <li>
                 <a href="#">
@@ -40,27 +42,18 @@
                     <span></span>
                     <span></span>
                     <span></span>
-                    <span id="newTableSpan">New</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span id="joinGame">Join</span>
+                    <span>New</span>
                 </a>
             </li>
         </ul>
-    </div> -->
+    </div>
     <div class="container" id="entrance">
         <div class="row">
             <div class="col-md-4" id="current-tables0"></div>
             <div class="col-md-4" id="current-tables1"></div>
             <div class="col-md-4" id="current-tables2"></div>
         </div>
-        <button id ="newTable">Create Table</button>
+        <!-- <button type="button" class="btn btn-success" id ="newTable">Create Table</button> -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

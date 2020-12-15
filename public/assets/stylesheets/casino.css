@@ -5,6 +5,11 @@ body {
     /* text-align: center; */
 }
 
+.navbar {
+    background-color: black;
+    margin-bottom: 40px;
+  }
+
 select option[disabled] {
     display: none;
 }
@@ -17,7 +22,7 @@ select option[disabled] {
 } */
 
 /*Buttons*/
-/* ul {
+ul {
     position: relative;
     display: flex;
     transform-style: preserve-3d;
@@ -102,12 +107,14 @@ ul li:nth-child(3):hover span {
 }
 ul li:nth-child(4):hover span {
     background: #8200b6 !important;
-} */
+}
+
 /* Game selection css */
-#gameChoice{
+#gameChoice,
+#containerRPS{
     background-image: url(../images/felt.png);
-    margin-bottom: 5px;
-    padding: 5px;
+    margin: 10px;
+    padding:10px;
     color: white;
     
     text-align: center;
@@ -120,18 +127,26 @@ ul li:nth-child(4):hover span {
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: black;
 }
-/* RPS css */
-#containerRPS{
-    background: #009919;
-    padding: 5px;
-    margin-bottom: 5px;
+#webcam,
+#my-photo,
+#their-photo{
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+}
+#rpsCountdown{
+    font-size: 40px;
+    font-weight: bolder;
+    color: red;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: white;
 }
 
-/* #rps-start{
-    content
-} */
 /*Chat Css*/
 #chat-container{
+    margin: 10px;
+    padding:10px;
     text-align: left;
     height: 200px;
     width: 90%;
@@ -160,6 +175,48 @@ ul li:nth-child(4):hover span {
 
 #chat-input{
     width: 90%;
+    background-color: rgb(109, 104, 104);
+    color: white;
+}
+
+#chooseGame {
+    margin-top: 10px;
     background-color: rgb(245, 235, 235);
     color: black;
+}
+
+
+#start,
+#hit, 
+#stand,
+#restart {
+    margin: 5px;
+}
+
+#start,
+#House,
+#Player1 {
+    text-align: center;
+    margin: 10px;
+}
+
+#pointsHouse,
+#pointsPlayer1,
+#scoreHouse,
+#scorePlayer1,
+#House,
+#Player1 {
+    color:white;
+}
+
+#containerBlackJack{
+    background-color: black;
+    margin: 10px;
+    padding:10px;
+    text-align: left;
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px 20px 0px 0px;
 }
