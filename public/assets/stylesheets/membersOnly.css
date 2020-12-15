@@ -19,6 +19,31 @@ body {
     -webkit-text-stroke-color: lime;
 }
 
+@font-face {
+    font-family: neon;
+    src: url(./Neon\ Planet\ Display.ttf);
+}
+
+h1 {
+        font-family: neon;
+        font-size: 75px;
+        color: whitesmoke;
+        -webkit-animation: glow 1s ease-in-out infinite alternate;
+        -moz-animation: glow 1s ease-in-out infinite alternate;
+        animation: glow 1s ease-in-out infinite alternate;
+    }
+    @-webkit-keyframes glow {
+        from {text-shadow:  
+        0 0 10px rgb(255, 230, 230), 0 0 20px rgb(255, 204, 204), 0 0 40px rgb(255, 102, 102),
+        0 0 50px rgb(255, 26, 26), 0 0 60px rgb(204, 0, 0), 0 0 80px rgb(128, 0, 0);
+    }
+    to {
+        text-shadow: 
+        0 0 20px rgb(255, 153, 153), 0 0 30px, rgb(255, 77, 77), 0 0 50px rgb(255, 26, 26),
+        0 0 70px rgb(153, 0, 0), 0 0 80px rgb(102, 0, 0), 0 0 90px rgb(77, 0, 0);
+    }      
+}
+
 h4,
 h6 {
     font-size: 20px;
