@@ -8,7 +8,7 @@ $(document).ready(function() {
 
     //function clears out any tables with no users or that haven't been updated recently
     function cleanupTables(){
-        $.post("api/cleanup", function(){
+        $.post("api/cleanup").then( function(){
             console.log("table cleanup complete");
             getTables();
         })

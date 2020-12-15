@@ -134,8 +134,15 @@ ul li:nth-child(4):hover span {
     border-style: solid;
     border-width: 2px;
     border-radius: 20px;
-
 }
+#rpsCountdown{
+    font-size: 40px;
+    font-weight: bolder;
+    color: red;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: white;
+}
+
 /*Chat Css*/
 #chat-container{
     margin: 10px;
@@ -171,11 +178,6 @@ ul li:nth-child(4):hover span {
     background-color: rgb(109, 104, 104);
     color: white;
 }
-
-/*Video*/
-/* #webcam1 {
-  
-} */
 
 #chooseGame {
     margin-top: 10px;
