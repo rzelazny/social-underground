@@ -1,0 +1,9 @@
+body {
+    background-image: url(../images/carpet.jpg);
+    background-size: cover;
+}
+
+.jumbotron {
+    background-image: url(../images/felt.png);
+
+}
