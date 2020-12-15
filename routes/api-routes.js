@@ -51,9 +51,11 @@ module.exports = function(app) {
     }).then(function (data){
       userStat.update({
         where: {
-          login_id = data.login_id,
+          login_id = req.body.login_id,
+        }, 
+        set: {
+          wins = data.wins+1
         } 
-        set: wins = data.wins+1
     })
     })
   });
@@ -491,14 +493,6 @@ app.get("/api/photo/:id/:table", function(req, res) {
     
     //   res.send(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png");
     //});
-
-  //   app.GET("/api/winLose", function(req, res){
-  //     res.json(winLose);
-  //   });
-
-  //   app.PUT("/api/winLose", function (req, res){
-
-  //   })
 };
 
 

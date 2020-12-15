@@ -487,7 +487,7 @@ function endRound() {
         let userStat = {
             login_id = localStorage.getItem("user"),
             display_name = "player1",
-            wins = [1]
+            wins = 1
         }
         postUserStat(userStat);
     }
