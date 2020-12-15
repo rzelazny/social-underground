@@ -22,7 +22,7 @@ select option[disabled] {
 } */
 
 /*Buttons*/
-/* ul {
+ul {
     position: relative;
     display: flex;
     transform-style: preserve-3d;
@@ -107,7 +107,8 @@ ul li:nth-child(3):hover span {
 }
 ul li:nth-child(4):hover span {
     background: #8200b6 !important;
-} */
+}
+
 /* Game selection css */
 #gameChoice,
 #containerRPS{
