@@ -29,7 +29,7 @@ $(document).ready(function() {
       password: password
     })
       .then(function(user) {
-        localStorage.setItem("user", JSON.stringify(user.id))
+        //localStorage.setItem("user", JSON.stringify(user.id))
         window.location.replace("/home");
         // If there's an error, log the error
       })

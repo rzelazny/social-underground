@@ -72,7 +72,7 @@ module.exports = function(app) {
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
     res.redirect("/");
   });
 
