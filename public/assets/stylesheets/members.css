@@ -1,0 +1,10 @@
+body {
+    background-image: url("../images/Membership.JPG");
+    background-repeat: no-repeat;
+    background-size: 1800px;
+}
+
+section {
+    text-align: center;
+    background-color: black;
+}

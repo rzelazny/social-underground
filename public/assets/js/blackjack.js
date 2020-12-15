@@ -6,7 +6,7 @@
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
-var players =  document.querySelector('#players');
+var players = document.querySelector('#players');
 var directions = document.querySelector('#directions');
 var endRoundDiv = document.querySelector('#endRoundDiv');
 
@@ -47,7 +47,7 @@ function onStart() {
     // will add the players hard coded in the allPlayers function to the session //
     addPlayers();
     // will draw cards for all players using the drawCards function //
-    
+
     drawCards();
 }
 
@@ -78,18 +78,19 @@ function displayBtns() {
     }
 }
 
+
 // hard coded for one player to play against the House //
 function addPlayers() {
     // each 'player' object will hold their name, id, session score, points of their hand, and their hand coordinating to their object in the hand array //
     var house = { Name: 'House', ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' };
-    var player1 = { Name: 'Player1',  ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
+    var player1 = { Name: 'Player1', ID: 1, Score: 0, Points: 0, Bust: false, Hand: hand[1], Stand: 'false' };
     // appends the objects created above to the playerArray //
     playerArray.push(house, player1);
 }
 
 // setting i to 0 so that we can control the synchronicity //
 var i = 0;
-function drawCards () {
+function drawCards() {
     // this api link will draw 2 random cards //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
     $.ajax({
@@ -99,15 +100,15 @@ function drawCards () {
         // we will save the data in an array. each object will hold the cards code, suit, value, and image //
         playerHand = [
             {
-                code: data.cards[ 0 ].code,
-                suit: data.cards[ 0 ].suit,
-                value: data.cards[ 0 ].value,
-                imgUrl: data.cards[ 0 ].image
+                code: data.cards[0].code,
+                suit: data.cards[0].suit,
+                value: data.cards[0].value,
+                imgUrl: data.cards[0].image
             }, {
-                code: data.cards[ 1 ].code,
-                suit: data.cards[ 1 ].suit,
-                value: data.cards[ 1 ].value,
-                imgUrl: data.cards[ 1 ].image
+                code: data.cards[1].code,
+                suit: data.cards[1].suit,
+                value: data.cards[1].value,
+                imgUrl: data.cards[1].image
             }
         ];
         // this will give the drawn set of cards to whichever player is 'i' //
@@ -115,8 +116,8 @@ function drawCards () {
         console.log(i);
         console.log(playerHand);
         console.log(playerArray);
-        console.log(playerArray[ i ].Hand);
-        playerArray[ i ].Hand = playerHand
+        console.log(playerArray[i].Hand);
+        playerArray[i].Hand = playerHand
         // this will increment i so that it will keep running the draw cards function for each player //
         i++
         if (i < playerArray.length) {
@@ -134,14 +135,14 @@ function drawCards () {
 function totalPoints() {
     // handVal is set to 0 //
     var handVal = 0;
-    for(var i = 0; i < playerArray.length; i++) {
+    for (var i = 0; i < playerArray.length; i++) {
         // resets players points //
         playerArray[i].Points = 0;
         for (var j = 0; j < (playerArray[i].Hand).length; j++) {
             // sets values for face cards //
             if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
                 playerArray[i].Hand[j].value = "10";
-            } 
+            }
             // sets value for ace depending on current point value
             if (playerArray[i].Hand[0].value === "ACE") {
                 playerArray[i].Hand[0].value = "11";
@@ -166,7 +167,7 @@ function createElements() {
     players.innerHTML = ''; // this clears the gameboard //
 
     // in this loop, we will create elements for each player //
-    for(var i = 0; i < playerArray.length; i++) {
+    for (var i = 0; i < playerArray.length; i++) {
 
         // creates div where all player data will be held, displays name //
         divPlayer = document.createElement('div');
@@ -208,7 +209,7 @@ function createElements() {
         divPlayer.appendChild(divScore);
         divPlayer.appendChild(divHand);
         divPlayer.appendChild(divPoints);
-        
+
 
         // appends all the data held in the player div to the gameboard
         players.appendChild(divPlayer);
@@ -243,7 +244,7 @@ function onHit() {
     setTimeout(function () {
         // if the hit card makes the points go over 21 the user will get a bust alert and the game will end //
         itsABust();
-    }, 500); 
+    }, 500);
 }
 
 // hard coded for one player // 
@@ -256,31 +257,31 @@ function playerOneHit() {
     }).then(function (data) {
         // this object holds all the data needed for the card //
         hitCard = {
-                code: data.cards[0].code,
-                suit: data.cards[0].suit,
-                value: data.cards[0].value,
-                imgUrl: data.cards[0].image
-            };
+            code: data.cards[0].code,
+            suit: data.cards[0].suit,
+            value: data.cards[0].value,
+            imgUrl: data.cards[0].image
+        };
         // this variable = the players original cards
         var originalHand = playerArray[1].Hand;
         // this pushes the new card into the array of cards
-        originalHand.push(hitCard); 
+        originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
         var hitCardImg = document.createElement('img');
         hitCardImg.className = ('hitCard' + playerArray[1].Name)
         hitCardImg.src = (hitCard.imgUrl)
         divHand.appendChild(hitCardImg);
-        
+
         // resets value of hand to zero //
         var handVal = 0;
-        for(var i = 0; i < playerArray.length; i++) {
+        for (var i = 0; i < playerArray.length; i++) {
             // resets players points //
             playerArray[i].Points = 0;
             for (var j = 0; j < (playerArray[i].Hand).length; j++) {
                 // sets values for face cards //
                 if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
                     playerArray[i].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[i].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[i].Hand[j].value = "11";
@@ -303,7 +304,7 @@ function playerOneHit() {
             divPoints.id = ('points' + playerArray[i].Name);
             divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
             divPlayer.appendChild(divPoints);
-            
+
         }
     })
 }
@@ -342,15 +343,15 @@ function hitHouseLogic() {
         }).then(function (data) {
             // this object holds all the data needed for the card //
             hitCard = {
-                    code: data.cards[0].code,
-                    suit: data.cards[0].suit,
-                    value: data.cards[0].value,
-                    imgUrl: data.cards[0].image
-                };
+                code: data.cards[0].code,
+                suit: data.cards[0].suit,
+                value: data.cards[0].value,
+                imgUrl: data.cards[0].image
+            };
             // this variable = the players original cards
             var originalHand = playerArray[0].Hand;
             // this pushes the new card into the array of cards
-            originalHand.push(hitCard); 
+            originalHand.push(hitCard);
             // then, the image is created and appended to the hand div with the other cards //
 
             var houseHitCard = document.querySelector("#handHouse");
@@ -358,7 +359,7 @@ function hitHouseLogic() {
             hitCardImg.className = ('hitCard' + playerArray[0].Name)
             hitCardImg.src = (hitCard.imgUrl)
             houseHitCard.appendChild(hitCardImg);
-            
+
             // resets value of hand to zero //
             var handVal = 0;
             // resets players points //
@@ -367,7 +368,7 @@ function hitHouseLogic() {
                 // sets values for face cards //
                 if (playerArray[0].Hand[j].value === "JACK" || playerArray[0].Hand[j].value === "QUEEN" || playerArray[0].Hand[j].value === "KING") {
                     playerArray[0].Hand[j].value = "10";
-                } 
+                }
                 // sets value for ace depending on previous hand value //
                 else if (playerArray[0].Hand[j].value === "ACE" && handVal < 11) {
                     playerArray[0].Hand[j].value = "11";
@@ -418,13 +419,13 @@ function onStand() {
     if (playerArray[0].Bust === true) {
         console.log("if busted why did it come here???")
     }
-    else{
+    else {
         if (playerArray[0].Points > 16 || playerArray[0].Points > playerArray[1].Points) {
             playerArray[0].Stand = true;
             console.log("house standing ends the round");
             endRound();
         }
-        else{
+        else {
             console.log("player1 stands // house does not - hits again")
             hitHouseLogic();
             setTimeout(function () {
@@ -450,6 +451,7 @@ function endRound() {
     console.log("======ending round========")
     // the users will get an alert that the game is over //
     // display points from round to user //
+
     endRoundDiv.style.display = "block";
     roundOver = document.createElement("div");
     roundOver.innerHTML = `The round is over!`
@@ -487,7 +489,7 @@ function endRound() {
         // // update scores on html //
         // divScore.innerHTML = `Score: ${playerArray[0].Score} `;
         // divScore.innerHTML = `Score: ${playerArray[1].Score} `;
-    } 
+    }
     // if the House wins //
     else if (playerArray[1].Bust === true || playerArray[1].Points > 21 || playerArray[0].Bust === false && playerArray[0].Points > playerArray[1].Points) {
         // alert users //
@@ -513,7 +515,7 @@ function endRound() {
 
     }
     // if player1 wins //
-    else if (playerArray[0].Bust === true || playerArray[0].Points > 21 || playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points){
+    else if (playerArray[0].Bust === true || playerArray[0].Points > 21 || playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
         // alert users //
         // alert (`${playerArray[0].Name} lost || ${playerArray[1].Name} won`)
         // increase player1 points by 2 //
@@ -536,6 +538,12 @@ function endRound() {
         scoreHouse.innerHTML = `Score: ${playerArray[0].Score} `
         scorePlayer1 = document.querySelector("#scorePlayer1");
         scorePlayer1.innerHTML = `Score: ${playerArray[1].Score} `;
+        let userStat = {
+            login_id = localStorage.getItem("user"),
+            display_name = "player1",
+            wins = [1]
+        }
+        postUserStat(userStat);
     }
     console.log(playerArray);
     console.log("=========================")
@@ -555,7 +563,16 @@ function endRound() {
     playerArray[0].Stand = false;
     playerArray[1].Stand = false;
 }
-
+function postUserStat(userStat) {
+    $.post("/api/user_stat", {
+        login_id: userStat.login_id,
+        wins: userStat.wins
+    }).then(function (data) {
+        $(".card-text-blackjack").text(data.wins);
+    }).catch(function (err) {
+        console.log(err);
+    })
+}
 ///////////////////////////////////////////////
 //                On Clicks                  //
 ///////////////////////////////////////////////

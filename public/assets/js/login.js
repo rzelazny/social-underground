@@ -28,7 +28,8 @@ $(document).ready(function() {
       email: email,
       password: password
     })
-      .then(function() {
+      .then(function(user) {
+        localStorage.setItem("user", JSON.stringify(user.id))
         window.location.replace("/home");
         // If there's an error, log the error
       })
