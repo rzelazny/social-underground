@@ -48,7 +48,7 @@
                 <select class="custom-select my-1 mr-sm-2" id="multi-select">
                     <option selected>Pick a Game...</option>
                         <!-- <option>Just Chatting</option> -->
-                        <option>Blackjack Multiplayer</option>
+                        <!-- <option>Blackjack Multiplayer</option> -->
                         <option>Rock Paper Scissors</option>
                 </select>
                 <select class="custom-select my-1 mr-sm-2" id="single-select" style="display:none">
@@ -61,11 +61,13 @@
         </form>
     </div>
     <div class="container" id="cont-blackjack-single"style="display:none">
-        <div id="directions"> 
-            <h2>Single Player Blackjack</h2>
+        <h2>Single Player Blackjack</h2>
             <br>
+        <div id="directions" style="display:block"> 
             <p>Try to get as close to 21 without busting. If you want another card press 'hit' and you will be dealt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will not be awarded any points. If you win you will be awarded 1 point and if the House wins it will be awarded 1 point.</p>
 
+        </div>
+        <div id="endRoundDiv" class= "card mx-auto pt-3 pb-3" style="text-align: center; display:none;">
         </div>
         <!-- <canvas id="canvas" width="1100" height="650"></canvas> -->
         <br>
@@ -74,7 +76,7 @@
             <div class= "gameOptions" id="gameOptions" style="text-align: center;">
                 <div>
                     <ul>
-                        <li id="start">
+                        <li id="start" style="display: block;">
                             <a href="#">
                                 <span></span>
                                 <span></span>
@@ -83,7 +85,7 @@
                                 <span>Start</span>
                             </a>
                         </li>
-                        <li id="restart">
+                        <li id="restart" style="display: none;">
                             <a href="#">
                                 <span></span>
                                 <span></span>
@@ -92,7 +94,7 @@
                                 <span>New Round</span>
                             </a>
                         </li>
-                        <li id="hit">
+                        <li id="hit" style="display: none;">
                             <a href="#">
                                 <span></span>
                                 <span></span>
@@ -101,7 +103,7 @@
                                 <span>Hit</span>
                             </a>
                         </li>
-                        <li id="stand">
+                        <li id="stand" style="display: none;">
                             <a href="#">
                                 <span></span>
                                 <span></span>
