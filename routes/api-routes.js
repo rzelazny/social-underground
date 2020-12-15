@@ -44,16 +44,19 @@ module.exports = function(app) {
   });
 
   app.patch("/api/user_stat", function(req, res) {
+    var loginID = req.body.login_id
     userStat.find({
       where: {
-        login_id = req.body.login_id
+        login_id: loginID
       }
     }).then(function (data){
       userStat.update({
         where: {
-          login_id = data.login_id,
+          login_id: loginID,
+        }, 
+        set: {
+          wins: data.wins+1
         } 
-        set: wins = data.wins+1
     })
     })
   });
@@ -491,14 +494,6 @@ app.get("/api/photo/:id/:table", function(req, res) {
     
     //   res.send(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png");
     //});
-
-  //   app.GET("/api/winLose", function(req, res){
-  //     res.json(winLose);
-  //   });
-
-  //   app.PUT("/api/winLose", function (req, res){
-
-  //   })
 };
 
 

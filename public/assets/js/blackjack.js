@@ -538,12 +538,12 @@ function endRound() {
         scoreHouse.innerHTML = `Score: ${playerArray[0].Score} `
         scorePlayer1 = document.querySelector("#scorePlayer1");
         scorePlayer1.innerHTML = `Score: ${playerArray[1].Score} `;
-        let userStat = {
-            login_id = localStorage.getItem("user"),
-            display_name = "player1",
-            wins = [1]
-        }
-        postUserStat(userStat);
+        // let userStat = {
+        //     login_id = localStorage.getItem("user"),
+        //     display_name = "player1",
+        //     wins = 1
+        // }
+        // postUserStat(userStat);
     }
     console.log(playerArray);
     console.log("=========================")
@@ -563,16 +563,16 @@ function endRound() {
     playerArray[0].Stand = false;
     playerArray[1].Stand = false;
 }
-function postUserStat(userStat) {
-    $.post("/api/user_stat", {
-        login_id: userStat.login_id,
-        wins: userStat.wins
-    }).then(function (data) {
-        $(".card-text-blackjack").text(data.wins);
-    }).catch(function (err) {
-        console.log(err);
-    })
-}
+// function postUserStat(userStat) {
+//     $.post("/api/user_stat", {
+//         login_id: userStat.login_id,
+//         wins: userStat.wins
+//     }).then(function (data) {
+//         $(".card-text-blackjack").text(data.wins);
+//     }).catch(function (err) {
+//         console.log(err);
+//     })
+// }
 ///////////////////////////////////////////////
 //                On Clicks                  //
 ///////////////////////////////////////////////
