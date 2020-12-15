@@ -6,16 +6,10 @@ $(document).ready(function() {
     $(".member-name").text(data.email);
   });
 
-  $.get("/api/user_data").then (function(data){
-    $(".card-text-email").text(data.email);
-  });
+  // $.get("/api/user_stat").then (function(data){
+  //   $(".card-text-w/l").text(data.gamePoints);
+  // });
 
-  $.get("/api/user_stat").then (function(data){
-    $(".card-text-w/l").text(data.gamePoints);
-  });
+//creating common utilitize 
 
-  //function to obtain all wins and losses from game
-  function winLose (){
-    
-  }
 });

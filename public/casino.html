@@ -21,13 +21,13 @@
             </a>
         
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="./home.html">Home</a>
-                <a class="dropdown-item" href="./members.html">Membership</a>
-                <a class="dropdown-item" href="/logout">Log Out</a>
+
+                <a class="dropdown-item" id="goHome" href="#">Home</a>
+                <a class="dropdown-item" id="memberPage" href="#">Membership</a>
+                <a class="dropdown-item" id="logOut" href="#">Log Out</a>
             </div>
         </nav>
     </nav>
-
 </nav>
 <body>
     <div class="container"id=gameChoice>
@@ -48,7 +48,7 @@
                 <select class="custom-select my-1 mr-sm-2" id="multi-select">
                     <option selected>Pick a Game...</option>
                         <!-- <option>Just Chatting</option> -->
-                        <option>Blackjack</option>
+                        <option>Blackjack Multiplayer</option>
                         <option>Rock Paper Scissors</option>
                 </select>
                 <select class="custom-select my-1 mr-sm-2" id="single-select" style="display:none">
@@ -60,20 +60,82 @@
             </form>
         </form>
     </div>
-    <div class="container" id="containerBlackJack">
+    <div class="container" id="cont-blackjack-single"style="display:none">
+        <div id="directions"> 
+            <h2>Single Player Blackjack</h2>
+            <br>
+            <p>Try to get as close to 21 without busting. If you want another card press 'hit' and you will be dealt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will not be awarded any points. If you win you will be awarded 1 point and if the House wins it will be awarded 1 point.</p>
+
+        </div>
         <!-- <canvas id="canvas" width="1100" height="650"></canvas> -->
         <br>
         <div id="gameBody">
-            <div class= "gameOptions" id="gameOptions">
+            <div class="players" id="players"></div>
+            <div class= "gameOptions" id="gameOptions" style="text-align: center;">
                 <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
-                <input class="btn btn-success type="button" id="start" value="start" style="display: none;">
+
+                <!-- <input class="btn btn-success" type="button" id="start" value="start" style="display: none;">
                 <input class="btn btn-success" type="button" id="restart" value="restart" style="display: none;">
                 <input class="btn btn-success" type="button" id="hit" value="hit me" style="display: none;">
-                <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;">
 
+                <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;"> -->
+                <div>
+                    <ul>
+                        <li id="start">
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span>Start</span>
+                            </a>
+                        </li>
+                        <li id="restart">
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span>New Round</span>
+                            </a>
+                        </li>
+                        <li id="hit">
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span>Hit</span>
+                            </a>
+                        </li>
+                        <li id="stand">
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span>Stand</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+<!--                 <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;"> -->
             </div>
-            <div class="players" id="players"></div>
         </div>
+    </div>
+    <div class="container" id="cont-blackjack-multi">
+        <div class="row">
+            <div id="gameBody">
+                <div class= "globalGameOptions" id="globalGameOptions">
+                    <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
+                    <input class="btn" type="button" id="start-multi-blackjack" value="start" style="display: none;">                </div>
+            </div>
+        </div>
+        <!-- will create house row -->
+            <!-- will append houses hand -->
+        <!-- will create player row -->
+            <!-- will dynamically create cols for players ( 2 hard coded ) -->
+                <!-- will dynamically append hand along with hit, stand, and restart buttons to each players col -->
     </div>
     <div class="container" id="containerRPS", style="display:none">
         <div class="row">
@@ -97,7 +159,7 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <img id="my-photo" style="display: none;" src="">
+                <img id="my-photo" style="visibility: hidden; height:240px; width:100%;" src="">
                 <div id="rpsCountdown"></div>
             </div>
             <div class="col-lg-4">
@@ -125,7 +187,7 @@
             </div>
             <div class="col-md-4"></div>
         </div>
-
+        
         <!-- <div>
             <ul>
                 <li>
@@ -158,6 +220,7 @@
             </ul>
         </div> -->
     </div>
+
     <div class="container"   id="chat-container">
         <div id="chat-log"></div>
         <form class="form-inline" id="chat-entry">
@@ -174,7 +237,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/js/casino.js"></script>
 <script src="./assets/js/blackjack.js"></script>
-
-<!-- <script src="./assets/js/websocket.js"></script> -->
+<!-- <script src="./assets/js/blackjackmulti.js"></script> -->
 
 </html>

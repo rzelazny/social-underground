@@ -103,13 +103,19 @@ $(document).ready(function() {
             switch(tableGame){
                 case "Just Chatting":
                     console.log("Just chatting setup")
-                    $("#containerBlackJack").css("display", "none");
+                    $("#cont-blackjack").css("display", "none");
                 break;
                 case "Blackjack":
-                    console.log("Black Jack setup");
+                    console.log("Blackjack single setup");
                     $("#gameChoice").css("display", "none");
-                    $("#containerBlackJack").css("display", "block");
-                    $("#start").css("display", "block");
+                    $("#cont-blackjack-single").css("display", "block");
+                    // $("#start").css("display", "block");
+                break;
+                case "Blackjack Multiplayer":
+                    console.log("Blackjack multi setup");
+                    $("#gameChoice").css("display", "none");
+                    $("#cont-blackjack-multi").css("display", "block");
+                    // $("#start").css("display", "block");
                 break;
                 case "Rock Paper Scissors":
                     console.log("RPS setup");
@@ -143,6 +149,7 @@ $(document).ready(function() {
             data: "Open Seat"
         }
         $.post("/api/table"+ curTable, updateSeat).then(function(){
+            console.log("leave table running");
             window.location.assign(goTo);
         })
     }
@@ -214,7 +221,7 @@ $(document).ready(function() {
         }
         console.log("Sending photo");
         //unhide element and set the source to the new image
-        myPhoto.style="display: block;"
+        myPhoto.style="display: block;";
         myPhoto.src = picture.photo;
         //store the photo in the db so others can access it
         $.post("/api/photo/", picture);
@@ -241,13 +248,27 @@ $(document).ready(function() {
 
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
-        let timer = 3
+        let timer = 4
         oppEmail = $("#select-RPS-opponent").val();
 
         //set the countdown
         let rpsTimer = setInterval(function() {
             timer--
-            $("#rpsCountdown").text(timer);
+            switch(timer){
+                case 3:
+                    $("#rpsCountdown").text("Rock");
+                break;
+                case 2:
+                    $("#rpsCountdown").text("Paper");
+                break;
+                case 1:
+                    $("#rpsCountdown").text("Scissors");
+                break;
+                case 0:
+                    $("#rpsCountdown").text("Shoot!");
+                break;
+            }
+            
             console.log(timer);
             if(timer === 0){ //when the timer runs out...
                 clearInterval(rpsTimer);
@@ -259,6 +280,7 @@ $(document).ready(function() {
                 //and post it to the db
                 console.log("Sending photo");
                 myPhoto.src = sendPic.photo;
+                myPhoto.style="display: block;";
                 $.post("/api/photo/", sendPic);
 
                 //Then get the opponent's most most recent photo

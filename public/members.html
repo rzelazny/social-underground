@@ -8,12 +8,26 @@
   <meta name="Description" content="Enter your description here" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="./assets/stylesheets/membersOnly.css">
+
   <title>Member</title>
 </head>
+<nav class="navbar navbar-dark">
+  <nav class="dropdown ml-auto " style="display: inline;">
+      <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Main Menu
+      </a>
+  
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="dropdown-item" href="./home.html">Home</a>
+          <a class="dropdown-item" href="./members.html">Membership</a>
+          <a class="dropdown-item" href="/logout">Log Out</a>
+      </div>
+  </nav>
+</nav>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Member</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
@@ -30,12 +44,27 @@
             <a class="nav-link active" href="./home.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./logout">Logout</a>
+            <a class="nav-link" href="./login.html">Logout</a>
           </li>
         </ul>
       </section>
     </div>
-  </nav>
+  </nav> -->
+
+<! -- <section>
+  <nav class="dropdown" display="inline">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        Main Menu
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="./home.html">Home</a>
+        <a class="dropdown-item" href="./login.html">Log Out</a>
+    </div>
+  </nav>  
+</section>
+1-->
 
   <div class="jumbotron jumbotron-fluid">
     <div class="container">

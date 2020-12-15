@@ -31,23 +31,30 @@ module.exports = function(app) {
       email: req.body.email,
       password: req.body.password
     })
-      .then(function() {
-        res.redirect(307, "/api/login");
+      .then(function(user) {
+        db.user_stat.create({
+          login_id: user.id
+        }).then(function(userStat){
+          res.redirect(307, "/api/login");
+        })
       })
       .catch(function(err) {
         res.status(401).json(err);
       });
   });
 
-  app.post("/api/user_stat", function(req, res) {
-    // Take the request...
-    var routeName = req.body.name.replace(/\s+/g, "").toLowerCase();
-    // Then add the user to the database using sequelize
-    User_stat.create({
-      gamePoints: req.body.gamePoints
-
-    }).then ((user_stat) => {
-      res.status(201).json(user_stat);
+  app.patch("/api/user_stat", function(req, res) {
+    userStat.find({
+      where: {
+        login_id = req.body.login_id
+      }
+    }).then(function (data){
+      userStat.update({
+        where: {
+          login_id = data.login_id,
+        } 
+        set: wins = data.wins+1
+    })
     })
   });
 
@@ -62,6 +69,7 @@ module.exports = function(app) {
   // Route for logging user out
   app.get("/logout", function(req, res) {
     req.logout();
+    localStorage.removeItem("user");
     res.redirect("/");
   });
 
@@ -484,13 +492,13 @@ app.get("/api/photo/:id/:table", function(req, res) {
     //   res.send(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png");
     //});
 
-    app.GET("/api/winLose", function(req, res){
-      res.json(winLose);
-    })
+  //   app.GET("/api/winLose", function(req, res){
+  //     res.json(winLose);
+  //   });
 
-    app.PUT("/api/winLose", function (req, res){
+  //   app.PUT("/api/winLose", function (req, res){
 
-    })
-  });
+  //   })
+};
 
 
