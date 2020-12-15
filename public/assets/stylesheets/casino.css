@@ -209,7 +209,7 @@ ul li:nth-child(4):hover span {
     color:white;
 }
 
-#containerBlackJack{
+#cont-blackjack-single{
     background-color: black;
     margin: 10px;
     padding:10px;
@@ -224,7 +224,9 @@ ul li:nth-child(4):hover span {
 #cardOneHouse,
 #cardTwoHouse,
 #cardOnePlayer1,
-#cardTwoPlayer1 {
+#cardTwoPlayer1,
+.hitCardHouse,
+.hitCardPlayer1 {
     width:100px;
     height:150px;
 }
