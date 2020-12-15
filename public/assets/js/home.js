@@ -8,7 +8,7 @@ $(document).ready(function() {
 
     //function clears out any tables with no users or that haven't been updated recently
     function cleanupTables(){
-        $.post("api/cleanup", function(){
+        $.post("api/cleanup").then( function(){
             console.log("table cleanup complete");
             getTables();
         })
@@ -97,7 +97,7 @@ $(document).ready(function() {
     }
 
     // Create a new gaming table on click
-    $("#newTable").on("click", function(event) {
+    $("#newTableSpan").on("click", function(event) {
         console.log("Making a new gaming table ");
         //create a new gaming table
         $.post("/api/newtable").then(function(newTable){

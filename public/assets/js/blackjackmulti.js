@@ -6,13 +6,13 @@
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
-var gameContainer = document.querySelector('#gameContainer');
+var gameContainer = document.querySelector('#cont-blackjack-multi');
 
-var startBtn = document.querySelector('#start');
+var multistartBtn = document.getElementById('start-multi-blackjack');
 // var goBackBtn = document.querySelector('#goBack');
 
 //making global variables to be used throughout several functions//
-let hand = [];
+let multiHand = [];
 var divPlayer = null;
 var divHand = null;
 var divPoints = null;
@@ -20,20 +20,21 @@ var divScore = null;
 
 var amount = 0;
 // hard coded for now but will use players from db
-let playerArray = [{ Name: "House", ID: 0, Score: 0, Points: 0, Bust: false, Hand: hand[0], Stand: 'false' }];
+let multiPlayerArray = [{ Name: "House", ID: 0, Score: 0, Points: 0, Bust: false, Hand: multiHand[0], Stand: 'false' }];
 
 
 ///////////////////////////////////////////////
 //                Functions                  //
 ///////////////////////////////////////////////
 
-startBtn.addEventListener('click', onStart);
+multistartBtn.addEventListener('click', onStart);
 
 // this function will be called when the start btn is pressed //
 function onStart() {
+    console.log("I'm running");
     // the start button is hidden //
-    if (startBtn.style.display === 'block') {
-        startBtn.style.display = 'none'
+    if (multistartBtn.style.display === 'block') {
+        multistartBtn.style.display = 'none'
     }
     // will add the players hard coded in the allPlayers function to the session //
     addPlayers();
@@ -51,13 +52,13 @@ function addPlayers() {
     }
 
     for (var i = 1; i <= amount; i++) {
-        var player = { Name: 'Player' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand, Stand: 'false' };
-        playerArray.push(player)
+        var player = { Name: 'Player' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: multiHand, Stand: 'false' };
+        multiPlayerArray.push(player)
     }
 }
 
 // setting i to 0 so that we can control the synchronicity //
-let i = 0;
+i = 0;
 function drawCards() {
     // this api link will draw 2 random cards //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
@@ -80,10 +81,10 @@ function drawCards() {
             }
         ];
         // this will give the drawn set of cards to whichever player is 'i' //
-        playerArray[i].Hand = playerHand
+        multiPlayerArray[i].Hand = playerHand
         // this will increment i so that it will keep running the draw cards function for each player //
         i++
-        if (i < playerArray.length) {
+        if (i < multiPlayerArray.length) {
             drawCards()
         }
         // if there isnt any more players it will stop drawing cards and run the following functions //
@@ -100,28 +101,28 @@ function drawCards() {
 function totalPoints() {
     // handVal is set to 0 //
     var handVal = 0;
-    for (var i = 0; i < playerArray.length; i++) {
+    for (var i = 0; i < multiPlayerArray.length; i++) {
         // resets players points //
-        playerArray[i].Points = 0;
-        for (var j = 0; j < (playerArray[i].Hand).length; j++) {
+        multiPlayerArray[i].Points = 0;
+        for (var j = 0; j < (multiPlayerArray[i].Hand).length; j++) {
             // sets values for face cards //
-            if (playerArray[i].Hand[j].value === "JACK" || playerArray[i].Hand[j].value === "QUEEN" || playerArray[i].Hand[j].value === "KING") {
-                playerArray[i].Hand[j].value = "10";
+            if (multiPlayerArray[i].Hand[j].value === "JACK" || multiPlayerArray[i].Hand[j].value === "QUEEN" || multiPlayerArray[i].Hand[j].value === "KING") {
+                multiPlayerArray[i].Hand[j].value = "10";
             }
             // sets value for ace depending on current point value
-            if (playerArray[i].Hand[0].value === "ACE") {
-                playerArray[i].Hand[0].value = "11";
-            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value < 11) {
-                playerArray[i].Hand[1].value = "11";
-            } else if (playerArray[i].Hand[1].value === "ACE" && playerArray[i].Hand[0].value > 10) {
-                playerArray[i].Hand[1].value = "1";
+            if (multiPlayerArray[i].Hand[0].value === "ACE") {
+                multiPlayerArray[i].Hand[0].value = "11";
+            } else if (multiPlayerArray[i].Hand[1].value === "ACE" && multiPlayerArray[i].Hand[0].value < 11) {
+                multiPlayerArray[i].Hand[1].value = "11";
+            } else if (multiPlayerArray[i].Hand[1].value === "ACE" && multiPlayerArray[i].Hand[0].value > 10) {
+                multiPlayerArray[i].Hand[1].value = "1";
             }
 
             // adds all cards in hand to create new value //
-            handVal += parseInt(playerArray[i].Hand[j].value);
+            handVal += parseInt(multiPlayerArray[i].Hand[j].value);
         }
         // sets the points equal to the new value //
-        playerArray[i].Points = handVal;
+        multiPlayerArray[i].Points = handVal;
         // resets back to zero //
         handVal = 0;
     }
@@ -146,14 +147,14 @@ function createElements() {
     // create house row elements //
     divHouse = document.createElement('section');
     divHouse.id = ('house');
-    divHouse.innerHTML = (playerArray[0].Name);
+    divHouse.innerHTML = (multiPlayerArray[0].Name);
     divHouse.setAttribute('style', 'text-align:center;')
     houseRow.appendChild(divHouse);
 
     // creates div where the houses session score will be held and displayed //
     houseScore = document.createElement('div');
     houseScore.id = ('houseScore');
-    houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
+    houseScore.innerHTML = `Score: ${multiPlayerArray[0].Score} `;
     divHouse.appendChild(houseScore);
 
     //creates div where cards will be appended //
@@ -164,53 +165,53 @@ function createElements() {
     // creates element to display card one image //
     var cardOneImg = document.createElement('img');
     cardOneImg.id = ('cardOneHouse')
-    cardOneImg.src = (playerArray[0].Hand[0].imgUrl)
+    cardOneImg.src = (multiPlayerArray[0].Hand[0].imgUrl)
     houseHand.appendChild(cardOneImg);
 
     // creates element to display card two image //
     var cardTwoImg = document.createElement('img');
     cardTwoImg.id = ('cardTwoHouse')
-    cardTwoImg.src = (playerArray[0].Hand[1].imgUrl)
+    cardTwoImg.src = (multiPlayerArray[0].Hand[1].imgUrl)
     houseHand.appendChild(cardTwoImg);
 
     // creates div where the point value of the hand will be held and displayed  //
     housePoints = document.createElement('div');
     housePoints.id = ('housePoints');
-    housePoints.innerHTML = `Points: ${playerArray[0].Points} `;
+    housePoints.innerHTML = `Points: ${multiPlayerArray[0].Points} `;
     divHouse.appendChild(housePoints);
 
     // make loop to create same elements for each player //
-    for (var i = 1; i < playerArray.length; i++) {
+    for (var i = 1; i < multiPlayerArray.length; i++) {
         // create cols for each player to store their elements and append to players row //
         var playersCol = document.createElement('div');
         playersCol.className = ('col-md-6');
-        playersCol.id = (playerArray[i].Name);
+        playersCol.id = (multiPlayerArray[i].Name);
         playersCol.setAttribute("style", "margin:20px; display:block; float:left;")
         playersRow.appendChild(playersCol);
 
         // create game option buttons for each player //
         var playersBtns = document.createElement('div');
         playersBtns.className = ('playersGameOptions');
-        playersBtns.id = ('buttons' + playerArray[i].Name);
+        playersBtns.id = ('buttons' + multiPlayerArray[i].Name);
         playersCol.appendChild(playersBtns);
 
         var hitBtn = document.createElement('input');
         hitBtn.className = ('btn');
-        hitBtn.id = ('hit' + playerArray[i].Name);
+        hitBtn.id = ('hit' + multiPlayerArray[i].Name);
         hitBtn.setAttribute("type", "button");
         hitBtn.setAttribute("value", "hit me");
         hitBtn.setAttribute("style", "display:block");
 
         var standBtn = document.createElement('input');
         standBtn.className = ('btn');
-        standBtn.id = ('stand' + playerArray[i].Name);
+        standBtn.id = ('stand' + multiPlayerArray[i].Name);
         standBtn.setAttribute("type", "button");
         standBtn.setAttribute("value", "stand");
         standBtn.setAttribute("style", "display:block;");
 
         var restartBtn = document.createElement('input');
         restartBtn.className = ('btn');
-        restartBtn.id = ('restart' + playerArray[i].Name);
+        restartBtn.id = ('restart' + multiPlayerArray[i].Name);
         restartBtn.setAttribute("type", "button");
         restartBtn.setAttribute("value", "restart");
         restartBtn.setAttribute("style", "display:block;");
@@ -223,8 +224,8 @@ function createElements() {
         // creates div to hold data and display name //
         divPlayer = document.createElement('div');
         divPlayer.className = ('player');
-        divPlayer.id = playerArray[i].Name;
-        divPlayer.innerHTML = (playerArray[i].Name);
+        divPlayer.id = multiPlayerArray[i].Name;
+        divPlayer.innerHTML = (multiPlayerArray[i].Name);
         divPlayer.setAttribute('style', 'text-align:center;')
         // append player to col //
         playersCol.appendChild(divPlayer);
@@ -232,24 +233,24 @@ function createElements() {
         // creates div where the users session score will be held and displayed //
         divScore = document.createElement('div');
         divScore.className = ('score');
-        divScore.id = ('score' + playerArray[i].Name);
-        divScore.innerHTML = `Score: ${playerArray[i].Score} `;
+        divScore.id = ('score' + multiPlayerArray[i].Name);
+        divScore.innerHTML = `Score: ${multiPlayerArray[i].Score} `;
         // append score to col //
         divPlayer.appendChild(divScore);
 
         //creates div where cards will be appended //
         divHand = document.createElement("div");
-        divHand.id = ("hand" + playerArray[i].Name);
+        divHand.id = ("hand" + multiPlayerArray[i].Name);
 
         // creates element to display card one image //
         var cardOneImg = document.createElement('img');
-        cardOneImg.id = ('cardOne' + playerArray[i].Name)
-        cardOneImg.src = (playerArray[i].Hand[0].imgUrl)
+        cardOneImg.id = ('cardOne' + multiPlayerArray[i].Name)
+        cardOneImg.src = (multiPlayerArray[i].Hand[0].imgUrl)
 
         // creates element to display card two image //
         var cardTwoImg = document.createElement('img');
-        cardTwoImg.id = ('cardTwo' + playerArray[i].Name)
-        cardTwoImg.src = (playerArray[i].Hand[1].imgUrl)
+        cardTwoImg.id = ('cardTwo' + multiPlayerArray[i].Name)
+        cardTwoImg.src = (multiPlayerArray[i].Hand[1].imgUrl)
 
         divPlayer.appendChild(divHand);
         // appends cards to hand div //
@@ -259,8 +260,8 @@ function createElements() {
         // creates div where the point value of the hand will be held and displayed  //
         divPoints = document.createElement('div');
         divPoints.className = ('points');
-        divPoints.id = ('points' + playerArray[i].Name);
-        divPoints.innerHTML = `Points: ${playerArray[i].Points} `;
+        divPoints.id = ('points' + multiPlayerArray[i].Name);
+        divPoints.innerHTML = `Points: ${multiPlayerArray[i].Points} `;
         // appends points to player //
         divPlayer.appendChild(divPoints);
     }
@@ -296,7 +297,7 @@ function createElements() {
 
     // event listeners //
 
-    if (playerArray.length === 3) {
+    if (multiPlayerArray.length === 3) {
         restartBtnP1.addEventListener('click', onRestartP1);
         restartBtnP2.addEventListener('click', onRestartP2);
 
@@ -306,7 +307,7 @@ function createElements() {
         standBtnP1.addEventListener('click', onStandPlayer1);
         standBtnP2.addEventListener('click', onStandPlayer2);
     }
-    else if (playerArray.length === 4) {
+    else if (multiPlayerArray.length === 4) {
         restartBtnP1.addEventListener('click', onRestartP1);
         restartBtnP2.addEventListener('click', onRestartP2);
         restartBtnP3.addEventListener('click', onRestartP3);
@@ -319,7 +320,7 @@ function createElements() {
         standBtnP2.addEventListener('click', onStandPlayer2);
         standBtnP3.addEventListener('click', onStandPlayer3);
     }
-    else if (playerArray.length === 5) {
+    else if (multiPlayerArray.length === 5) {
         restartBtnP1.addEventListener('click', onRestartP1);
         restartBtnP2.addEventListener('click', onRestartP2);
         restartBtnP3.addEventListener('click', onRestartP3);
@@ -336,7 +337,7 @@ function createElements() {
         hitBtnP4.addEventListener('click', onHitPlayer4);
         standBtnP4.addEventListener('click', onStandPlayer4);
     }
-    else if (playerArray.length === 6) {
+    else if (multiPlayerArray.length === 6) {
         restartBtnP1.addEventListener('click', onRestartP1);
         restartBtnP2.addEventListener('click', onRestartP2);
         restartBtnP3.addEventListener('click', onRestartP3);
@@ -357,7 +358,7 @@ function createElements() {
         hitBtnP5.addEventListener('click', onHitPlayer5);
         standBtnP5.addEventListener('click', onStandPlayer5);
     }
-    else if (playerArray.length === 7) {
+    else if (multiPlayerArray.length === 7) {
         restartBtnP1.addEventListener('click', onRestartP1);
         restartBtnP2.addEventListener('click', onRestartP2);
         restartBtnP3.addEventListener('click', onRestartP3);
@@ -382,7 +383,7 @@ function createElements() {
         hitBtnP6.addEventListener('click', onHitPlayer6);
         standBtnP6.addEventListener('click', onStandPlayer6);
     }
-    else if (playerArray.length === 8) {
+    else if (multiPlayerArray.length === 8) {
         restartBtnP1.addEventListener('click', onRestartP1);
         restartBtnP2.addEventListener('click', onRestartP2);
         restartBtnP3.addEventListener('click', onRestartP3);
@@ -419,11 +420,11 @@ function onRestartP1() {
     // reset player values // -- breaking code
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
+        multiPlayerArray[0].Bust = false;
+        multiPlayerArray[1].Bust = false;
 
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
+        multiPlayerArray[0].Stand = false;
+        multiPlayerArray[1].Stand = false;
 
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
@@ -443,13 +444,13 @@ function onRestartP2() {
     question = confirm("Player 2 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
+        multiPlayerArray[0].Bust = false;
+        multiPlayerArray[1].Bust = false;
+        multiPlayerArray[2].Bust = false;
 
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
+        multiPlayerArray[0].Stand = false;
+        multiPlayerArray[1].Stand = false;
+        multiPlayerArray[2].Stand = false;
 
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
@@ -467,15 +468,15 @@ function onRestartP3() {
     question = confirm("Player 3 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
+        multiPlayerArray[0].Bust = false;
+        multiPlayerArray[1].Bust = false;
+        multiPlayerArray[2].Bust = false;
+        multiPlayerArray[3].Bust = false;
 
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
+        multiPlayerArray[0].Stand = false;
+        multiPlayerArray[1].Stand = false;
+        multiPlayerArray[2].Stand = false;
+        multiPlayerArray[3].Stand = false;
 
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
@@ -493,17 +494,17 @@ function onRestartP4() {
     question = confirm("Player 4 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
+        multiPlayerArray[0].Bust = false;
+        multiPlayerArray[1].Bust = false;
+        multiPlayerArray[2].Bust = false;
+        multiPlayerArray[3].Bust = false;
+        multiPlayerArray[4].Bust = false;
 
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
+        multiPlayerArray[0].Stand = false;
+        multiPlayerArray[1].Stand = false;
+        multiPlayerArray[2].Stand = false;
+        multiPlayerArray[3].Stand = false;
+        multiPlayerArray[4].Stand = false;
 
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
@@ -521,19 +522,19 @@ function onRestartP5() {
     question = confirm("Player 5 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
+        multiPlayerArray[0].Bust = false;
+        multiPlayerArray[1].Bust = false;
+        multiPlayerArray[2].Bust = false;
+        multiPlayerArray[3].Bust = false;
+        multiPlayerArray[4].Bust = false;
+        multiPlayerArray[5].Bust = false;
 
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
+        multiPlayerArray[0].Stand = false;
+        multiPlayerArray[1].Stand = false;
+        multiPlayerArray[2].Stand = false;
+        multiPlayerArray[3].Stand = false;
+        multiPlayerArray[4].Stand = false;
+        multiPlayerArray[5].Stand = false;
 
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
@@ -551,21 +552,21 @@ function onRestartP6() {
     question = confirm("Player 6 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
+        multiPlayerArray[0].Bust = false;
+        multiPlayerArray[1].Bust = false;
+        multiPlayerArray[2].Bust = false;
+        multiPlayerArray[3].Bust = false;
+        multiPlayerArray[4].Bust = false;
+        multiPlayerArray[5].Bust = false;
+        multiPlayerArray[6].Bust = false;
 
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
+        multiPlayerArray[0].Stand = false;
+        multiPlayerArray[1].Stand = false;
+        multiPlayerArray[2].Stand = false;
+        multiPlayerArray[3].Stand = false;
+        multiPlayerArray[4].Stand = false;
+        multiPlayerArray[5].Stand = false;
+        multiPlayerArray[6].Stand = false;
 
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
@@ -583,23 +584,23 @@ function onRestartP7() {
     question = confirm("Player 7 wants to restart the game. Do you accept?")
     if (question === true) {
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
-        playerArray[3].Bust = false;
-        playerArray[4].Bust = false;
-        playerArray[5].Bust = false;
-        playerArray[6].Bust = false;
-        playerArray[7].Bust = false;
+        multiPlayerArray[0].Bust = false;
+        multiPlayerArray[1].Bust = false;
+        multiPlayerArray[2].Bust = false;
+        multiPlayerArray[3].Bust = false;
+        multiPlayerArray[4].Bust = false;
+        multiPlayerArray[5].Bust = false;
+        multiPlayerArray[6].Bust = false;
+        multiPlayerArray[7].Bust = false;
 
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
-        playerArray[3].Stand = false;
-        playerArray[4].Stand = false;
-        playerArray[5].Stand = false;
-        playerArray[6].Stand = false;
-        playerArray[7].Stand = false;
+        multiPlayerArray[0].Stand = false;
+        multiPlayerArray[1].Stand = false;
+        multiPlayerArray[2].Stand = false;
+        multiPlayerArray[3].Stand = false;
+        multiPlayerArray[4].Stand = false;
+        multiPlayerArray[5].Stand = false;
+        multiPlayerArray[6].Stand = false;
+        multiPlayerArray[7].Stand = false;
 
         // will clear everything on the gameboard //
         houseRow.innerHTML = '';
@@ -639,7 +640,7 @@ function player1Hit() {
             imgUrl: data.cards[0].image
         };
         // this variable = the players original cards
-        var originalHand = playerArray[1].Hand;
+        var originalHand = multiPlayerArray[1].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
@@ -652,32 +653,32 @@ function player1Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for (var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < multiPlayerArray.length; a++) {
             // resets players points //
-            playerArray[a].Points = 0;
-            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+            multiPlayerArray[a].Points = 0;
+            for (var j = 0; j < (multiPlayerArray[a].Hand).length; j++) {
                 // sets values for face cards //
-                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
-                    playerArray[a].Hand[j].value = "10";
+                if (multiPlayerArray[a].Hand[j].value === "JACK" || multiPlayerArray[a].Hand[j].value === "QUEEN" || multiPlayerArray[a].Hand[j].value === "KING") {
+                    multiPlayerArray[a].Hand[j].value = "10";
                 }
                 // sets value for ace depending on previous hand value //
-                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
-                    playerArray[a].Hand[j].value = "11";
-                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
-                    playerArray[a].Hand[j].value = "1";
+                else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    multiPlayerArray[a].Hand[j].value = "11";
+                } else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    multiPlayerArray[a].Hand[j].value = "1";
                 }
 
                 // adds all cards in hand to create new value //
-                handVal += parseInt(playerArray[a].Hand[j].value);
+                handVal += parseInt(multiPlayerArray[a].Hand[j].value);
             }
             // sets the points equal to the new value //
-            playerArray[a].Points = handVal;
+            multiPlayerArray[a].Points = handVal;
             // resets handVal back to zero //
             handVal = 0;
 
             // display the new points //
             divPoints = document.getElementById('pointsPlayer1');
-            divPoints.innerHTML = `Points: ${playerArray[1].Points} `;
+            divPoints.innerHTML = `Points: ${multiPlayerArray[1].Points} `;
 
         }
     })
@@ -707,7 +708,7 @@ function player2Hit() {
             imgUrl: data.cards[0].image
         };
         // this variable = the players original cards
-        var originalHand = playerArray[2].Hand;
+        var originalHand = multiPlayerArray[2].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
@@ -720,32 +721,32 @@ function player2Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for (var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < multiPlayerArray.length; a++) {
             // resets players points //
-            playerArray[a].Points = 0;
-            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+            multiPlayerArray[a].Points = 0;
+            for (var j = 0; j < (multiPlayerArray[a].Hand).length; j++) {
                 // sets values for face cards //
-                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
-                    playerArray[a].Hand[j].value = "10";
+                if (multiPlayerArray[a].Hand[j].value === "JACK" || multiPlayerArray[a].Hand[j].value === "QUEEN" || multiPlayerArray[a].Hand[j].value === "KING") {
+                    multiPlayerArray[a].Hand[j].value = "10";
                 }
                 // sets value for ace depending on previous hand value //
-                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
-                    playerArray[a].Hand[j].value = "11";
-                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
-                    playerArray[a].Hand[j].value = "1";
+                else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    multiPlayerArray[a].Hand[j].value = "11";
+                } else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    multiPlayerArray[a].Hand[j].value = "1";
                 }
 
                 // adds all cards in hand to create new value //
-                handVal += parseInt(playerArray[a].Hand[j].value);
+                handVal += parseInt(multiPlayerArray[a].Hand[j].value);
             }
             // sets the points equal to the new value //
-            playerArray[a].Points = handVal;
+            multiPlayerArray[a].Points = handVal;
             // resets handVal back to zero //
             handVal = 0;
 
             // display the new points //
             divPoints = document.getElementById('pointsPlayer2');
-            divPoints.innerHTML = `Points: ${playerArray[2].Points} `;
+            divPoints.innerHTML = `Points: ${multiPlayerArray[2].Points} `;
 
         }
     })
@@ -775,7 +776,7 @@ function player3Hit() {
             imgUrl: data.cards[0].image
         };
         // this variable = the players original cards
-        var originalHand = playerArray[3].Hand;
+        var originalHand = multiPlayerArray[3].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
@@ -788,32 +789,32 @@ function player3Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for (var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < multiPlayerArray.length; a++) {
             // resets players points //
-            playerArray[a].Points = 0;
-            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+            multiPlayerArray[a].Points = 0;
+            for (var j = 0; j < (multiPlayerArray[a].Hand).length; j++) {
                 // sets values for face cards //
-                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
-                    playerArray[a].Hand[j].value = "10";
+                if (multiPlayerArray[a].Hand[j].value === "JACK" || multiPlayerArray[a].Hand[j].value === "QUEEN" || multiPlayerArray[a].Hand[j].value === "KING") {
+                    multiPlayerArray[a].Hand[j].value = "10";
                 }
                 // sets value for ace depending on previous hand value //
-                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
-                    playerArray[a].Hand[j].value = "11";
-                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
-                    playerArray[a].Hand[j].value = "1";
+                else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    multiPlayerArray[a].Hand[j].value = "11";
+                } else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    multiPlayerArray[a].Hand[j].value = "1";
                 }
 
                 // adds all cards in hand to create new value //
-                handVal += parseInt(playerArray[a].Hand[j].value);
+                handVal += parseInt(multiPlayerArray[a].Hand[j].value);
             }
             // sets the points equal to the new value //
-            playerArray[a].Points = handVal;
+            multiPlayerArray[a].Points = handVal;
             // resets handVal back to zero //
             handVal = 0;
 
             // display the new points //
             divPoints = document.getElementById('pointsPlayer3');
-            divPoints.innerHTML = `Points: ${playerArray[3].Points} `;
+            divPoints.innerHTML = `Points: ${multiPlayerArray[3].Points} `;
 
         }
     })
@@ -843,7 +844,7 @@ function player4Hit() {
             imgUrl: data.cards[0].image
         };
         // this variable = the players original cards
-        var originalHand = playerArray[4].Hand;
+        var originalHand = multiPlayerArray[4].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
@@ -856,32 +857,32 @@ function player4Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for (var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < multiPlayerArray.length; a++) {
             // resets players points //
-            playerArray[a].Points = 0;
-            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+            multiPlayerArray[a].Points = 0;
+            for (var j = 0; j < (multiPlayerArray[a].Hand).length; j++) {
                 // sets values for face cards //
-                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
-                    playerArray[a].Hand[j].value = "10";
+                if (multiPlayerArray[a].Hand[j].value === "JACK" || multiPlayerArray[a].Hand[j].value === "QUEEN" || multiPlayerArray[a].Hand[j].value === "KING") {
+                    multiPlayerArray[a].Hand[j].value = "10";
                 }
                 // sets value for ace depending on previous hand value //
-                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
-                    playerArray[a].Hand[j].value = "11";
-                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
-                    playerArray[a].Hand[j].value = "1";
+                else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    multiPlayerArray[a].Hand[j].value = "11";
+                } else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    multiPlayerArray[a].Hand[j].value = "1";
                 }
 
                 // adds all cards in hand to create new value //
-                handVal += parseInt(playerArray[a].Hand[j].value);
+                handVal += parseInt(multiPlayerArray[a].Hand[j].value);
             }
             // sets the points equal to the new value //
-            playerArray[a].Points = handVal;
+            multiPlayerArray[a].Points = handVal;
             // resets handVal back to zero //
             handVal = 0;
 
             // display the new points //
             divPoints = document.getElementById('pointsPlayer4');
-            divPoints.innerHTML = `Points: ${playerArray[4].Points} `;
+            divPoints.innerHTML = `Points: ${multiPlayerArray[4].Points} `;
 
         }
     })
@@ -911,7 +912,7 @@ function player5Hit() {
             imgUrl: data.cards[0].image
         };
         // this variable = the players original cards
-        var originalHand = playerArray[5].Hand;
+        var originalHand = multiPlayerArray[5].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
@@ -924,32 +925,32 @@ function player5Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for (var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < multiPlayerArray.length; a++) {
             // resets players points //
-            playerArray[a].Points = 0;
-            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+            multiPlayerArray[a].Points = 0;
+            for (var j = 0; j < (multiPlayerArray[a].Hand).length; j++) {
                 // sets values for face cards //
-                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
-                    playerArray[a].Hand[j].value = "10";
+                if (multiPlayerArray[a].Hand[j].value === "JACK" || multiPlayerArray[a].Hand[j].value === "QUEEN" || multiPlayerArray[a].Hand[j].value === "KING") {
+                    multiPlayerArray[a].Hand[j].value = "10";
                 }
                 // sets value for ace depending on previous hand value //
-                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
-                    playerArray[a].Hand[j].value = "11";
-                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
-                    playerArray[a].Hand[j].value = "1";
+                else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    multiPlayerArray[a].Hand[j].value = "11";
+                } else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    multiPlayerArray[a].Hand[j].value = "1";
                 }
 
                 // adds all cards in hand to create new value //
-                handVal += parseInt(playerArray[a].Hand[j].value);
+                handVal += parseInt(multiPlayerArray[a].Hand[j].value);
             }
             // sets the points equal to the new value //
-            playerArray[a].Points = handVal;
+            multiPlayerArray[a].Points = handVal;
             // resets handVal back to zero //
             handVal = 0;
 
             // display the new points //
             divPoints = document.getElementById('pointsPlayer5');
-            divPoints.innerHTML = `Points: ${playerArray[5].Points} `;
+            divPoints.innerHTML = `Points: ${multiPlayerArray[5].Points} `;
 
         }
     })
@@ -979,7 +980,7 @@ function player6Hit() {
             imgUrl: data.cards[0].image
         };
         // this variable = the players original cards
-        var originalHand = playerArray[6].Hand;
+        var originalHand = multiPlayerArray[6].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
@@ -992,32 +993,32 @@ function player6Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for (var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < multiPlayerArray.length; a++) {
             // resets players points //
-            playerArray[a].Points = 0;
-            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+            multiPlayerArray[a].Points = 0;
+            for (var j = 0; j < (multiPlayerArray[a].Hand).length; j++) {
                 // sets values for face cards //
-                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
-                    playerArray[a].Hand[j].value = "10";
+                if (multiPlayerArray[a].Hand[j].value === "JACK" || multiPlayerArray[a].Hand[j].value === "QUEEN" || multiPlayerArray[a].Hand[j].value === "KING") {
+                    multiPlayerArray[a].Hand[j].value = "10";
                 }
                 // sets value for ace depending on previous hand value //
-                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
-                    playerArray[a].Hand[j].value = "11";
-                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
-                    playerArray[a].Hand[j].value = "1";
+                else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    multiPlayerArray[a].Hand[j].value = "11";
+                } else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    multiPlayerArray[a].Hand[j].value = "1";
                 }
 
                 // adds all cards in hand to create new value //
-                handVal += parseInt(playerArray[a].Hand[j].value);
+                handVal += parseInt(multiPlayerArray[a].Hand[j].value);
             }
             // sets the points equal to the new value //
-            playerArray[a].Points = handVal;
+            multiPlayerArray[a].Points = handVal;
             // resets handVal back to zero //
             handVal = 0;
 
             // display the new points //
             divPoints = document.getElementById('pointsPlayer6');
-            divPoints.innerHTML = `Points: ${playerArray[6].Points} `;
+            divPoints.innerHTML = `Points: ${multiPlayerArray[6].Points} `;
 
         }
     })
@@ -1047,7 +1048,7 @@ function player7Hit() {
             imgUrl: data.cards[0].image
         };
         // this variable = the players original cards
-        var originalHand = playerArray[7].Hand;
+        var originalHand = multiPlayerArray[7].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
@@ -1060,202 +1061,202 @@ function player7Hit() {
 
         // resets value of hand to zero //
         var handVal = 0;
-        for (var a = 0; a < playerArray.length; a++) {
+        for (var a = 0; a < multiPlayerArray.length; a++) {
             // resets players points //
-            playerArray[a].Points = 0;
-            for (var j = 0; j < (playerArray[a].Hand).length; j++) {
+            multiPlayerArray[a].Points = 0;
+            for (var j = 0; j < (multiPlayerArray[a].Hand).length; j++) {
                 // sets values for face cards //
-                if (playerArray[a].Hand[j].value === "JACK" || playerArray[a].Hand[j].value === "QUEEN" || playerArray[a].Hand[j].value === "KING") {
-                    playerArray[a].Hand[j].value = "10";
+                if (multiPlayerArray[a].Hand[j].value === "JACK" || multiPlayerArray[a].Hand[j].value === "QUEEN" || multiPlayerArray[a].Hand[j].value === "KING") {
+                    multiPlayerArray[a].Hand[j].value = "10";
                 }
                 // sets value for ace depending on previous hand value //
-                else if (playerArray[a].Hand[j].value === "ACE" && handVal < 11) {
-                    playerArray[a].Hand[j].value = "11";
-                } else if (playerArray[a].Hand[j].value === "ACE" && handVal > 10) {
-                    playerArray[a].Hand[j].value = "1";
+                else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal < 11) {
+                    multiPlayerArray[a].Hand[j].value = "11";
+                } else if (multiPlayerArray[a].Hand[j].value === "ACE" && handVal > 10) {
+                    multiPlayerArray[a].Hand[j].value = "1";
                 }
 
                 // adds all cards in hand to create new value //
-                handVal += parseInt(playerArray[a].Hand[j].value);
+                handVal += parseInt(multiPlayerArray[a].Hand[j].value);
             }
             // sets the points equal to the new value //
-            playerArray[a].Points = handVal;
+            multiPlayerArray[a].Points = handVal;
             // resets handVal back to zero //
             handVal = 0;
 
             // display the new points //
             divPoints = document.getElementById('pointsPlayer7');
-            divPoints.innerHTML = `Points: ${playerArray[7].Points} `;
+            divPoints.innerHTML = `Points: ${multiPlayerArray[7].Points} `;
 
         }
     })
 }
 
 function itsABust() {
-    for (var i = 0; i < playerArray.length; i++) {
-        if (playerArray[i].Points > 21) {
+    for (var i = 0; i < multiPlayerArray.length; i++) {
+        if (multiPlayerArray[i].Points > 21) {
             // sets bst property to true //
-            playerArray[i].Bust = true;
-            playerArray[i].Stand = true;
+            multiPlayerArray[i].Bust = true;
+            multiPlayerArray[i].Stand = true;
             //sends user alert // -- we need to set this to only display to the user who busted
-            console.log(`${playerArray[i].Name} busted`)
-            // alert(`${playerArray[i].Name} busted`);
+            console.log(`${multiPlayerArray[i].Name} busted`)
+            // alert(`${multiPlayerArray[i].Name} busted`);
         }
     }
 }
 
 function onStandPlayer1() {
-    playerArray[1].Stand = true;
-    console.log(playerArray[1])
+    multiPlayerArray[1].Stand = true;
+    console.log(multiPlayerArray[1])
     checkStandStat();
 }
 function onStandPlayer2() {
-    playerArray[2].Stand = true;
+    multiPlayerArray[2].Stand = true;
     checkStandStat();
 }
 function onStandPlayer3() {
-    playerArray[3].Stand = true;
+    multiPlayerArray[3].Stand = true;
     checkStandStat();
 }
 function onStandPlayer4() {
-    playerArray[4].Stand = true;
+    multiPlayerArray[4].Stand = true;
     checkStandStat();
 }
 function onStandPlayer5() {
-    playerArray[5].Stand = true;
+    multiPlayerArray[5].Stand = true;
     checkStandStat();
 }
 function onStandPlayer6() {
-    playerArray[6].Stand = true;
+    multiPlayerArray[6].Stand = true;
     checkStandStat();
 }
 function onStandPlayer7() {
-    playerArray[7].Stand = true;
+    multiPlayerArray[7].Stand = true;
     checkStandStat();
 }
 
 function checkStandStat() {
     console.log("i can see")
     // if there are 2 players ... //
-    if (playerArray.length === 3) {
-        if (playerArray[1].Stand === true && playerArray[2].Stand === true) {
+    if (multiPlayerArray.length === 3) {
+        if (multiPlayerArray[1].Stand === true && multiPlayerArray[2].Stand === true) {
             console.log("all players are standing");
             houseLogic();
         }
         else {
             console.log("waiting for all players to be standing");
-            console.log(playerArray);
+            console.log(multiPlayerArray);
         }
     }
     // if there are 3 players //
-    else if (playerArray.length === 4) {
-        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true) {
+    else if (multiPlayerArray.length === 4) {
+        if (multiPlayerArray[1].Stand === true && multiPlayerArray[2].Stand === true && multiPlayerArray[3].Stand === true) {
             console.log("all players are standing");
             houseLogic();
         }
         else {
             console.log("waiting for all players to be standing");
-            console.log(playerArray);
+            console.log(multiPlayerArray);
         }
     }
     // if there are 4 players //
-    else if (playerArray.length === 5) {
-        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true) {
+    else if (multiPlayerArray.length === 5) {
+        if (multiPlayerArray[1].Stand === true && multiPlayerArray[2].Stand === true && multiPlayerArray[3].Stand === true && multiPlayerArray[4].Stand === true) {
             console.log("all players are standing");
             houseLogic();
         }
         else {
             console.log("waiting for all players to be standing");
-            console.log(playerArray);
+            console.log(multiPlayerArray);
         }
     }
     // if there are 5 players //
-    else if (playerArray.length === 6) {
-        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true) {
+    else if (multiPlayerArray.length === 6) {
+        if (multiPlayerArray[1].Stand === true && multiPlayerArray[2].Stand === true && multiPlayerArray[3].Stand === true && multiPlayerArray[4].Stand === true && multiPlayerArray[5].Stand === true) {
             console.log("all players are standing");
             houseLogic();
         }
         else {
             console.log("waiting for all players to be standing");
-            console.log(playerArray);
+            console.log(multiPlayerArray);
         }
     }
     // if there are 6 players //
-    else if (playerArray.length === 7) {
-        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true && playerArray[6].Stand === true) {
+    else if (multiPlayerArray.length === 7) {
+        if (multiPlayerArray[1].Stand === true && multiPlayerArray[2].Stand === true && multiPlayerArray[3].Stand === true && multiPlayerArray[4].Stand === true && multiPlayerArray[5].Stand === true && multiPlayerArray[6].Stand === true) {
             console.log("all players are standing");
             houseLogic();
         }
         else {
             console.log("waiting for all players to be standing");
-            console.log(playerArray);
+            console.log(multiPlayerArray);
         }
     }
     // if there are 7 players //
-    else if (playerArray.length === 8) {
-        if (playerArray[1].Stand === true && playerArray[2].Stand === true && playerArray[3].Stand === true && playerArray[4].Stand === true && playerArray[5].Stand === true && playerArray[6].Stand === true && playerArray[7].Stand === true) {
+    else if (multiPlayerArray.length === 8) {
+        if (multiPlayerArray[1].Stand === true && multiPlayerArray[2].Stand === true && multiPlayerArray[3].Stand === true && multiPlayerArray[4].Stand === true && multiPlayerArray[5].Stand === true && multiPlayerArray[6].Stand === true && multiPlayerArray[7].Stand === true) {
             console.log("all players are standing");
             houseLogic();
         }
         else {
             console.log("waiting for all players to be standing");
-            console.log(playerArray);
+            console.log(multiPlayerArray);
         }
     }
 }
 
 function houseLogic() {
     // when all 2 players are standing ... //
-    if (playerArray.length === 3) {
+    if (multiPlayerArray.length === 3) {
         // house will stand if ... //
         // house 17+ points
-        if (playerArray[0].Points >= 17) {
-            playerArray[0].Stand = true;
+        if (multiPlayerArray[0].Points >= 17) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
         // all players bust
-        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
         // p1 bust & p2 points < house
-        else if (playerArray[1].Bust === true && playerArray[2].Points < playerArray[0].Points) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Points < multiPlayerArray[0].Points) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
         // p1 points < house & p2 bust
-        else if (playerArray[2].Bust === true && playerArray[1].Points < playerArray[0].Points) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[2].Bust === true && multiPlayerArray[1].Points < multiPlayerArray[0].Points) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
         // all players points < house 
-        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Points < multiPlayerArray[0].Points && multiPlayerArray[2].Points < multiPlayerArray[0].Points) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
         // house will hit if
         // p1 points > house BUT < 22
-        else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[1].Bust === false && multiPlayerArray[1].Points > multiPlayerArray[0].Points) {
             console.log("house will hit")
             houseHit();
         }
         // p2 points > house BUT < 22
-        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[2].Bust === false && multiPlayerArray[2].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // player 1 tied && points < 17
-        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[1].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 2 tied && points < 17
-        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[2].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
@@ -1265,210 +1266,210 @@ function houseLogic() {
     }
 
     // when all 3 players are standing ... //
-    else if (playerArray.length === 4) {
+    else if (multiPlayerArray.length === 4) {
         // house will stand if ... //
         // house 17+ points
-        if (playerArray[0].Points >= 17) {
-            playerArray[0].Stand = true;
+        if (multiPlayerArray[0].Points >= 17) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
         // all players bust
-        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
         // all players points < house 
-        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Points < multiPlayerArray[0].Points && multiPlayerArray[2].Points < multiPlayerArray[0].Points) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
         // house will hit if ... //
         // p1 points > house BUT < 22
-        else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[1].Bust === false && multiPlayerArray[1].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p2 points > house BUT < 22
-        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[2].Bust === false && multiPlayerArray[2].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p3 points > house BUT < 22
-        else if (playerArray[3].Bust === false && playerArray[3].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[3].Bust === false && multiPlayerArray[3].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // player 1 tied && points < 17
-        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[1].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 2 tied && points < 17
-        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[2].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 3 tied && points < 17
-        else if (playerArray[3].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[3].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // stand //
         else {
-            playerArray[0].Stand = true;
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
     }
 
     // when all 4 players are standing ... //
-    else if (playerArray.length === 5) {
+    else if (multiPlayerArray.length === 5) {
         // house will stand if ... //
         // house 17+ points
-        if (playerArray[0].Points >= 17) {
-            playerArray[0].Stand = true;
+        if (multiPlayerArray[0].Points >= 17) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // all players bust
-        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // all players points < house 
-        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Points < multiPlayerArray[0].Points && multiPlayerArray[2].Points < multiPlayerArray[0].Points) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // house will hit if ... //
         // p1 points > house BUT < 22
-        else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[1].Bust === false && multiPlayerArray[1].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p2 points > house BUT < 22
-        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[2].Bust === false && multiPlayerArray[2].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p3 points > house BUT < 22
-        else if (playerArray[3].Bust === false && playerArray[3].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[3].Bust === false && multiPlayerArray[3].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p4 points > house BUT < 22
-        else if (playerArray[4].Bust === false && playerArray[4].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[4].Bust === false && multiPlayerArray[4].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // player 1 tied && points < 17
-        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[1].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 2 tied && points < 17
-        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[2].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 3 tied && points < 17
-        else if (playerArray[3].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[3].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 4 tied && points < 17
-        else if (playerArray[4].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[4].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // stand //
         else {
-            playerArray[0].Stand = true;
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
     }
 
     // when all 5 players are standing ... //
-    else if (playerArray.length === 6) {
+    else if (multiPlayerArray.length === 6) {
         // house will stand if ... //
         // house 17+ points
-        if (playerArray[0].Points >= 17) {
-            playerArray[0].Stand = true;
+        if (multiPlayerArray[0].Points >= 17) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // all players bust
-        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // all players points < house 
-        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Points < multiPlayerArray[0].Points && multiPlayerArray[2].Points < multiPlayerArray[0].Points) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // house will hit if ... //
         // p1 points > house BUT < 22
-        else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[1].Bust === false && multiPlayerArray[1].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p2 points > house BUT < 22
-        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[2].Bust === false && multiPlayerArray[2].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p3 points > house BUT < 22
-        else if (playerArray[3].Bust === false && playerArray[3].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[3].Bust === false && multiPlayerArray[3].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p4 points > house BUT < 22
-        else if (playerArray[4].Bust === false && playerArray[4].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[4].Bust === false && multiPlayerArray[4].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p5 points > house BUT < 22
-        else if (playerArray[5].Bust === false && playerArray[5].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[5].Bust === false && multiPlayerArray[5].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // player 1 tied && points < 17
-        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[1].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 2 tied && points < 17
-        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[2].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 3 tied && points < 17
-        else if (playerArray[3].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[3].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 4 tied && points < 17
-        else if (playerArray[4].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[4].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 5 tied && points < 17
-        else if (playerArray[5].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[5].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // stand //
         else {
-            playerArray[0].Stand = true;
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
@@ -1476,190 +1477,190 @@ function houseLogic() {
     }
 
     // when all 6 players are standing ... //
-    else if (playerArray.length === 7) {
+    else if (multiPlayerArray.length === 7) {
         // house will stand if ... //
         // house 17+ points
-        if (playerArray[0].Points >= 17) {
-            playerArray[0].Stand = true;
+        if (multiPlayerArray[0].Points >= 17) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // all players bust
-        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // all players points < house 
-        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Points < multiPlayerArray[0].Points && multiPlayerArray[2].Points < multiPlayerArray[0].Points) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // house will hit if ... //
         // p1 points > house BUT < 22
-        else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[1].Bust === false && multiPlayerArray[1].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p2 points > house BUT < 22
-        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[2].Bust === false && multiPlayerArray[2].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p3 points > house BUT < 22
-        else if (playerArray[3].Bust === false && playerArray[3].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[3].Bust === false && multiPlayerArray[3].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p4 points > house BUT < 22
-        else if (playerArray[4].Bust === false && playerArray[4].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[4].Bust === false && multiPlayerArray[4].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p5 points > house BUT < 22
-        else if (playerArray[5].Bust === false && playerArray[5].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[5].Bust === false && multiPlayerArray[5].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p6 points > house BUT < 22
-        else if (playerArray[6].Bust === false && playerArray[6].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[6].Bust === false && multiPlayerArray[6].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // player 1 tied && points < 17
-        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[1].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 2 tied && points < 17
-        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[2].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 3 tied && points < 17
-        else if (playerArray[3].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[3].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 4 tied && points < 17
-        else if (playerArray[4].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[4].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 5 tied && points < 17
-        else if (playerArray[5].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[5].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 6 tied && points < 17
-        else if (playerArray[6].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[6].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // stand //
         else {
-            playerArray[0].Stand = true;
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
     }
 
     // when all 7 players are standing ... //
-    else if (playerArray.length === 8) {
+    else if (multiPlayerArray.length === 8) {
         // house will stand if ... //
         // house 17+ points
-        if (playerArray[0].Points >= 17) {
-            playerArray[0].Stand = true;
+        if (multiPlayerArray[0].Points >= 17) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // all players bust
-        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // all players points < house 
-        else if (playerArray[1].Points < playerArray[0].Points && playerArray[2].Points < playerArray[0].Points) {
-            playerArray[0].Stand = true;
+        else if (multiPlayerArray[1].Points < multiPlayerArray[0].Points && multiPlayerArray[2].Points < multiPlayerArray[0].Points) {
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             // endRound();
         }
         // house will hit if ... //
         // p1 points > house BUT < 22
-        else if (playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[1].Bust === false && multiPlayerArray[1].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p2 points > house BUT < 22
-        else if (playerArray[2].Bust === false && playerArray[2].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[2].Bust === false && multiPlayerArray[2].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p3 points > house BUT < 22
-        else if (playerArray[3].Bust === false && playerArray[3].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[3].Bust === false && multiPlayerArray[3].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p4 points > house BUT < 22
-        else if (playerArray[4].Bust === false && playerArray[4].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[4].Bust === false && multiPlayerArray[4].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p5 points > house BUT < 22
-        else if (playerArray[5].Bust === false && playerArray[5].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[5].Bust === false && multiPlayerArray[5].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p6 points > house BUT < 22
-        else if (playerArray[6].Bust === false && playerArray[6].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[6].Bust === false && multiPlayerArray[6].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // p7 points > house BUT < 22
-        else if (playerArray[7].Bust === false && playerArray[7].Points > playerArray[0].Points) {
+        else if (multiPlayerArray[7].Bust === false && multiPlayerArray[7].Points > multiPlayerArray[0].Points) {
             console.log("house will hit");
             houseHit();
         }
         // player 1 tied && points < 17
-        else if (playerArray[1].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[1].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 2 tied && points < 17
-        else if (playerArray[2].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[2].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 3 tied && points < 17
-        else if (playerArray[3].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[3].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 4 tied && points < 17
-        else if (playerArray[4].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[4].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 5 tied && points < 17
-        else if (playerArray[5].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[5].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 6 tied && points < 17
-        else if (playerArray[6].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[6].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // player 7 tied && points < 17
-        else if (playerArray[7].Points === playerArray[0].Points && playerArray[0].Points < 17) {
+        else if (multiPlayerArray[7].Points === multiPlayerArray[0].Points && multiPlayerArray[0].Points < 17) {
             console.log("house will hit");
             houseHit();
         }
         // stand //
         else {
-            playerArray[0].Stand = true;
+            multiPlayerArray[0].Stand = true;
             console.log("we will run end round");
             endRound();
         }
@@ -1680,42 +1681,42 @@ function houseHit() {
             imgUrl: data.cards[0].image
         };
         // this variable = the players original cards
-        var originalHand = playerArray[0].Hand;
+        var originalHand = multiPlayerArray[0].Hand;
         // this pushes the new card into the array of cards
         originalHand.push(hitCard);
         // then, the image is created and appended to the hand div with the other cards //
 
         var houseHitCard = document.querySelector("#houseHand");
         var hitCardImg = document.createElement('img');
-        hitCardImg.className = ('hitCard' + playerArray[0].Name)
+        hitCardImg.className = ('hitCard' + multiPlayerArray[0].Name)
         hitCardImg.src = (hitCard.imgUrl)
         houseHitCard.appendChild(hitCardImg);
 
         // resets value of hand to zero //
         var handVal = 0;
         // resets players points //
-        playerArray[0].Points = 0;
-        for (var j = 0; j < (playerArray[0].Hand).length; j++) {
+        multiPlayerArray[0].Points = 0;
+        for (var j = 0; j < (multiPlayerArray[0].Hand).length; j++) {
             // sets values for face cards //
-            if (playerArray[0].Hand[j].value === "JACK" || playerArray[0].Hand[j].value === "QUEEN" || playerArray[0].Hand[j].value === "KING") {
-                playerArray[0].Hand[j].value = "10";
+            if (multiPlayerArray[0].Hand[j].value === "JACK" || multiPlayerArray[0].Hand[j].value === "QUEEN" || multiPlayerArray[0].Hand[j].value === "KING") {
+                multiPlayerArray[0].Hand[j].value = "10";
             }
             // sets value for ace depending on previous hand value //
-            else if (playerArray[0].Hand[j].value === "ACE" && handVal < 11) {
-                playerArray[0].Hand[j].value = "11";
-            } else if (playerArray[0].Hand[j].value === "ACE" && handVal > 10) {
-                playerArray[0].Hand[j].value = "1";
+            else if (multiPlayerArray[0].Hand[j].value === "ACE" && handVal < 11) {
+                multiPlayerArray[0].Hand[j].value = "11";
+            } else if (multiPlayerArray[0].Hand[j].value === "ACE" && handVal > 10) {
+                multiPlayerArray[0].Hand[j].value = "1";
             }
             // adds all cards in hand to create new value //
-            handVal += parseInt(playerArray[0].Hand[j].value);
+            handVal += parseInt(multiPlayerArray[0].Hand[j].value);
         }
         // sets the points equal to the new value //
-        playerArray[0].Points = handVal;
+        multiPlayerArray[0].Points = handVal;
         // resets handVal back to zero //
         handVal = 0;
         // clears points on html & recreates the elements to display the new points //
         var housePointsDiv = document.querySelector("#housePoints");
-        housePointsDiv.innerHTML = `Points: ${playerArray[0].Points} `;
+        housePointsDiv.innerHTML = `Points: ${multiPlayerArray[0].Points} `;
 
         //timeout function to give html time to append card and points before running bust function //
         setTimeout(function () {
@@ -1726,11 +1727,11 @@ function houseHit() {
 }
 
 function houseBust() {
-    if (playerArray[0].Points > 21) {
+    if (multiPlayerArray[0].Points > 21) {
         console.log("inside the bust function")
         // sets bst property to true //
-        playerArray[0].Bust = true;
-        playerArray[0].Stand = true;
+        multiPlayerArray[0].Bust = true;
+        multiPlayerArray[0].Stand = true;
         //sends user alert //
         // alert("the house busted");
         // calls function //
@@ -1738,7 +1739,7 @@ function houseBust() {
             endRound();
         }, 500);
     }
-    else if (playerArray[0].Points < 22) {
+    else if (multiPlayerArray[0].Points < 22) {
         houseLogic();
     }
     else {
@@ -1752,48 +1753,48 @@ function endRound() {
     console.log("======ending round========");
     alert(`round over`);
 
-    if (playerArray.length === 3) {
+    if (multiPlayerArray.length === 3) {
         // display all players points to user //
         alert(`end of round point values:
-        ${playerArray[0].Name} has ${playerArray[0].Points} points
-        ${playerArray[1].Name} has ${playerArray[1].Points} points
-        ${playerArray[2].Name} has ${playerArray[2].Points} points`)
+        ${multiPlayerArray[0].Name} has ${multiPlayerArray[0].Points} points
+        ${multiPlayerArray[1].Name} has ${multiPlayerArray[1].Points} points
+        ${multiPlayerArray[2].Name} has ${multiPlayerArray[2].Points} points`)
 
         // if all players bust -> no one wins
-        if (playerArray[0].Bust === true && playerArray[1].Bust === true && playerArray[2].Bust === true) {
+        if (multiPlayerArray[0].Bust === true && multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
             alert("talk about the odds... all players have busted")
         }
         // if no one busts 
-        else if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false) {
+        else if (multiPlayerArray[0].Bust === false && multiPlayerArray[1].Bust === false && multiPlayerArray[2].Bust === false) {
             // if they all tie
-            if (playerArray[0].Points === playerArray[1].Points && playerArray[1].Points === playerArray[2].Points) {
+            if (multiPlayerArray[0].Points === multiPlayerArray[1].Points && multiPlayerArray[1].Points === multiPlayerArray[2].Points) {
                 alert("talk about the odds... all players have tied");
             }
             // if h > p1 & h > p2 -> h wins
-            else if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
-                playerArray[0].Score = playerArray[0].Score + 1;
+            else if (multiPlayerArray[0].Points > multiPlayerArray[1].Points && multiPlayerArray[0].Points > multiPlayerArray[2].Points) {
+                multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
                 alert("House wins");
             }
             // if p1 > h & p1 > p2 -> p1 wins
-            else if (playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[2].Points) {
-                playerArray[1].Score = playerArray[1].Score + 1;
+            else if (multiPlayerArray[1].Points > multiPlayerArray[0].Points && multiPlayerArray[1].Points > multiPlayerArray[2].Points) {
+                multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
                 alert("Player1 wins");
             }
             // if p2 > h & p2 > p1 -> p2 wins
-            else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[1].Points) {
-                playerArray[2].Score = playerArray[2].Score + 1;
+            else if (multiPlayerArray[2].Points > multiPlayerArray[0].Points && multiPlayerArray[2].Points > multiPlayerArray[1].Points) {
+                multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
                 alert("Player2 wins");
             }
             // if h = p1 & > p2 -> h & p1 tie
-            else if (playerArray[0].Points === playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
+            else if (multiPlayerArray[0].Points === multiPlayerArray[1].Points && multiPlayerArray[0].Points > multiPlayerArray[2].Points) {
                 alert("House and Player1 tie, there is no winner");
             }
             // -> h & p2 tie
-            else if (playerArray[0].Points === playerArray[2].Points && playerArray[0].Points > playerArray[1].Points) {
+            else if (multiPlayerArray[0].Points === multiPlayerArray[2].Points && multiPlayerArray[0].Points > multiPlayerArray[1].Points) {
                 alert("House and Player2 tie, there is no winner");
             }
             // p1 & p2 tie
-            else if (playerArray[1].Points === playerArray[2].Points && playerArray[1].Points > playerArray[0].Points) {
+            else if (multiPlayerArray[1].Points === multiPlayerArray[2].Points && multiPlayerArray[1].Points > multiPlayerArray[0].Points) {
                 alert("Player1 and Player2 tie, there is no winner");
             }
             else {
@@ -1802,15 +1803,15 @@ function endRound() {
         }
         // if one player busts
         // if house busts
-        else if (playerArray[0].Bust === true) {
+        else if (multiPlayerArray[0].Bust === true) {
             // if p1 > p2 -> p1 wins
-            if (playerArray[1].Points > playerArray[2].Points) {
-                playerArray[1].Score = playerArray[1].Score + 1;
+            if (multiPlayerArray[1].Points > multiPlayerArray[2].Points) {
+                multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
                 alert("Player1 wins");
             }
             // if p1 < p2 -> p2 wins
-            else if (playerArray[1].Points < playerArray[2].Points) {
-                playerArray[2].Score = playerArray[2].Score + 1;
+            else if (multiPlayerArray[1].Points < multiPlayerArray[2].Points) {
+                multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
                 alert("Player2 wins");
             }
             else {
@@ -1818,15 +1819,15 @@ function endRound() {
             }
         }
         //if p1 busts
-        else if (playerArray[1].Bust === true) {
+        else if (multiPlayerArray[1].Bust === true) {
             // h wins
-            if (playerArray[0].Points > playerArray[2].Points) {
-                playerArray[0].Score = playerArray[0].Score + 1;
+            if (multiPlayerArray[0].Points > multiPlayerArray[2].Points) {
+                multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
                 alert("House wins");
             }
             // p2 wins
-            else if (playerArray[2].Points > playerArray[0].Points) {
-                playerArray[2].Score = playerArray[2].Score + 1;
+            else if (multiPlayerArray[2].Points > multiPlayerArray[0].Points) {
+                multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
                 alert("Player2 wins");
             }
             else {
@@ -1834,15 +1835,15 @@ function endRound() {
             }
         }
         //if p2 busts
-        else if (playerArray[2].Bust === true) {
+        else if (multiPlayerArray[2].Bust === true) {
             // house wins
-            if (playerArray[0].Points > playerArray[1].Points) {
-                playerArray[0].Score = playerArray[0].Score + 1;
+            if (multiPlayerArray[0].Points > multiPlayerArray[1].Points) {
+                multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
                 alert("House wins");
             }
             // p1 wins
-            else if (playerArray[0].Points < playerArray[1].Points) {
-                playerArray[1].Score = playerArray[1].Score + 1;
+            else if (multiPlayerArray[0].Points < multiPlayerArray[1].Points) {
+                multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
                 alert("Player1 wins");
             }
             else {
@@ -1851,18 +1852,18 @@ function endRound() {
         }
         // if two players bust 
         //if house and p1 bust -> p2 win
-        else if (playerArray[0].Bust === true && playerArray[1].Bust === true) {
-            playerArray[2].Score = playerArray[2].Score + 1;
+        else if (multiPlayerArray[0].Bust === true && multiPlayerArray[1].Bust === true) {
+            multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
             alert("Player2 wins");
         }
         // if house and p2 bust -> p1 win
-        else if (playerArray[0].Bust === true && playerArray[2].Bust === true) {
-            playerArray[1].Score = playerArray[1].Score + 1;
+        else if (multiPlayerArray[0].Bust === true && multiPlayerArray[2].Bust === true) {
+            multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
             alert("Player1 wins");
         }
         // if p1 and p2 bust -> house win
-        else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
-            playerArray[0].Score = playerArray[0].Score + 1;
+        else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
+            multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
             alert("House wins");
         }
         else {
@@ -1871,17 +1872,17 @@ function endRound() {
 
         // alert users of all current scores //
         alert(`end of round updated scores:
-        ${playerArray[0].Name}: ${playerArray[0].Score}
-        ${playerArray[1].Name}: ${playerArray[1].Score}
-        ${playerArray[2].Name}: ${playerArray[2].Score}`);
+        ${multiPlayerArray[0].Name}: ${multiPlayerArray[0].Score}
+        ${multiPlayerArray[1].Name}: ${multiPlayerArray[1].Score}
+        ${multiPlayerArray[2].Name}: ${multiPlayerArray[2].Score}`);
 
         // update scores on html //
         houseScore = document.getElementById("houseScore");
         scoreP1 = document.getElementById("scorePlayer1");
         scoreP2 = document.getElementById("scorePlayer2");
-        houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
-        scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
-        scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
+        houseScore.innerHTML = `Score: ${multiPlayerArray[0].Score} `;
+        scoreP1.innerHTML = `Score: ${multiPlayerArray[1].Score} `;
+        scoreP2.innerHTML = `Score: ${multiPlayerArray[2].Score} `;
 
         // hides all game buttons besides and changes the value to ask user if they want to play another game //
         var hitBtnP1 = document.getElementById("hitPlayer1");
@@ -1899,98 +1900,98 @@ function endRound() {
         restartBtnP2.value = 'play another round';
 
         // reset player values //
-        playerArray[0].Bust = false;
-        playerArray[1].Bust = false;
-        playerArray[2].Bust = false;
+        multiPlayerArray[0].Bust = false;
+        multiPlayerArray[1].Bust = false;
+        multiPlayerArray[2].Bust = false;
 
-        playerArray[0].Stand = false;
-        playerArray[1].Stand = false;
-        playerArray[2].Stand = false;
+        multiPlayerArray[0].Stand = false;
+        multiPlayerArray[1].Stand = false;
+        multiPlayerArray[2].Stand = false;
 
-        console.log(playerArray);
+        console.log(multiPlayerArray);
         console.log("=========================")
 
     }
-    else if (playerArray.length === 4) {
+    else if (multiPlayerArray.length === 4) {
             // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC // for 3 player
     // display all players points to user //
     alert(`end of round point values:
-    ${playerArray[0].Name} has ${playerArray[0].Points} points
-    ${playerArray[1].Name} has ${playerArray[1].Points} points
-    ${playerArray[2].Name} has ${playerArray[2].Points} points
-    ${playerArray[3].Name} has ${playerArray[3].Points} points`)
+    ${multiPlayerArray[0].Name} has ${multiPlayerArray[0].Points} points
+    ${multiPlayerArray[1].Name} has ${multiPlayerArray[1].Points} points
+    ${multiPlayerArray[2].Name} has ${multiPlayerArray[2].Points} points
+    ${multiPlayerArray[3].Name} has ${multiPlayerArray[3].Points} points`)
 
     // if all players bust -> no one wins
-    if (playerArray[0].Bust === true && playerArray[1].Bust === true && playerArray[2].Bust === true) {
+    if (multiPlayerArray[0].Bust === true && multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
         alert("talk about the odds... all players have busted")
     }
     // if no one busts 
-    else if (playerArray[0].Bust === false && playerArray[1].Bust === false && playerArray[2].Bust === false && playerArray[3].Bust === false) {
+    else if (multiPlayerArray[0].Bust === false && multiPlayerArray[1].Bust === false && multiPlayerArray[2].Bust === false && multiPlayerArray[3].Bust === false) {
         // if they all tie
-        if (playerArray[0].Points === playerArray[1].Points && playerArray[1].Points === playerArray[2].Points && playerArray[2].Points === playerArray[3].Points) {
+        if (multiPlayerArray[0].Points === multiPlayerArray[1].Points && multiPlayerArray[1].Points === multiPlayerArray[2].Points && multiPlayerArray[2].Points === multiPlayerArray[3].Points) {
             alert("talk about the odds... all players have tied");
         }
         //winners based off everyone else being less than:
         // h wins
-        else if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points && playerArray[0].Points > playerArray[3].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
+        else if (multiPlayerArray[0].Points > multiPlayerArray[1].Points && multiPlayerArray[0].Points > multiPlayerArray[2].Points && multiPlayerArray[0].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
             alert("House wins");
         }
         // p1 wins
-        else if (playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[2].Points && playerArray[1].Points > playerArray[3].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
+        else if (multiPlayerArray[1].Points > multiPlayerArray[0].Points && multiPlayerArray[1].Points > multiPlayerArray[2].Points && multiPlayerArray[1].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
             alert("Player1 wins");
         }
          // p2 wins
-        else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[1].Points && playerArray[2].Points > playerArray[3].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
+        else if (multiPlayerArray[2].Points > multiPlayerArray[0].Points && multiPlayerArray[2].Points > multiPlayerArray[1].Points && multiPlayerArray[2].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
             alert("Player2 wins");
         }
          // p3 wins
-        else if (playerArray[3].Points > playerArray[0].Points && playerArray[3].Points > playerArray[1].Points && playerArray[3].Points > playerArray[2].Points) {
-            playerArray[3].Score = playerArray[3].Score + 1;
+        else if (multiPlayerArray[3].Points > multiPlayerArray[0].Points && multiPlayerArray[3].Points > multiPlayerArray[1].Points && multiPlayerArray[3].Points > multiPlayerArray[2].Points) {
+            multiPlayerArray[3].Score = multiPlayerArray[3].Score + 1;
             alert("Player3 wins");
         }
         // if 3 players tie & there is no winner //
         // h p1 p2 *
-        else if ( playerArray[0].Points === playerArray[1] && playerArray[1] === playerArray[2] && playerArray[2] > playerArray[3]) {
+        else if ( multiPlayerArray[0].Points === multiPlayerArray[1] && multiPlayerArray[1] === multiPlayerArray[2] && multiPlayerArray[2] > multiPlayerArray[3]) {
             alert("House, Player1, and Player2 tie, there is no winner");
         }
         // h p1 p3 *
-        else if ( playerArray[0].Points === playerArray[1] && playerArray[1] === playerArray[3] && playerArray[3] > playerArray[2]) {
+        else if ( multiPlayerArray[0].Points === multiPlayerArray[1] && multiPlayerArray[1] === multiPlayerArray[3] && multiPlayerArray[3] > multiPlayerArray[2]) {
             alert("House, Player1, and Player3 tie, there is no winner");
         }
         // p1 p2 p3 *
-        else if ( playerArray[1].Points === playerArray[2] && playerArray[2] === playerArray[3] && playerArray[3] > playerArray[0]) {
+        else if ( multiPlayerArray[1].Points === multiPlayerArray[2] && multiPlayerArray[2] === multiPlayerArray[3] && multiPlayerArray[3] > multiPlayerArray[0]) {
             alert("Player1, Player2, and Player3 tie, there is no winner");
         }
         // h p2 p3 *
-        else if ( playerArray[0].Points === playerArray[2] && playerArray[2] === playerArray[3] && playerArray[3] > playerArray[1]) {
+        else if ( multiPlayerArray[0].Points === multiPlayerArray[2] && multiPlayerArray[2] === multiPlayerArray[3] && multiPlayerArray[3] > multiPlayerArray[1]) {
             alert("House, Player2, and Player3 tie, there is no winner");
         }
         // if 2 players tie
         // h & p1 tie
-        else if (playerArray[0].Points === playerArray[1].Points && playerArray[0].Points > playerArray[2].Points && playerArray[0].Points > playerArray[3].Points) {
+        else if (multiPlayerArray[0].Points === multiPlayerArray[1].Points && multiPlayerArray[0].Points > multiPlayerArray[2].Points && multiPlayerArray[0].Points > multiPlayerArray[3].Points) {
             alert("House and Player1 tie, there is no winner");
         }
         // h & p2 tie
-        else if (playerArray[0].Points === playerArray[2].Points && playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[3].Points) {
+        else if (multiPlayerArray[0].Points === multiPlayerArray[2].Points && multiPlayerArray[0].Points > multiPlayerArray[1].Points && multiPlayerArray[0].Points > multiPlayerArray[3].Points) {
             alert("House and Player2 tie, there is no winner");
         }
         // p1 & p2 tie
-        else if (playerArray[1].Points === playerArray[2].Points && playerArray[1].Points > playerArray[0].Points && playerArray[1].Points > playerArray[3].Points) {
+        else if (multiPlayerArray[1].Points === multiPlayerArray[2].Points && multiPlayerArray[1].Points > multiPlayerArray[0].Points && multiPlayerArray[1].Points > multiPlayerArray[3].Points) {
             alert("Player1 and Player2 tie, there is no winner");
         }
         // h & p3 tie *
-        else if (playerArray[0].Points === playerArray[3].Points && playerArray[3].Points > playerArray[1].Points && playerArray[3].Points > playerArray[2].Points) {
+        else if (multiPlayerArray[0].Points === multiPlayerArray[3].Points && multiPlayerArray[3].Points > multiPlayerArray[1].Points && multiPlayerArray[3].Points > multiPlayerArray[2].Points) {
             alert("House and Player3 tie, there is no winner");
         }
         //p1 & p3 tie *
-        else if (playerArray[1].Points === playerArray[3].Points && playerArray[3].Points > playerArray[0].Points && playerArray[3].Points > playerArray[2].Points) {
+        else if (multiPlayerArray[1].Points === multiPlayerArray[3].Points && multiPlayerArray[3].Points > multiPlayerArray[0].Points && multiPlayerArray[3].Points > multiPlayerArray[2].Points) {
             alert("Player1 and Player3 tie, there is no winner");
         }
         // p2 and p3 tie *
-        else if (playerArray[2].Points === playerArray[3].Points && playerArray[3].Points > playerArray[0].Points && playerArray[3].Points > playerArray[1].Points) {
+        else if (multiPlayerArray[2].Points === multiPlayerArray[3].Points && multiPlayerArray[3].Points > multiPlayerArray[0].Points && multiPlayerArray[3].Points > multiPlayerArray[1].Points) {
             alert("Player2 and Player3 tie, there is no winner");
         }
         else {
@@ -1999,20 +2000,20 @@ function endRound() {
     }
     // if one player busts
     // if house busts
-    else if (playerArray[0].Bust === true) {
+    else if (multiPlayerArray[0].Bust === true) {
         //  p1 wins
-        if (playerArray[1].Points > playerArray[2].Points && playerArray[1].Points > playerArray[3].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
+        if (multiPlayerArray[1].Points > multiPlayerArray[2].Points && multiPlayerArray[1].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
             alert("Player1 wins");
         }
         // p2 wins
-        else if (playerArray[1].Points < playerArray[2].Points && playerArray[3].Points < playerArray[2].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
+        else if (multiPlayerArray[1].Points < multiPlayerArray[2].Points && multiPlayerArray[3].Points < multiPlayerArray[2].Points) {
+            multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
             alert("Player2 wins");
         }
         // p3 wins
-        else if (playerArray[1].Points < playerArray[3].Points && playerArray[2].Points < playerArray[3].Points) {
-            playerArray[3].Score = playerArray[3].Score + 1;
+        else if (multiPlayerArray[1].Points < multiPlayerArray[3].Points && multiPlayerArray[2].Points < multiPlayerArray[3].Points) {
+            multiPlayerArray[3].Score = multiPlayerArray[3].Score + 1;
             alert("Player3 wins");
         }
         else {
@@ -2020,20 +2021,20 @@ function endRound() {
         }
     }
     //if p1 busts
-    else if (playerArray[1].Bust === true) {
+    else if (multiPlayerArray[1].Bust === true) {
         // h wins
-        if (playerArray[0].Points > playerArray[2].Points && playerArray[0].Points > playerArray[3].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
+        if (multiPlayerArray[0].Points > multiPlayerArray[2].Points && multiPlayerArray[0].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
             alert("House wins");
         }
         // p2 wins
-        else if (playerArray[2].Points > playerArray[0].Points && playerArray[2].Points > playerArray[3].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
+        else if (multiPlayerArray[2].Points > multiPlayerArray[0].Points && multiPlayerArray[2].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
             alert("Player2 wins");
         }
         // p3 wins
-        else if (playerArray[3].Points > playerArray[0].Points && playerArray[3].Points > playerArray[2].Points) {
-            playerArray[3].Score = playerArray[3].Score + 1;
+        else if (multiPlayerArray[3].Points > multiPlayerArray[0].Points && multiPlayerArray[3].Points > multiPlayerArray[2].Points) {
+            multiPlayerArray[3].Score = multiPlayerArray[3].Score + 1;
             alert("Player3 wins");
         }
         else {
@@ -2041,20 +2042,20 @@ function endRound() {
         }
     }
     //if p2 busts
-    else if (playerArray[2].Bust === true) {
+    else if (multiPlayerArray[2].Bust === true) {
         // house wins
-        if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[3].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
+        if (multiPlayerArray[0].Points > multiPlayerArray[1].Points && multiPlayerArray[0].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
             alert("House wins");
         }
         // p1 wins
-        else if (playerArray[0].Points < playerArray[1].Points && playerArray[1].Points > playerArray[3].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
+        else if (multiPlayerArray[0].Points < multiPlayerArray[1].Points && multiPlayerArray[1].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
             alert("Player1 wins");
         }
         // p3 wins
-        else if (playerArray[0].Points < playerArray[3].Points && playerArray[3].Points > playerArray[1].Points) {
-            playerArray[3].Score = playerArray[3].Score + 1;
+        else if (multiPlayerArray[0].Points < multiPlayerArray[3].Points && multiPlayerArray[3].Points > multiPlayerArray[1].Points) {
+            multiPlayerArray[3].Score = multiPlayerArray[3].Score + 1;
             alert("Player3 wins");
         }
         else {
@@ -2062,20 +2063,20 @@ function endRound() {
         }
     }
     //if p3 busts
-    else if (playerArray[3].Bust === true) {
+    else if (multiPlayerArray[3].Bust === true) {
         // house wins
-        if (playerArray[0].Points > playerArray[1].Points && playerArray[0].Points > playerArray[2].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
+        if (multiPlayerArray[0].Points > multiPlayerArray[1].Points && multiPlayerArray[0].Points > multiPlayerArray[2].Points) {
+            multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
             alert("House wins");
         }
         // p1 wins
-        else if (playerArray[0].Points < playerArray[1].Points && playerArray[1].Points > playerArray[2].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
+        else if (multiPlayerArray[0].Points < multiPlayerArray[1].Points && multiPlayerArray[1].Points > multiPlayerArray[2].Points) {
+            multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
             alert("Player1 wins");
         }
         // p2 wins
-        else if (playerArray[0].Points < playerArray[2].Points && playerArray[2].Points > playerArray[1].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
+        else if (multiPlayerArray[0].Points < multiPlayerArray[2].Points && multiPlayerArray[2].Points > multiPlayerArray[1].Points) {
+            multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
             alert("Player2 wins");
         }
         else {
@@ -2085,15 +2086,15 @@ function endRound() {
 
     // if two players bust 
     //if house and p1 bust -> p2 win
-    else if (playerArray[0].Bust === true && playerArray[1].Bust === true) {
+    else if (multiPlayerArray[0].Bust === true && multiPlayerArray[1].Bust === true) {
         // p2 wins
-        if (playerArray[2].Points > playerArray[3].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
+        if (multiPlayerArray[2].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
         alert("Player2 wins");
         }
         // p3 wins
-        else if (playerArray[3].Points > playerArray[2].Points) {
-            playerArray[3].Score = playerArray[3].Score + 1;
+        else if (multiPlayerArray[3].Points > multiPlayerArray[2].Points) {
+            multiPlayerArray[3].Score = multiPlayerArray[3].Score + 1;
             alert("Player3 wins");
         }
         else {
@@ -2101,15 +2102,15 @@ function endRound() {
         }
     }
     // if house and p2 bust 
-    else if (playerArray[0].Bust === true && playerArray[2].Bust === true) {
+    else if (multiPlayerArray[0].Bust === true && multiPlayerArray[2].Bust === true) {
         // p1 wins
-        if (playerArray[1].Points > playerArray[3].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
+        if (multiPlayerArray[1].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
         alert("Player1 wins");
         }
         // p3 wins
-        else if (playerArray[3].Points > playerArray[1].Points) {
-            playerArray[3].Score = playerArray[3].Score + 1;
+        else if (multiPlayerArray[3].Points > multiPlayerArray[1].Points) {
+            multiPlayerArray[3].Score = multiPlayerArray[3].Score + 1;
             alert("Player3 wins");
         }
         else {
@@ -2117,15 +2118,15 @@ function endRound() {
         }
     }
     // if p1 and p2 bust -> house win
-    else if (playerArray[1].Bust === true && playerArray[2].Bust === true) {
+    else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
         // house wins
-        if (playerArray[0].Points > playerArray[3].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
+        if (multiPlayerArray[0].Points > multiPlayerArray[3].Points) {
+            multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
         alert("House wins");
         }
         // p3 wins
-        else if (playerArray[3].Points > playerArray[0].Points) {
-            playerArray[3].Score = playerArray[3].Score + 1;
+        else if (multiPlayerArray[3].Points > multiPlayerArray[0].Points) {
+            multiPlayerArray[3].Score = multiPlayerArray[3].Score + 1;
             alert("Player3 wins");
         }
         else {
@@ -2133,15 +2134,15 @@ function endRound() {
         }
     }
     // if p3 & house bust*
-    else if (playerArray[3].Bust === true && playerArray[0].Bust === true) {
+    else if (multiPlayerArray[3].Bust === true && multiPlayerArray[0].Bust === true) {
         // p1 wins
-        if (playerArray[1].Points > playerArray[2].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
+        if (multiPlayerArray[1].Points > multiPlayerArray[2].Points) {
+            multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
         alert("Player1 wins");
         }
         // p2 wins
-        else if (playerArray[2].Points > playerArray[1].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
+        else if (multiPlayerArray[2].Points > multiPlayerArray[1].Points) {
+            multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
             alert("Player2 wins");
         }
         else {
@@ -2149,15 +2150,15 @@ function endRound() {
         }
     }
     // if p3 & p1 bust *
-    else if (playerArray[3].Bust === true && playerArray[1].Bust === true) {
+    else if (multiPlayerArray[3].Bust === true && multiPlayerArray[1].Bust === true) {
         // h wins
-        if (playerArray[0].Points > playerArray[2].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
+        if (multiPlayerArray[0].Points > multiPlayerArray[2].Points) {
+            multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
         alert("House wins");
         }
         // p2 wins
-        else if (playerArray[2].Points > playerArray[0].Points) {
-            playerArray[2].Score = playerArray[2].Score + 1;
+        else if (multiPlayerArray[2].Points > multiPlayerArray[0].Points) {
+            multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
             alert("Player2 wins");
         }
         else {
@@ -2165,15 +2166,15 @@ function endRound() {
         }
     }
     // if p3 & p2 bust *
-    else if (playerArray[3].Bust === true && playerArray[2].Bust === true) {
+    else if (multiPlayerArray[3].Bust === true && multiPlayerArray[2].Bust === true) {
         // h wins
-        if (playerArray[0].Points > playerArray[1].Points) {
-            playerArray[0].Score = playerArray[0].Score + 1;
+        if (multiPlayerArray[0].Points > multiPlayerArray[1].Points) {
+            multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
         alert("House wins");
         }
         // p1 wins
-        else if (playerArray[1].Points > playerArray[0].Points) {
-            playerArray[1].Score = playerArray[1].Score + 1;
+        else if (multiPlayerArray[1].Points > multiPlayerArray[0].Points) {
+            multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
             alert("Player1 wins");
         }
         else {
@@ -2182,23 +2183,23 @@ function endRound() {
     }
     // if three players bust 
     // if h, p1, p2 bust 
-    else if (playerArray[0].Bust === true && playerArray[1].Bust === true && playerArray[2].Bust === true) {
-        playerArray[3].Score = playerArray[3].Score + 1;
+    else if (multiPlayerArray[0].Bust === true && multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true) {
+        multiPlayerArray[3].Score = multiPlayerArray[3].Score + 1;
         alert("Player3 wins");
     }
     // if h, p1, p3 bust 
-    else if (playerArray[0].Bust === true && playerArray[1].Bust === true && playerArray[3].Bust === true) {
-        playerArray[2].Score = playerArray[2].Score + 1;
+    else if (multiPlayerArray[0].Bust === true && multiPlayerArray[1].Bust === true && multiPlayerArray[3].Bust === true) {
+        multiPlayerArray[2].Score = multiPlayerArray[2].Score + 1;
         alert("Player2 wins");
     }
     // if h, p2, p3 bust 
-    else if (playerArray[0].Bust === true && playerArray[2].Bust === true && playerArray[3].Bust === true) {
-        playerArray[1].Score = playerArray[1].Score + 1;
+    else if (multiPlayerArray[0].Bust === true && multiPlayerArray[2].Bust === true && multiPlayerArray[3].Bust === true) {
+        multiPlayerArray[1].Score = multiPlayerArray[1].Score + 1;
         alert("Player1 wins");
     }
     // if p1, p2, p3 bust 
-    else if (playerArray[1].Bust === true && playerArray[2].Bust === true && playerArray[3].Bust === true) {
-        playerArray[0].Score = playerArray[0].Score + 1;
+    else if (multiPlayerArray[1].Bust === true && multiPlayerArray[2].Bust === true && multiPlayerArray[3].Bust === true) {
+        multiPlayerArray[0].Score = multiPlayerArray[0].Score + 1;
         alert("Player0 wins");
     }
     else {
@@ -2207,10 +2208,10 @@ function endRound() {
 
     // alert users of all current scores //
     alert(`end of round updated scores:
-    ${playerArray[0].Name}: ${playerArray[0].Score}
-    ${playerArray[1].Name}: ${playerArray[1].Score}
-    ${playerArray[2].Name}: ${playerArray[2].Score}
-    ${playerArray[3].Name}: ${playerArray[3].Score}`);
+    ${multiPlayerArray[0].Name}: ${multiPlayerArray[0].Score}
+    ${multiPlayerArray[1].Name}: ${multiPlayerArray[1].Score}
+    ${multiPlayerArray[2].Name}: ${multiPlayerArray[2].Score}
+    ${multiPlayerArray[3].Name}: ${multiPlayerArray[3].Score}`);
 
     // update scores on html //
     houseScore = document.getElementById("houseScore");
@@ -2218,10 +2219,10 @@ function endRound() {
     scoreP2 = document.getElementById("scorePlayer2");
     scoreP3 = document.getElementById("scorePlayer3");
     
-    houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
-    scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
-    scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
-    scoreP3.innerHTML = `Score: ${playerArray[3].Score} `;
+    houseScore.innerHTML = `Score: ${multiPlayerArray[0].Score} `;
+    scoreP1.innerHTML = `Score: ${multiPlayerArray[1].Score} `;
+    scoreP2.innerHTML = `Score: ${multiPlayerArray[2].Score} `;
+    scoreP3.innerHTML = `Score: ${multiPlayerArray[3].Score} `;
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
     var hitBtnP1 = document.getElementById("hitPlayer1");
@@ -2246,34 +2247,34 @@ function endRound() {
     restartBtnP3.value = 'play another round';
 
     // reset player values //
-    playerArray[0].Bust = false;
-    playerArray[1].Bust = false;
-    playerArray[2].Bust = false;
-    playerArray[3].Bust = false;
+    multiPlayerArray[0].Bust = false;
+    multiPlayerArray[1].Bust = false;
+    multiPlayerArray[2].Bust = false;
+    multiPlayerArray[3].Bust = false;
 
-    playerArray[0].Stand = false;
-    playerArray[1].Stand = false;
-    playerArray[2].Stand = false;
-    playerArray[3].Stand = false;
+    multiPlayerArray[0].Stand = false;
+    multiPlayerArray[1].Stand = false;
+    multiPlayerArray[2].Stand = false;
+    multiPlayerArray[3].Stand = false;
 
-    console.log(playerArray);
+    console.log(multiPlayerArray);
     console.log("=========================")
     // dont forget to uncomment the end round functions
 
     }
-    else if (playerArray.length === 5) {
+    else if (multiPlayerArray.length === 5) {
 
 
     }
-    else if (playerArray.length === 6) {
+    else if (multiPlayerArray.length === 6) {
 
 
     }
-    else if (playerArray.length === 7) {
+    else if (multiPlayerArray.length === 7) {
 
 
     }
-    else if (playerArray.length === 8) {
+    else if (multiPlayerArray.length === 8) {
 
 
     }
@@ -2287,11 +2288,11 @@ function endRound() {
 //     // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC // for 4 players
 //     // display all players points to user //
 //     alert(`end of round point values:
-//     ${playerArray[0].Name} has ${playerArray[0].Points} points
-//     ${playerArray[1].Name} has ${playerArray[1].Points} points
-//     ${playerArray[2].Name} has ${playerArray[2].Points} points
-//     ${playerArray[3].Name} has ${playerArray[3].Points} points
-//     ${playerArray[4].Name} has ${playerArray[4].Points} points`)
+//     ${multiPlayerArray[0].Name} has ${multiPlayerArray[0].Points} points
+//     ${multiPlayerArray[1].Name} has ${multiPlayerArray[1].Points} points
+//     ${multiPlayerArray[2].Name} has ${multiPlayerArray[2].Points} points
+//     ${multiPlayerArray[3].Name} has ${multiPlayerArray[3].Points} points
+//     ${multiPlayerArray[4].Name} has ${multiPlayerArray[4].Points} points`)
 
 //         // if all players bust -> no one wins
 //     // if no one busts 
@@ -2444,11 +2445,11 @@ function endRound() {
 
 //     // alert users of all current scores //
 //     alert(`end of round updated scores:
-//     ${playerArray[0].Name}: ${playerArray[0].Score}
-//     ${playerArray[1].Name}: ${playerArray[1].Score}
-//     ${playerArray[2].Name}: ${playerArray[2].Score}
-//     ${playerArray[3].Name}: ${playerArray[3].Score}
-//     ${playerArray[4].Name}: ${playerArray[4].Score}`);
+//     ${multiPlayerArray[0].Name}: ${multiPlayerArray[0].Score}
+//     ${multiPlayerArray[1].Name}: ${multiPlayerArray[1].Score}
+//     ${multiPlayerArray[2].Name}: ${multiPlayerArray[2].Score}
+//     ${multiPlayerArray[3].Name}: ${multiPlayerArray[3].Score}
+//     ${multiPlayerArray[4].Name}: ${multiPlayerArray[4].Score}`);
 
 //     // update scores on html //
 //     houseScore = document.getElementById("houseScore");
@@ -2457,11 +2458,11 @@ function endRound() {
 //     scoreP3 = document.getElementById("scorePlayer3");
 //     scoreP4 = document.getElementById("scorePlayer4");
     
-//     houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
-//     scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
-//     scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
-//     scoreP3.innerHTML = `Score: ${playerArray[3].Score} `;
-//     scoreP4.innerHTML = `Score: ${playerArray[4].Score} `;
+//     houseScore.innerHTML = `Score: ${multiPlayerArray[0].Score} `;
+//     scoreP1.innerHTML = `Score: ${multiPlayerArray[1].Score} `;
+//     scoreP2.innerHTML = `Score: ${multiPlayerArray[2].Score} `;
+//     scoreP3.innerHTML = `Score: ${multiPlayerArray[3].Score} `;
+//     scoreP4.innerHTML = `Score: ${multiPlayerArray[4].Score} `;
 
 //     // hides all game buttons besides and changes the value to ask user if they want to play another game //
 //     var hitBtnP1 = document.getElementById("hitPlayer1");
@@ -2493,30 +2494,30 @@ function endRound() {
 //     restartBtnP4.value = 'play another round';
 
 //     // reset player values //
-//     playerArray[0].Bust = false;
-//     playerArray[1].Bust = false;
-//     playerArray[2].Bust = false;
-//     playerArray[3].Bust = false;
-//     playerArray[4].Bust = false;
+//     multiPlayerArray[0].Bust = false;
+//     multiPlayerArray[1].Bust = false;
+//     multiPlayerArray[2].Bust = false;
+//     multiPlayerArray[3].Bust = false;
+//     multiPlayerArray[4].Bust = false;
 
-//     playerArray[0].Stand = false;
-//     playerArray[1].Stand = false;
-//     playerArray[2].Stand = false;
-//     playerArray[3].Stand = false;
-//     playerArray[4].Stand = false;
+//     multiPlayerArray[0].Stand = false;
+//     multiPlayerArray[1].Stand = false;
+//     multiPlayerArray[2].Stand = false;
+//     multiPlayerArray[3].Stand = false;
+//     multiPlayerArray[4].Stand = false;
 
-//     console.log(playerArray);
+//     console.log(multiPlayerArray);
 //     console.log("=========================")
 
 //     // USE THE FOLLOWING CODE AS A SKELETON TO BUILD EACH END ROUND LOGIC // for 5 players
 //     // display all players points to user //
 //     alert(`end of round point values:
-//     ${playerArray[0].Name} has ${playerArray[0].Points} points
-//     ${playerArray[1].Name} has ${playerArray[1].Points} points
-//     ${playerArray[2].Name} has ${playerArray[2].Points} points
-//     ${playerArray[3].Name} has ${playerArray[3].Points} points
-//     ${playerArray[4].Name} has ${playerArray[4].Points} points
-//     ${playerArray[5].Name} has ${playerArray[5].Points} points`)
+//     ${multiPlayerArray[0].Name} has ${multiPlayerArray[0].Points} points
+//     ${multiPlayerArray[1].Name} has ${multiPlayerArray[1].Points} points
+//     ${multiPlayerArray[2].Name} has ${multiPlayerArray[2].Points} points
+//     ${multiPlayerArray[3].Name} has ${multiPlayerArray[3].Points} points
+//     ${multiPlayerArray[4].Name} has ${multiPlayerArray[4].Points} points
+//     ${multiPlayerArray[5].Name} has ${multiPlayerArray[5].Points} points`)
 
 // // 5 player function //
 //     // if all players bust -> no one wins
@@ -2835,12 +2836,12 @@ function endRound() {
 
 //     // alert users of all current scores //
 //     alert(`end of round updated scores:
-//     ${playerArray[0].Name}: ${playerArray[0].Score}
-//     ${playerArray[1].Name}: ${playerArray[1].Score}
-//     ${playerArray[2].Name}: ${playerArray[2].Score}
-//     ${playerArray[3].Name}: ${playerArray[3].Score}
-//     ${playerArray[4].Name}: ${playerArray[4].Score}
-//     ${playerArray[5].Name}: ${playerArray[5].Score}`);
+//     ${multiPlayerArray[0].Name}: ${multiPlayerArray[0].Score}
+//     ${multiPlayerArray[1].Name}: ${multiPlayerArray[1].Score}
+//     ${multiPlayerArray[2].Name}: ${multiPlayerArray[2].Score}
+//     ${multiPlayerArray[3].Name}: ${multiPlayerArray[3].Score}
+//     ${multiPlayerArray[4].Name}: ${multiPlayerArray[4].Score}
+//     ${multiPlayerArray[5].Name}: ${multiPlayerArray[5].Score}`);
 
 //     // update scores on html //
 //     houseScore = document.getElementById("houseScore");
@@ -2850,12 +2851,12 @@ function endRound() {
 //     scoreP4 = document.getElementById("scorePlayer4");
 //     scoreP5 = document.getElementById("scorePlayer5");
     
-//     houseScore.innerHTML = `Score: ${playerArray[0].Score} `;
-//     scoreP1.innerHTML = `Score: ${playerArray[1].Score} `;
-//     scoreP2.innerHTML = `Score: ${playerArray[2].Score} `;
-//     scoreP3.innerHTML = `Score: ${playerArray[3].Score} `;
-//     scoreP4.innerHTML = `Score: ${playerArray[4].Score} `;
-//     scoreP5.innerHTML = `Score: ${playerArray[5].Score} `;
+//     houseScore.innerHTML = `Score: ${multiPlayerArray[0].Score} `;
+//     scoreP1.innerHTML = `Score: ${multiPlayerArray[1].Score} `;
+//     scoreP2.innerHTML = `Score: ${multiPlayerArray[2].Score} `;
+//     scoreP3.innerHTML = `Score: ${multiPlayerArray[3].Score} `;
+//     scoreP4.innerHTML = `Score: ${multiPlayerArray[4].Score} `;
+//     scoreP5.innerHTML = `Score: ${multiPlayerArray[5].Score} `;
 
 //     // hides all game buttons besides and changes the value to ask user if they want to play another game //
 //     var hitBtnP1 = document.getElementById("hitPlayer1");
@@ -2894,19 +2895,19 @@ function endRound() {
 //     restartBtnP5.value = 'play another round';
 
 //     // reset player values //
-//     playerArray[0].Bust = false;
-//     playerArray[1].Bust = false;
-//     playerArray[2].Bust = false;
-//     playerArray[3].Bust = false;
-//     playerArray[4].Bust = false;
-//     playerArray[5].Bust = false;
+//     multiPlayerArray[0].Bust = false;
+//     multiPlayerArray[1].Bust = false;
+//     multiPlayerArray[2].Bust = false;
+//     multiPlayerArray[3].Bust = false;
+//     multiPlayerArray[4].Bust = false;
+//     multiPlayerArray[5].Bust = false;
 
-//     playerArray[0].Stand = false;
-//     playerArray[1].Stand = false;
-//     playerArray[2].Stand = false;
-//     playerArray[3].Stand = false;
-//     playerArray[4].Stand = false;
-//     playerArray[5].Stand = false;
+//     multiPlayerArray[0].Stand = false;
+//     multiPlayerArray[1].Stand = false;
+//     multiPlayerArray[2].Stand = false;
+//     multiPlayerArray[3].Stand = false;
+//     multiPlayerArray[4].Stand = false;
+//     multiPlayerArray[5].Stand = false;
 
-//     console.log(playerArray);
+//     console.log(multiPlayerArray);
 //     console.log("=========================")
