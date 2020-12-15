@@ -221,7 +221,7 @@ $(document).ready(function() {
         }
         console.log("Sending photo");
         //unhide element and set the source to the new image
-        myPhoto.style="display: block;"
+        myPhoto.style="display: block;";
         myPhoto.src = picture.photo;
         //store the photo in the db so others can access it
         $.post("/api/photo/", picture);
@@ -280,6 +280,7 @@ $(document).ready(function() {
                 //and post it to the db
                 console.log("Sending photo");
                 myPhoto.src = sendPic.photo;
+                myPhoto.style="display: block;";
                 $.post("/api/photo/", sendPic);
 
                 //Then get the opponent's most most recent photo
