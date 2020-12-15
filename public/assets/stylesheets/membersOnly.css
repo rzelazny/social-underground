@@ -5,5 +5,22 @@ body {
 
 .jumbotron {
     background-image: url(../images/felt.png);
+}
 
+.card-body {
+    background-image: url(../images/dicebackground.jpg);
+    background-size: cover;
+}
+
+#bio {
+    
+}
+
+h4,
+h6 {
+    font-size: 20px;
+    list-style-type: none;
+    color: white;
+    -webkit-text-stroke-width: .7px;
+    -webkit-text-stroke-color: red;
 }
