@@ -1,14 +1,16 @@
 $(document).ready(function() {
 
     //variables
-    var hitButton = document.getElementById("hitButton");
-    var stayButton = document.getElementById("stayButton");
-    var newRound = document.getElementById("newRound");
-
+    var rpsOpponent = document.getElementById("select-RPS-opponent")
+    let myPhoto = document.getElementById("my-photo");
+    let theirPhoto = document.getElementById("their-photo");
     //get the current casino table
     var curTable = document.defaultView.location.pathname.split("casino").pop();
     let email = "";
     let curSeat = "";
+    let maxUsers = 5;
+    let oppEmail = "";
+    let chatCheck = "";
     //Elements and vars for chat log
     var chatScroll = $("#chat-log");
     var chatInput = $("#chat-input");
@@ -52,7 +54,7 @@ $(document).ready(function() {
         $.get("/api/chat" + curTable, function(chatLog){
             //chat length is used to check for new messages being posted
             chatLength = chatLog.length;
-            for(i=0; i < chatLength; i++) {
+            for(let i=0; i < chatLength; i++) {
                 var chatLine = $("<li>")
                 //chatLine.attr("list-style", "none");
                 chatLine.text(chatLog[i].user + ": " + chatLog[i].message);
@@ -65,7 +67,7 @@ $(document).ready(function() {
     
     //Function checks the chat log db for changes every 3s and refreshes the page if someone has posted a message to the chat log
     function chatTimer() {
-        setInterval(function() {
+        chatCheck = setInterval(function() {
             $.get("/api/chat" + curTable, function(chatLog){
                 if(chatLog.length > chatLength){
                     location.reload();
@@ -82,10 +84,17 @@ $(document).ready(function() {
             table: curTable
         }
         $.post("/api/chat/", newMessage);
-        location.reload();
+
+        //if we're leaving chat turn off the timer, otherwise refresh the page so the new message is displayed
+        if(msg != " has left chat."){
+            location.reload();
+        }else{
+            clearInterval(chatCheck);
+        }
+        
     }
 
-    //Function finds out what game is set at the table and adjusts what containers are visible
+    //Function finds out what game is set at the table and adjusts what elements are visible
     function getGame(){
         $.get("/api/table" + curTable).then( function(table){
             var tableGame = JSON.stringify(table[0].game).replace(/"/g, '');
@@ -93,47 +102,73 @@ $(document).ready(function() {
             console.log("gonna try: ", tableGame.replace(/"/g, ''));
             switch(tableGame){
                 case "Just Chatting":
-                    $("#containerBlackJack").css("display", "none");
+                    console.log("Just chatting setup")
+                    $("#cont-blackjack").css("display", "none");
                 break;
-                case "Black Jack":
+                case "Blackjack":
+                    console.log("Blackjack single setup");
                     $("#gameChoice").css("display", "none");
+                    $("#cont-blackjack-single").css("display", "block");
+                    // $("#start").css("display", "block");
+                break;
+                case "Blackjack Multiplayer":
+                    console.log("Blackjack multi setup");
+                    $("#gameChoice").css("display", "none");
+                    $("#cont-blackjack-multi").css("display", "block");
+                    // $("#start").css("display", "block");
+                break;
+                case "Rock Paper Scissors":
+                    console.log("RPS setup");
+                    $("#gameChoice").css("display", "none");
+                    $("#containerRPS").css("display", "block");
+
+                    //get the opponent list from the users at the table
+                    $.get("/api/table" + curTable).then(function(tableData){
+                        rpsOpponent[0].innerHTML = tableData[0].user1
+                        rpsOpponent[1].innerHTML = tableData[0].user2
+                        rpsOpponent[2].innerHTML = tableData[0].user3
+                        rpsOpponent[3].innerHTML = tableData[0].user4
+                        rpsOpponent[4].innerHTML = tableData[0].user5
+
+                        for(let i=0; i<maxUsers; i++){
+                            if (rpsOpponent[i].innerHTML === "Open Seat"|| rpsOpponent[i].innerHTML === email){
+                                rpsOpponent[i].disabled = true;
+                            }
+                        }
+                    })
                 break;
                 default:
                     console.log("default running");
-
             }
         })
     }
+    //Remove user from their seat at the gaming table and redirect them
     function giveUpSeat(goTo){
         let updateSeat = {
             column: curSeat,
             data: "Open Seat"
         }
         $.post("/api/table"+ curTable, updateSeat).then(function(){
+            console.log("leave table running");
             window.location.assign(goTo);
         })
     }
-
-    //functions with event listners 
-    // hitButton.addEventListener("click", function hitButton() {
-    //     console.log("Hit me baby one more time ;)");
-    // });
-
-    // stayButton.addEventListener("click", function stayButton() {
-    //     console.log("Stay with me cause you're all I need");
-    // });
-
-    // newRound.addEventListener("click", function newRound() {
-    //     console.log("Final round...FIGHT");
-    // });
-    //var choosenAnswer = document.querySelector('input[name="OptRadio"]:checked').getAttribute("id"); 
+    //Function deletes user photos
+    function cleanupPhotos(){
+        console.log("cleaning photos");
+        let tblCleanUp = {table: curTable};
+        $.post("/api/photo/cleanup", tblCleanUp);
+    }
     
     //Choosing a game
     $("#chooseGame").on("click", function(event) {
         event.preventDefault();
         let gameChoice = "";
+        //see if single or multiplayer has been selected
         let gameToggle = document.querySelector('input[name="inlineRadioOptions"]:checked').getAttribute("id"); 
         console.log($("#multi-select").val());
+
+        //get the game choice from the appropriate dropdown
         if(gameToggle === "radio-multi"){
             gameChoice = $("#multi-select").val();
         }else{
@@ -178,51 +213,81 @@ $(document).ready(function() {
         webcam.stop();
     })
 
-    //Take photo
-    $("#camBtnSnap").on("click", function(event) {
+    //Take a phot snapshot
+    $("#camSnap").on("click", function(event) {
         let picture = {
             photo: webcam.snap(),
             table: curTable
         }
         console.log("Sending photo");
+        //unhide element and set the source to the new image
+        myPhoto.style="display: block;";
+        myPhoto.src = picture.photo;
+        //store the photo in the db so others can access it
         $.post("/api/photo/", picture);
-        document.querySelector('#snap-photo').href = picture.photo;
     })
 
     //Navigate to home and free up user's seat at the table.
     $("#goHome").on("click", function(event) {
+        cleanupPhotos();
+        sendMessage(" has left chat.");
         giveUpSeat("/home");
     })
 
     $("#memberPage").on("click", function(event) {
+        cleanupPhotos();
+        sendMessage(" has left chat.");
         giveUpSeat("/members");
     })
     //Navigate to home and free up user's seat at the table.
     $("#logOut").on("click", function(event) {
+        cleanupPhotos();
+        sendMessage(" has left chat.");
         giveUpSeat("/logout");
     })
 
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
-        let timer = 1
+        let timer = 4
+        oppEmail = $("#select-RPS-opponent").val();
+
+        //set the countdown
         let rpsTimer = setInterval(function() {
             timer--
-            $("#rpsCountdown").text(timer);
+            switch(timer){
+                case 3:
+                    $("#rpsCountdown").text("Rock");
+                break;
+                case 2:
+                    $("#rpsCountdown").text("Paper");
+                break;
+                case 1:
+                    $("#rpsCountdown").text("Scissors");
+                break;
+                case 0:
+                    $("#rpsCountdown").text("Shoot!");
+                break;
+            }
+            
             console.log(timer);
-            if(timer === 0){
+            if(timer === 0){ //when the timer runs out...
                 clearInterval(rpsTimer);
+                //take the picture
                 let sendPic = {
                     photo: webcam.snap(),
                     table: curTable
                 }
+                //and post it to the db
                 console.log("Sending photo");
-                //document.querySelector('#snap-photo').href = sendPic.photo;
+                myPhoto.src = sendPic.photo;
+                myPhoto.style="display: block;";
                 $.post("/api/photo/", sendPic);
 
-                $.get("/api/photo/1/" + curTable).then(function(data){
-                    console.log("data: ", atob(data.photo));
-                    console.log("photo: ", data);
-                    document.querySelector('#download-photo').href = "data:image/png;base64," + atob(data.photo);
+                //Then get the opponent's most most recent photo
+                $.get("/api/photo/" + oppEmail + "/" + curTable).then(function(data){
+                    //unhide the photo element and set the source to the decoded image data
+                    theirPhoto.style="display: block;"
+                    theirPhoto.src = "data:image/png;base64," + atob(data[0].photo);
                 })
             }
         }, 1000);

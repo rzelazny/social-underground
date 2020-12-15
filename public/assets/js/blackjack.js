@@ -1,12 +1,13 @@
 // THIS GAME IS CURRENTLY CODED FOR ONE PLAYER VS THE HOUSE //
 
-alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has 17 or more points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. Once we are creating the actual page the houses cards should have the first card up the other face down (hit cards should also be face down) and hand points should be hidden from the player until the end of the round function has ran. I am just leaving them up for building purposes.")
+//alert("directions for creative team: This is how the house logic currently works: If the user hits the House will stand if it has 17 or more points or if it has higher points than the player, otherwise the House will also hit. When the player stands the House will stand as well if it has more than 17 points or if it has higher points than the player, otherwise the House will hit until it either is above 17 points, higher than the player, or busts. Once we are creating the actual page the houses cards should have the first card up the other face down (hit cards should also be face down) and hand points should be hidden from the player until the end of the round function has ran. I am just leaving them up for building purposes.")
 
-alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be dealt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 0 points. If you win you will be awarded 1 point and if the House wins it will be awarded 1 point.")
+//alert("directions for user: Try to get as close to 21 without busting. If you want another card press 'hit' and you will be dealt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you automatically lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will be awarded 0 points. If you win you will be awarded 1 point and if the House wins it will be awarded 1 point.")
 ///////////////////////////////////////////////
 //                Variables                  //
 ///////////////////////////////////////////////
 var players =  document.querySelector('#players');
+var directions = document.querySelector('#directions');
 
 var startBtn = document.querySelector('#start');
 var restartBtn = document.querySelector('#restart');
@@ -20,6 +21,8 @@ var divPlayer = null;
 var divHand = null;
 var divPoints = null;
 var divScore = null;
+
+
 
 // hard coded for now but will use players from db
 let playerArray = [];
@@ -35,6 +38,7 @@ function onStart() {
     // will add the players hard coded in the allPlayers function to the session //
     addPlayers();
     // will draw cards for all players using the drawCards function //
+    
     drawCards();
 }
 
@@ -44,17 +48,20 @@ function displayBtns() {
     if (startBtn.style.display === 'block') {
         startBtn.style.display = 'none'
     }
+    if (directions.style.display === 'block') {
+        directions.style.display = 'none'
+    }
     // the hit button is displayed //
     if (hitBtn.style.display === 'none') {
-        hitBtn.style.display = 'block'
+        hitBtn.style.display = 'inline'
     }
     // the stand button is displayed //
     if (standBtn.style.display === 'none') {
-        standBtn.style.display = 'block'
+        standBtn.style.display = 'inline'
     }
     // the restart button is displayed and replaces the spot of the start button //
     if (restartBtn.style.display === 'none') {
-        restartBtn.style.display = 'block'
+        restartBtn.style.display = 'inline'
     }
 }
 
@@ -78,7 +85,7 @@ function addPlayers() {
 }
 
 // setting i to 0 so that we can control the synchronicity //
-let i = 0;
+var i = 0;
 function drawCards () {
     // this api link will draw 2 random cards //
     var docUrl = "https://deckofcardsapi.com/api/deck/new/draw/?count=2"
@@ -101,6 +108,11 @@ function drawCards () {
             }
         ];
         // this will give the drawn set of cards to whichever player is 'i' //
+        console.log("Debug stuff:");
+        console.log(i);
+        console.log(playerHand);
+        console.log(playerArray);
+        console.log(playerArray[ i ].Hand);
         playerArray[ i ].Hand = playerHand
         // this will increment i so that it will keep running the draw cards function for each player //
         i++
@@ -190,9 +202,10 @@ function createElements() {
         divHand.appendChild(cardTwoImg);
 
         // appends hand, points, and score divs to the player div //
+        divPlayer.appendChild(divScore);
         divPlayer.appendChild(divHand);
         divPlayer.appendChild(divPoints);
-        divPlayer.appendChild(divScore);
+        
 
         // appends all the data held in the player div to the gameboard
         players.appendChild(divPlayer);
@@ -297,7 +310,7 @@ function itsABust() {
             //sends user alert //
             alert("you busted");
             // sets bst property to true //
-            playerArray[i].Bust === true;
+            playerArray[i].Bust = true;
             console.log(playerArray[i]);
             // calls function //
             console.log("this itsabust fcn is what is ending the round");
@@ -432,12 +445,11 @@ function testing() {
 function endRound() {
     console.log("======ending round========")
     // the users will get an alert that the game is over //
-    alert(`round over`)
     // display points from round to user //
-    for(var i = 0; i < playerArray.length; i++) {
-        console.log(`${playerArray[i].Name} has ${playerArray[i].Points} points`)
-        alert(`${playerArray[i].Name} has ${playerArray[i].Points} points`)
-    }
+    alert(`The round is over
+    ${playerArray[0].Name}: ${playerArray[0].Points} points
+    ${playerArray[1].Name}: ${playerArray[1].Points} points`)
+    
     // if the players tie //
     if (playerArray[0].Points === playerArray[1].Points) {
         alert(`you tied, no one was awarded points.`)
@@ -477,10 +489,10 @@ function endRound() {
     console.log("=========================")
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
-    if (hitBtn.style.display === 'block') {
+    if (hitBtn.style.display === 'inline') {
         hitBtn.style.display = 'none'
     }
-    if (standBtn.style.display === 'block') {
+    if (standBtn.style.display === 'inline') {
         standBtn.style.display = 'none'
     }
     restartBtn.value = "play another round";

@@ -5,12 +5,22 @@ body {
     text-align: center;
 }
 
+.navbar {
+  background-color: black;
+  margin-bottom: 40px;
+}
+
+#newTable {
+  margin: 20px;
+}
+
 #entrance {
     background-image: url(../images/casinoentrance.jpg);
     min-width: 1100px;
     min-height: 650px;
     background-repeat: no-repeat;
     background-size: cover;
+    margin-top: 40px;
 }
 
 .wrapper {
@@ -34,13 +44,13 @@ body {
 }
 @-webkit-keyframes glow {
   from {text-shadow:  
-  0 0 10px rgb(230, 255, 230), 0 0 20px rgb(204, 255, 204), 0 0 30px rgb(179, 255, 179), 0 0 40px rgb(153, 255, 153),
-  0 0 50px rgb(128, 255, 128), 0 0 60px rgb(0, 204, 0), 0 0 70px rgb(0, 153, 0), 0 0 80px rgb(0, 102, 0);
+  0 0 10px rgb(230, 255, 230), 0 0 20px rgb(204, 255, 204), 0 0 40px rgb(153, 255, 153),
+  0 0 50px rgb(128, 255, 128), 0 0 60px rgb(0, 204, 0), 0 0 80px rgb(0, 102, 0);
 }
 to {
   text-shadow: 
-  0 0 20px rgb(204, 255, 204), 0 0 30px rgb(179, 255, 179), 0 0 40px rgb(153, 255, 153), 0 0 50px rgb(128, 255, 128),
-  0 0 60px rgb(0, 204, 0), 0 0 70px rgb(0, 153, 0), 0 0 80px rgb(0, 102, 0), 0 0 90px rgb(0, 77, 0);
+  0 0 20px rgb(204, 255, 204), 0 0 30px, rgb(153, 255, 153), 0 0 50px rgb(128, 255, 128),
+  0 0 70px rgb(0, 153, 0), 0 0 80px rgb(0, 102, 0), 0 0 90px rgb(0, 77, 0);
 }}
 
   ul {
@@ -133,11 +143,18 @@ to {
   
 
   .game-table{
-    background-image: url(../images/pool_table.png);
+    background-image: url(../images/topdown.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 8%;
     color: white;
     width: 350px;
+    height: 350px;
     margin-bottom: 5px;
   }
+  .game-table h4{
+    font-weight: bold;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: black;
+  }
+  

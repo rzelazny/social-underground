@@ -172,15 +172,18 @@ app.get("/api/photo/:id/:table", function(req, res) {
   console.log("getting photo for user", req.params.id)
   console.log("getting photo for table", req.params.table)
 
-  db.photo.findOne({
+  //finalAll limit 1 instead of findOne so we can sort the results and only get the most recent
+  db.photo.findAll({
+    limit: 1,
     where: {
       table_id: {
         [Op.eq]: req.params.table
       },
-      user_id: {
+      user_email: {
         [Op.eq]: req.params.id
       }
-    }
+    },
+    order: [[ 'createdAt', 'DESC' ]]
   }).then(function(results){
     console.log("I got results");
     return res.json(results);
@@ -391,7 +394,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
   app.post("/api/chat/", function(req, res) {
 
     db.chat_log.create({
-      user: req.user.id,
+      user: req.user.email,
       message: req.body.message,
       table_id: req.body.table
     })
@@ -404,18 +407,57 @@ app.get("/api/photo/:id/:table", function(req, res) {
       });
   });
 
+  //deletes photos from a given table
+  app.post("/api/photo/cleanup", function(req, res) {
+
+  console.log("photo cleanup for table: ", req.body.table);
+  console.log("removing photos of user: ", req.user.email);
+
+  db.photo.findAll({
+    where: {
+      user_email: {
+        [Op.eq]: req.user.email
+      },
+      table_id: {
+        [Op.eq]: req.body.table
+      }
+    }
+  })
+  .then(function(results){
+    if(results != null){
+      for(i=0; i < results.length; i++){
+        db.photo.destroy({
+          where: {
+            user_email: {
+              [Op.eq]: req.user.email
+            },
+            table_id: {
+              [Op.eq]: req.body.table
+            }
+          }
+        })
+        console.log("deleting photo ", results[i].id)
+      }
+      res.send(results);
+    }
+  })
+    .catch(function(err) {
+      res.status(401).json(err);
+    });
+});
+
   //stores a photo captured from the webcam to the photo table
   app.post("/api/photo", function(req, res) {
 
     console.log("storing photo");
-    console.log(req.user.id);
+    console.log(req.user.email);
     console.log(req.body.table);
 
     let data = req.body.photo;
     let base64Data = data.replace("data:image/png;base64,", "");
     db.photo.create({
       photo: base64Data,
-      user_id: req.user.id,
+      user_email: req.user.email,
       table_id: req.body.table
     })
     .then(function(results){
@@ -425,7 +467,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
       .catch(function(err) {
         res.status(401).json(err);
       });
-
+    });
     // This successfully stores the photo as a png file in the public/assets/imgages folder, but the page can't use the images as a src
     // console.log("storing photo");
     // let data = req.body.photo;
@@ -441,7 +483,6 @@ app.get("/api/photo/:id/:table", function(req, res) {
     
     //   res.send(pathName + "/public/assets/images/tbl_" + req.body.table + "_user_" + req.user.id + ".png");
     //});
-  });
 };
 
 

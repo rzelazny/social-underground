@@ -13,16 +13,21 @@
     <title>Casino</title>
 </head>
 <nav class="dropdown">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        Main Menu
-    </a>
+    <nav class="navbar navbar-dark">
+        <nav class="dropdown ml-auto " style="display: inline;">
+            <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false" style="margin:10px;">
+                Main Menu
+            </a>
+        
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
 
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" id="goHome" href="#">Home</a>
-        <a class="dropdown-item" id="memberPage" href="#">Membership</a>
-        <a class="dropdown-item" id="logOut" href="#">Log Out</a>
-    </div>
+                <a class="dropdown-item" id="goHome" href="#">Home</a>
+                <a class="dropdown-item" id="memberPage" href="#">Membership</a>
+                <a class="dropdown-item" id="logOut" href="#">Log Out</a>
+            </div>
+        </nav>
+    </nav>
 </nav>
 <body>
     <div class="container"id=gameChoice>
@@ -36,26 +41,154 @@
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radio-single" value="Single Player">
                 <label class="form-check-label" for="inlineRadio2">Single Player</label>
             </div>
+            <hr>
             <h2>Choose a game</h2>
-            <select class="form-control" id="multi-select">
-                <option>Just Chatting Multi</option>
-                <option>Black Jack</option>
-                <option>Rock Paper Scissors</option>
-                <option>Monopoly</option>
-            </select>
-            <select class="form-control"id="single-select" style="display:none">
-                <option>Just Chatting</option>
-                <option>Black Jack</option>
-                <option>Rock Paper Scissors</option>
-                <option>Monopoly</option>
-            </select>
-            <button type="submit" class="btn btn-default" id="chooseGame">Start Playing</button>
+
+            <form class="form-inline">
+                <select class="custom-select my-1 mr-sm-2" id="multi-select">
+                    <option selected>Pick a Game...</option>
+                        <!-- <option>Just Chatting</option> -->
+                        <option>Blackjack Multiplayer</option>
+                        <option>Rock Paper Scissors</option>
+                </select>
+                <select class="custom-select my-1 mr-sm-2" id="single-select" style="display:none">
+                    <option selected>Pick a Game...</option>
+                        <option>Blackjack</option>
+                        <!-- <option>Rock Paper Scissors</option> -->
+                </select>
+                <button type="submit" class="btn btn-light mb-2" id="chooseGame">Start Playing</button>
+            </form>
         </form>
     </div>
-    <div class="container" id="containerBlackJack">
-        <canvas id="canvas" width="1100" height="650"></canvas>
+    <div class="container" id="cont-blackjack-single"style="display:none">
+        <div id="directions"> 
+            <h2>Single Player Blackjack</h2>
+            <br>
+            <p>Try to get as close to 21 without busting. If you want another card press 'hit' and you will be dealt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will not be awarded any points. If you win you will be awarded 1 point and if the House wins it will be awarded 1 point.</p>
+
+        </div>
+        <!-- <canvas id="canvas" width="1100" height="650"></canvas> -->
         <br>
-        <div>
+        <div id="gameBody">
+            <div class="players" id="players"></div>
+            <div class= "gameOptions" id="gameOptions" style="text-align: center;">
+                <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
+
+                <!-- <input class="btn btn-success" type="button" id="start" value="start" style="display: none;">
+                <input class="btn btn-success" type="button" id="restart" value="restart" style="display: none;">
+                <input class="btn btn-success" type="button" id="hit" value="hit me" style="display: none;">
+
+                <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;"> -->
+                <div>
+                    <ul>
+                        <li id="start">
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span>Start</span>
+                            </a>
+                        </li>
+                        <li id="restart">
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span>New Round</span>
+                            </a>
+                        </li>
+                        <li id="hit">
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span>Hit</span>
+                            </a>
+                        </li>
+                        <li id="stand">
+                            <a href="#">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span>Stand</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+<!--                 <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;"> -->
+            </div>
+        </div>
+    </div>
+    <div class="container" id="cont-blackjack-multi">
+        <div class="row">
+            <div id="gameBody">
+                <div class= "globalGameOptions" id="globalGameOptions">
+                    <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
+                    <input class="btn" type="button" id="start-multi-blackjack" value="start" style="display: none;">                </div>
+            </div>
+        </div>
+        <!-- will create house row -->
+            <!-- will append houses hand -->
+        <!-- will create player row -->
+            <!-- will dynamically create cols for players ( 2 hard coded ) -->
+                <!-- will dynamically append hand along with hit, stand, and restart buttons to each players col -->
+    </div>
+    <div class="container" id="containerRPS", style="display:none">
+        <div class="row">
+            <div class="col-lg-4">
+                <video id="webcam" autoplay playsinline width="320" height="240"></video>
+                <canvas id="snapShot" class="d-none"></canvas>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <button id="camBtnOn"class="btn btn-dark mb-1">Cam On</button>
+                    </div>
+                        <!-- <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                        </label> -->
+                    <div class="col-lg-4">
+                        <button id="camBtnOff"class="btn btn-dark mb-1">Cam Off</button>
+                    </div>
+                    <div class="col-lg-4">
+                        <button id="camSnap"class="btn btn-dark mb-1">Snapshot</button>
+                    </div>                        
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <img id="my-photo" style="visibility: hidden; height:240px; width:100%;" src="">
+                <div id="rpsCountdown"></div>
+            </div>
+            <div class="col-lg-4">
+                <img id="their-photo" style="display: none;" src="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <label for="form-group row">Who do you challenge?</label>
+                    <select class="col-sm-7" id="select-RPS-opponent">
+                        <option>user1</option>
+                        <option>user2</option>
+                        <option>user3</option>
+                        <option>user4</option>
+                        <option>user5</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button id="camBtnRPS"class="btn btn-dark mb-2">Play Rock Paper Scissors</button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        
+        <!-- <div>
             <ul>
                 <li>
                     <a href="#">
@@ -85,30 +218,15 @@
                     </a>
                 </li>
             </ul>
-        </div>
+        </div> -->
     </div>
-    <div class="container" style="position: relative; left:35%"  id="chat-container">
+
+    <div class="container"   id="chat-container">
         <div id="chat-log"></div>
         <form class="form-inline" id="chat-entry">
             <input type="text" class="form-control" id="chat-input" placeholder="Talk smack here">
-            <button type="submit" class="btn btn-default" id="send-chat"><i class="fas fa-share"></i></button>
+            <button type="submit" class="btn btn-dark" id="send-chat"><i class="fas fa-share"></i></button>
         </form>
-    </div>
-    <div class="container" id="webcam1", style="display:none">
-        <video id="webcam" autoplay playsinline width="320" height="240"></video>
-        <canvas id="snapShot" class="d-none"></canvas>
-        <button id="camBtnOn">Camera On</button>
-        <button id="camBtnSnap">Camera Snap</button>
-        <button id="camBtnOff">Camera Off</button>
-        <br>
-        <button id="camBtnRPS">Play Rock Paper Scissors</button>
-        <div id="rpsCountdown"></div>
-        <a id="snap-photo"></a>
-        <a id="download-photo"></a>
-        <!-- <label class="switch">
-            <input type="checkbox" checked>
-            <span class="slider round"></span>
-        </label> -->
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.slim.min.js"></script>
@@ -118,7 +236,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./assets/js/casino.js"></script>
-
-<!-- <script src="./assets/js/websocket.js"></script> -->
+<script src="./assets/js/blackjack.js"></script>
+<!-- <script src="./assets/js/blackjackmulti.js"></script> -->
 
 </html>

@@ -2,15 +2,24 @@ body {
     background-color: black;
     background-image: url(../images/carpet.jpg);
     background-size: cover;
-    text-align: center;
+    /* text-align: center; */
 }
 
-#canvas {
+.navbar {
+    background-color: black;
+    margin-bottom: 40px;
+  }
+
+select option[disabled] {
+    display: none;
+}
+
+/* #canvas {
     background-image: url(../images/blackjacktable2.png);
 
     display: inline;
     background-size: cover;
-}
+} */
 
 /*Buttons*/
 ul {
@@ -99,21 +108,56 @@ ul li:nth-child(3):hover span {
 ul li:nth-child(4):hover span {
     background: #8200b6 !important;
 }
+
 /* Game selection css */
-#gameChoice{
-    background: #009919;
-    margin-bottom: 5px;
+#gameChoice,
+#containerRPS{
+    background-image: url(../images/felt.png);
+    margin: 10px;
+    padding:10px;
+    color: white;
+    
+    text-align: center;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+}
+#gameChoice h2{
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+#webcam,
+#my-photo,
+#their-photo{
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+}
+#rpsCountdown{
+    font-size: 40px;
+    font-weight: bolder;
+    color: red;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: white;
 }
 
 /*Chat Css*/
 #chat-container{
+    margin: 10px;
+    padding:10px;
     text-align: left;
     height: 200px;
-    width: 400px;
+    width: 90%;
     background-image: url(../images/dicebackground.jpg);
     background-size: contain;
     color: white;
-  }
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 0px 0px 20px 20px;
+}
 
 #chat-log{
     height: 80%;
@@ -122,11 +166,11 @@ ul li:nth-child(4):hover span {
 }
 
 #chat-log li{
+    font-size: 18px;
+    font-weight: bold;
     list-style-type: none;
-}
-
-#chat-entry{
-  padding: 10px 0px 0px 10px;
+    -webkit-text-stroke-width: .5px;
+    -webkit-text-stroke-color: red;
 }
 
 #chat-input{
@@ -135,7 +179,54 @@ ul li:nth-child(4):hover span {
     color: white;
 }
 
-/*Video*/
-/* #webcam1 {
-  
-} */
+#chooseGame {
+    margin-top: 10px;
+    background-color: rgb(245, 235, 235);
+    color: black;
+}
+
+
+#start,
+#hit, 
+#stand,
+#restart {
+    margin: 5px;
+}
+
+#start,
+#House,
+#Player1 {
+    text-align: center;
+    margin: 10px;
+}
+
+#pointsHouse,
+#pointsPlayer1,
+#scoreHouse,
+#scorePlayer1,
+#House,
+#Player1 {
+    color:white;
+}
+
+#cont-blackjack-single{
+    background-color: black;
+    margin: 10px;
+    padding:10px;
+    text-align: left;
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px 20px 0px 0px;
+}
+
+#cardOneHouse,
+#cardTwoHouse,
+#cardOnePlayer1,
+#cardTwoPlayer1,
+.hitCardHouse,
+.hitCardPlayer1 {
+    width:100px;
+    height:150px;
+}
