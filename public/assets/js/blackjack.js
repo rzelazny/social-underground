@@ -490,6 +490,30 @@ function endRound() {
         // divScore.innerHTML = `Score: ${playerArray[0].Score} `;
         // divScore.innerHTML = `Score: ${playerArray[1].Score} `;
     }
+    // if the players both bust //
+    else if (playerArray[0].Points > 22 && playerArray[1].Points > 22) {
+        // alert(`you tied, no one was awarded points.`)
+        // // increase both scores by 1 //
+        // playerArray[0].Score = playerArray[0].Score + 1;
+        // playerArray[1].Score = playerArray[1].Score + 1;
+        // alert the users of current scores //
+        // alert(`You tied, no players scores were increased.
+        // Current Scores: 
+        // ${playerArray[0].Name}: ${playerArray[0].Score}
+        // ${playerArray[1].Name}: ${playerArray[1].Score}`)
+        winnerDisplay = document.createElement("div");
+        scoresDisplay = document.createElement("div");
+        scoresDisplayHousePlayer = document.createElement("div");
+        winnerDisplay.innerHTML = `You both busted, no players scores were increased.`
+        scoresDisplay.innerHTML = `Current Scores: `
+        scoresDisplayHousePlayer.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`
+        endRoundDiv.appendChild(winnerDisplay);
+        endRoundDiv.appendChild(scoresDisplay);
+        endRoundDiv.appendChild(scoresDisplayHousePlayer);
+        // // update scores on html //
+        // divScore.innerHTML = `Score: ${playerArray[0].Score} `;
+        // divScore.innerHTML = `Score: ${playerArray[1].Score} `;
+    }
     // if the House wins //
     else if (playerArray[1].Bust === true || playerArray[1].Points > 21 || playerArray[0].Bust === false && playerArray[0].Points > playerArray[1].Points) {
         // alert users //
