@@ -22,7 +22,7 @@ select option[disabled] {
 } */
 
 /*Buttons*/
-/* ul {
+ul {
     position: relative;
     display: flex;
     transform-style: preserve-3d;
@@ -107,7 +107,8 @@ ul li:nth-child(3):hover span {
 }
 ul li:nth-child(4):hover span {
     background: #8200b6 !important;
-} */
+}
+
 /* Game selection css */
 #gameChoice,
 #containerRPS{
@@ -184,6 +185,38 @@ ul li:nth-child(4):hover span {
     color: black;
 }
 
-#start {
+
+#start,
+#hit, 
+#stand,
+#restart {
     margin: 5px;
+}
+
+#start,
+#House,
+#Player1 {
+    text-align: center;
+    margin: 10px;
+}
+
+#pointsHouse,
+#pointsPlayer1,
+#scoreHouse,
+#scorePlayer1,
+#House,
+#Player1 {
+    color:white;
+}
+
+#containerBlackJack{
+    background-color: black;
+    margin: 10px;
+    padding:10px;
+    text-align: left;
+    color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px 20px 0px 0px;
 }

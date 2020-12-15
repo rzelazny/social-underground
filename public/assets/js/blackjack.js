@@ -49,15 +49,15 @@ function displayBtns() {
     }
     // the hit button is displayed //
     if (hitBtn.style.display === 'none') {
-        hitBtn.style.display = 'block'
+        hitBtn.style.display = 'inline'
     }
     // the stand button is displayed //
     if (standBtn.style.display === 'none') {
-        standBtn.style.display = 'block'
+        standBtn.style.display = 'inline'
     }
     // the restart button is displayed and replaces the spot of the start button //
     if (restartBtn.style.display === 'none') {
-        restartBtn.style.display = 'block'
+        restartBtn.style.display = 'inline'
     }
 }
 
@@ -197,9 +197,10 @@ function createElements() {
         divHand.appendChild(cardTwoImg);
 
         // appends hand, points, and score divs to the player div //
+        divPlayer.appendChild(divScore);
         divPlayer.appendChild(divHand);
         divPlayer.appendChild(divPoints);
-        divPlayer.appendChild(divScore);
+        
 
         // appends all the data held in the player div to the gameboard
         players.appendChild(divPlayer);
