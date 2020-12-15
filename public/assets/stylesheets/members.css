@@ -3,3 +3,9 @@ body {
     background-repeat: no-repeat;
     background-size: 1800px;
 }
+
+.navbar-brand{
+    background-color: greenyellow;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold; 
+}
