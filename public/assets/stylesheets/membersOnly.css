@@ -13,7 +13,11 @@ body {
 }
 
 #bio {
-    
+    background-color: rgb(109, 104, 104);
+    color: white;
+    -webkit-text-stroke-width: .2px;
+    -webkit-text-stroke-color: lime;
+
 }
 
 h4,
@@ -22,5 +26,5 @@ h6 {
     list-style-type: none;
     color: white;
     -webkit-text-stroke-width: .7px;
-    -webkit-text-stroke-color: red;
+    -webkit-text-stroke-color: lime;
 }
