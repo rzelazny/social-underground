@@ -248,13 +248,27 @@ $(document).ready(function() {
 
     //Play Rock Paper Scissors
     $("#camBtnRPS").on("click", function(event) {
-        let timer = 3
+        let timer = 4
         oppEmail = $("#select-RPS-opponent").val();
 
         //set the countdown
         let rpsTimer = setInterval(function() {
             timer--
-            $("#rpsCountdown").text(timer);
+            switch(timer){
+                case 3:
+                    $("#rpsCountdown").text("Rock");
+                break;
+                case 2:
+                    $("#rpsCountdown").text("Paper");
+                break;
+                case 1:
+                    $("#rpsCountdown").text("Scissors");
+                break;
+                case 0:
+                    $("#rpsCountdown").text("Shoot!");
+                break;
+            }
+            
             console.log(timer);
             if(timer === 0){ //when the timer runs out...
                 clearInterval(rpsTimer);
