@@ -134,21 +134,6 @@ app.get("/api/table:table", function(req, res) {
   })
 });
 
-
-// Route for finding existing game tables
-// app.get("/api/findseat", function(req, res) {
-//   db.gaming_table.findAll({
-//     where: {
-//       game_ended: {
-//         [Op.eq]: false
-//       }
-//     }
-//   }).then(function(results){
-//     console.log("sending table data back")
-//     return res.send(results);
-//   })
-// });
-
 // Route for getting chat log data
   app.get("/api/chat:table", function(req, res) {
     db.chat_log.findAll({
@@ -223,7 +208,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
       });
   });
 
-  //update an existing table
+  //update an existing table. Call requires an object with the column to update and the new data
   app.post("/api/table:table", function(req, res) {
 
     console.log("Updating table ", req.params.table);
@@ -465,7 +450,7 @@ app.get("/api/photo/:id/:table", function(req, res) {
     console.log(req.body.table);
 
     let data = req.body.photo;
-    let base64Data = data.replace("data:image/png;base64,", "");
+    let base64Data = data.replace("data:image/png;base64,", ""); //trim off the header so only the encoded data is stored
     db.photo.create({
       photo: base64Data,
       user_email: req.user.email,

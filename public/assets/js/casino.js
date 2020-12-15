@@ -130,6 +130,7 @@ $(document).ready(function() {
                         rpsOpponent[3].innerHTML = tableData[0].user4
                         rpsOpponent[4].innerHTML = tableData[0].user5
 
+                        //hide our own email and any Open seats from the drop down, css hides disabled options
                         for(let i=0; i<maxUsers; i++){
                             if (rpsOpponent[i].innerHTML === "Open Seat"|| rpsOpponent[i].innerHTML === email){
                                 rpsOpponent[i].disabled = true;
@@ -213,7 +214,7 @@ $(document).ready(function() {
         webcam.stop();
     })
 
-    //Take a phot snapshot
+    //Take a photo snapshot
     $("#camSnap").on("click", function(event) {
         let picture = {
             photo: webcam.snap(),
@@ -234,12 +235,14 @@ $(document).ready(function() {
         giveUpSeat("/home");
     })
 
+    //Navigate to member's page and free up user's seat at the table.
     $("#memberPage").on("click", function(event) {
         cleanupPhotos();
         sendMessage(" has left chat.");
         giveUpSeat("/members");
     })
-    //Navigate to home and free up user's seat at the table.
+
+    //Log out free up user's seat at the table.
     $("#logOut").on("click", function(event) {
         cleanupPhotos();
         sendMessage(" has left chat.");

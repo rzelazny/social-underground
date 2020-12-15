@@ -52,6 +52,7 @@ CREATE TABLE chat_log(
 	PRIMARY KEY (id)
 );
 
+-- stores photos for rock paper scissors game
 CREATE TABLE photo(
     id int NOT NULL AUTO_INCREMENT,
 	photo MEDIUMBLOB NOT NULL,
