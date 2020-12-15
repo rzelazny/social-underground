@@ -143,14 +143,13 @@ to {
   
 
   .game-table{
-    background-image: url(../images/pool_table.png);
+    background-image: url(../images/tabletable.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 8%;
     color: white;
     width: 350px;
     margin-bottom: 5px;
-    
   }
   .game-table h4{
     font-weight: bold;
