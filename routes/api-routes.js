@@ -44,17 +44,18 @@ module.exports = function(app) {
   });
 
   app.patch("/api/user_stat", function(req, res) {
+    var loginID = req.body.login_id
     userStat.find({
       where: {
-        login_id = req.body.login_id
+        login_id: loginID
       }
     }).then(function (data){
       userStat.update({
         where: {
-          login_id = req.body.login_id,
+          login_id: loginID,
         }, 
         set: {
-          wins = data.wins+1
+          wins: data.wins+1
         } 
     })
     })
