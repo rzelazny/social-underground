@@ -1,0 +1,29 @@
+body {
+    background-image: url(../images/carpet.jpg);
+    background-size: cover;
+}
+
+.jumbotron {
+    background-image: url(../images/felt.png);
+}
+
+.card-body {
+    background-image: url(../images/dicebackground.jpg);
+    background-size: cover;
+}
+
+#bio {
+    background-color: rgb(109, 104, 104);
+    color: white;
+    -webkit-text-stroke-width: .2px;
+    -webkit-text-stroke-color: lime;
+}
+
+h4,
+h6 {
+    font-size: 20px;
+    list-style-type: none;
+    color: white;
+    -webkit-text-stroke-width: .7px;
+    -webkit-text-stroke-color: lime;
+}
