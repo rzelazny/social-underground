@@ -21,9 +21,9 @@
             </a>
         
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="./home.html">Home</a>
-                <a class="dropdown-item" href="./members.html">Membership</a>
-                <a class="dropdown-item" href="/logout">Log Out</a>
+                <a class="dropdown-item" href=#>Home</a>
+                <a class="dropdown-item" href=#>Membership</a>
+                <a class="dropdown-item" href=#>Log Out</a>
             </div>
         </nav>
     </nav>
@@ -61,10 +61,17 @@
         </form>
     </div>
     <div class="container" id="containerBlackJack">
+        <div id="directions"> 
+            <h2>Single Player Blackjack</h2>
+            <br>
+            <p>Try to get as close to 21 without busting. If you want another card press 'hit' and you will be dealt another card. If you want to stay with your hand and end the game press 'stand'. You can hit as many times as you want but beware, if you bust you lose. To keep playing press 'play another round'. Each round you play, your score will be displayed and will increment as you win. If you tie with the House you will not be awarded any points. If you win you will be awarded 1 point and if the House wins it will be awarded 1 point.</p>
+
+        </div>
         <!-- <canvas id="canvas" width="1100" height="650"></canvas> -->
         <br>
         <div id="gameBody">
-            <div class= "gameOptions" id="gameOptions">
+            <div class="players" id="players"></div>
+            <div class= "gameOptions" id="gameOptions" style="text-align: center;">
                 <!-- <input class="btn" type="button" id="goBack" value="go back to lobby" style="display: block;"> -->
                 <!-- <input class="btn btn-success" type="button" id="start" value="start" style="display: none;">
                 <input class="btn btn-success" type="button" id="restart" value="restart" style="display: none;">
@@ -113,7 +120,6 @@
                 </div>
 <!--                 <input class="btn btn-success" type="button" id="stand" value="stand" style="display: none;"> -->
             </div>
-            <div class="players" id="players"></div>
         </div>
     </div>
     <div class="container" id="containerRPS", style="display:none">
