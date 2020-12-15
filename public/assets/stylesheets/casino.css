@@ -190,7 +190,8 @@ ul li:nth-child(4):hover span {
 #hit, 
 #stand,
 #restart {
-    margin: 5px;
+    margin: 50px;
+    text-align: center;
 }
 
 #start,

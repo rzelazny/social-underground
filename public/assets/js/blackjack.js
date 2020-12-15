@@ -8,6 +8,12 @@
 ///////////////////////////////////////////////
 var players =  document.querySelector('#players');
 var directions = document.querySelector('#directions');
+var playerBusted = document.querySelector('#playerBusted');
+var houseBusted = document.querySelector('#houseBusted');
+var playerTied = document.querySelector('#playerTied');
+var playerWon = document.querySelector('#playerWon');
+var playerLost = document.querySelector('#playerLost');
+
 
 var startBtn = document.querySelector('#start');
 var restartBtn = document.querySelector('#restart');
@@ -48,6 +54,21 @@ function displayBtns() {
     if (startBtn.style.display === 'block') {
         startBtn.style.display = 'none'
     }
+    if (playerBusted.style.display === 'block') {
+        playerBusted.style.display = 'none'
+    }
+    if (houseBusted.style.display === 'block') {
+        houseBusted.style.display = 'none'
+    }
+    if (playerTied.style.display === 'block') {
+        playerTied.style.display = 'none'
+    }
+    if (playerLost.style.display === 'block') {
+        playerLost.style.display = 'none'
+    }
+    if (playerWon.style.display === 'block') {
+        playerWon.style.display = 'none'
+    }
     if (directions.style.display === 'block') {
         directions.style.display = 'none'
     }
@@ -64,16 +85,6 @@ function displayBtns() {
         restartBtn.style.display = 'inline'
     }
 }
-
-// CONNECT DB HERE TO ADD PLAYERS BASED ON PEOPLE AT TABLE //
-// currently a hard coded below but will need a more in-depth function where we use the logged in players //
-// function addPlayers(amount) {
-    // playerArray = [{ Name: House, ID: 0, Score: 0, Points: 0, Hand: hand }];
-    //     for (var i = 1; i <= amount; i++) {
-    //         var player = { Name: 'Player ' + i, ID: i, Score: 0, Points: 0, Bust: false, Hand: hand };
-    //         playerArray.push(player)
-    //     }
-// }
 
 // hard coded for one player to play against the House //
 function addPlayers() {
@@ -308,7 +319,7 @@ function itsABust() {
     for (var i = 0; i < playerArray.length; i++) {
         if (playerArray[i].Points > 21) {
             //sends user alert //
-            alert("you busted");
+            // alert("you busted");
             // sets bst property to true //
             playerArray[i].Bust = true;
             console.log(playerArray[i]);
@@ -397,7 +408,7 @@ function houseBust() {
     if (playerArray[0].Points > 21) {
         console.log("inside the bust function")
         //sends user alert //
-        alert("the house busted");
+        // alert("the house busted");
         // sets bst property to true //
         playerArray[0].Bust = true;
         // calls function //
@@ -452,12 +463,15 @@ function endRound() {
     
     // if the players tie //
     if (playerArray[0].Points === playerArray[1].Points) {
-        alert(`you tied, no one was awarded points.`)
+        // alert(`you tied, no one was awarded points.`)
         // // increase both scores by 1 //
         // playerArray[0].Score = playerArray[0].Score + 1;
         // playerArray[1].Score = playerArray[1].Score + 1;
         // alert the users of current scores //
-        alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`)
+        alert(`You tied, no players scores were increased.
+        Current Scores: 
+        ${playerArray[0].Name}: ${playerArray[0].Score}
+        ${playerArray[1].Name}: ${playerArray[1].Score}`)
         // // update scores on html //
         // divScore.innerHTML = `Score: ${playerArray[0].Score} `;
         // divScore.innerHTML = `Score: ${playerArray[1].Score} `;
@@ -465,11 +479,14 @@ function endRound() {
     // if the House wins //
     else if (playerArray[1].Bust === true || playerArray[1].Points > 21 || playerArray[0].Bust === false && playerArray[0].Points > playerArray[1].Points) {
         // alert users //
-        alert(`${playerArray[0].Name} won || ${playerArray[1].Name} lost`)
+        // alert(`${playerArray[0].Name} won || ${playerArray[1].Name} lost`)
         // increase House points by 2 //
         playerArray[0].Score = playerArray[0].Score + 1;
         // alert the users of current scores //
-        alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`) 
+        alert(`House wins
+        Current Scores: 
+        ${playerArray[0].Name}: ${playerArray[0].Score}
+        ${playerArray[1].Name}: ${playerArray[1].Score}`) 
         scoreHouse = document.querySelector("#scoreHouse");
         scoreHouse.innerHTML = `Score: ${playerArray[0].Score} `;
 
@@ -477,11 +494,16 @@ function endRound() {
     // if player1 wins //
     else if (playerArray[0].Bust === true || playerArray[0].Points > 21 || playerArray[1].Bust === false && playerArray[1].Points > playerArray[0].Points){
         // alert users //
-        alert (`${playerArray[0].Name} lost || ${playerArray[1].Name} won`)
+        // alert (`${playerArray[0].Name} lost || ${playerArray[1].Name} won`)
         // increase player1 points by 2 //
         playerArray[1].Score = playerArray[1].Score + 1;
         // alert the users of current scores //
-        alert(`${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`)
+        alert(`Player1 wins
+        Current Scores: 
+        ${playerArray[0].Name}: ${playerArray[0].Score}
+        ${playerArray[1].Name}: ${playerArray[1].Score}`) 
+        scoreHouse = document.querySelector("#scoreHouse");
+        scoreHouse.innerHTML = `Score: ${playerArray[0].Score} `
         scorePlayer1 = document.querySelector("#scorePlayer1");
         scorePlayer1.innerHTML = `Score: ${playerArray[1].Score} `;
     }
@@ -495,7 +517,7 @@ function endRound() {
     if (standBtn.style.display === 'inline') {
         standBtn.style.display = 'none'
     }
-    restartBtn.value = "play another round";
+    // restartBtn.value = "play another round";
 
     // reset player values //
     playerArray[0].Bust = false;
