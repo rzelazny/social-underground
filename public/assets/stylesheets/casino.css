@@ -220,3 +220,13 @@ ul li:nth-child(4):hover span {
     border-width: 2px;
     border-radius: 20px 20px 0px 0px;
 }
+
+#cardOneHouse,
+#cardTwoHouse,
+#cardOnePlayer1,
+#cardTwoPlayer1,
+.hitCardHouse,
+.hitCardPlayer1 {
+    width:100px;
+    height:150px;
+}

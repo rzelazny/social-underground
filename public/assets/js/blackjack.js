@@ -7,6 +7,7 @@
 //                Variables                  //
 ///////////////////////////////////////////////
 var players =  document.querySelector('#players');
+var directions = document.querySelector('#directions');
 
 var startBtn = document.querySelector('#start');
 var restartBtn = document.querySelector('#restart');
@@ -46,6 +47,9 @@ function displayBtns() {
     // the start button is hidden //
     if (startBtn.style.display === 'block') {
         startBtn.style.display = 'none'
+    }
+    if (directions.style.display === 'block') {
+        directions.style.display = 'none'
     }
     // the hit button is displayed //
     if (hitBtn.style.display === 'none') {
@@ -306,7 +310,7 @@ function itsABust() {
             //sends user alert //
             alert("you busted");
             // sets bst property to true //
-            playerArray[i].Bust === true;
+            playerArray[i].Bust = true;
             console.log(playerArray[i]);
             // calls function //
             console.log("this itsabust fcn is what is ending the round");
@@ -441,12 +445,11 @@ function testing() {
 function endRound() {
     console.log("======ending round========")
     // the users will get an alert that the game is over //
-    alert(`round over`)
     // display points from round to user //
-    for(var i = 0; i < playerArray.length; i++) {
-        console.log(`${playerArray[i].Name} has ${playerArray[i].Points} points`)
-        alert(`${playerArray[i].Name} has ${playerArray[i].Points} points`)
-    }
+    alert(`The round is over
+    ${playerArray[0].Name}: ${playerArray[0].Points} points
+    ${playerArray[1].Name}: ${playerArray[1].Points} points`)
+    
     // if the players tie //
     if (playerArray[0].Points === playerArray[1].Points) {
         alert(`you tied, no one was awarded points.`)
@@ -486,10 +489,10 @@ function endRound() {
     console.log("=========================")
 
     // hides all game buttons besides and changes the value to ask user if they want to play another game //
-    if (hitBtn.style.display === 'block') {
+    if (hitBtn.style.display === 'inline') {
         hitBtn.style.display = 'none'
     }
-    if (standBtn.style.display === 'block') {
+    if (standBtn.style.display === 'inline') {
         standBtn.style.display = 'none'
     }
     restartBtn.value = "play another round";
