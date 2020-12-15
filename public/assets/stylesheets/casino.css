@@ -234,8 +234,24 @@ ul li:nth-child(4):hover span {
 
 #endRoundDiv {
     text-align: center;
-    color:black;
-    width: 50%;
-    margin: 25px, auto;
-    background-color: white;
+    color:white;
+    width: 40%;
+    background-color: #840b0b;
+    font-size: 20px;
+}
+
+#pointDisplay,
+#pointDisplayHousePlayer,
+#scoresDisplay,
+#scoresDisplayHousePlayer {
+    margin: 5px;
+    padding: 5px;
+
+}
+
+#roundOver,
+#winnerDisplay {
+    margin: 10px;
+    padding: 10px;
+
 }

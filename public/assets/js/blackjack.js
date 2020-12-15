@@ -23,14 +23,13 @@ var divPlayer = null;
 var divHand = null;
 var divPoints = null;
 var divScore = null;
-var pointDisplayHouse = null;
-var pointDisplayPlayer = null;
+
+var roundOver = null;
+var pointDisplay = null;
+var pointDisplayHousePlayer = null;
 var winnerDisplay = null;
-var winnerDisplayHouse = null;
-var winnerDisplayPlayer = null;
 var scoresDisplay = null;
-var scoresDisplayHouse = null;
-var scoresDisplayPlayer = null;
+var scoresDisplayHousePlayer = null;
 
 
 
@@ -452,13 +451,15 @@ function endRound() {
     // the users will get an alert that the game is over //
     // display points from round to user //
     endRoundDiv.style.display = "block";
-    endRoundDiv.innerHTML = `The round is over`
-    pointDisplayHouse = document.createElement("div");
-    pointDisplayPlayer = document.createElement("div");
-    pointDisplayHouse.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Points} points `
-    pointDisplayPlayer.innerHTML = `${playerArray[1].Name}: ${playerArray[1].Points} points`
-    endRoundDiv.appendChild(pointDisplayHouse);
-    endRoundDiv.appendChild(pointDisplayPlayer);
+    roundOver = document.createElement("div");
+    roundOver.innerHTML = `The round is over!`
+    pointDisplay = document.createElement("div");
+    pointDisplayHousePlayer = document.createElement("div");
+    pointDisplay.innerHTML = `Hand Points:`
+    pointDisplayHousePlayer.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Points} || ${playerArray[1].Name}: ${playerArray[1].Points}`
+    endRoundDiv.appendChild(roundOver);
+    endRoundDiv.appendChild(pointDisplay);
+    endRoundDiv.appendChild(pointDisplayHousePlayer);
     // alert(`The round is over
     // ${playerArray[0].Name}: ${playerArray[0].Points} points
     // ${playerArray[1].Name}: ${playerArray[1].Points} points`)
@@ -476,16 +477,13 @@ function endRound() {
         // ${playerArray[1].Name}: ${playerArray[1].Score}`)
         winnerDisplay = document.createElement("div");
         scoresDisplay = document.createElement("div");
-        scoresDisplayHouse = document.createElement("div");
-        scoresDisplayPlayer = document.createElement("div");
+        scoresDisplayHousePlayer = document.createElement("div");
         winnerDisplay.innerHTML = `You tied, no players scores were increased.`
         scoresDisplay.innerHTML = `Current Scores: `
-        scoresDisplayHouse.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Score}`
-        scoresDisplayPlayer.innerHTML = `${playerArray[1].Name}: ${playerArray[1].Score}`
+        scoresDisplayHousePlayer.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`
         endRoundDiv.appendChild(winnerDisplay);
         endRoundDiv.appendChild(scoresDisplay);
-        endRoundDiv.appendChild(scoresDisplayHouse);
-        endRoundDiv.appendChild(scoresDisplayPlayer);
+        endRoundDiv.appendChild(scoresDisplayHousePlayer);
         // // update scores on html //
         // divScore.innerHTML = `Score: ${playerArray[0].Score} `;
         // divScore.innerHTML = `Score: ${playerArray[1].Score} `;
@@ -499,16 +497,13 @@ function endRound() {
         // alert the users of current scores //
         winnerDisplay = document.createElement("div");
         scoresDisplay = document.createElement("div");
-        scoresDisplayHouse = document.createElement("div");
-        scoresDisplayPlayer = document.createElement("div");
-        winnerDisplay.innerHTML = `House wins.`
+        scoresDisplayHousePlayer = document.createElement("div");
+        winnerDisplay.innerHTML = `House wins!`
         scoresDisplay.innerHTML = `Current Scores: `
-        scoresDisplayHouse.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Score}`
-        scoresDisplayPlayer.innerHTML = `${playerArray[1].Name}: ${playerArray[1].Score}`
+        scoresDisplayHousePlayer.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`
         endRoundDiv.appendChild(winnerDisplay);
         endRoundDiv.appendChild(scoresDisplay);
-        endRoundDiv.appendChild(scoresDisplayHouse);
-        endRoundDiv.appendChild(scoresDisplayPlayer);
+        endRoundDiv.appendChild(scoresDisplayHousePlayer);
         // alert(`House wins
         // Current Scores: 
         // ${playerArray[0].Name}: ${playerArray[0].Score}
@@ -526,16 +521,13 @@ function endRound() {
         // alert the users of current scores //
         winnerDisplay = document.createElement("div");
         scoresDisplay = document.createElement("div");
-        scoresDisplayHouse = document.createElement("div");
-        scoresDisplayPlayer = document.createElement("div");
-        winnerDisplay.innerHTML = `Player1 wins.`
+        scoresDisplayHousePlayer = document.createElement("div");
+        winnerDisplay.innerHTML = `Player1 wins!`
         scoresDisplay.innerHTML = `Current Scores: `
-        scoresDisplayHouse.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Score}`
-        scoresDisplayPlayer.innerHTML = `${playerArray[1].Name}: ${playerArray[1].Score}`
+        scoresDisplayHousePlayer.innerHTML = `${playerArray[0].Name}: ${playerArray[0].Score} || ${playerArray[1].Name}: ${playerArray[1].Score}`
         endRoundDiv.appendChild(winnerDisplay);
         endRoundDiv.appendChild(scoresDisplay);
-        endRoundDiv.appendChild(scoresDisplayHouse);
-        endRoundDiv.appendChild(scoresDisplayPlayer);
+        endRoundDiv.appendChild(scoresDisplayHousePlayer);
         // alert(`Player1 wins
         // Current Scores: 
         // ${playerArray[0].Name}: ${playerArray[0].Score}
